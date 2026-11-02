@@ -36,6 +36,9 @@ __all__ = [
     "TIKTOK_SPEC", "YOUTUBE_SPEC", "assemble", "ingest_into_db",
 ]
 
+# Note: `tagging` is imported lazily inside ingest_into_db(tag=True) to keep the
+# base ingest path free of any dependency on the tagging module.
+
 _DIM_PK = {
     "placement": "placement_id", "creative": "creative_id",
     "campaign": "campaign_id", "audience_segment": "segment_id",
@@ -79,11 +82,20 @@ def _build_fx(frames: dict[str, pd.DataFrame], fx_lookup: FxLookup) -> pd.DataFr
 
 
 def ingest_into_db(con, sources: list[DataSource], account: dict,
-                   fx_lookup: FxLookup = nok_only_fx) -> dict[str, int]:
+                   fx_lookup: FxLookup = nok_only_fx, *,
+                   tag: bool = False, cfg: dict | None = None,
+                   overrides: dict | None = None,
+                   platform_labels: dict | None = None,
+                   c2pa: dict | None = None) -> dict[str, int]:
     """Load one or more CSV sources for a single account into a DuckDB connection.
 
     Builds the account row, date_dim and fx_rate from the mapped data, creates
-    the schema if needed, and loads everything in dependency order.
+    the schema if needed, and loads everything in dependency order. Creatives
+    land **untagged** (provenance is never inferred from mapping).
+
+    With ``tag=True`` the Phase-3 ``ingest -> tagging`` step runs in place after
+    load, resolving provenance / Norwegian-ness from the naming convention and
+    any supplied ``overrides`` / ``platform_labels`` / ``c2pa`` evidence.
     """
     account_id = account["account_id"]
     mapped = [s.load(account_id, fx_lookup) for s in sources]
@@ -95,4 +107,11 @@ def ingest_into_db(con, sources: list[DataSource], account: dict,
     frames["fx_rate"] = _build_fx(frames, fx_lookup)
 
     database.create_schema(con)
-    return database.load_all(con, frames)
+    counts = database.load_all(con, frames)
+
+    if tag:
+        from ..tagging import apply_to_db
+        counts["creative_tagged"] = apply_to_db(
+            con, cfg, overrides=overrides,
+            platform_labels=platform_labels, c2pa=c2pa)
+    return counts

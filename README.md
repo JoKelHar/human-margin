@@ -25,8 +25,8 @@ experiments on any platform. It recommends; a human acts.
 |---|---|---|
 | **1** | Unified placement-grain schema + synthetic data generator | ✅ complete |
 | **2** | CSV mappers (Meta, Snapchat, TikTok, YouTube) behind a `DataSource` interface | ✅ complete |
-| 3 | Tagging: provenance, sub-types, Norwegian-ness (trust hierarchy) | ◻ next |
-| 4 | Exhaustion module, mixed-effects stats, breakdowns | ◻ |
+| **3** | Tagging: provenance, sub-types, Norwegian-ness (trust hierarchy) + untagged-spend reporting | ✅ complete |
+| 4 | Exhaustion module, mixed-effects stats, breakdowns | ◻ next |
 | 5 | Norwegian sentiment / AI-callout detection | ◻ |
 | 6–10 | Decision matrix, opportunity, halo, recommendations, API connectors | ◻ |
 
@@ -122,9 +122,30 @@ Vinterkos_HL-UGC_NO-loc_NO-dia_lang-dia_v3
 | `NO-loc` `NO-face` `NO-cult` `NO-dia` | recognisable Norwegian locations / faces / cultural refs / dialect present |
 | `lang-bok` `lang-nyn` `lang-dia` `lang-eng` `lang-mix` | language of the creative |
 
-Trust hierarchy (Phase 3): `naming_convention → csv_override → platform_label →
-c2pa`. Anything unresolved is reported as **untagged spend** (a share of total),
-not guessed.
+**Trust hierarchy (Phase 3, implemented).** Several sources may have an opinion
+about one creative — the ad name, a buyer-supplied CSV override, a platform's
+self-declared AI label, a C2PA content-credential manifest. Each speaks a common
+`TagEvidence`, and the resolver merges them **field by field** in trust order
+`naming_convention → csv_override → platform_label → c2pa`: the highest-trust
+source with an opinion on a field wins it, so a disciplined ad name can set
+provenance while a lower source still fills a gap (e.g. `dialect_region`) the
+name left blank. `tag_source` and `tag_confidence` record which source decided
+the headline provenance. Anything no source speaks to stays **untagged** and is
+reported as a **share of total NOK spend** against
+`thresholds.untagged_spend_warn_share` — never guessed from performance.
+
+```python
+from mediekjop import tagging
+# run the ingest -> tagging step in place, then report untagged spend
+tagging.apply_to_db(con)                 # naming convention + optional overrides
+rep = tagging.untagged_spend(con)
+print(rep.untagged_share, rep.over_threshold)
+```
+
+The tagging module is the exact inverse of the naming convention the synthetic
+generator uses to *encode* provenance into ad names — a round-trip test recovers
+the generator's ground-truth tags from the names alone, with no access to the
+performance tables.
 
 ## Data model (placement grain)
 
