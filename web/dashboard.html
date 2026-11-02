@@ -1,0 +1,527 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Mediekjøp Signal</title>
+<style>
+  /* Layout: fixed left identity rail + scrollable content; a Smartly-style
+     light SaaS analytics console in a Helvetica-forward voice. */
+  :root {
+    --bg: #eef0f4; --surface: #ffffff; --surface-2: #f7f8fb;
+    --ink: #0b1020; --ink-2: #565d70; --ink-3: #8a90a2;
+    --line: #e4e7ee; --rail: #0b1020; --rail-ink: #e9eaf0;
+    --accent: #4f46e5; --accent-2: #ff5c7a; --accent-ink: #ffffff;
+    --pos: #15803d; --pos-bg: #e7f4ec; --warn: #b45309; --warn-bg: #fbf0dd;
+    --crit: #b91c1c; --crit-bg: #fbe6e6; --neutral: #475569; --neutral-bg: #eef1f5;
+    --s-human: #2563eb; --s-assist: #f59e0b; --s-gen: #db2777;
+    --shadow: 0 1px 2px rgba(11,16,32,.06), 0 8px 24px rgba(11,16,32,.05);
+    --font-display: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+    --font-body: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+    --font-mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
+    --r: 14px;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #080a10; --surface: #121724; --surface-2: #0e131e;
+    --ink: #eceef4; --ink-2: #a3abbd; --ink-3: #6e7689;
+    --line: #232a3b; --rail: #05070c; --rail-ink: #eceef4;
+    --accent: #818cf8; --accent-2: #ff7d95; --accent-ink: #0b1020;
+    --pos: #4ade80; --pos-bg: #112a1c; --warn: #fbbf24; --warn-bg: #2b2008;
+    --crit: #f87171; --crit-bg: #2c1414; --neutral: #94a3b8; --neutral-bg: #1a2030;
+    --s-human: #60a5fa; --s-assist: #fbbf24; --s-gen: #f472b6;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+    color-scheme: dark;
+  } }
+  :root[data-theme="dark"] {
+    --bg: #080a10; --surface: #121724; --surface-2: #0e131e;
+    --ink: #eceef4; --ink-2: #a3abbd; --ink-3: #6e7689;
+    --line: #232a3b; --rail: #05070c; --rail-ink: #eceef4;
+    --accent: #818cf8; --accent-2: #ff7d95; --accent-ink: #0b1020;
+    --pos: #4ade80; --pos-bg: #112a1c; --warn: #fbbf24; --warn-bg: #2b2008;
+    --crit: #f87171; --crit-bg: #2c1414; --neutral: #94a3b8; --neutral-bg: #1a2030;
+    --s-human: #60a5fa; --s-assist: #fbbf24; --s-gen: #f472b6;
+    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased; line-height: 1.45; }
+  h1,h2,h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
+  .tnum { font-variant-numeric: tabular-nums; }
+
+  .app { display: grid; grid-template-columns: 236px 1fr; min-height: 100%; }
+
+  /* identity rail */
+  .rail { background: var(--rail); color: var(--rail-ink); position: sticky; top: 0;
+    align-self: start; height: 100vh; padding: 22px 18px;
+    padding-left: max(18px, env(safe-area-inset-left, 0px));
+    display: flex; flex-direction: column; gap: 26px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .brand .mark { width: 30px; height: 30px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); flex: none; }
+  .brand b { font-family: var(--font-display); font-weight: 800; font-size: 18px;
+    letter-spacing: -.02em; }
+  .brand small { display: block; color: var(--ink-3); font-size: 11px; letter-spacing: .14em;
+    text-transform: uppercase; margin-top: 1px; }
+  .nav { display: flex; flex-direction: column; gap: 2px; }
+  .nav a { color: var(--rail-ink); opacity: .72; text-decoration: none; font-size: 13.5px;
+    padding: 8px 10px; border-radius: 9px; display: flex; gap: 9px; align-items: center; }
+  .nav a:hover { opacity: 1; background: rgba(255,255,255,.06); }
+  .nav .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .5; }
+  .rail .foot { margin-top: auto; font-size: 11.5px; color: var(--ink-3); line-height: 1.5; }
+  .rail .foot b { color: var(--rail-ink); font-weight: 700; }
+
+  /* content */
+  .main { min-width: 0; padding: 26px; padding-block: 22px 56px;
+    padding-left: max(26px, env(safe-area-inset-left, 0px));
+    padding-right: max(26px, env(safe-area-inset-right, 0px)); }
+  .topline { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: flex-end;
+    justify-content: space-between; margin-bottom: 22px; }
+  .topline h1 { font-size: 27px; font-weight: 800; letter-spacing: -.025em; }
+  .topline p { margin: 5px 0 0; color: var(--ink-2); font-size: 14px; max-width: 62ch; }
+  .topctl { display: flex; gap: 8px; align-items: center; }
+  .pill { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-2);
+    background: var(--surface); white-space: nowrap; }
+  .pill.live { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
+  button.toggle { font: inherit; font-size: 12.5px; cursor: pointer; border: 1px solid var(--line);
+    background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 6px 12px; }
+  button.toggle:hover { color: var(--ink); }
+
+  .grid { display: grid; gap: 16px; }
+  .kpis { grid-template-columns: repeat(4, 1fr); margin-bottom: 18px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
+    box-shadow: var(--shadow); padding: 18px; min-width: 0; }
+  .kpi .k-label { font-size: 12px; color: var(--ink-2); letter-spacing: .02em; }
+  .kpi .k-val { font-family: var(--font-display); font-weight: 800; font-size: 30px;
+    letter-spacing: -.03em; margin-top: 6px; line-height: 1; }
+  .kpi .k-sub { font-size: 12px; color: var(--ink-3); margin-top: 7px; }
+  .kpi .k-sub.warn { color: var(--warn); font-weight: 600; }
+
+  section { margin-top: 26px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 13px; flex-wrap: wrap; }
+  .sec-head h2 { font-size: 16px; font-weight: 800; letter-spacing: -.01em; }
+  .sec-head .eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-3); font-weight: 700; }
+  .sec-head .note { font-size: 12.5px; color: var(--ink-2); margin-left: auto; }
+
+  .two { grid-template-columns: 1.35fr 1fr; align-items: start; }
+
+  /* chart */
+  .chart-wrap { overflow-x: auto; }
+  svg .axis { stroke: var(--line); }
+  svg .grid { stroke: color-mix(in srgb, var(--line) 70%, transparent); }
+  svg text { fill: var(--ink-2); font-family: var(--font-mono); font-size: 11px; }
+  svg .lbl { fill: var(--ink); font-family: var(--font-display); font-weight: 700; font-size: 11.5px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 2px 0 12px; }
+  .legend span { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink-2); }
+  .legend i { width: 13px; height: 3px; border-radius: 2px; display: inline-block; }
+
+  /* provenance table */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th, td { text-align: right; padding: 9px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3);
+    font-weight: 700; border-bottom: 1px solid var(--line); }
+  tbody tr:last-child td { border-bottom: none; }
+  .prov-chip { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+  .prov-chip i { width: 10px; height: 10px; border-radius: 3px; }
+
+  /* matrix */
+  .verdict { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 12px;
+    padding: 4px 9px; border-radius: 7px; white-space: nowrap; }
+  .v-human { color: var(--pos); background: var(--pos-bg); }
+  .v-ai { color: var(--warn); background: var(--warn-bg); }
+  .v-none { color: var(--neutral); background: var(--neutral-bg); }
+  .v-insuf { color: var(--ink-3); background: var(--surface-2); border: 1px dashed var(--line); }
+  .conf { font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--ink-3); }
+  .win { font-size: 11.5px; color: var(--ink-2); }
+
+  /* affinity bars */
+  .aff-row { display: grid; grid-template-columns: 130px 1fr; gap: 12px; align-items: center;
+    margin-bottom: 11px; }
+  .aff-row > span { font-size: 13px; color: var(--ink); font-weight: 600; }
+  .bars { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+  .bar { display: grid; grid-template-columns: 62px 1fr auto; gap: 8px; align-items: center;
+    font-size: 11.5px; color: var(--ink-2); }
+  .bar .track { height: 10px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
+  .bar .fill { height: 100%; border-radius: 999px; }
+
+  /* alerts */
+  .alerts { display: flex; flex-direction: column; gap: 11px; }
+  .alert { display: grid; grid-template-columns: 4px 1fr; gap: 12px; background: var(--surface);
+    border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px 13px 0; box-shadow: var(--shadow); }
+  .alert .stripe { border-radius: 4px 0 0 4px; }
+  .alert.high .stripe { background: var(--crit); } .alert.medium .stripe { background: var(--warn); }
+  .alert.info .stripe { background: var(--accent); } .alert.ok .stripe { background: var(--pos); }
+  .alert h4 { margin: 0 0 3px; font-size: 13.5px; font-family: var(--font-display); font-weight: 700;
+    display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
+  .alert .tag { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--ink-3); }
+  .alert p { margin: 2px 0 0; font-size: 12.5px; color: var(--ink-2); }
+  .alert .action { margin-top: 6px; font-size: 12.5px; color: var(--ink); }
+  .alert .action b { color: var(--accent); font-weight: 700; }
+
+  .directional { border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
+    background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
+  .directional .badge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--accent); border: 1px solid currentColor; border-radius: 6px;
+    padding: 2px 7px; margin-bottom: 8px; }
+  .gauge { display: flex; gap: 6px; align-items: center; margin: 8px 0; }
+  .gauge i { height: 8px; flex: 1; border-radius: 2px; background: var(--surface-2); }
+  .gauge i.on { background: var(--accent); }
+
+  .compliance { grid-template-columns: repeat(3, 1fr); }
+  .flag .f-n { font-family: var(--font-display); font-weight: 800; font-size: 24px; letter-spacing: -.02em; }
+  .flag .f-l { font-size: 12.5px; color: var(--ink-2); margin-top: 4px; }
+  .flag .f-law { font-size: 11px; color: var(--ink-3); margin-top: 6px; }
+
+  .page-foot { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--line);
+    font-size: 12px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 6px 18px; }
+
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 1fr; }
+    .rail { position: static; height: auto; flex-direction: row; align-items: center; flex-wrap: wrap;
+      gap: 14px; }
+    .rail .nav, .rail .foot { display: none; }
+    .kpis { grid-template-columns: repeat(2, 1fr); }
+    .two { grid-template-columns: 1fr; }
+    .compliance { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: no-preference) { .fill, .bar .fill { transition: width .5s ease; } }
+</style>
+
+<div class="app">
+  <aside class="rail">
+    <div class="brand">
+      <span class="mark" aria-hidden="true"></span>
+      <span><b>Mediekjøp</b><small>Signal</small></span>
+    </div>
+    <nav class="nav">
+      <a href="#overview"><span class="dot"></span>Oversikt</a>
+      <a href="#matrix"><span class="dot"></span>Beslutningsmatrise</a>
+      <a href="#exhaustion"><span class="dot"></span>KI-utmattelse</a>
+      <a href="#opportunity"><span class="dot"></span>Muligheter</a>
+      <a href="#compliance"><span class="dot"></span>Etterlevelse</a>
+    </nav>
+    <div class="foot">
+      <b>Recommend-only.</b> This agent never changes budgets, bids or status on any platform.
+      <br><br>Prototype view on synthetic data.
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topline">
+      <div>
+        <h1 id="overview">Human&nbsp;vs&nbsp;AI creative signal</h1>
+        <p id="subtitle">Where human-led content earns its cost, and where AI iterations win on efficiency — for Norwegian B2C audiences, at placement grain.</p>
+      </div>
+      <div class="topctl">
+        <span class="pill live" id="range-pill">—</span>
+        <span class="pill">Synthetic · prototype</span>
+        <button class="toggle" id="theme-toggle" type="button" aria-label="Bytt tema">◐ Tema</button>
+      </div>
+    </div>
+
+    <div class="grid kpis" id="kpis"></div>
+
+    <section id="provenance">
+      <div class="sec-head">
+        <span class="eyebrow">Provenance</span>
+        <h2>The core contrast</h2>
+        <span class="note" id="prov-note"></span>
+      </div>
+      <div class="grid two">
+        <div class="card">
+          <div class="legend" id="decay-legend"></div>
+          <div class="chart-wrap"><svg id="decay" viewBox="0 0 640 300" width="100%" role="img"
+            aria-label="Click-through rate decay as frequency rises, by provenance"></svg></div>
+          <p style="margin:10px 2px 0;font-size:12.5px;color:var(--ink-2)">
+            CTR against cumulative frequency. Shorter half-life = faster fatigue.</p>
+        </div>
+        <div class="card" style="overflow-x:auto">
+          <table id="prov-table">
+            <thead><tr><th>Provenance</th><th>CTR&nbsp;‰</th><th>Saves&nbsp;‰</th><th>ROAS</th><th>Half-life</th></tr></thead>
+            <tbody></tbody>
+          </table>
+          <p style="margin:12px 2px 0;font-size:12.5px;color:var(--ink-2)" id="prov-takeaway"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="matrix">
+      <div class="sec-head">
+        <span class="eyebrow">Decision matrix</span>
+        <h2>Verdict by channel × placement</h2>
+        <span class="note">Let the data decide — min-sample gated, placement-level.</span>
+      </div>
+      <div class="card" style="overflow-x:auto">
+        <table id="matrix-table">
+          <thead><tr>
+            <th>Channel</th><th>Placement</th><th>Verdict</th>
+            <th>Human ROAS</th><th>AI ROAS</th><th>Human CTR‰</th><th>AI CTR‰</th><th>Conf.</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="legend" style="margin-top:12px">
+        <span><i style="background:var(--pos);height:10px;width:10px;border-radius:3px"></i>Human wins</span>
+        <span><i style="background:var(--warn);height:10px;width:10px;border-radius:3px"></i>AI wins</span>
+        <span><i style="background:var(--neutral);height:10px;width:10px;border-radius:3px"></i>No difference</span>
+        <span><i style="background:var(--ink-3);height:10px;width:10px;border-radius:3px"></i>Insufficient data</span>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head"><span class="eyebrow">Placement affinity</span>
+        <h2>Lo-fi wins vertical; polished wins feed</h2></div>
+      <div class="card" id="affinity"></div>
+    </section>
+
+    <div class="grid two" style="margin-top:26px;align-items:start">
+      <section id="exhaustion" style="margin:0">
+        <div class="sec-head"><span class="eyebrow">Alerts</span><h2>AI-exhaustion</h2></div>
+        <div class="alerts" id="exhaustion-alerts"></div>
+      </section>
+      <section id="opportunity" style="margin:0">
+        <div class="sec-head"><span class="eyebrow">Forward</span><h2>Opportunities</h2></div>
+        <div class="alerts" id="opportunity-alerts"></div>
+      </section>
+    </div>
+
+    <section id="compliance">
+      <div class="sec-head"><span class="eyebrow">Norwegian compliance</span>
+        <h2>Flagged for review</h2>
+        <span class="note">Flagged, never auto-resolved.</span></div>
+      <div class="grid compliance" id="compliance-flags"></div>
+    </section>
+
+    <div class="page-foot">
+      <span id="foot-gen">—</span>
+      <span>Recommend-only · evidence over opinion</span>
+      <span id="foot-note"></span>
+    </div>
+  </main>
+</div>
+
+<script id="insights" type="application/json">__INSIGHTS_JSON__</script>
+<script>
+(function () {
+  "use strict";
+  var D;
+  try { D = JSON.parse(document.getElementById("insights").textContent); }
+  catch (e) { D = null; }
+  if (!D) { return; }
+
+  var PROV_LABEL = { human_led: "Human-led", ai_assisted: "AI-assisted", ai_generated: "AI-generated" };
+  var PROV_VAR = { human_led: "--s-human", ai_assisted: "--s-assist", ai_generated: "--s-gen" };
+  var nf = new Intl.NumberFormat("en-US");
+  function fmtNOK(n){ return "kr " + nf.format(Math.round(n)); }
+  function fmtImpr(n){ return n>=1e6 ? (n/1e6).toFixed(1)+"M" : nf.format(n); }
+  function el(tag, cls, html){ var e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
+
+  // ---- range + footer
+  document.getElementById("range-pill").textContent = D.meta.data_range[0] + " → " + D.meta.data_range[1];
+  document.getElementById("foot-gen").textContent = "Generated " + D.meta.generated_at.replace("T"," ");
+  document.getElementById("foot-note").textContent = D.meta.prototype_note;
+  document.getElementById("subtitle").textContent =
+    "Where human-led content earns its cost, and where AI iterations win on efficiency — "
+    + D.meta.brand + ", at placement grain.";
+
+  // ---- KPIs
+  var k = D.kpis;
+  var kpis = [
+    { label: "Spend (NOK-normalised)", val: fmtNOK(k.spend_nok), sub: "Currencies: " + k.currencies.join(", ") },
+    { label: "Impressions", val: fmtImpr(k.impressions), sub: "Placement-level rows" },
+    { label: "Blended ROAS", val: k.blended_roas.toFixed(2) + "×", sub: "Across all provenance" },
+    { label: "Untagged spend", val: k.untagged_spend_pct + "%", sub: k.untagged_warn ? "Above warn threshold — tag it" : "Within threshold",
+      warn: k.untagged_warn }
+  ];
+  var kw = document.getElementById("kpis");
+  kpis.forEach(function (x) {
+    var c = el("div", "card kpi");
+    c.appendChild(el("div", "k-label", x.label));
+    c.appendChild(el("div", "k-val tnum", x.val));
+    c.appendChild(el("div", "k-sub" + (x.warn ? " warn" : ""), x.sub));
+    kw.appendChild(c);
+  });
+
+  // ---- provenance table + legend + takeaway
+  var tb = document.querySelector("#prov-table tbody");
+  D.provenance.forEach(function (p) {
+    var tr = el("tr");
+    tr.appendChild(el("td", null, '<span class="prov-chip"><i style="background:var('+PROV_VAR[p.provenance]+')"></i>'+PROV_LABEL[p.provenance]+'</span>'));
+    tr.appendChild(el("td", "tnum", p.ctr_permille.toFixed(2)));
+    tr.appendChild(el("td", "tnum", p.save_permille.toFixed(2)));
+    tr.appendChild(el("td", "tnum", p.roas.toFixed(2) + "×"));
+    tr.appendChild(el("td", "tnum", p.half_life != null ? p.half_life.toFixed(1) : "—"));
+    tb.appendChild(tr);
+  });
+  var leg = document.getElementById("decay-legend");
+  D.provenance.forEach(function (p) {
+    leg.appendChild(el("span", null, '<i style="background:var('+PROV_VAR[p.provenance]+')"></i>'+PROV_LABEL[p.provenance]));
+  });
+  var hH = (D.provenance.find(function(p){return p.provenance==="human_led";})||{}).half_life;
+  var gH = (D.provenance.find(function(p){return p.provenance==="ai_generated";})||{}).half_life;
+  if (hH && gH) {
+    document.getElementById("prov-note").textContent = "AI-generated fatigues ≈" + (hH/gH).toFixed(1) + "× faster";
+    document.getElementById("prov-takeaway").textContent =
+      "AI-generated wins raw clicks when fresh, but its half-life is " + gH.toFixed(1) + " vs "
+      + hH.toFixed(1) + " for human-led, and it trails on saves and ROAS. Human-led earns its premium.";
+  }
+
+  // ---- decay chart (hand-rolled SVG)
+  drawDecay();
+  function drawDecay() {
+    var W=640,H=300, m={l:46,r:92,t:14,b:34};
+    var iw=W-m.l-m.r, ih=H-m.t-m.b;
+    var series = D.provenance.map(function(p){ return { key:p.provenance, pts:(D.decay_curve[p.provenance]||[]) }; })
+      .filter(function(s){ return s.pts.length>1; });
+    var maxF=0, maxY=0;
+    series.forEach(function(s){ s.pts.forEach(function(d){ maxF=Math.max(maxF,d.f); maxY=Math.max(maxY,d.ctr); }); });
+    maxF=Math.max(maxF,1); maxY=Math.ceil(maxY/2)*2 || 2;
+    var x=function(f){ return m.l + (f/maxF)*iw; };
+    var y=function(v){ return m.t + ih - (v/maxY)*ih; };
+    var svg=document.getElementById("decay"); var ns="http://www.w3.org/2000/svg"; var parts="";
+    // gridlines + y labels
+    for (var g=0; g<=4; g++){ var vy=maxY*g/4; var py=y(vy);
+      parts+='<line class="grid" x1="'+m.l+'" y1="'+py+'" x2="'+(W-m.r)+'" y2="'+py+'"/>';
+      parts+='<text x="'+(m.l-8)+'" y="'+(py+4)+'" text-anchor="end">'+vy.toFixed(0)+'</text>'; }
+    // x labels
+    for (var f=0; f<=maxF; f+=Math.ceil(maxF/6)){ parts+='<text x="'+x(f)+'" y="'+(H-m.b+18)+'" text-anchor="middle">'+f+'</text>'; }
+    parts+='<text x="'+(m.l+iw/2)+'" y="'+(H-2)+'" text-anchor="middle">Cumulative frequency</text>';
+    parts+='<text x="'+(m.l-34)+'" y="'+(m.t-2)+'" text-anchor="start">CTR ‰</text>';
+    parts+='<line class="axis" x1="'+m.l+'" y1="'+(m.t+ih)+'" x2="'+(W-m.r)+'" y2="'+(m.t+ih)+'"/>';
+    // de-collide endpoint labels: keep a minimum vertical gap between them
+    var ends = series.map(function(s){ var last=s.pts[s.pts.length-1];
+      return { key:s.key, fx:x(last.f), fy:y(last.ctr), ly:y(last.ctr) }; });
+    ends.sort(function(a,b){ return a.ly-b.ly; });
+    var GAP=15;
+    for (var i=1;i<ends.length;i++){ if (ends[i].ly - ends[i-1].ly < GAP) ends[i].ly = ends[i-1].ly + GAP; }
+    var endByKey={}; ends.forEach(function(e){ endByKey[e.key]=e; });
+    // series paths + first-point markers
+    series.forEach(function(s){
+      var col="var("+PROV_VAR[s.key]+")";
+      var dd=s.pts.map(function(d,i){ return (i?"L":"M")+x(d.f).toFixed(1)+" "+y(d.ctr).toFixed(1); }).join(" ");
+      parts+='<path d="'+dd+'" fill="none" stroke="'+col+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+      var first=s.pts[0];
+      parts+='<circle cx="'+x(first.f)+'" cy="'+y(first.ctr)+'" r="3" fill="'+col+'" opacity=".55"/>';
+    });
+    // endpoint dots + de-collided labels (with a short leader where nudged)
+    ends.forEach(function(e){
+      var col="var("+PROV_VAR[e.key]+")";
+      parts+='<circle cx="'+e.fx+'" cy="'+e.fy+'" r="3.5" fill="'+col+'"/>';
+      if (Math.abs(e.ly-e.fy)>1) parts+='<line x1="'+(e.fx+4)+'" y1="'+e.fy+'" x2="'+(e.fx+8)+'" y2="'+e.ly+'" stroke="'+col+'" stroke-width="1" opacity=".5"/>';
+      parts+='<text class="lbl" x="'+(e.fx+10)+'" y="'+(e.ly+4)+'" fill="'+col+'">'+PROV_LABEL[e.key].replace("-led","").replace("AI-","AI ")+'</text>';
+    });
+    svg.innerHTML=parts;
+  }
+
+  // ---- decision matrix
+  var CH={ meta:"Meta", snapchat:"Snapchat", tiktok:"TikTok", youtube:"YouTube" };
+  var vClass={ "Human wins":"v-human","AI wins":"v-ai","No difference":"v-none","Insufficient data":"v-insuf" };
+  var mt=document.querySelector("#matrix-table tbody");
+  D.matrix.forEach(function(c){
+    var tr=el("tr");
+    tr.appendChild(el("td", null, "<b>"+(CH[c.channel]||c.channel)+"</b>"));
+    tr.appendChild(el("td", null, c.placement.replace(/_/g," ")));
+    var v=c.verdict + (c.sub_type? ' <span class="win">· '+c.sub_type.replace("_"," ")+'</span>':'');
+    tr.appendChild(el("td", null, '<span class="verdict '+vClass[c.verdict]+'">'+c.verdict+'</span>'
+      + (c.sub_type? ' <span class="win">'+c.sub_type.replace("_"," ")+'</span>':'')));
+    tr.appendChild(el("td", "tnum", c.human_roas.toFixed(2)+"×"));
+    tr.appendChild(el("td", "tnum", c.ai_roas.toFixed(2)+"×"));
+    tr.appendChild(el("td", "tnum", c.human_ctr_permille.toFixed(2)));
+    tr.appendChild(el("td", "tnum", c.ai_ctr_permille.toFixed(2)));
+    tr.appendChild(el("td", null, '<span class="conf">'+c.confidence+'</span>'));
+    mt.appendChild(tr);
+  });
+
+  // ---- affinity
+  var aff=document.getElementById("affinity");
+  var affMax=0; Object.keys(D.affinity).forEach(function(s){ var o=D.affinity[s];
+    Object.keys(o).forEach(function(f){ affMax=Math.max(affMax,o[f]); }); });
+  affMax=Math.max(affMax,1);
+  var SUBS={ ugc:"UGC", creator:"Creator", staff_founder:"Staff / founder", documentary:"Documentary", studio_polished:"Studio-polished" };
+  Object.keys(D.affinity).forEach(function(sub){
+    var o=D.affinity[sub]; var row=el("div","aff-row");
+    row.appendChild(el("span", null, SUBS[sub]||sub));
+    var bars=el("div","bars");
+    [["vertical","Vertical"],["feed","Feed"]].forEach(function(pair){
+      var fam=pair[0]; if(o[fam]==null) return;
+      var pct=(o[fam]/affMax*100).toFixed(1);
+      var col = fam==="vertical" ? "var(--accent)" : "var(--accent-2)";
+      var b=el("div","bar");
+      b.appendChild(el("span", null, pair[1]));
+      b.appendChild(el("div","track", '<div class="fill" style="width:'+pct+'%;background:'+col+'"></div>'));
+      b.appendChild(el("span","tnum", o[fam].toFixed(1)+"%"));
+      bars.appendChild(b);
+    });
+    row.appendChild(bars); aff.appendChild(row);
+  });
+
+  // ---- exhaustion alerts
+  var ex=document.getElementById("exhaustion-alerts");
+  if (!D.exhaustion_alerts.length) ex.appendChild(makeAlert("ok","No widening gaps","Stable","No segment shows accelerating AI fatigue in this window.",""));
+  D.exhaustion_alerts.forEach(function(a){
+    ex.appendChild(makeAlert(a.severity, a.segment, "Gap +"+a.widening_permille+"‰", a.detail, a.action));
+  });
+
+  // ---- opportunity alerts: calendar + organic + saturation
+  var op=document.getElementById("opportunity-alerts");
+  D.calendar_alerts.slice(0,3).forEach(function(c){
+    var tag=c.status==="history" ? c.weeks_out+" weeks out" : "Untested · "+c.weeks_out+"w";
+    op.appendChild(makeAlert(c.status==="history"?"info":"medium", c.moment, tag, c.detail, c.action));
+  });
+  D.organic_alerts.filter(function(o){return o.provenance==="human_led";}).slice(0,1).forEach(function(o){
+    op.appendChild(makeAlert("ok","Organic outperformer","+"+o.quality_vs_median+"% vs median",
+      "A human-led organic post is over-indexing on saves + shares.", o.action));
+  });
+  var s=D.saturation;
+  var card=el("div","alert info directional");
+  card.appendChild(el("div","stripe"));
+  var body=el("div");
+  body.appendChild(el("span","badge", s.label));
+  body.appendChild(el("h4", null, "Category saturation · "+s.category));
+  var g=el("div","gauge"); var lvl=s.level==="high"?5:s.level==="medium"?3:2;
+  for(var i=0;i<5;i++){ g.appendChild(el("i", i<lvl?"on":"")); }
+  body.appendChild(g);
+  body.appendChild(el("p", null, "AI presence appears <b>"+s.trend+"</b> · level <b>"+s.level+"</b>. Classifier accuracy ≈ "
+    + s.classifier_accuracy_pct + "% ± " + s.classifier_accuracy_margin + "."));
+  body.appendChild(el("p","action", s.note));
+  card.appendChild(body); op.appendChild(card);
+
+  function makeAlert(sev, title, tag, detail, action){
+    var a=el("div","alert "+sev); a.appendChild(el("div","stripe"));
+    var b=el("div");
+    b.appendChild(el("h4", null, title + (tag? ' <span class="tag">'+tag+'</span>':'')));
+    if(detail) b.appendChild(el("p", null, detail));
+    if(action) b.appendChild(el("div","action", '<b>→</b> '+action));
+    a.appendChild(b); return a;
+  }
+
+  // ---- compliance
+  var cf=document.getElementById("compliance-flags");
+  var comp=D.compliance;
+  [
+    { n: comp.kroppspress_review_count, l: "AI creatives showing people", law: "Kroppspress-merking — retouch-labelling review" },
+    { n: comp.boosted_posts_labelling, l: "Boosted organic posts", law: "Markedsføringsloven — advertising disclosure" },
+    { n: comp.creator_disclosure_count, l: "Creator-led creatives", law: "Influencer labelling check" }
+  ].forEach(function(x){
+    var c=el("div","card flag");
+    c.appendChild(el("div","f-n tnum", x.n));
+    c.appendChild(el("div","f-l", x.l));
+    c.appendChild(el("div","f-law", x.law));
+    cf.appendChild(c);
+  });
+
+  // ---- theme toggle (per-viewer convenience only)
+  var root=document.documentElement, KEY="mk-theme";
+  try { var saved=localStorage.getItem(KEY); if(saved) root.setAttribute("data-theme", saved); } catch(e){}
+  document.getElementById("theme-toggle").addEventListener("click", function(){
+    var cur=root.getAttribute("data-theme");
+    var isDark = cur ? cur==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    var next= isDark ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem(KEY, next); } catch(e){}
+    drawDecay();
+  });
+})();
+</script>

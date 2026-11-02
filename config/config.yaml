@@ -1,0 +1,171 @@
+# =============================================================================
+# mediekjop — single source of configuration
+# One YAML file for the whole agent: currency, channels, placements, callout
+# terms, calendar moments and thresholds. Edit here, not in code.
+#
+# Credentials are NEVER stored here. API keys/tokens come only from environment
+# variables (see README). Nothing in this file is a secret.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Currency
+# Scope is the Norwegian *consumer*, not Norwegian locality: a Norwegian buying
+# in EUR/USD/GBP from a foreign advertiser is in scope. We preserve the original
+# transaction currency and normalise to a single reporting currency (NOK) via a
+# dated FX layer.
+# -----------------------------------------------------------------------------
+currency:
+  reporting: NOK
+  # Currencies we expect to see on inbound data. FX rates are supplied per-date
+  # in the fx_rate table, not hard-coded here.
+  known: [NOK, EUR, USD, GBP, SEK, DKK]
+
+# -----------------------------------------------------------------------------
+# Channels (Norway, B2C) — priority order per the brief.
+# Priorities are a starting prior only; the data decides budget, not this list.
+# Verify against the latest Ipsos SoMe-tracker before each planning cycle
+# (do not hard-code usage figures anywhere).
+# -----------------------------------------------------------------------------
+channels:
+  meta:       { enabled: true,  priority: 1, publishers: [facebook, instagram] }
+  snapchat:   { enabled: true,  priority: 2, publishers: [snapchat] }
+  tiktok:     { enabled: true,  priority: 3, publishers: [tiktok] }
+  youtube:    { enabled: true,  priority: 4, publishers: [youtube] }
+  pinterest:  { enabled: false, priority: 5, publishers: [pinterest] }  # optional, behind flag
+  # Excluded by the brief: linkedin, x.
+
+# -----------------------------------------------------------------------------
+# Placements — analysis is ALWAYS at placement grain, never rolled up to campaign.
+# format: still | video.  is_video is derived from format.
+# -----------------------------------------------------------------------------
+placements:
+  # channel | publisher | placement_name | format
+  - { channel: meta,     publisher: facebook,  name: feed,        format: still }
+  - { channel: meta,     publisher: facebook,  name: feed_video,  format: video }
+  - { channel: meta,     publisher: facebook,  name: stories,     format: video }
+  - { channel: meta,     publisher: facebook,  name: reels,       format: video }
+  - { channel: meta,     publisher: instagram, name: feed,        format: still }
+  - { channel: meta,     publisher: instagram, name: stories,     format: video }
+  - { channel: meta,     publisher: instagram, name: reels,       format: video }
+  - { channel: snapchat, publisher: snapchat,  name: stories,     format: video }
+  - { channel: snapchat, publisher: snapchat,  name: spotlight,   format: video }
+  - { channel: tiktok,   publisher: tiktok,    name: feed,        format: video }
+  - { channel: youtube,  publisher: youtube,   name: shorts,      format: video }
+  - { channel: youtube,  publisher: youtube,   name: in_stream,   format: video }
+
+# -----------------------------------------------------------------------------
+# Creative tagging — provenance vocabulary and the ad-name convention.
+# Provenance is NEVER inferred from performance. Tags come, in order of trust:
+#   naming_convention -> csv_override -> platform_label -> c2pa
+# -----------------------------------------------------------------------------
+tagging:
+  provenance: [human_led, ai_assisted, ai_generated]
+  human_sub_types: [ugc, creator, staff_founder, documentary, studio_polished]
+
+  # Compact ad-name scheme. Tokens are delimited by underscores anywhere in the
+  # ad name, e.g.  "SpringSale_HL-UGC_NO-loc-dia_v3".
+  naming_convention:
+    provenance_tokens:
+      HL-UGC:   { provenance: human_led,   sub_type: ugc }
+      HL-CRE:   { provenance: human_led,   sub_type: creator }
+      HL-STF:   { provenance: human_led,   sub_type: staff_founder }
+      HL-DOC:   { provenance: human_led,   sub_type: documentary }
+      HL-STU:   { provenance: human_led,   sub_type: studio_polished }
+      AA:       { provenance: ai_assisted, sub_type: null }
+      AG:       { provenance: ai_generated, sub_type: null }
+    # Norwegian-ness locality flags (optional tokens).
+    locality_tokens:
+      NO-loc: norwegian_locations      # recognisable Norwegian locations
+      NO-face: norwegian_faces         # recognisable Norwegian faces
+      NO-cult: norwegian_cultural_refs # Norwegian cultural references
+      NO-dia: dialect_present          # Norwegian dialect present
+    language_tokens:
+      lang-bok: bokmal
+      lang-nyn: nynorsk
+      lang-dia: dialect
+      lang-eng: english
+      lang-mix: mixed
+
+# -----------------------------------------------------------------------------
+# Norwegian-aware AI-callout terms (used by the sentiment module, Phase 5).
+# Editable. Matched case-insensitively; keep as whole-word-ish patterns.
+# -----------------------------------------------------------------------------
+callout_terms:
+  - "KI"
+  - "KI-generert"
+  - "KI-laga"
+  - "AI-generert"
+  - "AI-generated"
+  - "laget med AI"
+  - "laga med KI"
+  - "AI-søppel"
+  - "KI-søppel"
+  - "fake"
+  - "falsk"
+  - "bot"
+  - "generert"
+
+# -----------------------------------------------------------------------------
+# Norwegian cultural calendar (editable). Used by the opportunity module.
+# Movable feasts (påske) are given per-year date ranges. 'lead_time_weeks' is
+# how far ahead to raise a forward alert.
+# -----------------------------------------------------------------------------
+calendar:
+  moments:
+    - { key: vinterferie,   label: "Vinterferie",        month: 2,  approx_day: 24, window_days: 9,  lead_time_weeks: 6 }
+    - { key: paske,         label: "Påske",              ranges: { 2025: [2025-04-13, 2025-04-21], 2026: [2026-03-29, 2026-04-06] }, lead_time_weeks: 8 }
+    - { key: russetid,      label: "Russetid",           month: 4,  approx_day: 20, window_days: 27, lead_time_weeks: 10 }
+    - { key: syttende_mai,  label: "17. mai",            month: 5,  approx_day: 17, window_days: 7,  lead_time_weeks: 8 }
+    - { key: fellesferie,   label: "Fellesferie",        month: 7,  approx_day: 15, window_days: 31, lead_time_weeks: 10 }
+    - { key: back_to_school,label: "Skolestart",         month: 8,  approx_day: 18, window_days: 10, lead_time_weeks: 6 }
+    - { key: first_snow,    label: "Første snø",         month: 11, approx_day: 15, window_days: 14, lead_time_weeks: 4, untested: true }
+    - { key: black_friday,  label: "Black Friday",       month: 11, approx_day: 28, window_days: 5,  lead_time_weeks: 6 }
+    - { key: julebord,      label: "Julebordsesong",     month: 11, approx_day: 20, window_days: 30, lead_time_weeks: 6 }
+    - { key: advent_jul,    label: "Advent og jul",      month: 12, approx_day: 10, window_days: 20, lead_time_weeks: 8 }
+
+# -----------------------------------------------------------------------------
+# Norwegian regions (fylker, 2024 structure) with rough population weights and
+# an urban/rural hint. Used for seasonality realism and (Phase 6) geo-split
+# experiment cell assignment. Weights are approximate and need not sum to 1.
+# -----------------------------------------------------------------------------
+regions:
+  - { key: oslo,            label: "Oslo",              pop_weight: 0.130, urban: high }
+  - { key: akershus,        label: "Akershus",          pop_weight: 0.130, urban: high }
+  - { key: vestland,        label: "Vestland",          pop_weight: 0.120, urban: mid }
+  - { key: rogaland,        label: "Rogaland",          pop_weight: 0.090, urban: mid }
+  - { key: trondelag,       label: "Trøndelag",         pop_weight: 0.090, urban: mid }
+  - { key: innlandet,       label: "Innlandet",         pop_weight: 0.065, urban: low }
+  - { key: more_romsdal,    label: "Møre og Romsdal",   pop_weight: 0.048, urban: low }
+  - { key: vestfold,        label: "Vestfold",          pop_weight: 0.045, urban: mid }
+  - { key: buskerud,        label: "Buskerud",          pop_weight: 0.050, urban: mid }
+  - { key: agder,           label: "Agder",             pop_weight: 0.058, urban: low }
+  - { key: ostfold,         label: "Østfold",           pop_weight: 0.058, urban: mid }
+  - { key: nordland,        label: "Nordland",          pop_weight: 0.044, urban: low }
+  - { key: troms,           label: "Troms",             pop_weight: 0.030, urban: low }
+  - { key: telemark,        label: "Telemark",          pop_weight: 0.031, urban: low }
+  - { key: finnmark,        label: "Finnmark",          pop_weight: 0.014, urban: low }
+
+# Age cohorts used for the audience-trust breakdown (age x channel).
+age_cohorts: [age_13_17, age_18_24, age_25_34, age_35_44, age_45_54, age_55_plus]
+
+# -----------------------------------------------------------------------------
+# Analysis thresholds (used from Phase 4 onward). Collected here so the
+# statistical behaviour of the agent is transparent and editable.
+# -----------------------------------------------------------------------------
+thresholds:
+  min_impressions_for_verdict: 10000   # below this -> "insufficient data", not a verdict
+  min_spend_nok_for_verdict: 2000
+  min_conversions_for_cpa: 25
+  fdr_alpha: 0.05                      # Benjamini-Hochberg false-discovery rate
+  exhaustion_trend_windows_days: [30, 60, 90]
+  untagged_spend_warn_share: 0.15      # warn when > this share of spend is untagged
+
+# -----------------------------------------------------------------------------
+# Base CPMs (NOK) by channel, before placement/seasonal modifiers. Starting
+# priors for the synthetic generator only — real data overrides these entirely.
+# -----------------------------------------------------------------------------
+base_cpm_nok:
+  meta: 70
+  snapchat: 45
+  tiktok: 55
+  youtube: 85
