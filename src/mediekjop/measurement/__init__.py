@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Measurement [Phase 6 / 8].
 
   * halo        — downstream contribution of human-led upper-funnel content,

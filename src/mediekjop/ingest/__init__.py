@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Data ingestion [Phase 2 / 10].
 
 CSV/XLSX mappers from each platform's standard ads export into the unified

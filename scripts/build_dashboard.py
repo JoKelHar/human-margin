@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Build the demo dashboard by injecting insights.json into the template.
 
 Produces two self-contained outputs from one source (web/dashboard.html):

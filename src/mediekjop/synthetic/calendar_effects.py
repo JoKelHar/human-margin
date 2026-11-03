@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Seasonal demand effects around Norwegian calendar moments.
 
 Turns the editable calendar in config into a per-date demand multiplier used by

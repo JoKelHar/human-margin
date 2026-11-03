@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Phase 2: CSV mappers map platform exports into the unified schema correctly."""
 
 from __future__ import annotations

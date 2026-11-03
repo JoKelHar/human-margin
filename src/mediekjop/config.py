@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Loader for the single YAML configuration file.
 
 The whole agent reads its configuration from one file (config/config.yaml by

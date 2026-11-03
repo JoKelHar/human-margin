@@ -8,9 +8,14 @@ __pycache__/
 # Local data / generated artifacts
 *.duckdb
 *.duckdb.wal
-data/
 out/
 ground_truth.json
+
+# Ignore everything under data/, but keep the committed, versioned libraries
+# (the CC BY 4.0 benchmark library and the FX rates file ship with the repo).
+/data/*
+!/data/benchmarks/
+!/data/fx/
 
 # Secrets — credentials must only ever come from environment variables
 .env

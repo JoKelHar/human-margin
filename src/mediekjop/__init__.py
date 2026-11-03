@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """mediekjop — Norwegian B2C media-buying analysis agent with AI-exhaustion detection.
 
 Recommend-only. The agent never changes budgets, bids or ad status and never

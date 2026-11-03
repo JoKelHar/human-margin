@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Unified placement-grain schema — single source of truth.
 
 Column names, order and types are defined once here as ``TableSpec`` objects.

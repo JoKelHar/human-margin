@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Untagged-spend reporting and writing resolved tags back to the database.
 
 Untagged spend is reported as a *share of total NOK spend*, compared against

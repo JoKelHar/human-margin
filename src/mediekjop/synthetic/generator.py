@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Synthetic Norwegian media-buying data generator.
 
 Produces a realistic, fully-tagged dataset at placement grain for developing and

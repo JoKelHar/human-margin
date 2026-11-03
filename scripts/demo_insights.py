@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Compute descriptive insights from the synthetic DuckDB for the demo dashboard.
 
 This is a PROTOTYPE read of the data: it uses transparent descriptive aggregates

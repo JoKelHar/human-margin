@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Mediekjøp Signal"
+abstract: >-
+  A recommend-only media-buying analysis agent for Norwegian B2C advertisers,
+  with AI-exhaustion detection — spotting where audiences tire of, distrust or
+  ignore AI-generated creative — and a creative-approach planner that recommends
+  whether a campaign should use an AI-driven, hybrid or human-led approach,
+  backed by transparent economics, cited benchmarks and honest uncertainty.
+type: software
+authors:
+  - family-names: Harrison
+    given-names: João
+    # orcid: "https://orcid.org/0000-0000-0000-0000"  # [[PLACEHOLDER: ORCID, if any]]
+version: 0.1.0
+date-released: "2026-11-03"
+license: Apache-2.0
+repository-code: "https://github.com/JoKelHar/mediekjop-signal"
+url: "https://github.com/JoKelHar/mediekjop-signal"
+keywords:
+  - media buying
+  - AI exhaustion
+  - creative strategy
+  - Norway
+  - marketing
+  - open source

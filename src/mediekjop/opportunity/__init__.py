@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Forward-looking opportunity detection [Phase 7].
 
   * calendar  — Norwegian cultural calendar; forward alerts with lead time.

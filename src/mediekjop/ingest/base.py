@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Source-agnostic ingestion: map any platform export into the unified schema.
 
 A platform export (Meta, Snapchat, TikTok, Google/YouTube) differs in column

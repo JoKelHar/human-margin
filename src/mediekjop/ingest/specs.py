@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Declarative mapping specs, one per platform.
 
 Each spec says how that platform's standard ads export maps into the unified

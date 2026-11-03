@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """DuckDB storage: create the schema and load dataframes into it.
 
 Column order is taken from the TableSpec, so loaders never have to match the

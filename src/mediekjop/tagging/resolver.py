@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Merge tag evidence by trust, then apply the result to creatives.
 
 The trust hierarchy is ``naming_convention -> csv_override -> platform_label ->

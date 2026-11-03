@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Unified placement-grain schema and DuckDB storage.
 
 Public surface:

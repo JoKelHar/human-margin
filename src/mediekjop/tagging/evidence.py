@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """One tag claim from one source, and the resolved tag that wins the hierarchy.
 
 Every tagging source (the ad-name convention, a buyer-supplied CSV override, a

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Norwegian-aware comment sentiment and AI-callout detection [Phase 5].
 
 Classifies comments in bokmål, nynorsk, dialect and English, and detects

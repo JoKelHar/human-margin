@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Config loading and channel priorities."""
 
 from __future__ import annotations

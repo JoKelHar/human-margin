@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Creative tagging [Phase 3].
 
 Resolves provenance, human sub-type and Norwegian-ness using the trust

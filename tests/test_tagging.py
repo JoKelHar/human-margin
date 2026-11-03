@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Phase 3 — tagging: naming parser, trust hierarchy, untagged-spend report.
 
 The strongest test here is a round-trip: the synthetic generator *encodes*

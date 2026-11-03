@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Render a weekly Markdown report from out/insights.json.
 
 A lightweight preview of the Phase-9 report: the same evidence the dashboard

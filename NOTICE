@@ -1,0 +1,19 @@
+Mediekjøp Signal
+A recommend-only media-buying analysis agent for Norwegian B2C advertisers,
+with AI-exhaustion detection and a creative-approach planner.
+
+Copyright 2026 João Harrison
+
+Originally created by João Harrison.
+https://github.com/JoKelHar/mediekjop-signal
+
+Built with the assistance of Claude Code (Anthropic).
+
+This product includes software developed by João Harrison and contributors,
+licensed under the Apache License, Version 2.0 (see LICENSE).
+
+The benchmark library (under data/benchmarks/) and the project documentation
+are licensed separately under the Creative Commons Attribution 4.0 International
+licence (CC BY 4.0); see LICENSE-DATA. That licence covers the compilation and
+structure of the library, not the third-party facts it cites or those sources
+themselves.

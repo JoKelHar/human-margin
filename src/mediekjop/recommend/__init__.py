@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Budget recommendations [Phase 9].
 
 Recommend-only: reallocation by channel, placement and creative type, with

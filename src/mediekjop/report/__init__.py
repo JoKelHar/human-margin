@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Reporting and dashboard [Phase 9].
 
 Weekly Markdown report (decision matrix, exhaustion/opportunity alerts, halo,

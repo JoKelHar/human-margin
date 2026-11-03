@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Parse the ad-name naming convention into tag evidence.
 
 The buyer encodes provenance and Norwegian-ness in the ad/post name using the

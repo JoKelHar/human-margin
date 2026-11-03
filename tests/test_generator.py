@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Synthetic generator: determinism, referential integrity, encoded effects."""
 
 from __future__ import annotations

@@ -1,23 +1,118 @@
 # Mediekjøp Signal
 
-A **recommend-only** media-buying analysis agent for Norwegian B2C advertisers,
-whose distinguishing feature is **AI-exhaustion detection**: spotting where
-audiences tire of, distrust, or ignore AI-generated creative. It ingests paid and
-organic social data, keeps everything at **placement grain**, and answers two
-questions with evidence, never opinion:
+**A recommend-only media-buying analysis agent for Norwegian B2C advertisers —
+with AI-exhaustion detection and a creative-approach planner.** It answers two
+questions with evidence rather than opinion: where human-led creative earns its
+higher cost, and where the next distinctly-human opportunities are — and it
+helps you decide, before you spend, whether a campaign should go AI-driven,
+hybrid or human-led.
 
-1. Where does human-led content earn its higher cost, and where are AI-generated
-   iterations winning on efficiency? *(retrospective)*
-2. Where are the next opportunities for distinctly human-led content cycles and
-   placements? *(forward-looking, flagged before spend)*
+![Code licence: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)
+![Data licence: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)
+![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)
+![Tests](https://img.shields.io/badge/tests-40%20passing-brightgreen.svg)
 
-The agent **never** changes budgets, bids or ad status, and never launches
-experiments on any platform. It recommends; a human acts.
+## Demo
 
 > **Live demo dashboard** → https://jokelhar.github.io/mediekjop-signal/
 > A Smartly-style console rendering the human-vs-AI decision matrix, exhaustion
-> and opportunity alerts, built on **synthetic** Norwegian data. Prototype view —
-> the descriptive aggregates behind it are not yet the full statistical engine.
+> and opportunity alerts, built on **synthetic** Norwegian data.
+
+<!-- [[PLACEHOLDER: add a GIF or screenshot of the planner wizard here once Phase 7 lands]] -->
+
+## Why I built this
+
+I led marketing for a portfolio of 20-odd brands in Oslo, and I reported the numbers. This is the beta of the tool I wish I'd had the whole time.
+
+The temptation is always the same: let AI iterate the copy, the creative, the UGC. The reason is cost. Even with a lower ROAS, the savings against a human-led workflow make AI tempting, and far easier to justify on a thin budget. Whether it wins the audience is another matter, and that rarely gets measured.
+
+Feeds fill up with content that looks the same, and audiences learn to scroll past it. That cost never appears on the production invoice. Neither does the damage to a brand that starts to look like slop.
+
+This tool replaces the guess with evidence. It tracks where AI creative is wearing thin, where human-led work still earns its cost, and what a given campaign should do with the budget it actually has. It's built for marketers, and for business owners who want data to protect their brand before they sign an agency quote.
+
+I built it with Claude Code, and that's the point. I use Claude daily. AI should make our decisions better informed and our iterations faster. It shouldn't make the creative call. Going into 2027, the edge belongs to teams who know where AI earns its place and where a human idea is still worth paying for.
+
+Try it, break it, and tell me where the benchmarks are wrong and what the results mean in your industry.
+
+João Harrison, Oslo
+
+## Quick start
+
+No ad accounts and no API keys required — it runs fully offline on synthetic
+data. Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
+
+```bash
+uv sync                 # virtual environment + dependencies
+uv run pytest -q        # 40 tests
+```
+
+End-to-end on synthetic data (generate → analyse → dashboard → report):
+
+```bash
+uv run python scripts/generate.py --out data/synthetic.duckdb --accounts 1 --days 180
+uv run python scripts/demo_insights.py          # -> out/insights.json
+uv run python scripts/build_dashboard.py        # -> docs/index.html (the live demo)
+uv run python scripts/weekly_report.py          # Markdown weekly brief to stdout
+```
+
+A rendered example brief lives at [`samples/weekly_report_sample.md`](samples/weekly_report_sample.md).
+
+## A worked example, in plain language
+
+Say you run ads for a skincare brand. You've been leaning on AI-generated video
+because it's cheap to churn out. The agent takes your exported numbers (kept at
+the level of each individual *placement* — Instagram Reels, Snapchat Spotlight,
+and so on, never blurred together) and shows you, for example:
+
+- **AI creative wins the first clicks but fades faster.** On synthetic data the
+  AI-generated ads start with a strong click rate and then tire quickly — a
+  "half-life" of about 4 days against roughly 10 for human-led — while human-led
+  content keeps earning saves and conversions for longer.
+- **Different placements want different creative.** Lo-fi, human UGC does its
+  best work in Stories and Reels; polished studio work holds up better in Feed.
+- **Some of your spend is on creative nobody has labelled.** The agent reports
+  that as a share of your budget and tells you to go tag it, rather than guessing
+  what it was.
+
+Every figure comes with how much it rests on your own data versus a benchmark or
+an assumption, so you know how hard to lean on it. The planner (in progress)
+takes this further: you enter a budget, a price and a few campaign details, and
+it tells you whether AI, hybrid or human-led is the better bet — with the
+break-even spelled out ("human-led needs to beat AI by X% to pay off").
+
+## Licences
+
+This repository is **dual-licensed**:
+
+| Part of the repo | Licence |
+|---|---|
+| Source code (`src/`, `tests/`, `scripts/`, `web/`) | [Apache-2.0](LICENSE) |
+| Benchmark library (`data/benchmarks/`) and documentation | [CC BY 4.0](LICENSE-DATA) |
+
+See [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) for dependency licences
+(all permissive) and [`DATA_SOURCES.md`](DATA_SOURCES.md) for how benchmark
+figures are cited.
+
+**Name and trademark.** The Apache-2.0 licence covers the code, not the
+project's name or logo. You're very welcome to fork and build on this — please
+just give your fork its own name rather than "Mediekjøp Signal", so nobody
+confuses the two. (See `NOTICE`.)
+
+**How to cite.** Citation metadata is in [`CITATION.cff`](CITATION.cff); GitHub
+shows a "Cite this repository" button from it.
+
+## Disclaimer
+
+This is **decision-support software, not a guarantee of results.** Benchmarks are
+estimates — often drawn from proxy markets and clearly-labelled assumptions — and
+every recommendation ships with an evidence grade so you can see how far to trust
+it. The agent is **recommend-only**: it never changes budgets, bids or ad status,
+never launches experiments, and never touches your ad accounts. All data stays on
+your machine; there is no telemetry. Nothing here is financial advice.
+
+Built with [Claude Code](https://claude.com/claude-code).
+
+---
 
 ## Status
 
@@ -26,9 +121,14 @@ experiments on any platform. It recommends; a human acts.
 | **1** | Unified placement-grain schema + synthetic data generator | ✅ complete |
 | **2** | CSV mappers (Meta, Snapchat, TikTok, YouTube) behind a `DataSource` interface | ✅ complete |
 | **3** | Tagging: provenance, sub-types, Norwegian-ness (trust hierarchy) + untagged-spend reporting | ✅ complete |
-| 4 | Exhaustion module, mixed-effects stats, breakdowns | ◻ next |
+| 4 | Exhaustion module, mixed-effects stats, breakdowns | ⏸ on hold |
 | 5 | Norwegian sentiment / AI-callout detection | ◻ |
 | 6–10 | Decision matrix, opportunity, halo, recommendations, API connectors | ◻ |
+
+Also in progress, as a parallel module: the **Creative Approach Planner**
+(AI vs hybrid vs human) — a standalone, offline planner backed by a cited
+benchmark library, which sharpens its estimates with the exhaustion framework
+once account data exists.
 
 Every remaining module exists as a documented stub (`src/mediekjop/*/__init__.py`).
 
@@ -45,27 +145,9 @@ EUR/USD/GBP from a foreign advertiser is in scope. Therefore:
   **descriptive analytical dimension** — something tested as an explanatory
   variable — never an inclusion filter.
 
-## Quickstart
+## Ingesting real platform exports
 
-Requires Python 3.11+. Uses [uv](https://docs.astral.sh/uv/).
-
-```bash
-uv sync                 # venv + Phase 1–2 deps
-uv run pytest -q        # 28 tests
-```
-
-End-to-end on synthetic data (generate → analyse → dashboard → report):
-
-```bash
-uv run python scripts/generate.py --out data/synthetic.duckdb --accounts 1 --days 180
-uv run python scripts/demo_insights.py          # -> out/insights.json
-uv run python scripts/build_dashboard.py        # -> docs/index.html (the live demo)
-uv run python scripts/weekly_report.py          # Markdown weekly brief to stdout
-```
-
-A rendered example brief lives at [`samples/weekly_report_sample.md`](samples/weekly_report_sample.md).
-
-Ingest real platform exports (the Phase 2 path), using the included samples:
+The Phase 2 path, using the included samples:
 
 ```python
 from mediekjop.ingest import SPECS, CsvDataSource, ingest_into_db, const_fx
@@ -77,7 +159,7 @@ sources = [CsvDataSource(SPECS[p], f"samples/exports/{f}") for p, f in {
     "tiktok": "tiktok_ads_export.csv", "youtube": "google_ads_youtube_export.csv",
 }.items()]
 account = {"account_id": "acc1", "account_name": "Demo", "brand": "demo", "home_currency": "NOK"}
-ingest_into_db(con, sources, account, fx_lookup=const_fx({"EUR": 11.5}))
+ingest_into_db(con, sources, account, fx_lookup=const_fx({"EUR": 11.5}), tag=True)
 ```
 
 ## Architecture
@@ -136,7 +218,6 @@ reported as a **share of total NOK spend** against
 
 ```python
 from mediekjop import tagging
-# run the ingest -> tagging step in place, then report untagged spend
 tagging.apply_to_db(con)                 # naming convention + optional overrides
 rep = tagging.untagged_spend(con)
 print(rep.untagged_share, rep.over_threshold)
@@ -190,6 +271,13 @@ So later phases have real signal to recover (ground truth is written to
 - **Platform AI-disclosure** (Meta, TikTok).
 - **GDPR**: aggregated performance only; commenter identities hashed before
   storage; competitor data limited to what public ad libraries expose.
+
+## Contributing
+
+Benchmark figures with good sources are as welcome as code. See
+[`CONTRIBUTING.md`](CONTRIBUTING.md) (we use the DCO — sign off commits with
+`git commit -s`) and the [`Code of Conduct`](CODE_OF_CONDUCT.md). Security
+reports: [`SECURITY.md`](SECURITY.md).
 
 ## Tech
 

@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Fatigue / decay model used by the synthetic generator.
 
 A creative's response rate (CTR, thumb-stop) decays as cumulative frequency

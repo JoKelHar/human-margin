@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Controlled vocabularies for the unified schema.
 
 Stored as plain strings in DuckDB (str-based enums) so values are human-readable

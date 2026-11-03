@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """AI-exhaustion detection [Phase 4].
 
 Compares provenance groups and human sub-types while controlling for confounders

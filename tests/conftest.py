@@ -1,3 +1,5 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright 2026 João Harrison
 """Shared pytest fixtures: a small synthetic dataset and an in-memory DuckDB."""
 
 from __future__ import annotations
