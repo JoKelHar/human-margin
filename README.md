@@ -82,6 +82,10 @@ and so on, never blurred together) and shows you, for example:
   that as a share of your budget and tells you to go tag it, rather than guessing
   what it was.
 
+These figures are not real findings: the ~4-day versus ~10-day half-life comes
+from synthetic data in which the generator deliberately plants that pattern, and
+the point of the example is that the method recovers what was planted.
+
 Every figure comes with how much it rests on your own data versus a benchmark or
 an assumption, so you know how hard to lean on it. The planner (in progress)
 takes this further: you enter a budget, a price and a few campaign details, and
