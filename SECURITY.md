@@ -4,7 +4,7 @@ Copyright 2026 João Harrison
 -->
 # Security Policy
 
-Thank you for helping keep Mediekjøp Signal and its users safe.
+Thank you for helping keep Human Margin and its users safe.
 
 ## Supported versions
 

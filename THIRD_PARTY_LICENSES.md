@@ -4,7 +4,7 @@ Copyright 2026 João Harrison
 -->
 # Third-party licences
 
-Mediekjøp Signal is licensed under Apache-2.0 (code) and CC BY 4.0 (benchmark
+Human Margin is licensed under Apache-2.0 (code) and CC BY 4.0 (benchmark
 library and docs). It depends on the third-party packages below. **All runtime
 dependencies are permissive (MIT / BSD-3-Clause) and compatible with
 Apache-2.0** — there are no copyleft (GPL / LGPL / AGPL) dependencies.

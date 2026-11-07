@@ -49,5 +49,5 @@ First tagged release. Covers the data foundation of the agent on synthetic data.
   `SECURITY.md`, `DATA_SOURCES.md`, `THIRD_PARTY_LICENSES.md`, GitHub issue and
   pull-request templates, and SPDX headers across the source tree.
 
-[Unreleased]: https://github.com/JoKelHar/mediekjop-signal/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/JoKelHar/mediekjop-signal/releases/tag/v0.1.0
+[Unreleased]: https://github.com/JoKelHar/human-margin/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/JoKelHar/human-margin/releases/tag/v0.1.0
