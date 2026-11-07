@@ -1,8 +1,20 @@
 <!doctype html>
-<html lang="no">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mediekjøp Signal</title>
+<meta name="description" content="Recommend-only analysis tool for Norwegian B2C media buyers deciding between AI-led, hybrid and human-led creative. Prototype on synthetic data.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mediekjøp Signal">
+<meta property="og:description" content="Recommend-only analysis tool for Norwegian B2C media buyers deciding between AI-led, hybrid and human-led creative. Prototype on synthetic data.">
+<meta property="og:url" content="https://jokelhar.github.io/mediekjop-signal/">
+<meta property="og:image" content="https://jokelhar.github.io/mediekjop-signal/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Mediekjøp Signal">
+<meta name="twitter:description" content="Recommend-only analysis tool for Norwegian B2C media buyers deciding between AI-led, hybrid and human-led creative. Prototype on synthetic data.">
+<meta name="twitter:image" content="https://jokelhar.github.io/mediekjop-signal/og-image.png">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <style>:root{color-scheme:light}body{margin:0;font:14px "Helvetica Neue",Helvetica,Arial,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
 <body>
@@ -94,6 +106,7 @@
   button.toggle { font: inherit; font-size: 12.5px; cursor: pointer; border: 1px solid var(--line);
     background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 6px 12px; }
   button.toggle:hover { color: var(--ink); }
+  a.briefint { font-size: 12.5px; color: var(--ink-2); text-decoration: underline; white-space: nowrap; align-self: center; }
 
   .grid { display: grid; gap: 16px; }
   .kpis { grid-template-columns: repeat(4, 1fr); margin-bottom: 18px; }
@@ -111,6 +124,10 @@
   .sec-head .eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
     color: var(--ink-3); font-weight: 700; }
   .sec-head .note { font-size: 12.5px; color: var(--ink-2); margin-left: auto; }
+  .caption { margin: -2px 0 14px; font-size: 13px; color: var(--ink-2); max-width: 72ch; }
+  .glossary { margin: 2px 0 20px; font-size: 12.5px; line-height: 1.55; color: var(--ink-2);
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; }
+  .glossary b { color: var(--ink); }
 
   .two { grid-template-columns: 1.35fr 1fr; align-items: start; }
 
@@ -186,6 +203,7 @@
 
   .page-foot { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--line);
     font-size: 12px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 6px 18px; }
+  .page-foot a { color: var(--ink-2); text-decoration: underline; }
 
   @media (max-width: 900px) {
     .app { grid-template-columns: 1fr; }
@@ -206,11 +224,11 @@
       <span><b>Mediekjøp</b><small>Signal</small></span>
     </div>
     <nav class="nav">
-      <a href="#overview"><span class="dot"></span>Oversikt</a>
-      <a href="#matrix"><span class="dot"></span>Beslutningsmatrise</a>
-      <a href="#exhaustion"><span class="dot"></span>KI-utmattelse</a>
-      <a href="#opportunity"><span class="dot"></span>Muligheter</a>
-      <a href="#compliance"><span class="dot"></span>Etterlevelse</a>
+      <a href="#overview"><span class="dot"></span>Overview</a>
+      <a href="#matrix"><span class="dot"></span>Decision matrix</a>
+      <a href="#exhaustion"><span class="dot"></span>AI exhaustion</a>
+      <a href="#opportunity"><span class="dot"></span>Opportunities</a>
+      <a href="#compliance"><span class="dot"></span>Compliance</a>
     </nav>
     <div class="foot">
       <b>Recommend-only.</b> This agent never changes budgets, bids or status on any platform.
@@ -222,17 +240,20 @@
     <div class="topline">
       <div>
         <h1 id="overview">Human&nbsp;vs&nbsp;AI creative signal</h1>
-        <p id="subtitle">Where human-led content earns its cost, and where AI iterations win on efficiency — for Norwegian B2C audiences, at placement grain.</p>
+        <p id="subtitle">Where human-led content earns its cost, and where AI iterations win on efficiency, for Norwegian B2C audiences, at placement grain.</p>
         <p class="synthnote">Demonstration on <b>synthetic data with deliberately planted patterns</b>, a prototype, not real campaign results.</p>
       </div>
       <div class="topctl">
         <span class="pill live" id="range-pill">—</span>
         <span class="pill">Synthetic · prototype</span>
-        <button class="toggle" id="theme-toggle" type="button" aria-label="Bytt tema">◐ Tema</button>
+        <a class="briefint" href="sample-brief.html">Sample weekly brief</a>
+        <button class="toggle" id="theme-toggle" type="button" aria-label="Toggle theme">◐ Theme</button>
       </div>
     </div>
 
     <div class="grid kpis" id="kpis"></div>
+
+    <p class="glossary"><b>Glossary.</b> <b>‰</b> is per thousand impressions. <b>Half-life</b> is the number of exposures at which response falls by half, so shorter means faster fatigue. A <b>placement</b> is one ad slot, such as Instagram Reels or Snapchat Spotlight. <b>Minimum sample</b> means placements below a set impression threshold are marked insufficient data rather than judged.</p>
 
     <section id="provenance">
       <div class="sec-head">
@@ -240,6 +261,7 @@
         <h2>The core contrast</h2>
         <span class="note" id="prov-note"></span>
       </div>
+      <p class="caption">How human-led, AI-assisted and AI-generated creative compare on clicks, saves and return, and how fast each one tires.</p>
       <div class="grid two">
         <div class="card">
           <div class="legend" id="decay-legend"></div>
@@ -262,8 +284,9 @@
       <div class="sec-head">
         <span class="eyebrow">Decision matrix</span>
         <h2>Verdict by channel × placement</h2>
-        <span class="note">Let the data decide — min-sample gated, placement-level.</span>
+        <span class="note">Let the data decide, min-sample gated, placement-level.</span>
       </div>
+      <p class="caption">For each ad slot, which approach actually won on the numbers, with low-volume placements marked insufficient rather than judged.</p>
       <div class="card" style="overflow-x:auto">
         <table id="matrix-table">
           <thead><tr>
@@ -284,16 +307,19 @@
     <section>
       <div class="sec-head"><span class="eyebrow">Placement affinity</span>
         <h2>Lo-fi wins vertical; polished wins feed</h2></div>
+      <p class="caption">Which creative styles do best in vertical, full-screen placements versus in-feed.</p>
       <div class="card" id="affinity"></div>
     </section>
 
     <div class="grid two" style="margin-top:26px;align-items:start">
       <section id="exhaustion" style="margin:0">
         <div class="sec-head"><span class="eyebrow">Alerts</span><h2>AI-exhaustion</h2></div>
+        <p class="caption">Audience segments where the human versus AI gap is widening over time, a sign that AI creative is tiring.</p>
         <div class="alerts" id="exhaustion-alerts"></div>
       </section>
       <section id="opportunity" style="margin:0">
         <div class="sec-head"><span class="eyebrow">Forward</span><h2>Opportunities</h2></div>
+        <p class="caption">Upcoming seasonal moments and strong organic posts worth a planned human versus AI test before spending.</p>
         <div class="alerts" id="opportunity-alerts"></div>
       </section>
     </div>
@@ -302,6 +328,7 @@
       <div class="sec-head"><span class="eyebrow">Norwegian compliance</span>
         <h2>Flagged for review</h2>
         <span class="note">Flagged, never auto-resolved.</span></div>
+      <p class="caption">Creatives and posts that may need a disclosure or labelling check under Norwegian marketing rules.</p>
       <div class="grid compliance" id="compliance-flags"></div>
     </section>
 
@@ -309,6 +336,9 @@
       <span id="foot-gen">—</span>
       <span>Recommend-only · evidence over opinion</span>
       <span id="foot-note"></span>
+      <span>Built by João Harrison</span>
+      <span><a href="https://github.com/JoKelHar/mediekjop-signal">GitHub</a> · <a href="https://www.linkedin.com/in/joaoharrison">LinkedIn</a></span>
+      <span><a href="sample-brief.html">See a sample weekly brief</a></span>
     </div>
   </main>
 </div>
@@ -324,17 +354,31 @@
 
   var PROV_LABEL = { human_led: "Human-led", ai_assisted: "AI-assisted", ai_generated: "AI-generated" };
   var PROV_VAR = { human_led: "--s-human", ai_assisted: "--s-assist", ai_generated: "--s-gen" };
+  // Norwegian calendar moments kept as proper nouns, with a short English gloss.
+  var MOMENT_GLOSS = {
+    "Julebordsesong": "Julebordsesong (Christmas party season)",
+    "Første snø": "Første snø (first snow)",
+    "Advent og jul": "Advent og jul (Advent and Christmas)",
+    "Vinterferie": "Vinterferie (winter break)",
+    "Russetid": "Russetid (graduation season)",
+    "17. mai": "17. mai (Constitution Day)",
+    "Påske": "Påske (Easter)",
+    "Fellesferie": "Fellesferie (common summer holiday)",
+    "Skolestart": "Skolestart (back to school)"
+  };
   var nf = new Intl.NumberFormat("en-US");
   function fmtNOK(n){ return "kr " + nf.format(Math.round(n)); }
   function fmtImpr(n){ return n>=1e6 ? (n/1e6).toFixed(1)+"M" : nf.format(n); }
   function el(tag, cls, html){ var e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
+  // Normalise dashes used as punctuation in data-driven copy (presentation only).
+  function tidy(s){ return String(s).replace(/Human[–-]AI/g, "Human vs AI").replace(/\s[—–]\s/g, ", "); }
 
   // ---- range + footer
   document.getElementById("range-pill").textContent = D.meta.data_range[0] + " → " + D.meta.data_range[1];
   document.getElementById("foot-gen").textContent = "Generated " + D.meta.generated_at.replace("T"," ");
   document.getElementById("foot-note").textContent = D.meta.prototype_note;
   document.getElementById("subtitle").textContent =
-    "Where human-led content earns its cost, and where AI iterations win on efficiency — "
+    "Where human-led content earns its cost, and where AI iterations win on efficiency, "
     + D.meta.brand + ", at placement grain.";
 
   // ---- KPIs
@@ -343,7 +387,7 @@
     { label: "Spend (NOK-normalised)", val: fmtNOK(k.spend_nok), sub: "Currencies: " + k.currencies.join(", ") },
     { label: "Impressions", val: fmtImpr(k.impressions), sub: "Placement-level rows" },
     { label: "Blended ROAS", val: k.blended_roas.toFixed(2) + "×", sub: "Across all provenance" },
-    { label: "Untagged spend", val: k.untagged_spend_pct + "%", sub: k.untagged_warn ? "Above warn threshold — tag it" : "Within threshold",
+    { label: "Untagged spend", val: k.untagged_spend_pct + "%", sub: k.untagged_warn ? "Above warn threshold, tag it" : "Within threshold",
       warn: k.untagged_warn }
   ];
   var kw = document.getElementById("kpis");
@@ -479,7 +523,7 @@
   var op=document.getElementById("opportunity-alerts");
   D.calendar_alerts.slice(0,3).forEach(function(c){
     var tag=c.status==="history" ? c.weeks_out+" weeks out" : "Untested · "+c.weeks_out+"w";
-    op.appendChild(makeAlert(c.status==="history"?"info":"medium", c.moment, tag, c.detail, c.action));
+    op.appendChild(makeAlert(c.status==="history"?"info":"medium", MOMENT_GLOSS[c.moment]||c.moment, tag, c.detail, c.action));
   });
   D.organic_alerts.filter(function(o){return o.provenance==="human_led";}).slice(0,1).forEach(function(o){
     op.appendChild(makeAlert("ok","Organic outperformer","+"+o.quality_vs_median+"% vs median",
@@ -496,15 +540,15 @@
   body.appendChild(g);
   body.appendChild(el("p", null, "AI presence appears <b>"+s.trend+"</b> · level <b>"+s.level+"</b>. Classifier accuracy ≈ "
     + s.classifier_accuracy_pct + "% ± " + s.classifier_accuracy_margin + "."));
-  body.appendChild(el("p","action", s.note));
+  body.appendChild(el("p","action", tidy(s.note)));
   card.appendChild(body); op.appendChild(card);
 
   function makeAlert(sev, title, tag, detail, action){
     var a=el("div","alert "+sev); a.appendChild(el("div","stripe"));
     var b=el("div");
     b.appendChild(el("h4", null, title + (tag? ' <span class="tag">'+tag+'</span>':'')));
-    if(detail) b.appendChild(el("p", null, detail));
-    if(action) b.appendChild(el("div","action", '<b>→</b> '+action));
+    if(detail) b.appendChild(el("p", null, tidy(detail)));
+    if(action) b.appendChild(el("div","action", '<b>→</b> '+tidy(action)));
     a.appendChild(b); return a;
   }
 
@@ -512,8 +556,8 @@
   var cf=document.getElementById("compliance-flags");
   var comp=D.compliance;
   [
-    { n: comp.kroppspress_review_count, l: "AI creatives showing people", law: "Kroppspress-merking — retouch-labelling review" },
-    { n: comp.boosted_posts_labelling, l: "Boosted organic posts", law: "Markedsføringsloven — advertising disclosure" },
+    { n: comp.kroppspress_review_count, l: "AI creatives showing people", law: "Kroppspress-merking (retouched-image labelling)" },
+    { n: comp.boosted_posts_labelling, l: "Boosted organic posts", law: "Markedsføringsloven (Marketing Control Act): advertising disclosure" },
     { n: comp.creator_disclosure_count, l: "Creator-led creatives", law: "Influencer labelling check" }
   ].forEach(function(x){
     var c=el("div","card flag");
