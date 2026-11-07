@@ -82,6 +82,9 @@ and so on, never blurred together) and shows you, for example:
   content keeps earning saves and conversions for longer.
 - **Different placements want different creative.** Lo-fi, human UGC does its
   best work in Stories and Reels; polished studio work holds up better in Feed.
+- **Not all AI is the same.** The agent separates kinds of AI: product mock-ups
+  (AA-PRD) behave close to human-led in feed, while synthetic UGC (AG-UGC) tires
+  fastest and draws the most "this is AI" comments.
 - **Some of your spend is on creative nobody has labelled.** The agent reports
   that as a share of your budget and tells you to go tag it, rather than guessing
   what it was.
@@ -136,7 +139,7 @@ Built with [Claude Code](https://claude.com/claude-code).
 |---|---|---|
 | **1** | Unified placement-grain schema + synthetic data generator | ✅ complete |
 | **2** | CSV mappers (Meta, Snapchat, TikTok, YouTube) behind a `DataSource` interface | ✅ complete |
-| **3** | Tagging: provenance, sub-types, Norwegian-ness (trust hierarchy) + untagged-spend reporting | ✅ complete |
+| **3** | Tagging: provenance (human **and AI** sub-types), Norwegian-ness (trust hierarchy) + untagged-spend reporting | ✅ complete |
 | 4 | Exhaustion module, mixed-effects stats, breakdowns | ⏸ on hold |
 | 5 | Norwegian sentiment / AI-callout detection | ◻ |
 | 6–10 | Decision matrix, opportunity, halo, recommendations, API connectors | ◻ |
@@ -145,6 +148,11 @@ Also in progress, as a parallel module: the **Creative Approach Planner**
 (AI vs hybrid vs human), a standalone, offline planner backed by a cited
 benchmark library, which sharpens its estimates with the exhaustion framework
 once account data exists.
+
+A preview of forward **opportunities** is also in: the dashboard's calendar
+opportunities are config-driven and each names an advertiser category, a moment,
+a time window and a recommended approach (naming the AI sub-type where relevant).
+This is a descriptive preview, not the full Phase-7 engine.
 
 Every remaining module exists as a documented stub (`src/mediekjop/*/__init__.py`).
 
@@ -215,8 +223,8 @@ Vinterkos_HL-UGC_NO-loc_NO-dia_lang-dia_v3
 | Token | Meaning |
 |---|---|
 | `HL-UGC` `HL-CRE` `HL-STF` `HL-DOC` `HL-STU` | human-led + sub-type (ugc / creator / staff_founder / documentary / studio_polished) |
-| `AA` | ai_assisted (human concept, AI in production) |
-| `AG` | ai_generated (concept/core visuals by AI) |
+| `AA` `AA-PRD` `AA-CPY` | ai_assisted (human concept, AI in production); optional sub-type product_imagery / copy_variants. Plain `AA` is untyped |
+| `AG` `AG-UGC` `AG-SCN` | ai_generated (concept/core visuals by AI); optional sub-type synthetic_ugc / synthetic_scene. Plain `AG` is untyped |
 | `NO-loc` `NO-face` `NO-cult` `NO-dia` | recognisable Norwegian locations / faces / cultural refs / dialect present |
 | `lang-bok` `lang-nyn` `lang-dia` `lang-eng` `lang-mix` | language of the creative |
 
@@ -262,6 +270,9 @@ So later phases have real signal to recover (ground truth is written to
 - **Placement affinity**: UGC/lo-fi wins in Stories/Spotlight/Reels;
   studio-polished wins in Feed/in-stream.
 - **Engagement-quality contrast**: AI wins clicks/likes, loses saves/shares.
+- **AI sub-type differences**: product mock-ups (AA-PRD) sit close to human-led in
+  feed; synthetic UGC (AG-UGC) fatigues fastest, saves worst and draws the most
+  AI-callout comments (recorded in `ground_truth.json`).
 - Multi-currency campaigns, seasonality around Norwegian calendar moments,
   organic posts, and comments (some carrying AI-callout language).
 
