@@ -88,6 +88,8 @@
   button.toggle { font: inherit; font-size: 12.5px; cursor: pointer; border: 1px solid var(--line);
     background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 6px 12px; }
   button.toggle:hover { color: var(--ink); }
+  .by { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); }
+  .na { color: var(--ink-3); }
   a.briefint { font-size: 12.5px; color: var(--ink-2); text-decoration: underline; white-space: nowrap; align-self: center; }
 
   .grid { display: grid; gap: 16px; }
@@ -281,8 +283,8 @@
       <div class="card" style="overflow-x:auto">
         <table id="matrix-table">
           <thead><tr>
-            <th>Channel</th><th>Placement</th><th>Verdict</th>
-            <th>Human ROAS</th><th>AI ROAS</th><th>Human CTR‰</th><th>AI CTR‰</th><th>Conf.</th>
+            <th>Channel</th><th>Placement</th><th>Verdict</th><th>Decided by</th>
+            <th>Human ROAS</th><th>AI ROAS</th><th>Human saves‰</th><th>AI saves‰</th><th>Conf.</th>
           </tr></thead>
           <tbody></tbody>
         </table>
@@ -304,7 +306,7 @@
 
     <div class="grid two" style="margin-top:26px;align-items:start">
       <section id="exhaustion" style="margin:0">
-        <div class="sec-head"><span class="eyebrow">Alerts</span><h2>AI-exhaustion</h2></div>
+        <div class="sec-head"><span class="eyebrow">Alerts</span><h2>AI exhaustion</h2></div>
         <p class="caption">Audience segments where the human versus AI gap is widening over time, a sign that AI creative is tiring.</p>
         <div class="alerts" id="exhaustion-alerts"></div>
       </section>
@@ -465,17 +467,18 @@
   var CH={ meta:"Meta", snapchat:"Snapchat", tiktok:"TikTok", youtube:"YouTube" };
   var vClass={ "Human wins":"v-human","AI wins":"v-ai","No difference":"v-none","Insufficient data":"v-insuf" };
   var mt=document.querySelector("#matrix-table tbody");
+  function roas(v){ return v==null ? '<span class="na">n/a</span>' : v.toFixed(2)+"×"; }
   D.matrix.forEach(function(c){
     var tr=el("tr");
     tr.appendChild(el("td", null, "<b>"+(CH[c.channel]||c.channel)+"</b>"));
     tr.appendChild(el("td", null, c.placement.replace(/_/g," ")));
-    var v=c.verdict + (c.sub_type? ' <span class="win">· '+c.sub_type.replace("_"," ")+'</span>':'');
     tr.appendChild(el("td", null, '<span class="verdict '+vClass[c.verdict]+'">'+c.verdict+'</span>'
-      + (c.sub_type? ' <span class="win">'+c.sub_type.replace("_"," ")+'</span>':'')));
-    tr.appendChild(el("td", "tnum", c.human_roas.toFixed(2)+"×"));
-    tr.appendChild(el("td", "tnum", c.ai_roas.toFixed(2)+"×"));
-    tr.appendChild(el("td", "tnum", c.human_ctr_permille.toFixed(2)));
-    tr.appendChild(el("td", "tnum", c.ai_ctr_permille.toFixed(2)));
+      + (c.sub_type? ' <span class="win">'+c.sub_type.replace(/_/g," ")+'</span>':'')));
+    tr.appendChild(el("td", null, c.decided_by ? '<span class="by">'+c.decided_by+'</span>' : '<span class="na">n/a</span>'));
+    tr.appendChild(el("td", "tnum", roas(c.human_roas)));
+    tr.appendChild(el("td", "tnum", roas(c.ai_roas)));
+    tr.appendChild(el("td", "tnum", c.human_save_permille.toFixed(2)));
+    tr.appendChild(el("td", "tnum", c.ai_save_permille.toFixed(2)));
     tr.appendChild(el("td", null, '<span class="conf">'+c.confidence+'</span>'));
     mt.appendChild(tr);
   });
@@ -514,11 +517,12 @@
   var op=document.getElementById("opportunity-alerts");
   D.calendar_alerts.slice(0,4).forEach(function(c){
     var moment = MOMENT_GLOSS[c.moment]||c.moment;
-    var tag = (c.status==="history" ? "" : "Untested · ") + "~"+c.weeks_out+"w out";
-    // four fields: advertiser category + moment (title), time window, approach (action)
+    // four fields: advertiser category + moment (title), plain-language timing, window, approach
+    var detail = "Window " + c.window + (c.detail ? ". " + c.detail : "");
     op.appendChild(makeAlert(c.status==="history"?"info":"medium",
-      c.category + " · " + moment, tag, "Window " + c.window + ". " + c.detail, c.approach));
+      c.category + " · " + moment, c.timing, detail, c.approach));
   });
+  if (D.opportunities_note) op.appendChild(el("p", "caption", D.opportunities_note));
   D.organic_alerts.filter(function(o){return o.provenance==="human_led";}).slice(0,1).forEach(function(o){
     op.appendChild(makeAlert("ok","Organic outperformer","+"+o.quality_vs_median+"% vs median",
       "A human-led organic post is over-indexing on saves + shares.", o.action));
