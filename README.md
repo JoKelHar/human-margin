@@ -1,13 +1,15 @@
-# Mediekjøp Signal
+# Human Margin
+
+**AI vs human led creative, measured**
 
 A recommend-only analysis tool for Norwegian B2C media buyers, built for
 marketers and business owners choosing between AI-led, hybrid and human-led
 creative. Working today: data ingestion, creative tagging and a prototype
 dashboard. In development: the AI-exhaustion engine and the creative-approach planner.
 
-**Live demo** → https://jokelhar.github.io/mediekjop-signal/ (runs on synthetic data)
+**Live demo** → https://jokelhar.github.io/human-margin/ (runs on synthetic data)
 
-[![Mediekjøp Signal dashboard on synthetic data: English interface with KPI tiles, a glossary, and a provenance section showing a click-through-rate decay chart and a comparison table for human-led, AI-assisted and AI-generated creative.](docs/screenshot.png)](https://jokelhar.github.io/mediekjop-signal/)
+[![Human Margin dashboard on synthetic data: English interface with KPI tiles, a glossary, and a provenance section showing a click-through-rate decay chart and a comparison table for human-led, AI-assisted and AI-generated creative.](docs/screenshot.png)](https://jokelhar.github.io/human-margin/)
 
 It keeps every platform export at the level of the individual placement, never
 rolled up, and is being built to answer two questions with evidence rather than
@@ -23,7 +25,7 @@ in development; see the status table below.
 
 ## Demo
 
-> **Live demo dashboard** → https://jokelhar.github.io/mediekjop-signal/
+> **Live demo dashboard** → https://jokelhar.github.io/human-margin/
 > A prototype console rendering the human-vs-AI decision matrix
 > with exhaustion and opportunity alerts, on **synthetic** Norwegian data in
 > which the patterns are deliberately planted.
@@ -109,7 +111,7 @@ figures are cited.
 
 **Name and trademark.** The Apache-2.0 licence covers the code, not the
 project's name or logo. You're very welcome to fork and build on this. Please
-just give your fork its own name rather than "Mediekjøp Signal", so nobody
+just give your fork its own name rather than "Human Margin", so nobody
 confuses the two. (See `NOTICE`.)
 
 **How to cite.** Citation metadata is in [`CITATION.cff`](CITATION.cff); GitHub
@@ -296,5 +298,6 @@ reports: [`SECURITY.md`](SECURITY.md).
 ## Tech
 
 Python 3.11+ · pandas · DuckDB · (statsmodels/PyMC from Phase 4) · pytest · uv.
+The Python package is named `mediekjop` (Norwegian for media buying).
 Config is one file: [`config/config.yaml`](config/config.yaml). Credentials come
 only from environment variables, never logged, never committed.

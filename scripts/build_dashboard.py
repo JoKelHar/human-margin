@@ -26,7 +26,7 @@ STANDALONE = ROOT / "docs" / "index.html"
 SAMPLE_HTML = ROOT / "docs" / "sample-brief.html"
 ARTIFACT = ROOT / "out" / "dashboard_page.html"
 
-SITE = "https://jokelhar.github.io/mediekjop-signal/"
+SITE = "https://jokelhar.github.io/human-margin/"
 OG_DESC = ("Recommend-only analysis tool for Norwegian B2C media buyers deciding "
            "between AI-led, hybrid and human-led creative. Prototype on synthetic data.")
 
@@ -49,7 +49,7 @@ SYNTHNOTE = ('<p class="synthnote">Demonstration on <b>synthetic data with '
 
 ATTRIBUTION = (
     '<span>Built by João Harrison</span>'
-    '<span><a href="https://github.com/JoKelHar/mediekjop-signal">GitHub</a> · '
+    '<span><a href="https://github.com/JoKelHar/human-margin">GitHub</a> · '
     '<a href="https://www.linkedin.com/in/joaoharrison">LinkedIn</a></span>'
 )
 
@@ -186,7 +186,7 @@ def build_dashboard(template: str) -> None:
     data = json.loads(INSIGHTS.read_text(encoding="utf-8"))
     payload = json.dumps(data, ensure_ascii=False).replace("</script", "<\\/script")
     rendered = template.replace("__INSIGHTS_JSON__", payload)
-    head = page_head("Mediekjøp Signal", SITE, extra_style=INDEX_STYLE)
+    head = page_head("Human Margin", SITE, extra_style=INDEX_STYLE)
     STANDALONE.parent.mkdir(parents=True, exist_ok=True)
     STANDALONE.write_text(head + rendered + "\n</body>\n</html>\n", encoding="utf-8")
     ARTIFACT.parent.mkdir(parents=True, exist_ok=True)
@@ -197,7 +197,7 @@ def build_dashboard(template: str) -> None:
 
 def build_sample_brief() -> None:
     body = render_markdown(SAMPLE_MD.read_text(encoding="utf-8"))
-    head = page_head("Sample weekly brief · Mediekjøp Signal", SITE + "sample-brief.html",
+    head = page_head("Sample weekly brief · Human Margin", SITE + "sample-brief.html",
                      extra_style=BRIEF_CSS)
     foot = (
         '<div class="page-foot">'

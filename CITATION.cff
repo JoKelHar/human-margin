@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "Mediekjøp Signal"
+title: "Human Margin"
 abstract: >-
   A recommend-only media-buying analysis agent for Norwegian B2C advertisers,
   with AI-exhaustion detection — spotting where audiences tire of, distrust or
@@ -15,8 +15,8 @@ authors:
 version: 0.1.0
 date-released: "2026-11-03"
 license: Apache-2.0
-repository-code: "https://github.com/JoKelHar/mediekjop-signal"
-url: "https://github.com/JoKelHar/mediekjop-signal"
+repository-code: "https://github.com/JoKelHar/human-margin"
+url: "https://github.com/JoKelHar/human-margin"
 keywords:
   - media buying
   - AI exhaustion

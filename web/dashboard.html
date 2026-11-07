@@ -1,5 +1,5 @@
 <meta name="claude:viewport-fit-sides" content="cover">
-<title>Mediekjøp Signal</title>
+<title>Human Margin</title>
 <style>
   /* Layout: fixed left identity rail + scrollable content; a light SaaS
      analytics console in a Helvetica-forward voice. */
@@ -60,6 +60,8 @@
     letter-spacing: -.02em; }
   .brand small { display: block; color: var(--ink-3); font-size: 11px; letter-spacing: .14em;
     text-transform: uppercase; margin-top: 1px; }
+  .brandblock { display: flex; flex-direction: column; gap: 7px; }
+  .brand-tag { font-size: 11px; color: var(--ink-3); line-height: 1.4; max-width: 190px; }
   .nav { display: flex; flex-direction: column; gap: 2px; }
   .nav a { color: var(--rail-ink); opacity: .72; text-decoration: none; font-size: 13.5px;
     padding: 8px 10px; border-radius: 9px; display: flex; gap: 9px; align-items: center; }
@@ -205,9 +207,12 @@
 
 <div class="app">
   <aside class="rail">
-    <div class="brand">
-      <span class="mark" aria-hidden="true"></span>
-      <span><b>Mediekjøp</b><small>Signal</small></span>
+    <div class="brandblock">
+      <div class="brand">
+        <span class="mark" aria-hidden="true"></span>
+        <span><b>Human</b><small>Margin</small></span>
+      </div>
+      <div class="brand-tag">AI vs human led creative, measured</div>
     </div>
     <nav class="nav">
       <a href="#overview"><span class="dot"></span>Overview</a>
@@ -323,7 +328,7 @@
       <span>Recommend-only · evidence over opinion</span>
       <span id="foot-note"></span>
       <span>Built by João Harrison</span>
-      <span><a href="https://github.com/JoKelHar/mediekjop-signal">GitHub</a> · <a href="https://www.linkedin.com/in/joaoharrison">LinkedIn</a></span>
+      <span><a href="https://github.com/JoKelHar/human-margin">GitHub</a> · <a href="https://www.linkedin.com/in/joaoharrison">LinkedIn</a></span>
       <span><a href="sample-brief.html">See a sample weekly brief</a></span>
     </div>
   </main>

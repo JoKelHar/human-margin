@@ -2,7 +2,7 @@
 SPDX-License-Identifier: CC-BY-4.0
 Copyright 2026 João Harrison
 -->
-# Contributing to Mediekjøp Signal
+# Contributing to Human Margin
 
 Thank you for considering a contribution. This project is useful in direct
 proportion to how good its benchmarks are, so **benchmark figures with solid
