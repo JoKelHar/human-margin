@@ -1,5 +1,12 @@
 # Mediekjøp Signal
 
+A recommend-only analysis tool for Norwegian B2C media buyers, built for
+marketers and business owners choosing between AI-led, hybrid and human-led
+creative. Working today: data ingestion, creative tagging and a prototype
+dashboard. In development: the AI-exhaustion engine and the creative-approach planner.
+
+**Live demo** → https://jokelhar.github.io/mediekjop-signal/ (runs on synthetic data)
+
 **A recommend-only media-buying analysis agent for Norwegian B2C advertisers —
 with AI-exhaustion detection and a creative-approach planner.** It answers two
 questions with evidence rather than opinion: where human-led creative earns its
