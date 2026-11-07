@@ -60,6 +60,15 @@ class HumanSubType(StrEnum):
     STUDIO_POLISHED = "studio_polished"
 
 
+class AiSubType(StrEnum):
+    """What kind of AI work it is. Mirrors HumanSubType for the AI provenances."""
+
+    PRODUCT_IMAGERY = "product_imagery"    # AI product imagery / mock-ups (ai_assisted)
+    COPY_VARIANTS = "copy_variants"        # AI copy and text variants (ai_assisted)
+    SYNTHETIC_UGC = "synthetic_ugc"        # synthetic people / testimonials (ai_generated)
+    SYNTHETIC_SCENE = "synthetic_scene"    # AI scenes / backgrounds / visuals (ai_generated)
+
+
 class Language(StrEnum):
     BOKMAL = "bokmal"
     NYNORSK = "nynorsk"

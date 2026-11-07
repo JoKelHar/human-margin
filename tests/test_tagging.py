@@ -107,7 +107,7 @@ def test_tagging_recovers_generator_ground_truth(dataset, cfg):
     truth = truth.set_index("creative_id")
 
     recoverable = [
-        "provenance", "human_sub_type", "language",
+        "provenance", "human_sub_type", "ai_sub_type", "language",
         "norwegian_locations", "norwegian_faces", "norwegian_cultural_refs",
         "dialect_present",
     ]
@@ -174,3 +174,64 @@ def test_csv_override_wins_over_lower_sources_in_db(con, cfg):
     # unless the name is untagged; assert the stamp is one of the two valid sources
     assert src in (TagSource.NAMING_CONVENTION.value, TagSource.CSV_OVERRIDE.value)
     assert prov in Provenance.values()
+
+
+# --- AI provenance sub-types ------------------------------------------------
+
+@pytest.mark.parametrize("token,provenance,sub", [
+    ("AA-PRD", "ai_assisted", "product_imagery"),
+    ("AA-CPY", "ai_assisted", "copy_variants"),
+    ("AG-UGC", "ai_generated", "synthetic_ugc"),
+    ("AG-SCN", "ai_generated", "synthetic_scene"),
+])
+def test_parse_ai_subtypes(cfg, token, provenance, sub):
+    ev = parse_name(f"Nyhet_{token}_lang-eng_v1", cfg)
+    assert ev.provenance == provenance
+    assert ev.sub_type == sub
+
+
+@pytest.mark.parametrize("token,provenance", [("AA", "ai_assisted"), ("AG", "ai_generated")])
+def test_untyped_ai_tokens_still_parse(cfg, token, provenance):
+    ev = parse_name(f"Nyhet_{token}_lang-eng_v1", cfg)
+    assert ev.provenance == provenance
+    assert ev.sub_type is None
+
+
+def _one_creative(raw_name):
+    return pd.DataFrame([{
+        "creative_id": "c1", "account_id": "a", "raw_name": raw_name,
+        "created_date": "2025-01-01",
+    }])
+
+
+def test_ai_subtype_routes_to_ai_sub_type_column(cfg):
+    got = tag_creatives(_one_creative("Produkt_AA-PRD_lang-eng_v1"), cfg).iloc[0]
+    assert got["provenance"] == "ai_assisted"
+    assert got["ai_sub_type"] == "product_imagery"
+    assert got["human_sub_type"] is None
+
+
+def test_ag_ugc_sets_shows_people_for_compliance(cfg):
+    got = tag_creatives(_one_creative("Testimonial_AG-UGC_lang-eng_v1"), cfg).iloc[0]
+    assert got["provenance"] == "ai_generated"
+    assert got["ai_sub_type"] == "synthetic_ugc"
+    # synthetic people -> shows_people True so it feeds the kroppspress / AI-disclosure flags
+    assert bool(got["shows_people"]) is True
+
+
+def test_ag_ugc_feeds_kroppspress_count_in_db(con, cfg):
+    # A known AG-UGC creative, tagged in place, must be counted by the kroppspress
+    # query the dashboard uses (ai provenance AND shows_people).
+    con.execute(
+        "INSERT INTO creative (creative_id, account_id, raw_name, created_date, "
+        "tag_source, tag_confidence) VALUES "
+        "('agugc-test', 'a', 'Testimonial_AG-UGC_lang-eng_v1', DATE '2025-01-01', 'untagged', 0.0)")
+    tagging.apply_to_db(con, cfg)
+    prov, ai_sub, shows = con.execute(
+        "SELECT provenance, ai_sub_type, shows_people FROM creative WHERE creative_id = 'agugc-test'"
+    ).fetchone()
+    assert (prov, ai_sub, shows) == ("ai_generated", "synthetic_ugc", True)
+    counted = con.execute(
+        "SELECT COUNT(*) FROM creative WHERE creative_id = 'agugc-test' "
+        "AND provenance IN ('ai_assisted','ai_generated') AND shows_people").fetchone()[0]
+    assert counted == 1

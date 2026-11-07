@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, fields
 
-from ..schema.enums import Provenance, TagSource
+from ..schema.enums import AiSubType, HumanSubType, Provenance, TagSource
 
 # Highest trust first. Source of truth for the order is config.tagging
 # (naming_convention -> csv_override -> platform_label -> c2pa); kept in sync here.
@@ -62,9 +62,17 @@ class TagEvidence:
     def __post_init__(self) -> None:
         if self.provenance is not None and self.provenance not in Provenance.values():
             raise ValueError(f"unknown provenance {self.provenance!r} from {self.source}")
-        # sub_type only makes sense for human_led; drop a stray one rather than lie.
-        if self.sub_type is not None and self.provenance != Provenance.HUMAN_LED.value:
-            self.sub_type = None
+        # Keep a sub_type only when it belongs to the provenance's vocabulary
+        # (human sub-types for human_led, AI sub-types for the AI provenances).
+        if self.sub_type is not None:
+            if self.provenance == Provenance.HUMAN_LED.value:
+                if self.sub_type not in HumanSubType.values():
+                    self.sub_type = None
+            elif self.provenance in (Provenance.AI_ASSISTED.value, Provenance.AI_GENERATED.value):
+                if self.sub_type not in AiSubType.values():
+                    self.sub_type = None
+            else:
+                self.sub_type = None
 
     def has_provenance(self) -> bool:
         return self.provenance is not None
@@ -93,9 +101,12 @@ class ResolvedTag:
     def as_creative_columns(self) -> dict:
         """Emit using the ``creative`` table's own column names.
 
-        The only rename is ``sub_type`` -> ``human_sub_type`` (the schema scopes
-        the sub-type to human-led creative); every other field name matches.
+        ``sub_type`` is routed to ``human_sub_type`` for human-led creative and to
+        ``ai_sub_type`` for the AI provenances; every other field name matches.
         """
         out = {f.name: getattr(self, f.name) for f in fields(self)}
-        out["human_sub_type"] = out.pop("sub_type")
+        sub = out.pop("sub_type")
+        is_ai = self.provenance in (Provenance.AI_ASSISTED.value, Provenance.AI_GENERATED.value)
+        out["human_sub_type"] = sub if self.provenance == Provenance.HUMAN_LED.value else None
+        out["ai_sub_type"] = sub if is_ai else None
         return out

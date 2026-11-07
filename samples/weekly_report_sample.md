@@ -1,53 +1,50 @@
 # Weekly signal — Fjord Active (synthetic)
 
-_Window 2025-03-24 → 2025-08-12 · generated 2026-11-02T22:07:23_
+_Window 2025-03-20 → 2025-07-26 · generated 2026-11-07T16:46:20_
 
 > Recommend-only. Descriptive prototype on synthetic data — not the Phase-4 statistical engine.
 
 ## Headline
-- Spend (NOK-normalised): **5,938,673** across DKK, NOK, SEK, USD
-- Impressions: **91,777,631** · Blended ROAS: **1.87×**
-- Untagged spend: **16.5%** ⚠️ above threshold — push to tag
+- Spend (NOK-normalised): **3,211,760** across NOK, SEK
+- Impressions: **43,338,942** · Blended ROAS: **1.64×**
+- Untagged spend: **4.3%** (within threshold)
 
 ## Human vs AI, by provenance
 
 | Provenance | CTR ‰ | Saves ‰ | ROAS | Half-life (freq) |
 |---|--:|--:|--:|--:|
-| Human-led | 5.20 | 3.20 | 2.66× | 10.4 |
-| AI-assisted | 3.74 | 2.20 | 1.51× | 5.9 |
-| AI-generated | 3.29 | 1.40 | 1.27× | 4.4 |
+| Human-led | 6.57 | 3.19 | 1.78× | 10.6 |
+| AI-assisted | 5.20 | 2.36 | 1.45× | 6.3 |
+| AI-generated | 3.79 | 1.23 | 1.22× | 3.9 |
 
-AI-generated fatigues ≈**2.4×** faster than human-led and trails on saves and ROAS, while winning raw clicks when fresh.
+AI-generated fatigues ≈**2.7×** faster than human-led and trails on saves and ROAS, while winning raw clicks when fresh.
 
 ## Decision matrix (channel × placement)
 
 | Channel | Placement | Verdict | Human ROAS | AI ROAS | Conf. |
 |---|---|---|--:|--:|---|
-| meta | feed | Human wins · documentary | 0.00× | 0.02× | high |
-| meta | feed video | Human wins · creator | 0.47× | 0.22× | high |
-| meta | reels | Human wins · documentary | 0.40× | 0.29× | high |
-| meta | stories | Human wins · creator | 0.35× | 0.20× | high |
-| snapchat | spotlight | Human wins · documentary | 2.81× | 0.87× | high |
-| snapchat | stories | Human wins · ugc | 3.27× | 1.07× | high |
-| tiktok | feed | Human wins · documentary | 4.92× | 2.78× | high |
-| youtube | in stream | Human wins · creator | 0.81× | 0.33× | high |
-| youtube | shorts | Human wins · ugc | 1.28× | 0.57× | high |
+| meta | feed | Human wins · studio polished | 0.00× | 0.00× | high |
+| meta | feed video | Human wins · studio polished | 0.00× | 0.00× | high |
+| meta | reels | Human wins · documentary | 0.00× | 0.00× | high |
+| meta | stories | Human wins · documentary | 0.00× | 0.00× | high |
+| tiktok | feed | Human wins · staff founder | 2.75× | 2.18× | high |
+| youtube | in stream | Human wins · documentary | 0.24× | 0.04× | high |
+| youtube | shorts | Human wins · documentary | 2.48× | 1.30× | high |
 
 ## ⚠️ Exhaustion alerts
-- **age_25_34 · tiktok** (high, gap +3.85‰): Human–AI CTR gap is widening over the flight — AI exhaustion setting in. → _Shift new AI iterations here to human-led UGC/creator; cap AI frequency._
-- **age_45_54 · youtube** (high, gap +1.84‰): Human–AI CTR gap is widening over the flight — AI exhaustion setting in. → _Shift new AI iterations here to human-led UGC/creator; cap AI frequency._
-- **age_35_44 · youtube** (medium, gap +1.42‰): Human–AI CTR gap is widening over the flight — AI exhaustion setting in. → _Shift new AI iterations here to human-led UGC/creator; cap AI frequency._
-- **age_25_34 · meta** (medium, gap +1.11‰): Human–AI CTR gap is widening over the flight — AI exhaustion setting in. → _Shift new AI iterations here to human-led UGC/creator; cap AI frequency._
-- **age_25_34 · youtube** (medium, gap +1.07‰): Human–AI CTR gap is widening over the flight — AI exhaustion setting in. → _Shift new AI iterations here to human-led UGC/creator; cap AI frequency._
+- **age_35_44 · tiktok** (high, gap +3.34‰): Human–AI CTR gap is widening over the flight — AI exhaustion setting in. → _Shift new AI iterations here to human-led UGC/creator; cap AI frequency._
 
 ## Opportunities
-- **Julebordsesong** — untested, ~0w out: No reliable history for this moment yet. → _Queue a matched human-vs-AI experiment to establish a baseline._
-- **Første snø** — untested, ~0w out: No reliable history for this moment yet. → _Queue a matched human-vs-AI experiment to establish a baseline._
-- **Black Friday** — untested, ~3w out: No reliable history for this moment yet. → _Queue a matched human-vs-AI experiment to establish a baseline._
-- **Advent og jul** — untested, ~4w out: No reliable history for this moment yet. → _Queue a matched human-vs-AI experiment to establish a baseline._
+
+Each names an advertiser category, a moment, a time window and a recommended approach.
+
+- **Outerwear and winter tyres · Første snø** (2026-11-08 to 2026-11-22, ~0w out): No reliable history for this moment yet; queue a matched human-vs-AI test. → _Have human-led creative ready one to two weeks before first snow in the Oslo area._
+- **Consumer electronics · Black Friday** (2026-11-26 to 2026-12-01, ~2w out): No reliable history for this moment yet; queue a matched human-vs-AI test. → _AI product mock-ups (AA-PRD) are fine for catalogue variants; avoid AI-generated UGC (AG-UGC), where callout risk is highest._
+- **Gifts and retail · Advent og jul** (2026-11-30 to 2026-12-20, ~3w out): No reliable history for this moment yet; queue a matched human-vs-AI test. → _Human-led gift storytelling; AI product mock-ups (AA-PRD) for catalogue scale._
+- **Ski and winter travel · Vinterferie** (2027-02-20 to 2027-03-01, ~15w out): No reliable history for this moment yet; queue a matched human-vs-AI test. → _Human-led destination and ski content; AI product mock-ups (AA-PRD) are fine for gear catalogue variants._
 - **Category saturation (Outdoor & activewear (NO))** — _directional estimate_: AI presence rising, level high; classifier accuracy ≈78% ±6. Directional only, never a league table.
 
 ## Compliance to review
-- Kroppspress-merking: **12** AI creatives showing people
-- Markedsføringsloven: **21** boosted organic posts to label
-- Influencer labelling: **3** creator-led creatives
+- Kroppspress-merking: **9** AI creatives showing people
+- Markedsføringsloven: **35** boosted organic posts to label
+- Influencer labelling: **1** creator-led creatives

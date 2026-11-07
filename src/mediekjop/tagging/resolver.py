@@ -26,7 +26,7 @@ from .evidence import (
     TagEvidence,
 )
 from .naming import parse_name
-from ..schema.enums import TagSource
+from ..schema.enums import AiSubType, TagSource
 
 # Which creative columns the resolver owns, in the `creative` table's own
 # naming. Everything else on the row is left untouched (creative_id,
@@ -61,6 +61,11 @@ def resolve(evidence: list[TagEvidence]) -> ResolvedTag:
             if val is not None:
                 setattr(out, field, val)
                 break
+
+    # AG-UGC is synthetic people by definition: unless a source says otherwise it
+    # shows people, so it feeds the kroppspress / AI-disclosure compliance flags.
+    if out.sub_type == AiSubType.SYNTHETIC_UGC.value and out.shows_people is None:
+        out.shows_people = True
 
     return out
 

@@ -61,6 +61,8 @@ placements:
 tagging:
   provenance: [human_led, ai_assisted, ai_generated]
   human_sub_types: [ugc, creator, staff_founder, documentary, studio_polished]
+  # AI sub-types mirror the human ones: they say what kind of AI work it is.
+  ai_sub_types: [product_imagery, copy_variants, synthetic_ugc, synthetic_scene]
 
   # Compact ad-name scheme. Tokens are delimited by underscores anywhere in the
   # ad name, e.g.  "SpringSale_HL-UGC_NO-loc-dia_v3".
@@ -71,8 +73,12 @@ tagging:
       HL-STF:   { provenance: human_led,   sub_type: staff_founder }
       HL-DOC:   { provenance: human_led,   sub_type: documentary }
       HL-STU:   { provenance: human_led,   sub_type: studio_polished }
-      AA:       { provenance: ai_assisted, sub_type: null }
-      AG:       { provenance: ai_generated, sub_type: null }
+      AA-PRD:   { provenance: ai_assisted,  sub_type: product_imagery }   # AI product imagery / mock-ups
+      AA-CPY:   { provenance: ai_assisted,  sub_type: copy_variants }     # AI copy and text variants
+      AA:       { provenance: ai_assisted,  sub_type: null }              # untyped ai_assisted fallback
+      AG-UGC:   { provenance: ai_generated, sub_type: synthetic_ugc }     # synthetic people / testimonials / presenters
+      AG-SCN:   { provenance: ai_generated, sub_type: synthetic_scene }   # AI scenes / backgrounds / full visuals
+      AG:       { provenance: ai_generated, sub_type: null }              # untyped ai_generated fallback
     # Norwegian-ness locality flags (optional tokens).
     locality_tokens:
       NO-loc: norwegian_locations      # recognisable Norwegian locations
@@ -111,17 +117,89 @@ callout_terms:
 # how far ahead to raise a forward alert.
 # -----------------------------------------------------------------------------
 calendar:
+  # Each moment carries an obvious advertiser category and a recommended creative
+  # approach (naming the AI sub-type where it is relevant). A moment with no
+  # obvious category is dropped from opportunities rather than reworded.
   moments:
-    - { key: vinterferie,   label: "Vinterferie",        month: 2,  approx_day: 24, window_days: 9,  lead_time_weeks: 6 }
-    - { key: paske,         label: "Påske",              ranges: { 2025: [2025-04-13, 2025-04-21], 2026: [2026-03-29, 2026-04-06] }, lead_time_weeks: 8 }
-    - { key: russetid,      label: "Russetid",           month: 4,  approx_day: 20, window_days: 27, lead_time_weeks: 10 }
-    - { key: syttende_mai,  label: "17. mai",            month: 5,  approx_day: 17, window_days: 7,  lead_time_weeks: 8 }
-    - { key: fellesferie,   label: "Fellesferie",        month: 7,  approx_day: 15, window_days: 31, lead_time_weeks: 10 }
-    - { key: back_to_school,label: "Skolestart",         month: 8,  approx_day: 18, window_days: 10, lead_time_weeks: 6 }
-    - { key: first_snow,    label: "Første snø",         month: 11, approx_day: 15, window_days: 14, lead_time_weeks: 4, untested: true }
-    - { key: black_friday,  label: "Black Friday",       month: 11, approx_day: 28, window_days: 5,  lead_time_weeks: 6 }
-    - { key: julebord,      label: "Julebordsesong",     month: 11, approx_day: 20, window_days: 30, lead_time_weeks: 6 }
-    - { key: advent_jul,    label: "Advent og jul",      month: 12, approx_day: 10, window_days: 20, lead_time_weeks: 8 }
+    - key: vinterferie
+      label: "Vinterferie"
+      month: 2
+      approx_day: 24
+      window_days: 9
+      lead_time_weeks: 6
+      category: "Ski and winter travel"
+      approach: "Human-led destination and ski content; AI product mock-ups (AA-PRD) are fine for gear catalogue variants."
+    - key: paske
+      label: "Påske"
+      ranges: { 2025: [2025-04-13, 2025-04-21], 2026: [2026-03-29, 2026-04-06] }
+      lead_time_weeks: 8
+      category: "Easter travel and confectionery"
+      approach: "Human-led seasonal content; keep AI-generated UGC (AG-UGC) out of family-facing creative."
+    - key: russetid
+      label: "Russetid"
+      month: 4
+      approx_day: 20
+      window_days: 27
+      lead_time_weeks: 10
+      category: "Graduation wear and party"
+      approach: "Human-led creator and UGC; this young audience calls out AI-generated UGC (AG-UGC) fastest."
+    - key: syttende_mai
+      label: "17. mai"
+      month: 5
+      approx_day: 17
+      window_days: 7
+      lead_time_weeks: 8
+      category: "National-day wear, flags and food"
+      approach: "Human-led cultural content with Norwegian-ness markers; avoid AI-generated scenes (AG-SCN) of national symbols."
+    - key: fellesferie
+      label: "Fellesferie"
+      month: 7
+      approx_day: 15
+      window_days: 31
+      lead_time_weeks: 10
+      category: "Summer travel and outdoor"
+      approach: "Human-led destination content; AI product mock-ups (AA-PRD) for gear variants."
+    - key: back_to_school
+      label: "Skolestart"
+      month: 8
+      approx_day: 18
+      window_days: 10
+      lead_time_weeks: 6
+      category: "Stationery and consumer electronics"
+      approach: "AI product mock-ups (AA-PRD) work for catalogue variants; human-led for brand launches."
+    - key: first_snow
+      label: "Første snø"
+      month: 11
+      approx_day: 15
+      window_days: 14
+      lead_time_weeks: 4
+      untested: true
+      category: "Outerwear and winter tyres"
+      approach: "Have human-led creative ready one to two weeks before first snow in the Oslo area."
+    - key: black_friday
+      label: "Black Friday"
+      month: 11
+      approx_day: 28
+      window_days: 5
+      lead_time_weeks: 6
+      category: "Consumer electronics"
+      approach: "AI product mock-ups (AA-PRD) are fine for catalogue variants; avoid AI-generated UGC (AG-UGC), where callout risk is highest."
+    - key: julebord
+      label: "Julebordsesong"
+      month: 11
+      approx_day: 20
+      window_days: 30
+      lead_time_weeks: 6
+      category: "Party wear and hospitality"
+      approach: "Human-led creator content for venues; AI copy variants (AA-CPY) for offer headlines."
+    - key: advent_jul
+      label: "Advent og jul"
+      month: 12
+      approx_day: 10
+      window_days: 20
+      lead_time_weeks: 8
+      category: "Gifts and retail"
+      approach: "Human-led gift storytelling; AI product mock-ups (AA-PRD) for catalogue scale."
 
 # -----------------------------------------------------------------------------
 # Norwegian regions (fylker, 2024 structure) with rough population weights and

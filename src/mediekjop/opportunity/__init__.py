@@ -8,3 +8,7 @@
     estimate (never a scoreboard or competitor league table), with the
     classifier's estimated accuracy shown alongside it.
 """
+
+from .calendar import REQUIRED_FIELDS, upcoming_opportunities
+
+__all__ = ["upcoming_opportunities", "REQUIRED_FIELDS"]
