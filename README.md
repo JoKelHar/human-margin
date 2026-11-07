@@ -46,7 +46,7 @@ João Harrison, Oslo
 
 ## Quick start
 
-No ad accounts and no API keys required — it runs fully offline on synthetic
+No ad accounts and no API keys required: it runs fully offline on synthetic
 data. Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
@@ -69,12 +69,12 @@ A rendered example brief lives at [`samples/weekly_report_sample.md`](samples/we
 
 Say you run ads for a skincare brand. You've been leaning on AI-generated video
 because it's cheap to churn out. The agent takes your exported numbers (kept at
-the level of each individual *placement* — Instagram Reels, Snapchat Spotlight,
+the level of each individual *placement*: Instagram Reels, Snapchat Spotlight,
 and so on, never blurred together) and shows you, for example:
 
 - **AI creative wins the first clicks but fades faster.** On synthetic data the
-  AI-generated ads start with a strong click rate and then tire quickly — a
-  "half-life" of about 4 days against roughly 10 for human-led — while human-led
+  AI-generated ads start with a strong click rate and then tire quickly, a
+  "half-life" of about 4 days against roughly 10 for human-led, while human-led
   content keeps earning saves and conversions for longer.
 - **Different placements want different creative.** Lo-fi, human UGC does its
   best work in Stories and Reels; polished studio work holds up better in Feed.
@@ -89,7 +89,7 @@ the point of the example is that the method recovers what was planted.
 Every figure comes with how much it rests on your own data versus a benchmark or
 an assumption, so you know how hard to lean on it. The planner (in progress)
 takes this further: you enter a budget, a price and a few campaign details, and
-it tells you whether AI, hybrid or human-led is the better bet — with the
+it tells you whether AI, hybrid or human-led is the better bet, with the
 break-even spelled out ("human-led needs to beat AI by X% to pay off").
 
 ## Licences
@@ -106,7 +106,7 @@ See [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md) for dependency licences
 figures are cited.
 
 **Name and trademark.** The Apache-2.0 licence covers the code, not the
-project's name or logo. You're very welcome to fork and build on this — please
+project's name or logo. You're very welcome to fork and build on this. Please
 just give your fork its own name rather than "Mediekjøp Signal", so nobody
 confuses the two. (See `NOTICE`.)
 
@@ -116,7 +116,7 @@ shows a "Cite this repository" button from it.
 ## Disclaimer
 
 This is **decision-support software, not a guarantee of results.** Benchmarks are
-estimates — often drawn from proxy markets and clearly-labelled assumptions — and
+estimates, often drawn from proxy markets and clearly-labelled assumptions, and
 every recommendation is designed to ship with an evidence grade so you can see
 how far to trust it. The agent is **recommend-only**: it never changes budgets, bids or ad status,
 never launches experiments, and never touches your ad accounts. All data stays on
@@ -138,7 +138,7 @@ Built with [Claude Code](https://claude.com/claude-code).
 | 6–10 | Decision matrix, opportunity, halo, recommendations, API connectors | ◻ |
 
 Also in progress, as a parallel module: the **Creative Approach Planner**
-(AI vs hybrid vs human) — a standalone, offline planner backed by a cited
+(AI vs hybrid vs human), a standalone, offline planner backed by a cited
 benchmark library, which sharpens its estimates with the exhaustion framework
 once account data exists.
 
@@ -154,8 +154,8 @@ EUR/USD/GBP from a foreign advertiser is in scope. Therefore:
 - **Creative language is not a filter.** English-language ads reaching Norwegian
   consumers are first-class.
 - **"Norwegian-ness"** (language, dialect, locations, faces, cultural refs) is a
-  **descriptive analytical dimension** — something tested as an explanatory
-  variable — never an inclusion filter.
+  **descriptive analytical dimension**: something tested as an explanatory
+  variable, never an inclusion filter.
 
 ## Ingesting real platform exports
 
@@ -185,7 +185,7 @@ ingest (DataSource: CSV now, API later) → unified placement-grain schema → D
   `TableSpec` objects; DuckDB DDL and the loaders' column order are both derived
   from it, so they cannot drift.
 - **Ingestion is declarative.** A platform is a `MappingSpec`
-  ([`ingest/specs.py`](src/mediekjop/ingest/specs.py)) — column map + placement map —
+  ([`ingest/specs.py`](src/mediekjop/ingest/specs.py)): a column map plus placement map,
   consumed by one generic `CsvMapper`. Adding a platform is a spec, not new code.
   The `DataSource` protocol is the seam that lets API connectors (Phase 10) swap in.
 - **Recommend-only** is structural: no module can call a platform write API.
@@ -217,7 +217,7 @@ Vinterkos_HL-UGC_NO-loc_NO-dia_lang-dia_v3
 | `lang-bok` `lang-nyn` `lang-dia` `lang-eng` `lang-mix` | language of the creative |
 
 **Trust hierarchy (Phase 3, implemented).** Several sources may have an opinion
-about one creative — the ad name, a buyer-supplied CSV override, a platform's
+about one creative: the ad name, a buyer-supplied CSV override, a platform's
 self-declared AI label, a C2PA content-credential manifest. Each speaks a common
 `TagEvidence`, and the resolver merges them **field by field** in trust order
 `naming_convention → csv_override → platform_label → c2pa`: the highest-trust
@@ -226,7 +226,7 @@ provenance while a lower source still fills a gap (e.g. `dialect_region`) the
 name left blank. `tag_source` and `tag_confidence` record which source decided
 the headline provenance. Anything no source speaks to stays **untagged** and is
 reported as a **share of total NOK spend** against
-`thresholds.untagged_spend_warn_share` — never guessed from performance.
+`thresholds.untagged_spend_warn_share`, never guessed from performance.
 
 ```python
 from mediekjop import tagging
@@ -236,7 +236,7 @@ print(rep.untagged_share, rep.over_threshold)
 ```
 
 The tagging module is the exact inverse of the naming convention the synthetic
-generator uses to *encode* provenance into ad names — a round-trip test recovers
+generator uses to *encode* provenance into ad names. A round-trip test recovers
 the generator's ground-truth tags from the names alone, with no access to the
 performance tables.
 
@@ -245,7 +245,7 @@ performance tables.
 Dimensions: `account`, `campaign`, `placement`, `audience_segment`, `creative`
 (carries provenance + Norwegian-ness), `date_dim`, `fx_rate`. Facts:
 `ad_performance`, `organic_performance` (both placement grain), `comment` (author
-identity stored only as a salted hash — GDPR).
+identity stored only as a salted hash, for GDPR).
 
 ## What the synthetic generator encodes
 
@@ -265,7 +265,7 @@ So later phases have real signal to recover (ground truth is written to
 
 - **Ad-library coverage (verified Nov 2026):** TikTok's Commercial Content Library
   covers Norway via the EEA; Meta's full *commercial* ad archive likely does
-  **not** (Norway is EEA but not EU) — expect manual export for Meta
+  **not** (Norway is EEA but not EU). Expect manual export for Meta
   category-saturation. Confirm against each platform's own docs.
 - The demo dashboard uses **descriptive aggregates** and simple log-linear decay
   fits, not the Phase-4 hierarchical/Bayesian engine. It is labelled a prototype.
@@ -287,7 +287,7 @@ So later phases have real signal to recover (ground truth is written to
 ## Contributing
 
 Benchmark figures with good sources are as welcome as code. See
-[`CONTRIBUTING.md`](CONTRIBUTING.md) (we use the DCO — sign off commits with
+[`CONTRIBUTING.md`](CONTRIBUTING.md) (we use the DCO; sign off commits with
 `git commit -s`) and the [`Code of Conduct`](CODE_OF_CONDUCT.md). Security
 reports: [`SECURITY.md`](SECURITY.md).
 
@@ -295,4 +295,4 @@ reports: [`SECURITY.md`](SECURITY.md).
 
 Python 3.11+ · pandas · DuckDB · (statsmodels/PyMC from Phase 4) · pytest · uv.
 Config is one file: [`config/config.yaml`](config/config.yaml). Credentials come
-only from environment variables — never logged, never committed.
+only from environment variables, never logged, never committed.

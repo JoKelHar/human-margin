@@ -214,7 +214,7 @@
     <div class="topline">
       <div>
         <h1 id="overview">Human&nbsp;vs&nbsp;AI creative signal</h1>
-        <p id="subtitle">Where human-led content earns its cost, and where AI iterations win on efficiency — for Norwegian B2C audiences, at placement grain.</p>
+        <p id="subtitle">Where human-led content earns its cost, and where AI iterations win on efficiency, for Norwegian B2C audiences, at placement grain.</p>
         <p class="synthnote">Demonstration on <b>synthetic data with deliberately planted patterns</b>, a prototype, not real campaign results.</p>
       </div>
       <div class="topctl">
@@ -254,7 +254,7 @@
       <div class="sec-head">
         <span class="eyebrow">Decision matrix</span>
         <h2>Verdict by channel × placement</h2>
-        <span class="note">Let the data decide — min-sample gated, placement-level.</span>
+        <span class="note">Let the data decide, min-sample gated, placement-level.</span>
       </div>
       <div class="card" style="overflow-x:auto">
         <table id="matrix-table">
@@ -332,13 +332,15 @@
   function fmtNOK(n){ return "kr " + nf.format(Math.round(n)); }
   function fmtImpr(n){ return n>=1e6 ? (n/1e6).toFixed(1)+"M" : nf.format(n); }
   function el(tag, cls, html){ var e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
+  // Normalise dashes used as punctuation in data-driven copy (presentation only).
+  function tidy(s){ return String(s).replace(/Human[–-]AI/g, "Human vs AI").replace(/\s[—–]\s/g, ", "); }
 
   // ---- range + footer
   document.getElementById("range-pill").textContent = D.meta.data_range[0] + " → " + D.meta.data_range[1];
   document.getElementById("foot-gen").textContent = "Generated " + D.meta.generated_at.replace("T"," ");
   document.getElementById("foot-note").textContent = D.meta.prototype_note;
   document.getElementById("subtitle").textContent =
-    "Where human-led content earns its cost, and where AI iterations win on efficiency — "
+    "Where human-led content earns its cost, and where AI iterations win on efficiency, "
     + D.meta.brand + ", at placement grain.";
 
   // ---- KPIs
@@ -347,7 +349,7 @@
     { label: "Spend (NOK-normalised)", val: fmtNOK(k.spend_nok), sub: "Currencies: " + k.currencies.join(", ") },
     { label: "Impressions", val: fmtImpr(k.impressions), sub: "Placement-level rows" },
     { label: "Blended ROAS", val: k.blended_roas.toFixed(2) + "×", sub: "Across all provenance" },
-    { label: "Untagged spend", val: k.untagged_spend_pct + "%", sub: k.untagged_warn ? "Above warn threshold — tag it" : "Within threshold",
+    { label: "Untagged spend", val: k.untagged_spend_pct + "%", sub: k.untagged_warn ? "Above warn threshold, tag it" : "Within threshold",
       warn: k.untagged_warn }
   ];
   var kw = document.getElementById("kpis");
@@ -500,15 +502,15 @@
   body.appendChild(g);
   body.appendChild(el("p", null, "AI presence appears <b>"+s.trend+"</b> · level <b>"+s.level+"</b>. Classifier accuracy ≈ "
     + s.classifier_accuracy_pct + "% ± " + s.classifier_accuracy_margin + "."));
-  body.appendChild(el("p","action", s.note));
+  body.appendChild(el("p","action", tidy(s.note)));
   card.appendChild(body); op.appendChild(card);
 
   function makeAlert(sev, title, tag, detail, action){
     var a=el("div","alert "+sev); a.appendChild(el("div","stripe"));
     var b=el("div");
     b.appendChild(el("h4", null, title + (tag? ' <span class="tag">'+tag+'</span>':'')));
-    if(detail) b.appendChild(el("p", null, detail));
-    if(action) b.appendChild(el("div","action", '<b>→</b> '+action));
+    if(detail) b.appendChild(el("p", null, tidy(detail)));
+    if(action) b.appendChild(el("div","action", '<b>→</b> '+tidy(action)));
     a.appendChild(b); return a;
   }
 
