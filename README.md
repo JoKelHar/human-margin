@@ -7,12 +7,12 @@ dashboard. In development: the AI-exhaustion engine and the creative-approach pl
 
 **Live demo** → https://jokelhar.github.io/mediekjop-signal/ (runs on synthetic data)
 
-**A recommend-only media-buying analysis agent for Norwegian B2C advertisers —
-with AI-exhaustion detection and a creative-approach planner.** It answers two
-questions with evidence rather than opinion: where human-led creative earns its
-higher cost, and where the next distinctly-human opportunities are — and it
-helps you decide, before you spend, whether a campaign should go AI-driven,
-hybrid or human-led.
+It keeps every platform export at the level of the individual placement, never
+rolled up, and is being built to answer two questions with evidence rather than
+opinion: where human-led creative earns its higher cost, and where the next
+distinctly-human opportunities are. The AI-exhaustion detection behind the
+first, and the planner that weighs AI against hybrid and human-led creative, are
+in development; see the status table below.
 
 ![Code licence: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)
 ![Data licence: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)
@@ -22,8 +22,9 @@ hybrid or human-led.
 ## Demo
 
 > **Live demo dashboard** → https://jokelhar.github.io/mediekjop-signal/
-> A Smartly-style console rendering the human-vs-AI decision matrix, exhaustion
-> and opportunity alerts, built on **synthetic** Norwegian data.
+> A prototype console (Smartly-style) rendering the human-vs-AI decision matrix
+> with exhaustion and opportunity alerts, on **synthetic** Norwegian data in
+> which the patterns are deliberately planted.
 
 <!-- [[PLACEHOLDER: add a GIF or screenshot of the planner wizard here once Phase 7 lands]] -->
 
@@ -112,8 +113,8 @@ shows a "Cite this repository" button from it.
 
 This is **decision-support software, not a guarantee of results.** Benchmarks are
 estimates — often drawn from proxy markets and clearly-labelled assumptions — and
-every recommendation ships with an evidence grade so you can see how far to trust
-it. The agent is **recommend-only**: it never changes budgets, bids or ad status,
+every recommendation is designed to ship with an evidence grade so you can see
+how far to trust it. The agent is **recommend-only**: it never changes budgets, bids or ad status,
 never launches experiments, and never touches your ad accounts. All data stays on
 your machine; there is no telemetry. Nothing here is financial advice.
 
