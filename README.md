@@ -34,7 +34,7 @@ in development; see the status table below.
 
 ## Why I built this
 
-I led marketing for a portfolio of 20-odd brands in Oslo, and I reported the numbers. This is the beta of the tool I wish I'd had the whole time.
+I led marketing for a portfolio of 20-odd brands in Oslo, and I reported the numbers. This is the beta of a tool I started to notice I was lacking, something to contextualise creative decisions within a larger market perspective, which could account and tangentially predict AI fatigue among potential customers.
 
 The temptation is always the same: let AI iterate the copy, the creative, the UGC. The reason is cost. Even with a lower ROAS, the savings against a human-led workflow make AI tempting, and far easier to justify on a thin budget. Whether it wins the audience is another matter, and that rarely gets measured.
 
