@@ -20,7 +20,7 @@ import duckdb
 import numpy as np
 
 from mediekjop.config import load_config
-from mediekjop.synthetic.calendar_effects import windows_for_years
+from mediekjop.opportunity.calendar import upcoming_opportunities
 
 ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "data" / "synthetic.duckdb"
@@ -210,54 +210,8 @@ def main() -> None:
             })
     alerts.sort(key=lambda a: -a["widening_permille"])
 
-    # ---- opportunity: calendar (forward) -----------------------------------
-    # Every opportunity names four things: advertiser category, moment, time
-    # window, and recommended creative approach (naming the AI sub-type where it
-    # is relevant). Moments without an obvious advertiser category are dropped,
-    # not reworded.
-    today = dt.date.today()
-    moment_meta = {m["key"]: m for m in cfg["calendar"]["moments"]}
-    cal_windows = windows_for_years(cfg, [today.year, today.year + 1, 2025])
-    moments_seen = {}
-    for w in sorted(cal_windows, key=lambda w: w.start):
-        if w.start < today or w.key in moments_seen:
-            continue
-        meta = moment_meta.get(w.key, {})
-        category = meta.get("category")
-        if not category:
-            continue  # no obvious advertiser category -> drop the moment
-        # historical read from the synthetic 2025 window, if it overlaps the data
-        hist = con.execute(
-            "SELECT 1, "
-            "SUM(a.conversion_value_nok) FILTER(WHERE c.provenance='human_led')/"
-            "NULLIF(SUM(a.spend_nok) FILTER(WHERE c.provenance='human_led'),0) hroas, "
-            "SUM(a.conversion_value_nok) FILTER(WHERE c.provenance!='human_led')/"
-            "NULLIF(SUM(a.spend_nok) FILTER(WHERE c.provenance!='human_led'),0) airoas, "
-            "SUM(a.impressions) i FROM ad_performance a JOIN creative c USING(creative_id) "
-            "WHERE a.date BETWEEN ? AND ?",
-            [w.start.replace(year=2025) if w.start.year != 2025 else w.start,
-             w.end.replace(year=2025) if w.end.year != 2025 else w.end],
-        ).fetchone()
-        weeks = max(0, (w.start - today).days // 7)
-        if hist and hist[3] and hist[3] > min_impr and hist[1] and hist[2]:
-            lift = (hist[1] - hist[2]) / hist[2] * 100
-            status = "history"
-            detail = f"Human-led ROAS beat AI by {lift:+.0f}% around this moment last year."
-        else:
-            status = "untested"
-            detail = "No reliable history for this moment yet; queue a matched human-vs-AI test."
-        moments_seen[w.key] = {
-            "category": category,
-            "moment": w.label,
-            "window": f"{w.start.isoformat()} to {w.end.isoformat()}",
-            "approach": meta.get("approach", ""),
-            "weeks_out": weeks,
-            "status": status,
-            "detail": detail,
-        }
-        if len(moments_seen) >= 5:
-            break
-    calendar_alerts = sorted(moments_seen.values(), key=lambda m: m["weeks_out"])
+    # ---- opportunity: calendar (forward, four actionable fields) -----------
+    calendar_alerts = upcoming_opportunities(con, cfg, dt.date.today(), min_impr)
 
     # ---- opportunity: organic outperformers --------------------------------
     organic = con.execute(
