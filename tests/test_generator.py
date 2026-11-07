@@ -130,4 +130,5 @@ def test_raw_names_follow_naming_convention(con):
     ).fetchall()
     assert tagged
     for (name,) in tagged:
-        assert any(tok in name for tok in ("HL-", "_AA_", "_AG_"))
+        # provenance tokens: human HL-*, ai_assisted _AA/_AA-*, ai_generated _AG/_AG-*
+        assert any(tok in name for tok in ("HL-", "_AA", "_AG"))

@@ -61,6 +61,8 @@ placements:
 tagging:
   provenance: [human_led, ai_assisted, ai_generated]
   human_sub_types: [ugc, creator, staff_founder, documentary, studio_polished]
+  # AI sub-types mirror the human ones: they say what kind of AI work it is.
+  ai_sub_types: [product_imagery, copy_variants, synthetic_ugc, synthetic_scene]
 
   # Compact ad-name scheme. Tokens are delimited by underscores anywhere in the
   # ad name, e.g.  "SpringSale_HL-UGC_NO-loc-dia_v3".
@@ -71,8 +73,12 @@ tagging:
       HL-STF:   { provenance: human_led,   sub_type: staff_founder }
       HL-DOC:   { provenance: human_led,   sub_type: documentary }
       HL-STU:   { provenance: human_led,   sub_type: studio_polished }
-      AA:       { provenance: ai_assisted, sub_type: null }
-      AG:       { provenance: ai_generated, sub_type: null }
+      AA-PRD:   { provenance: ai_assisted,  sub_type: product_imagery }   # AI product imagery / mock-ups
+      AA-CPY:   { provenance: ai_assisted,  sub_type: copy_variants }     # AI copy and text variants
+      AA:       { provenance: ai_assisted,  sub_type: null }              # untyped ai_assisted fallback
+      AG-UGC:   { provenance: ai_generated, sub_type: synthetic_ugc }     # synthetic people / testimonials / presenters
+      AG-SCN:   { provenance: ai_generated, sub_type: synthetic_scene }   # AI scenes / backgrounds / full visuals
+      AG:       { provenance: ai_generated, sub_type: null }              # untyped ai_generated fallback
     # Norwegian-ness locality flags (optional tokens).
     locality_tokens:
       NO-loc: norwegian_locations      # recognisable Norwegian locations

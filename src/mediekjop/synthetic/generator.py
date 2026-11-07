@@ -94,6 +94,20 @@ _SUBTYPE_PLACEMENT_THUMBSTOP = {
     ("studio_polished", "vertical"): 0.98, ("studio_polished", "feed"): 1.15,
 }
 
+# AI sub-type planted differences (clearly-labelled synthetic ground truth):
+#   product_imagery  close to human-led in feed: slow fatigue, strong saves
+#   copy_variants    neutral
+#   synthetic_ugc    fastest fatigue, weakest saves, most AI-callout comments
+#   synthetic_scene  a milder version of synthetic_ugc
+_AI_SUBTYPE_DECAY_MULT = {"product_imagery": 0.82, "copy_variants": 1.0,
+                          "synthetic_ugc": 1.35, "synthetic_scene": 1.12}
+_AI_SUBTYPE_SAVE_MULT = {"product_imagery": 1.45, "copy_variants": 1.0,
+                         "synthetic_ugc": 0.70, "synthetic_scene": 0.90}
+_AI_SUBTYPE_FEED_THUMBSTOP = {"product_imagery": 1.18, "copy_variants": 1.0,
+                              "synthetic_ugc": 0.90, "synthetic_scene": 1.0}
+_AI_SUBTYPE_CALLOUT_MULT = {"product_imagery": 0.4, "copy_variants": 0.8,
+                            "synthetic_ugc": 1.9, "synthetic_scene": 1.3}
+
 # Funnel-stage conversion rates (per link click) and average order value (NOK).
 # Tuned so blended ROAS lands in a believable range for Norwegian activewear.
 _FUNNEL_CVR = {"awareness": 0.006, "consideration": 0.022, "conversion": 0.055}
@@ -120,7 +134,7 @@ class GeneratorConfig:
     start_date: dt.date = dt.date(2025, 3, 1)
     days: int = 150
     n_campaigns_per_account: int = 5
-    n_creatives_per_account: int = 18
+    n_creatives_per_account: int = 26
     untagged_share: float = 0.12
     foreign_currency_share: float = 0.25  # share of campaigns billed in a non-NOK currency
     comment_sample_creatives: int = 10
@@ -196,11 +210,17 @@ def _make_creatives(account_id: str, gc: GeneratorConfig, cfg: dict, rng: np.ran
     """Create the creative pool with provenance + Norwegian-ness + raw names."""
     prov_choices = ["human_led", "human_led", "ai_assisted", "ai_generated"]
     sub_types = cfg["tagging"]["human_sub_types"]
+    # AI sub-types, each with an untyped None so plain AA/AG still occur.
+    aa_subs = ["product_imagery", "copy_variants", None]
+    ag_subs = ["synthetic_ugc", "synthetic_scene", None]
     prov_token = {
         ("human_led", "ugc"): "HL-UGC", ("human_led", "creator"): "HL-CRE",
         ("human_led", "staff_founder"): "HL-STF", ("human_led", "documentary"): "HL-DOC",
         ("human_led", "studio_polished"): "HL-STU",
-        ("ai_assisted", None): "AA", ("ai_generated", None): "AG",
+        ("ai_assisted", "product_imagery"): "AA-PRD", ("ai_assisted", "copy_variants"): "AA-CPY",
+        ("ai_assisted", None): "AA",
+        ("ai_generated", "synthetic_ugc"): "AG-UGC", ("ai_generated", "synthetic_scene"): "AG-SCN",
+        ("ai_generated", None): "AG",
     }
     lang_token = {"bokmal": "lang-bok", "nynorsk": "lang-nyn", "dialect": "lang-dia",
                   "english": "lang-eng", "mixed": "lang-mix"}
@@ -211,7 +231,12 @@ def _make_creatives(account_id: str, gc: GeneratorConfig, cfg: dict, rng: np.ran
     for n in range(gc.n_creatives_per_account):
         cid = f"{account_id}-cr{n:03d}"
         provenance = rng.choice(prov_choices)
-        sub_type = rng.choice(sub_types) if provenance == "human_led" else None
+        if provenance == "human_led":
+            sub_type = rng.choice(sub_types)
+        elif provenance == "ai_assisted":
+            sub_type = aa_subs[int(rng.integers(len(aa_subs)))]
+        else:
+            sub_type = ag_subs[int(rng.integers(len(ag_subs)))]
         untagged = rng.random() < gc.untagged_share
 
         # Norwegian-ness (human content more often carries locality markers)
@@ -225,7 +250,8 @@ def _make_creatives(account_id: str, gc: GeneratorConfig, cfg: dict, rng: np.ran
         no_loc = rng.random() < (0.55 if human else 0.15)
         no_face = rng.random() < (0.50 if human else 0.12)
         no_cult = rng.random() < (0.45 if human else 0.10)
-        shows_people = rng.random() < 0.7
+        # synthetic UGC is synthetic people by definition -> always shows people
+        shows_people = True if sub_type == "synthetic_ugc" else rng.random() < 0.7
 
         concept = rng.choice(concepts)
         if untagged:
@@ -235,7 +261,7 @@ def _make_creatives(account_id: str, gc: GeneratorConfig, cfg: dict, rng: np.ran
             tag_source = TagSource.UNTAGGED.value
             tag_conf = 0.0
         else:
-            tok = prov_token[(provenance, sub_type if human else None)]
+            tok = prov_token[(provenance, sub_type)]
             loc_tokens = []
             if no_loc:
                 loc_tokens.append("NO-loc")
@@ -258,7 +284,8 @@ def _make_creatives(account_id: str, gc: GeneratorConfig, cfg: dict, rng: np.ran
             "raw_name": raw_name,
             "created_date": gc.start_date,
             "provenance": prov_out,
-            "human_sub_type": sub_out,
+            "human_sub_type": sub_out if provenance == "human_led" else None,
+            "ai_sub_type": sub_out if provenance in ("ai_assisted", "ai_generated") else None,
             "tag_source": tag_source,
             "tag_confidence": tag_conf,
             "language": language,
@@ -428,6 +455,18 @@ def generate(gc: GeneratorConfig | None = None, cfg: dict | None = None) -> Synt
         "save_rate_by_provenance": _SAVE_RATE,
         "share_rate_by_provenance": _SHARE_RATE,
         "like_rate_by_provenance": _LIKE_RATE,
+        "ai_subtype_effects": {
+            "decay_multiplier": _AI_SUBTYPE_DECAY_MULT,
+            "save_multiplier": _AI_SUBTYPE_SAVE_MULT,
+            "feed_thumbstop_multiplier": _AI_SUBTYPE_FEED_THUMBSTOP,
+            "callout_multiplier": _AI_SUBTYPE_CALLOUT_MULT,
+            "note": (
+                "AI sub-types are planted with clear differences: product_imagery "
+                "behaves closest to human-led in feed (slow fatigue, strong saves); "
+                "synthetic_ugc fatigues fastest, saves worst and draws the most "
+                "AI-callout comments. Synthetic, never real."
+            ),
+        },
         "note": (
             "AI creative is built to decay faster (shorter half-life) and to win "
             "likes/clicks while losing saves/shares. Phase 4 must recover these "
@@ -499,6 +538,8 @@ def _generate_campaign_rows(
             reach = max(1, int(round(impr / max(frequency, 1.0))))
 
             k = fatigue.decay_k(provenance, s.age_cohort)
+            if provenance != "human_led" and sub_type:
+                k *= _AI_SUBTYPE_DECAY_MULT.get(sub_type, 1.0)
             trend = 0.6 * day_frac if widening[s.segment_id] and provenance != "human_led" else 0.0
             ctr = fatigue.decayed_rate(_BASE_CTR[provenance], k, frequency, trend)
             ctr = float(np.clip(ctr * rng.uniform(0.85, 1.15), 0.0005, 0.08))
@@ -510,6 +551,8 @@ def _generate_campaign_rows(
                 ts_base = _BASE_THUMBSTOP[provenance]
                 if provenance == "human_led" and sub_type:
                     ts_base *= _SUBTYPE_PLACEMENT_THUMBSTOP.get((sub_type, fam), 1.0)
+                elif provenance != "human_led" and sub_type and fam == "feed":
+                    ts_base *= _AI_SUBTYPE_FEED_THUMBSTOP.get(sub_type, 1.0)
                 thumbstop = float(np.clip(ts_base * np.exp(-0.5 * k * frequency) * rng.uniform(0.9, 1.1), 0.05, 0.9))
                 three_sec = int(round(impr * thumbstop))
                 video_plays = three_sec
@@ -523,7 +566,8 @@ def _generate_campaign_rows(
             likes = int(round(impr * _LIKE_RATE[provenance] * rng.uniform(0.8, 1.2)))
             comments = int(round(impr * _COMMENT_RATE[provenance] * rng.uniform(0.7, 1.3)))
             shares = int(round(impr * _SHARE_RATE[provenance] * rng.uniform(0.8, 1.2)))
-            saves = int(round(impr * _SAVE_RATE[provenance] * rng.uniform(0.8, 1.2)))
+            save_mult = _AI_SUBTYPE_SAVE_MULT.get(sub_type, 1.0) if provenance != "human_led" and sub_type else 1.0
+            saves = int(round(impr * _SAVE_RATE[provenance] * save_mult * rng.uniform(0.8, 1.2)))
             hide_scale = 1.0 + 0.15 * frequency
             hides = int(round(impr * _HIDE_RATE[provenance] * hide_scale * rng.uniform(0.7, 1.3)))
             not_interested = int(round(hides * rng.uniform(0.4, 0.8)))
@@ -602,8 +646,11 @@ def _generate_organic_and_comments(organic_rows, comment_rows, account_id, cre_d
     cidx = 0
     for _, cr in sample.iterrows():
         provenance = cr["_true_provenance"]
+        ai_sub = cr["ai_sub_type"] if pd.notna(cr["ai_sub_type"]) else None
         n_comments = int(rng.integers(3, 9))
         callout_prob = {"human_led": 0.05, "ai_assisted": 0.12, "ai_generated": 0.30}[provenance]
+        if provenance != "human_led" and ai_sub:
+            callout_prob = min(0.85, callout_prob * _AI_SUBTYPE_CALLOUT_MULT.get(ai_sub, 1.0))
         for _ in range(n_comments):
             is_callout = rng.random() < callout_prob
             pool = _COMMENT_POOL_CALLOUT if is_callout else _COMMENT_POOL_NEUTRAL

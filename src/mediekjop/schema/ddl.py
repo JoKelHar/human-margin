@@ -106,6 +106,7 @@ CREATIVE = TableSpec(
         # provenance (Phase 3 resolves these; nullable = untagged)
         ("provenance", "VARCHAR"),       # human_led | ai_assisted | ai_generated | NULL
         ("human_sub_type", "VARCHAR"),   # ugc | creator | staff_founder | documentary | studio_polished | NULL
+        ("ai_sub_type", "VARCHAR"),      # product_imagery | copy_variants | synthetic_ugc | synthetic_scene | NULL
         ("tag_source", "VARCHAR"),       # naming_convention | csv_override | platform_label | c2pa | untagged
         ("tag_confidence", "DOUBLE"),    # 0..1
         # Norwegian-ness (optional descriptive dimension, never a scope filter)

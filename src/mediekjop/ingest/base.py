@@ -150,7 +150,7 @@ class CsvMapper:
                 "creative_id": creative_id, "account_id": account_id,
                 "raw_name": ad_name, "created_date": date,
                 # provenance/Norwegian-ness resolved in Phase 3 — untagged for now
-                "provenance": None, "human_sub_type": None,
+                "provenance": None, "human_sub_type": None, "ai_sub_type": None,
                 "tag_source": TagSource.UNTAGGED.value, "tag_confidence": 0.0,
                 "language": None, "dialect_present": None, "dialect_region": None,
                 "norwegian_locations": None, "norwegian_faces": None,
