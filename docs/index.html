@@ -210,9 +210,15 @@
     .rail { position: static; height: auto; flex-direction: row; align-items: center; flex-wrap: wrap;
       gap: 14px; }
     .rail .nav, .rail .foot { display: none; }
+    .topline { align-items: flex-start; }
+    .topctl { flex-wrap: wrap; }
     .kpis { grid-template-columns: repeat(2, 1fr); }
     .two { grid-template-columns: 1fr; }
     .compliance { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 460px) {
+    .kpis { grid-template-columns: 1fr; }
+    .main { padding: 18px; padding-block: 16px 44px; }
   }
   @media (prefers-reduced-motion: no-preference) { .fill, .bar .fill { transition: width .5s ease; } }
 </style>
