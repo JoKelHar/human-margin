@@ -276,8 +276,8 @@ So later phases have real signal to recover (ground truth is written to
 
 ## Compliance surfaced in reports
 
-- **Markedsføringsloven**: advertising labelling, especially creator/influencer
-  and boosted organic content.
+- **Markedsføringsloven** (the Marketing Control Act): advertising labelling,
+  especially creator/influencer and boosted organic content.
 - **Kroppspress-merking**: `ai_assisted`/`ai_generated` creatives showing people
   are flagged for retouch-labelling review (`shows_people` on `creative`).
 - **Platform AI-disclosure** (Meta, TikTok).

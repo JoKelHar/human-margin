@@ -22,7 +22,7 @@ STANDALONE = ROOT / "docs" / "index.html"
 ARTIFACT = ROOT / "out" / "dashboard_page.html"
 
 HEAD = (
-    "<!doctype html>\n<html lang=\"no\">\n<head>\n"
+    "<!doctype html>\n<html lang=\"en\">\n<head>\n"
     "<meta charset=\"utf-8\">\n"
     "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1, viewport-fit=cover\">\n"
     "<style>:root{color-scheme:light}body{margin:0;font:14px \"Helvetica Neue\",Helvetica,Arial,sans-serif}"

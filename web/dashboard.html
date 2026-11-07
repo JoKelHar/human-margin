@@ -198,11 +198,11 @@
       <span><b>Mediekjøp</b><small>Signal</small></span>
     </div>
     <nav class="nav">
-      <a href="#overview"><span class="dot"></span>Oversikt</a>
-      <a href="#matrix"><span class="dot"></span>Beslutningsmatrise</a>
-      <a href="#exhaustion"><span class="dot"></span>KI-utmattelse</a>
-      <a href="#opportunity"><span class="dot"></span>Muligheter</a>
-      <a href="#compliance"><span class="dot"></span>Etterlevelse</a>
+      <a href="#overview"><span class="dot"></span>Overview</a>
+      <a href="#matrix"><span class="dot"></span>Decision matrix</a>
+      <a href="#exhaustion"><span class="dot"></span>AI exhaustion</a>
+      <a href="#opportunity"><span class="dot"></span>Opportunities</a>
+      <a href="#compliance"><span class="dot"></span>Compliance</a>
     </nav>
     <div class="foot">
       <b>Recommend-only.</b> This agent never changes budgets, bids or status on any platform.
@@ -220,7 +220,7 @@
       <div class="topctl">
         <span class="pill live" id="range-pill">—</span>
         <span class="pill">Synthetic · prototype</span>
-        <button class="toggle" id="theme-toggle" type="button" aria-label="Bytt tema">◐ Tema</button>
+        <button class="toggle" id="theme-toggle" type="button" aria-label="Toggle theme">◐ Theme</button>
       </div>
     </div>
 
@@ -316,6 +316,18 @@
 
   var PROV_LABEL = { human_led: "Human-led", ai_assisted: "AI-assisted", ai_generated: "AI-generated" };
   var PROV_VAR = { human_led: "--s-human", ai_assisted: "--s-assist", ai_generated: "--s-gen" };
+  // Norwegian calendar moments kept as proper nouns, with a short English gloss.
+  var MOMENT_GLOSS = {
+    "Julebordsesong": "Julebordsesong (Christmas party season)",
+    "Første snø": "Første snø (first snow)",
+    "Advent og jul": "Advent og jul (Advent and Christmas)",
+    "Vinterferie": "Vinterferie (winter break)",
+    "Russetid": "Russetid (graduation season)",
+    "17. mai": "17. mai (Constitution Day)",
+    "Påske": "Påske (Easter)",
+    "Fellesferie": "Fellesferie (common summer holiday)",
+    "Skolestart": "Skolestart (back to school)"
+  };
   var nf = new Intl.NumberFormat("en-US");
   function fmtNOK(n){ return "kr " + nf.format(Math.round(n)); }
   function fmtImpr(n){ return n>=1e6 ? (n/1e6).toFixed(1)+"M" : nf.format(n); }
@@ -471,7 +483,7 @@
   var op=document.getElementById("opportunity-alerts");
   D.calendar_alerts.slice(0,3).forEach(function(c){
     var tag=c.status==="history" ? c.weeks_out+" weeks out" : "Untested · "+c.weeks_out+"w";
-    op.appendChild(makeAlert(c.status==="history"?"info":"medium", c.moment, tag, c.detail, c.action));
+    op.appendChild(makeAlert(c.status==="history"?"info":"medium", MOMENT_GLOSS[c.moment]||c.moment, tag, c.detail, c.action));
   });
   D.organic_alerts.filter(function(o){return o.provenance==="human_led";}).slice(0,1).forEach(function(o){
     op.appendChild(makeAlert("ok","Organic outperformer","+"+o.quality_vs_median+"% vs median",
@@ -504,8 +516,8 @@
   var cf=document.getElementById("compliance-flags");
   var comp=D.compliance;
   [
-    { n: comp.kroppspress_review_count, l: "AI creatives showing people", law: "Kroppspress-merking — retouch-labelling review" },
-    { n: comp.boosted_posts_labelling, l: "Boosted organic posts", law: "Markedsføringsloven — advertising disclosure" },
+    { n: comp.kroppspress_review_count, l: "AI creatives showing people", law: "Kroppspress-merking (retouched-image labelling)" },
+    { n: comp.boosted_posts_labelling, l: "Boosted organic posts", law: "Markedsføringsloven (Marketing Control Act): advertising disclosure" },
     { n: comp.creator_disclosure_count, l: "Creator-led creatives", law: "Influencer labelling check" }
   ].forEach(function(x){
     var c=el("div","card flag");
