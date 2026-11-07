@@ -22,7 +22,7 @@ in development; see the status table below.
 ## Demo
 
 > **Live demo dashboard** → https://jokelhar.github.io/mediekjop-signal/
-> A prototype console (Smartly-style) rendering the human-vs-AI decision matrix
+> A prototype console rendering the human-vs-AI decision matrix
 > with exhaustion and opportunity alerts, on **synthetic** Norwegian data in
 > which the patterns are deliberately planted.
 
