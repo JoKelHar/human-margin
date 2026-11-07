@@ -133,7 +133,7 @@ class GeneratorConfig:
     n_accounts: int = 1
     start_date: dt.date = dt.date(2025, 3, 1)
     days: int = 150
-    n_campaigns_per_account: int = 5
+    n_campaigns_per_account: int = 8
     n_creatives_per_account: int = 26
     untagged_share: float = 0.12
     foreign_currency_share: float = 0.25  # share of campaigns billed in a non-NOK currency
@@ -467,6 +467,12 @@ def generate(gc: GeneratorConfig | None = None, cfg: dict | None = None) -> Synt
                 "AI-callout comments. Synthetic, never real."
             ),
         },
+        "conversion_edge_note": (
+            "Conversions are planted so AI (product mock-ups AA-PRD most of all) "
+            "wins in feed / catalogue placements and human-led wins in vertical, "
+            "full-screen placements, producing a realistic mix of verdicts "
+            "(human wins, AI wins, no difference). Synthetic, never real."
+        ),
         "note": (
             "AI creative is built to decay faster (shorter half-life) and to win "
             "likes/clicks while losing saves/shares. Phase 4 must recover these "
@@ -574,8 +580,12 @@ def _generate_campaign_rows(
             negative_feedback = hides + not_interested
             unfollows = int(round(negative_feedback * rng.uniform(0.0, 0.2)))
 
-            cvr = _FUNNEL_CVR[funnel] * (1.05 if provenance == "human_led" else 1.0)
-            conversions = int(round(link_clicks * cvr * rng.uniform(0.7, 1.3)))
+            cvr = _FUNNEL_CVR[funnel] * _conv_mult(provenance, sub_type, fam)
+            # stochastic rounding so low-CVR (awareness) placements keep a realistic
+            # non-zero conversion total instead of every per-row count rounding to 0
+            exp_conv = link_clicks * cvr * rng.uniform(0.7, 1.3)
+            base_conv = int(exp_conv)
+            conversions = base_conv + (1 if rng.random() < (exp_conv - base_conv) else 0)
             spend_nok = impr / 1000.0 * cpm_nok
             conv_value_nok = conversions * _AOV_NOK * rng.uniform(0.8, 1.2)
             spend = spend_nok / nok_per_unit
@@ -603,6 +613,22 @@ def _cpm_place_mult(placement_name: str) -> float:
         "feed": 1.1, "feed_video": 1.05, "stories": 0.9, "reels": 0.95,
         "spotlight": 0.85, "shorts": 0.8, "in_stream": 1.25,
     }.get(placement_name, 1.0)
+
+
+# Conversion-rate multiplier by provenance / AI sub-type / placement family.
+# Plants verdict variation (clearly-labelled synthetic ground truth): AI, and
+# product mock-ups (AA-PRD) most of all, win in feed / catalogue placements;
+# human-led wins in vertical, full-screen placements; synthetic UGC converts
+# worst. Some placements land near parity ("no difference").
+def _conv_mult(provenance: str, sub_type, fam: str) -> float:
+    if provenance == "human_led":
+        return 1.15 if fam == "vertical" else 0.95
+    base = 1.28 if fam == "feed" else 0.85   # AI stronger in feed, weaker in vertical
+    if sub_type == "product_imagery":
+        base *= 1.10
+    elif sub_type == "synthetic_ugc":
+        base *= 0.80
+    return base
 
 
 def _generate_organic_and_comments(organic_rows, comment_rows, account_id, cre_df,
