@@ -7,6 +7,8 @@ dashboard. In development: the AI-exhaustion engine and the creative-approach pl
 
 **Live demo** → https://jokelhar.github.io/mediekjop-signal/ (runs on synthetic data)
 
+[![Mediekjøp Signal dashboard on synthetic data: English interface with KPI tiles, a glossary, and a provenance section showing a click-through-rate decay chart and a comparison table for human-led, AI-assisted and AI-generated creative.](docs/screenshot.png)](https://jokelhar.github.io/mediekjop-signal/)
+
 It keeps every platform export at the level of the individual placement, never
 rolled up, and is being built to answer two questions with evidence rather than
 opinion: where human-led creative earns its higher cost, and where the next
