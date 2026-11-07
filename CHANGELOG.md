@@ -36,7 +36,7 @@ First tagged release. Covers the data foundation of the agent on synthetic data.
   hierarchy — naming convention → CSV override → platform label → C2PA —
   merged field by field, with untagged spend reported as a share of total.
   Provenance is never inferred from performance.
-- **Demo dashboard** (Smartly-style, theme-aware) and a weekly Markdown report,
+- **Demo dashboard** (theme-aware) and a weekly Markdown report,
   both built from the synthetic data.
 - Test suite (40 tests) including a round-trip proving the tagger recovers the
   generator's ground-truth tags from ad names alone.
