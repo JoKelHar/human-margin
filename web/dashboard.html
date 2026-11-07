@@ -103,6 +103,10 @@
   .sec-head .eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
     color: var(--ink-3); font-weight: 700; }
   .sec-head .note { font-size: 12.5px; color: var(--ink-2); margin-left: auto; }
+  .caption { margin: -2px 0 14px; font-size: 13px; color: var(--ink-2); max-width: 72ch; }
+  .glossary { margin: 2px 0 20px; font-size: 12.5px; line-height: 1.55; color: var(--ink-2);
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; }
+  .glossary b { color: var(--ink); }
 
   .two { grid-template-columns: 1.35fr 1fr; align-items: start; }
 
@@ -227,12 +231,15 @@
 
     <div class="grid kpis" id="kpis"></div>
 
+    <p class="glossary"><b>Glossary.</b> <b>‰</b> is per thousand impressions. <b>Half-life</b> is the number of exposures at which response falls by half, so shorter means faster fatigue. A <b>placement</b> is one ad slot, such as Instagram Reels or Snapchat Spotlight. <b>Minimum sample</b> means placements below a set impression threshold are marked insufficient data rather than judged.</p>
+
     <section id="provenance">
       <div class="sec-head">
         <span class="eyebrow">Provenance</span>
         <h2>The core contrast</h2>
         <span class="note" id="prov-note"></span>
       </div>
+      <p class="caption">How human-led, AI-assisted and AI-generated creative compare on clicks, saves and return, and how fast each one tires.</p>
       <div class="grid two">
         <div class="card">
           <div class="legend" id="decay-legend"></div>
@@ -257,6 +264,7 @@
         <h2>Verdict by channel × placement</h2>
         <span class="note">Let the data decide, min-sample gated, placement-level.</span>
       </div>
+      <p class="caption">For each ad slot, which approach actually won on the numbers, with low-volume placements marked insufficient rather than judged.</p>
       <div class="card" style="overflow-x:auto">
         <table id="matrix-table">
           <thead><tr>
@@ -277,16 +285,19 @@
     <section>
       <div class="sec-head"><span class="eyebrow">Placement affinity</span>
         <h2>Lo-fi wins vertical; polished wins feed</h2></div>
+      <p class="caption">Which creative styles do best in vertical, full-screen placements versus in-feed.</p>
       <div class="card" id="affinity"></div>
     </section>
 
     <div class="grid two" style="margin-top:26px;align-items:start">
       <section id="exhaustion" style="margin:0">
         <div class="sec-head"><span class="eyebrow">Alerts</span><h2>AI-exhaustion</h2></div>
+        <p class="caption">Audience segments where the human versus AI gap is widening over time, a sign that AI creative is tiring.</p>
         <div class="alerts" id="exhaustion-alerts"></div>
       </section>
       <section id="opportunity" style="margin:0">
         <div class="sec-head"><span class="eyebrow">Forward</span><h2>Opportunities</h2></div>
+        <p class="caption">Upcoming seasonal moments and strong organic posts worth a planned human versus AI test before spending.</p>
         <div class="alerts" id="opportunity-alerts"></div>
       </section>
     </div>
@@ -295,6 +306,7 @@
       <div class="sec-head"><span class="eyebrow">Norwegian compliance</span>
         <h2>Flagged for review</h2>
         <span class="note">Flagged, never auto-resolved.</span></div>
+      <p class="caption">Creatives and posts that may need a disclosure or labelling check under Norwegian marketing rules.</p>
       <div class="grid compliance" id="compliance-flags"></div>
     </section>
 
