@@ -69,8 +69,12 @@ def render(d: dict) -> str:
         L.append("")
 
     L.append("## Opportunities")
+    L.append("")
+    L.append("Each names an advertiser category, a moment, a time window and a recommended approach.")
+    L.append("")
     for c in d["calendar_alerts"][:4]:
-        L.append(f"- **{c['moment']}** — {c['status']}, ~{c['weeks_out']}w out: {c['detail']} → _{c['action']}_")
+        L.append(f"- **{c['category']} · {c['moment']}** ({c['window']}, ~{c['weeks_out']}w out): "
+                 f"{c['detail']} → _{c['approach']}_")
     s = d["saturation"]
     L.append(f"- **Category saturation ({s['category']})** — _{s['label']}_: AI presence {s['trend']}, "
              f"level {s['level']}; classifier accuracy ≈{s['classifier_accuracy_pct']}% "

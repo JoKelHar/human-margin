@@ -211,14 +211,21 @@ def main() -> None:
     alerts.sort(key=lambda a: -a["widening_permille"])
 
     # ---- opportunity: calendar (forward) -----------------------------------
+    # Every opportunity names four things: advertiser category, moment, time
+    # window, and recommended creative approach (naming the AI sub-type where it
+    # is relevant). Moments without an obvious advertiser category are dropped,
+    # not reworded.
     today = dt.date.today()
+    moment_meta = {m["key"]: m for m in cfg["calendar"]["moments"]}
     cal_windows = windows_for_years(cfg, [today.year, today.year + 1, 2025])
     moments_seen = {}
     for w in sorted(cal_windows, key=lambda w: w.start):
-        if w.start < today:
+        if w.start < today or w.key in moments_seen:
             continue
-        if w.key in moments_seen:
-            continue
+        meta = moment_meta.get(w.key, {})
+        category = meta.get("category")
+        if not category:
+            continue  # no obvious advertiser category -> drop the moment
         # historical read from the synthetic 2025 window, if it overlaps the data
         hist = con.execute(
             "SELECT 1, "
@@ -234,17 +241,20 @@ def main() -> None:
         weeks = max(0, (w.start - today).days // 7)
         if hist and hist[3] and hist[3] > min_impr and hist[1] and hist[2]:
             lift = (hist[1] - hist[2]) / hist[2] * 100
-            moments_seen[w.key] = {
-                "moment": w.label, "weeks_out": weeks, "status": "history",
-                "detail": f"Human-led ROAS beat AI by {lift:+.0f}% around this moment last year.",
-                "action": "Brief human-led production now (UGC + Norwegian-ness markers).",
-            }
+            status = "history"
+            detail = f"Human-led ROAS beat AI by {lift:+.0f}% around this moment last year."
         else:
-            moments_seen[w.key] = {
-                "moment": w.label, "weeks_out": weeks, "status": "untested",
-                "detail": "No reliable history for this moment yet.",
-                "action": "Queue a matched human-vs-AI experiment to establish a baseline.",
-            }
+            status = "untested"
+            detail = "No reliable history for this moment yet; queue a matched human-vs-AI test."
+        moments_seen[w.key] = {
+            "category": category,
+            "moment": w.label,
+            "window": f"{w.start.isoformat()} to {w.end.isoformat()}",
+            "approach": meta.get("approach", ""),
+            "weeks_out": weeks,
+            "status": status,
+            "detail": detail,
+        }
         if len(moments_seen) >= 5:
             break
     calendar_alerts = sorted(moments_seen.values(), key=lambda m: m["weeks_out"])
@@ -286,6 +296,8 @@ def main() -> None:
     ).fetchone()[0]
     boosted = con.execute("SELECT COUNT(*) FROM organic_performance WHERE is_boosted").fetchone()[0]
     creator_ct = con.execute("SELECT COUNT(*) FROM creative WHERE human_sub_type='creator'").fetchone()[0]
+    ai_disclosure = con.execute(
+        "SELECT COUNT(*) FROM creative WHERE provenance = 'ai_generated'").fetchone()[0]
 
     insights = {
         "meta": {
@@ -312,6 +324,7 @@ def main() -> None:
         "saturation": saturation,
         "compliance": {
             "kroppspress_review_count": int(kroppspress),
+            "ai_disclosure_count": int(ai_disclosure),
             "boosted_posts_labelling": int(boosted),
             "creator_disclosure_count": int(creator_ct),
         },

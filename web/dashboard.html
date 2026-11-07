@@ -178,7 +178,7 @@
   .gauge i { height: 8px; flex: 1; border-radius: 2px; background: var(--surface-2); }
   .gauge i.on { background: var(--accent); }
 
-  .compliance { grid-template-columns: repeat(3, 1fr); }
+  .compliance { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
   .flag .f-n { font-family: var(--font-display); font-weight: 800; font-size: 24px; letter-spacing: -.02em; }
   .flag .f-l { font-size: 12.5px; color: var(--ink-2); margin-top: 4px; }
   .flag .f-law { font-size: 11px; color: var(--ink-3); margin-top: 6px; }
@@ -512,9 +512,12 @@
 
   // ---- opportunity alerts: calendar + organic + saturation
   var op=document.getElementById("opportunity-alerts");
-  D.calendar_alerts.slice(0,3).forEach(function(c){
-    var tag=c.status==="history" ? c.weeks_out+" weeks out" : "Untested · "+c.weeks_out+"w";
-    op.appendChild(makeAlert(c.status==="history"?"info":"medium", MOMENT_GLOSS[c.moment]||c.moment, tag, c.detail, c.action));
+  D.calendar_alerts.slice(0,4).forEach(function(c){
+    var moment = MOMENT_GLOSS[c.moment]||c.moment;
+    var tag = (c.status==="history" ? "" : "Untested · ") + "~"+c.weeks_out+"w out";
+    // four fields: advertiser category + moment (title), time window, approach (action)
+    op.appendChild(makeAlert(c.status==="history"?"info":"medium",
+      c.category + " · " + moment, tag, "Window " + c.window + ". " + c.detail, c.approach));
   });
   D.organic_alerts.filter(function(o){return o.provenance==="human_led";}).slice(0,1).forEach(function(o){
     op.appendChild(makeAlert("ok","Organic outperformer","+"+o.quality_vs_median+"% vs median",
@@ -548,6 +551,7 @@
   var comp=D.compliance;
   [
     { n: comp.kroppspress_review_count, l: "AI creatives showing people", law: "Kroppspress-merking (retouched-image labelling)" },
+    { n: comp.ai_disclosure_count, l: "AI-generated creatives", law: "Platform AI disclosure (Meta, TikTok)" },
     { n: comp.boosted_posts_labelling, l: "Boosted organic posts", law: "Markedsføringsloven (Marketing Control Act): advertising disclosure" },
     { n: comp.creator_disclosure_count, l: "Creator-led creatives", law: "Influencer labelling check" }
   ].forEach(function(x){
