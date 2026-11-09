@@ -1,0 +1,42 @@
+# =============================================================================
+# Creative Approach Planner - industries and price bands
+#
+# Editable list of B2C industries (bransjer) and the price thresholds that put a
+# scenario's price into a low / mid / high band.
+#
+# PROVISIONAL: the band thresholds below are placeholders so Phase 1 is testable.
+# Phase 2 replaces them with researched, sourced figures and the user approves
+# them before they ship. Thresholds are in NOK (the planner's internal currency);
+# a scenario's price is converted to NOK before banding.
+#
+#   band(price_nok) = low  if price_nok <= low_max
+#                     high if price_nok >= high_min
+#                     mid  otherwise
+# =============================================================================
+
+industries:
+  - { key: events_concerts,     label: "Events and concerts",        low_max: 250,    high_min: 800 }
+  - { key: uteliv,              label: "Nightlife (uteliv)",         low_max: 150,    high_min: 400 }
+  - { key: restaurant_cafe,     label: "Restaurant and cafe",        low_max: 200,    high_min: 600 }
+  - { key: hotel_travel,        label: "Hotel and travel",           low_max: 800,    high_min: 3000 }
+  - { key: culture,             label: "Culture (theatre, museums, festivals)", low_max: 150, high_min: 500 }
+  - { key: beauty_skincare,     label: "Beauty and skincare",        low_max: 200,    high_min: 700 }
+  - { key: fashion_accessories, label: "Fashion and accessories",    low_max: 400,    high_min: 2000 }
+  - { key: fitness_wellness,    label: "Fitness and wellness",       low_max: 300,    high_min: 1000 }
+  - { key: outdoor_sport,       label: "Outdoor and sport (friluftsliv)", low_max: 500, high_min: 2500 }
+  - { key: home_interior,       label: "Home and interior",          low_max: 800,    high_min: 5000 }
+  - { key: consumer_electronics, label: "Consumer electronics",      low_max: 1000,   high_min: 8000 }
+  - { key: food_drink_retail,   label: "Food and drink retail",      low_max: 150,    high_min: 600 }
+  - { key: automotive,          label: "Automotive (incl. EV)",      low_max: 200000, high_min: 500000 }
+  - { key: courses_education,   label: "Courses and education",      low_max: 2000,   high_min: 15000 }
+  - { key: other,               label: "Other",                      low_max: 300,    high_min: 1500 }
+
+# Campaign objectives a scenario can target.
+objectives: [ticket_sales, bookings, online_sales, leads, awareness]
+
+# Brand positioning, mass -> exclusive. Premium/exclusive raise the modelled cost
+# of AI detection in later phases.
+brand_positioning: [mass, mid_market, premium, exclusive]
+
+# Stated creative approach an agency may declare (for the Phase 5 quote check).
+agency_approaches: [human_shoot, ugc, ai_generated, templated, mixed, unknown]

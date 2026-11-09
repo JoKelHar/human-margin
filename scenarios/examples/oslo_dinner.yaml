@@ -1,0 +1,26 @@
+# Example: an exclusive Oslo dinner event. Capacity-capped and high-ticket:
+# the objective is to sell out 40 seats, not to maximise ROAS.
+name: "Exclusive Oslo dinner"
+industry: events_concerts
+objective: ticket_sales
+brand_positioning: exclusive
+currency: NOK
+
+price: 1500          # ticket price
+capacity: 40         # seats; revenue cannot exceed this
+budget: 8000         # media budget
+lead_time_weeks: 4
+geography: "Oslo, 30-55, fine-dining interest"
+audience_size: 40000
+reuse_campaigns: 1
+existing_assets: [last_year_footage]
+
+costs:
+  human_led:
+    photographer: 6000
+    editing: 2000
+    usage_rights_months: 12
+  ai_driven:
+    tool_subscriptions: 400
+    hours: 6
+    hourly_rate: 700
