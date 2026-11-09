@@ -1,0 +1,25 @@
+# Example: a club night in Oslo. Mid-ticket, capacity-capped at 300 tickets.
+name: "Oslo club night"
+industry: uteliv
+objective: ticket_sales
+brand_positioning: mid_market
+currency: NOK
+
+price: 250
+capacity: 300
+budget: 5000
+lead_time_weeks: 3
+geography: "Oslo, 18-30, nightlife interest"
+audience_size: 120000
+reuse_campaigns: 2
+existing_assets: [creator_relationship]
+
+costs:
+  human_led:
+    ugc_creator: 3000
+    editing: 1200
+    usage_rights_months: 6
+  ai_driven:
+    tool_subscriptions: 300
+    hours: 4
+    hourly_rate: 650

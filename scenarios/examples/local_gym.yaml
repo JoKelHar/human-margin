@@ -1,0 +1,27 @@
+# Example: a local gym generating membership leads. Value per conversion is the
+# worth of a lead, not a product price.
+name: "Local gym memberships"
+industry: fitness_wellness
+objective: leads
+brand_positioning: mass
+currency: NOK
+
+price: 499                   # monthly membership price
+value_per_conversion: 1800   # worth of a signed-up lead (several months retained)
+budget: 15000
+lead_time_weeks: 2
+geography: "Trondheim, 20-50, fitness interest"
+audience_size: 90000
+reuse_campaigns: 3
+existing_assets: [staff_founder_access]
+
+costs:
+  human_led:
+    ugc_creator: 2500
+    designer: 1500
+    editing: 1000
+    usage_rights_months: 12
+  ai_driven:
+    tool_subscriptions: 400
+    hours: 8
+    hourly_rate: 600

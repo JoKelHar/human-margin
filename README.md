@@ -147,7 +147,13 @@ Built with [Claude Code](https://claude.com/claude-code).
 Also in progress, as a parallel module: the **Creative Approach Planner**
 (AI vs hybrid vs human), a standalone, offline planner backed by a cited
 benchmark library, which sharpens its estimates with the exhaustion framework
-once account data exists.
+once account data exists. **Phase 1 is in**: the input schema, scenario YAML
+format and currency handling (NOK-internal, with a dated Norges Bank FX file and
+a fallback). Try it on the example scenarios:
+
+```bash
+uv run python scripts/plan.py --all   # validates scenarios/examples/*.yaml
+```
 
 A preview of forward **opportunities** is also in: the dashboard's calendar
 opportunities are config-driven and each names an advertiser category, a moment,

@@ -1,0 +1,35 @@
+# Example: a premium skincare brand running always-on online sales, with an
+# agency quote to sanity-check (Phase 5).
+name: "Premium skincare brand"
+industry: beauty_skincare
+objective: online_sales
+brand_positioning: premium
+currency: NOK
+
+price: 900           # average order value
+margin: 0.6          # gross margin fraction -> value per conversion = 540 NOK
+budget: 40000        # monthly media budget
+lead_time_weeks: 8
+geography: "Norway, 25-45, skincare interest"
+audience_size: 350000
+reuse_campaigns: 4
+existing_assets: [product_photos]
+
+costs:
+  human_led:
+    photographer: 12000
+    videographer: 8000
+    talent: 6000
+    editing: 4000
+    usage_rights_months: 12
+  ai_driven:
+    tool_subscriptions: 1200
+    hours: 20
+    hourly_rate: 750
+
+agency:
+  setup_fee: 15000
+  monthly_management_fee: 12000
+  media_management_pct: 15
+  creative_production_fee: 25000
+  stated_approach: ai_generated
