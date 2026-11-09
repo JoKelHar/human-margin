@@ -184,7 +184,9 @@ def render_markdown(md: str) -> str:
 
 def build_dashboard(template: str) -> None:
     data = json.loads(INSIGHTS.read_text(encoding="utf-8"))
-    payload = json.dumps(data, ensure_ascii=False).replace("</script", "<\\/script")
+    # allow_nan=False: NaN/Infinity are invalid JSON and would break JSON.parse in
+    # the browser, so fail loudly at build time instead of shipping a dead page.
+    payload = json.dumps(data, ensure_ascii=False, allow_nan=False).replace("</script", "<\\/script")
     rendered = template.replace("__INSIGHTS_JSON__", payload)
     head = page_head("Human Margin", SITE, extra_style=INDEX_STYLE)
     STANDALONE.parent.mkdir(parents=True, exist_ok=True)

@@ -22,6 +22,19 @@ from ..synthetic.calendar_effects import windows_for_years
 # The four fields every opportunity must carry.
 REQUIRED_FIELDS = ("category", "moment", "window", "approach")
 
+# One shared rationale for the untested moments, instead of repeating it per card.
+UNTESTED_NOTE = ("Where there is no reliable history yet, queue a matched "
+                 "human-vs-AI test to establish a baseline.")
+
+
+def _timing(weeks: int) -> str:
+    """Plain-language lead time instead of '~Nw out'."""
+    if weeks <= 0:
+        return "starts this week"
+    if weeks == 1:
+        return "in 1 week"
+    return f"in {weeks} weeks"
+
 
 def upcoming_opportunities(con, cfg: dict, today: dt.date, min_impr: int,
                            limit: int = 5) -> list[dict]:
@@ -56,15 +69,16 @@ def upcoming_opportunities(con, cfg: dict, today: dt.date, min_impr: int,
         if hist and hist[3] and hist[3] > min_impr and hist[1] and hist[2]:
             lift = (hist[1] - hist[2]) / hist[2] * 100
             status = "history"
-            detail = f"Human-led ROAS beat AI by {lift:+.0f}% around this moment last year."
+            detail = f"Human-led ROAS beat AI by {lift:+.0f}% here last year."
         else:
             status = "untested"
-            detail = "No reliable history for this moment yet; queue a matched human-vs-AI test."
+            detail = None  # the single shared UNTESTED_NOTE covers these
 
         seen[w.key] = {
             "category": category,
             "moment": w.label,
             "window": f"{w.start.isoformat()} to {w.end.isoformat()}",
+            "timing": _timing(weeks),
             "approach": meta.get("approach", ""),
             "weeks_out": weeks,
             "status": status,

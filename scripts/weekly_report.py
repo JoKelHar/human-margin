@@ -22,11 +22,11 @@ PROV = {"human_led": "Human-led", "ai_assisted": "AI-assisted", "ai_generated": 
 def render(d: dict) -> str:
     m, k = d["meta"], d["kpis"]
     L: list[str] = []
-    L.append(f"# Weekly signal — {m['brand']}")
+    L.append(f"# Weekly signal: {m['brand']}")
     L.append("")
     L.append(f"_Window {m['data_range'][0]} → {m['data_range'][1]} · generated {m['generated_at']}_")
     L.append("")
-    L.append("> Recommend-only. Descriptive prototype on synthetic data — not the Phase-4 statistical engine.")
+    L.append("> Recommend-only. Descriptive prototype on synthetic data, not the Phase-4 statistical engine.")
     L.append("")
     L.append("## Headline")
     L.append(f"- Spend (NOK-normalised): **{k['spend_nok']:,}** across {', '.join(k['currencies'])}")
@@ -62,7 +62,7 @@ def render(d: dict) -> str:
     L.append("")
 
     if d["exhaustion_alerts"]:
-        L.append("## ⚠️ Exhaustion alerts")
+        L.append("## AI exhaustion")
         for a in d["exhaustion_alerts"]:
             L.append(f"- **{a['segment']}** ({a['severity']}, gap +{a['widening_permille']}‰): "
                      f"{a['detail']} → _{a['action']}_")
@@ -73,10 +73,14 @@ def render(d: dict) -> str:
     L.append("Each names an advertiser category, a moment, a time window and a recommended approach.")
     L.append("")
     for c in d["calendar_alerts"][:4]:
-        L.append(f"- **{c['category']} · {c['moment']}** ({c['window']}, ~{c['weeks_out']}w out): "
-                 f"{c['detail']} → _{c['approach']}_")
+        extra = f": {c['detail']}" if c.get("detail") else ""
+        L.append(f"- **{c['category']} · {c['moment']}** ({c['window']}, {c['timing']}){extra} "
+                 f"→ _{c['approach']}_")
+    if d.get("opportunities_note"):
+        L.append("")
+        L.append(f"_{d['opportunities_note']}_")
     s = d["saturation"]
-    L.append(f"- **Category saturation ({s['category']})** — _{s['label']}_: AI presence {s['trend']}, "
+    L.append(f"- **Category saturation ({s['category']})**, _{s['label']}_: AI presence {s['trend']}, "
              f"level {s['level']}; classifier accuracy ≈{s['classifier_accuracy_pct']}% "
              f"±{s['classifier_accuracy_margin']}. Directional only, never a league table.")
     L.append("")

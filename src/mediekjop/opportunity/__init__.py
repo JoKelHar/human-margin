@@ -9,6 +9,6 @@
     classifier's estimated accuracy shown alongside it.
 """
 
-from .calendar import REQUIRED_FIELDS, upcoming_opportunities
+from .calendar import REQUIRED_FIELDS, UNTESTED_NOTE, upcoming_opportunities
 
-__all__ = ["upcoming_opportunities", "REQUIRED_FIELDS"]
+__all__ = ["upcoming_opportunities", "REQUIRED_FIELDS", "UNTESTED_NOTE"]

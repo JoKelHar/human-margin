@@ -20,7 +20,8 @@ import duckdb
 import numpy as np
 
 from mediekjop.config import load_config
-from mediekjop.opportunity.calendar import upcoming_opportunities
+from mediekjop.opportunity.calendar import UNTESTED_NOTE, upcoming_opportunities
+from mediekjop.recommend.matrix import decision_matrix
 
 ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "data" / "synthetic.duckdb"
@@ -28,6 +29,11 @@ OUT = ROOT / "out" / "insights.json"
 
 PROV_ORDER = ["human_led", "ai_assisted", "ai_generated"]
 BRAND = "Fjord Active (synthetic)"
+
+
+def _clean(v):
+    """None for NULL/NaN (pandas gives NaN for an untagged field) so the JSON stays valid."""
+    return None if v is None or (isinstance(v, float) and math.isnan(v)) else v
 
 
 def _fit_half_life(freq: np.ndarray, ctr: np.ndarray) -> float | None:
@@ -119,63 +125,9 @@ def main() -> None:
         affinity_rows.setdefault(r.sub, {})[r.fam] = round(r.ts, 1)
 
     # ---- decision matrix: channel x placement, Human vs AI -----------------
-    cells = con.execute(
-        """
-        WITH grp AS (
-          SELECT p.channel, p.placement_name,
-                 CASE WHEN c.provenance='human_led' THEN 'human' ELSE 'ai' END side,
-                 SUM(a.impressions) i, SUM(a.clicks) cl,
-                 SUM(a.conversion_value_nok) cv, SUM(a.spend_nok) sp,
-                 SUM(a.saves) sv
-          FROM ad_performance a JOIN creative c USING(creative_id) JOIN placement p USING(placement_id)
-          WHERE c.provenance IS NOT NULL GROUP BY 1,2,3)
-        SELECT channel, placement_name,
-               MAX(i) FILTER(WHERE side='human') hi, MAX(i) FILTER(WHERE side='ai') ai_i,
-               MAX(cl*1.0/NULLIF(i,0)) FILTER(WHERE side='human') hctr,
-               MAX(cl*1.0/NULLIF(i,0)) FILTER(WHERE side='ai') aictr,
-               MAX(cv/NULLIF(sp,0)) FILTER(WHERE side='human') hroas,
-               MAX(cv/NULLIF(sp,0)) FILTER(WHERE side='ai') airoas,
-               MAX(sv*1.0/NULLIF(i,0)) FILTER(WHERE side='human') hsave,
-               MAX(sv*1.0/NULLIF(i,0)) FILTER(WHERE side='ai') aisave
-        FROM grp GROUP BY 1,2 ORDER BY 1,2
-        """
-    ).df()
-
-    def _subtype_winner(channel, placement):
-        r = con.execute(
-            "SELECT c.human_sub_type, SUM(a.saves)*1.0/NULLIF(SUM(a.impressions),0) s "
-            "FROM ad_performance a JOIN creative c USING(creative_id) JOIN placement p USING(placement_id) "
-            "WHERE c.human_sub_type IS NOT NULL AND p.channel=? AND p.placement_name=? "
-            "GROUP BY 1 ORDER BY 2 DESC LIMIT 1", [channel, placement]).fetchone()
-        return r[0] if r else None
-
-    def z(x) -> float:
-        return 0.0 if x is None or (isinstance(x, float) and math.isnan(x)) else float(x)
-
-    matrix = []
-    for r in cells.itertuples():
-        hi, ai_i = z(r.hi), z(r.ai_i)
-        n = min(hi, ai_i)
-        if n < min_impr:
-            verdict, sub, conf = "Insufficient data", None, "low"
-        else:
-            roas_gap = z(r.hroas) - z(r.airoas)
-            save_gap = z(r.hsave) - z(r.aisave)
-            conf = "high" if n > 5 * min_impr else "medium"
-            if roas_gap > 0.03 or save_gap > 0.0005:
-                verdict, sub = "Human wins", _subtype_winner(r.channel, r.placement_name)
-            elif roas_gap < -0.03:
-                verdict, sub = "AI wins", None
-            else:
-                verdict, sub = "No difference", None
-        matrix.append({
-            "channel": r.channel, "placement": r.placement_name, "verdict": verdict,
-            "sub_type": sub, "confidence": conf,
-            "human_roas": round(z(r.hroas), 2), "ai_roas": round(z(r.airoas), 2),
-            "human_ctr_permille": round(1000 * z(r.hctr), 2),
-            "ai_ctr_permille": round(1000 * z(r.aictr), 2),
-            "impressions": int(hi + ai_i),
-        })
+    # Each verdict names the metric that decided it and is backed by values shown
+    # in the same row (ROAS when reliable, else saves; ROAS is n/a otherwise).
+    matrix = decision_matrix(con, cfg)
 
     # ---- exhaustion alerts: AI gap widening by age cohort x channel --------
     seg = con.execute(
@@ -205,13 +157,14 @@ def main() -> None:
                 "segment": f"{cohort} · {channel}",
                 "severity": "high" if widening > 0.0016 else "medium",
                 "widening_permille": round(1000 * widening, 2),
-                "detail": "Human–AI CTR gap is widening over the flight — AI exhaustion setting in.",
+                "detail": "Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in.",
                 "action": "Shift new AI iterations here to human-led UGC/creator; cap AI frequency.",
             })
     alerts.sort(key=lambda a: -a["widening_permille"])
 
     # ---- opportunity: calendar (forward, four actionable fields) -----------
-    calendar_alerts = upcoming_opportunities(con, cfg, dt.date.today(), min_impr)
+    today = dt.date.today()
+    calendar_alerts = upcoming_opportunities(con, cfg, today, min_impr)
 
     # ---- opportunity: organic outperformers --------------------------------
     organic = con.execute(
@@ -226,11 +179,11 @@ def main() -> None:
     ).df()
     base_q = organic.quality.median() if len(organic) else 0
     organic_alerts = [{
-        "post_id": r.post_id, "provenance": r.provenance, "sub_type": r.human_sub_type,
+        "post_id": r.post_id, "provenance": _clean(r.provenance), "sub_type": _clean(r.human_sub_type),
         "quality_vs_median": round((r.quality / base_q - 1) * 100) if base_q else 0,
         "boosted": bool(r.is_boosted),
         "action": "Amplify as a partnership/Spark ad" if r.provenance == "human_led" and not r.is_boosted
-                  else "Already boosted — track converted lift",
+                  else "Already boosted, track converted lift",
     } for r in organic.itertuples()]
 
     # ---- opportunity: saturation (directional, labelled) -------------------
@@ -240,7 +193,7 @@ def main() -> None:
         "trend": "rising", "level": "high",
         "classifier_accuracy_pct": 78, "classifier_accuracy_margin": 6,
         "note": ("Share of category feed that looks AI-generated appears to be RISING. "
-                 "Directional only — never a competitor league table. Use to support, "
+                 "Directional only, never a competitor league table. Use to support, "
                  "not justify, a human-led push backed by your own performance data."),
     }
 
@@ -276,6 +229,7 @@ def main() -> None:
         "calendar_alerts": calendar_alerts,
         "organic_alerts": organic_alerts,
         "saturation": saturation,
+        "opportunities_note": UNTESTED_NOTE,
         "compliance": {
             "kroppspress_review_count": int(kroppspress),
             "ai_disclosure_count": int(ai_disclosure),
@@ -285,7 +239,7 @@ def main() -> None:
     }
     con.close()
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(insights, indent=2), encoding="utf-8")
+    OUT.write_text(json.dumps(insights, indent=2, allow_nan=False), encoding="utf-8")
     print(f"Wrote {OUT}")
     print(f"  provenance groups: {len(prov_summary)}  matrix cells: {len(matrix)}  "
           f"exhaustion alerts: {len(alerts)}  calendar: {len(calendar_alerts)}")

@@ -22,14 +22,19 @@ def main() -> None:
     ap.add_argument("--out", default="data/synthetic.duckdb", help="output DuckDB path")
     ap.add_argument("--accounts", type=int, default=1)
     ap.add_argument("--days", type=int, default=150)
-    ap.add_argument("--start", default="2025-03-01", help="start date YYYY-MM-DD")
+    ap.add_argument("--start", default="",
+                    help="start date YYYY-MM-DD; default: window ends ~3 weeks before today")
     ap.add_argument("--seed", type=int, default=42)
     args = ap.parse_args()
 
+    # Default to a recent window: end roughly three weeks before today so the
+    # demo always reads as current rather than a year-old snapshot.
+    start_date = (dt.date.fromisoformat(args.start) if args.start
+                  else dt.date.today() - dt.timedelta(days=args.days))
     gc = GeneratorConfig(
         seed=args.seed,
         n_accounts=args.accounts,
-        start_date=dt.date.fromisoformat(args.start),
+        start_date=start_date,
         days=args.days,
     )
     ds = generate(gc, load_config())
