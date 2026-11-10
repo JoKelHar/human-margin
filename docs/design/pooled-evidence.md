@@ -14,6 +14,14 @@ The tool is a **sanity checker**. The evidence layer exists so that every answer
 can show where it came from and how sure it is, and so that the quality of that
 answer rises as more accounts link, without any account's data leaking.
 
+**Two decisions frame the rest.** (1) **Build local-only (option A) now** — every
+job works offline on public + own data; the pooled tier is designed for but not
+required, and local aggregates are written export-ready so a hosted store (B) is a
+later transport change (§8). (2) **Pooling stays off by default** until one legal
+read (§9.5); it is fed by aggregates each account computes from its **own exports**,
+never performance pulled from a platform API, which keeps it clear of the hardest
+platform-terms questions (§9.0).
+
 ---
 
 ## 1. What each job needs, and how it grows with scale
@@ -50,8 +58,10 @@ UGC, …) and count advertisers and creatives per industry bucket over time. Rep
 from ~X% to ~Y% over the last two quarters"), not a binary label.
 
 **Response — is it still working.** Source: **pooled accounts only** (public
-libraries carry no performance). Per content type × cell: CTR decay, fatigue onset,
-CPA drift, save/share quality. Report direction and speed of change, with N and
+libraries carry no performance), and those contributions are aggregates each
+account computes locally from its **own exports**, never performance pulled from a
+platform API (see §9.0). Per content type × cell: CTR decay, fatigue onset, CPA
+drift, save/share quality. Report direction and speed of change, with N and
 confidence. If there aren't enough accounts in a cell, the honest answer is *not
 enough evidence*, never a guess.
 
@@ -147,21 +157,29 @@ avoids them changes the supply). Handle it **honestly, by describing not steerin
 
 ## 8. Architecture
 
-**Today:** the tool is local, offline and downloadable. The planner and agent run
-on one machine against local files; nothing leaves it.
+**Decision: build for A (local-only) now; everything must work offline on public +
+own data.** The planner and agent run on one machine against local files; nothing
+leaves it. The pooled tier is designed for from day one but is **not a runtime
+dependency**: with zero pooled data every job still works (public benchmarks + the
+account's own exports), only less sharply.
 
-**Pooling needs a shared aggregate store.** Options:
+**Make local aggregates export-ready.** Even before any hosted store exists, the
+local app computes per-account, min-cell-size-safe aggregates and can write them to
+a file in **exactly the schema a future hosted store (B) would accept** (cell key,
+effect, uncertainty, N, provenance, period, market — never raw rows). So moving to B
+later is a transport change, not a redesign, and a contributor can hand over an
+export by hand in the meantime.
 
-| Option | What it is | Effect on open-source positioning |
-|--------|------------|-----------------------------------|
-| **A. Local-only (no pooling)** | Ship as-is; users rely on public + own data | Fully open, fully offline, but no pooled tier (the core virtue) |
-| **B. Client-side aggregation + opt-in push to a hosted aggregate store** | The local app computes per-account aggregates and pushes only min-cell-size-safe aggregates to a shared service that returns pooled cells | Code stays open; the hosted aggregate service is the one network dependency (optional, opt-in). Keeps "offline by default" |
-| **C. Federated / privacy-preserving aggregation** | Accounts contribute to aggregates without a central party seeing per-account values (secure aggregation) | Strongest privacy story; most engineering; still needs a coordinator |
+| Option | What it is | Status |
+|--------|------------|--------|
+| **A. Local-only** | Ship as-is; public + own data; local export-ready aggregates | **Build now** |
+| **B. Opt-in push to a hosted aggregate store** | The same local aggregates are pushed to a shared service that returns pooled cells | **Documented as the next step**, not built yet |
+| ~~C. Federated / secure aggregation~~ | Central party never sees per-account values | **Dropped** — disproportionate engineering for this stage |
 
-**Recommendation:** B, with the hosted aggregate store clearly separated from the
-open-source local tool, opt-in, and publishing only its aggregation rules. The tool
-stays downloadable and offline; pooling is an optional connected feature. Revisit C
-if the pool grows.
+**B, the next step (documented, not built):** a hosted service that only ever
+receives the min-cell-size-safe aggregates defined above, opt-in, with its
+aggregation rules published. The local tool stays downloadable and offline; pooling
+becomes an optional connected feature that consumes the export A already produces.
 
 ---
 
@@ -169,6 +187,30 @@ if the pool grows.
 
 Primary sources quoted below; **this is not legal advice** and the splits are
 explicit. Short quotes only.
+
+### 9.0 Design choices that keep pooling clear of platform terms
+
+The pooling design is shaped to avoid the hardest platform-terms questions, not to
+argue its way through them:
+
+- **Public data: official APIs only, within their published terms. No scraping.**
+  Volume/supply comes only from the platforms' own transparency products (Meta Ad
+  Library / EU DSA repositories, TikTok Commercial Content Library), used under
+  their stated access terms. Those terms are recorded in
+  [DATA_SOURCES.md](../../DATA_SOURCES.md).
+- **Pooled data never comes from platform APIs.** The tool does **not** pull one
+  advertiser's performance from a platform API and pool it for another — that is the
+  "unclear / needs a lawyer" case below. Instead, **users opt in to contribute
+  aggregate summaries their own machine computes from their own exports** (e.g. an
+  Ads Manager CSV the advertiser downloaded). The advertiser is sharing a summary of
+  their *own* data they already hold, not us redistributing platform data. No
+  account name, ID, creative, copy or personal data is in the contribution, and the
+  minimum-5-accounts rule (§6) still applies to every published cell.
+- **Pooling is off by default.** A config flag keeps the pooled tier disabled until
+  the owner has had **one legal read** (see §9.5). With it off, the tool is public +
+  own data only, which raises none of the questions below.
+
+### 9.1 Platform terms (for the public-volume use)
 
 **Meta.**
 - Ad Library / transparency data is for public ad-transparency research under
@@ -204,9 +246,29 @@ terms were not located in this pass. Needs checking — do not assume.**
   advertiser, are the design's anchor. Advertiser identity is a business, but ad
   performance can be linked to an identifiable advertiser, so treat the pooled
   pipeline as processing that must be aggregated/anonymised before sharing.
+- Because a contribution is the advertiser's **own** data, summarised **on their own
+  machine** and shared only as a min-cell aggregate under explicit opt-in, the
+  lawful basis is cleanest (consent) and we never hold their raw rows.
 - **Roles need confirmation:** whether we are controller or processor of the
   contributed aggregates, the lawful basis (likely consent via opt-in), and the
   anonymisation standard that takes the data out of GDPR scope. **Needs a lawyer.**
+
+### 9.5 The single remaining legal step
+
+Everything above is designed so that **one** legal review unblocks pooling:
+
+- The tool ships with **pooling off by default**; public + own-data use needs no
+  new review.
+- Before the pooled tier is switched on for anyone, a lawyer confirms: the
+  contributor model (own-export aggregates, opt-in) under GDPR; our controller/
+  processor role and lawful basis; and that the public-volume use sits within each
+  platform's transparency terms.
+- The plain-English contributor agreement — what is shared, what never is, and how to
+  withdraw — is drafted at [docs/contributing-data.md](../contributing-data.md) for
+  that review to sign off.
+
+Until that step is done, the off-by-default flag stays off. This is the **only**
+remaining legal gate for the pooled tier.
 
 ---
 
@@ -234,8 +296,11 @@ Each is a prior or a context layer, never a source of advertiser performance.
 2. **Own-account response.** Let a single linked account compute its own
    per-content-type response (reuse the exhaustion/decay code); the `own_account`
    provenance tier.
-3. **Aggregate store (opt-in), min cell size 5.** The `pooled` tier for the cells
-   that clear the floor; coarsening and suppression built in from the start.
+3. **Own-export contribution + local aggregate store (opt-in, off by default),
+   min cell size 5.** The account computes min-cell-safe aggregates from its own
+   exports, written in the export-ready schema (§8); the `pooled` tier reads the
+   cells that clear the floor; coarsening and suppression built in from the start.
+   Stays behind the off-by-default flag until the §9.5 legal step.
 4. **Partial-pooling blend.** Wire the ladder (own → pooled → public → assumption)
    with N/recency/market/grade weighting into the planner's estimate.
 5. **Evidence graph tables + "established" thresholds.** Persist aggregates and
