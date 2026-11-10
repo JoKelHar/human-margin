@@ -4,70 +4,72 @@ Copyright 2026 João Harrison
 -->
 # Data sources and citation policy
 
-The benchmark library (`data/benchmarks/`) is what lets this tool give useful
-answers with no ad account connected. Its credibility — and its legal standing —
-depends on how its figures are sourced. This document explains the policy.
+This repository mixes code (Apache-2.0) with a small, versioned set of **data and
+benchmarks** (CC BY 4.0; see `LICENSE-DATA`). This file records where figures come
+from, how they are cited, and the terms of the public sources the tool is designed
+to use. It is the companion to the provenance model in
+[docs/principles.md](docs/principles.md) and the pooled-evidence design in
+[docs/design/pooled-evidence.md](docs/design/pooled-evidence.md).
 
-## What the CC BY 4.0 licence here covers
+## Citation policy for the benchmark library
 
-The benchmark library is licensed under
-[Creative Commons Attribution 4.0 International](LICENSE-DATA). That licence
-covers **our compilation and structure** — the selection, arrangement,
-normalisation and grading of the figures, and the schema around them.
+`data/benchmarks/benchmarks.yaml` holds **individual cited figures, never reproduced
+tables.** Each figure carries a provenance tier (see principles.md):
 
-It does **not** grant any rights over the underlying third-party facts, nor over
-the original reports, datasets or sources those facts come from. Each figure
-points back to its own source; that source keeps whatever rights it has. If you
-reuse the library, attribute *this project* for the compilation, and cite the
-*original source* for any individual figure you rely on.
+- `public_benchmark` — a cited public figure with `source_name`, `source_url`,
+  `published` date, market (`geography`) and a source-quality grade (A–D). Source
+  quality is fixed per study; distance from Norway lowers *relevance*, not the grade.
+- `expert_estimate` — a **named, dated** estimate used where credible public data is
+  thin. It may omit `source_url` but must name the estimator in `source_name` and
+  carry a date; it is ranked below public data and above a bare assumption. Unfilled
+  slots are listed by `scripts/assumptions.py`.
+- `assumption` — a labelled placeholder (quality D, no source), with a deliberately
+  wide range, pending real data.
 
-## How figures must be cited
+`config/planner/industries.yaml` applies the same tiers per price band
+(`bands_tier`, `bands_source`). Run `scripts/assumptions.py` for the full register of
+what is still an assumption or an unfilled expert slot.
 
-Every entry is an **individually cited value** and carries, at minimum:
+Where a figure is a proxy (US/global for Norway), that is stated in the entry's
+`notes` and reflected in its relevance, never hidden.
 
-- the **metric**, **industry**, **price band**, **channel** and **geography** it
-  applies to,
-- a **value or range** with its **unit**,
-- a **source name** and **source URL**,
-- a **publication date**, and
-- a **quality grade** (A–D).
+## Public sources the tool is designed to use
 
-## Third-party data hygiene (the important part)
+Used **only through each platform's official transparency product, within its
+published terms — no scraping.** These provide **ad volume/supply** (who is running
+what kind of creative), classified by our own tagging module. They carry **no
+performance data**.
 
-- **No whole-table or whole-dataset reproduction.** We store individual figures
-  we actually use, each linked to its source — never a copy of a report's full
-  table, chart or dataset. In Norway and the wider EEA, databases can carry
-  *sui generis* database protection independent of copyright, so reproducing a
-  substantial part of someone's dataset is not ours to relicense. Reduce it to
-  the specific cited figures, or leave it out.
-- **No paywalled content.** Do not copy figures from behind a paywall. Cite only
-  what is publicly available, or a public summary of it.
-- **No invented figures or sources.** Missing data is shown as missing, with a
-  clearly labelled, editable assumption and a wide range. The engine is built to
-  do this honestly rather than guess.
-- **Facts vs expression.** Individual facts (a single CPM figure) are generally
-  not copyrightable, but their original *expression* and *compilation* can be.
-  Our policy stays on the safe side of that line by citing discrete figures.
+| Source | What we take | Terms / access | Notes |
+|--------|--------------|----------------|-------|
+| **Meta Ad Library / EU DSA ad repositories** | Ad volume & content type by industry over time | Meta Research Tools / Ad Library terms; gated API | Norway is EEA. Public creatives only; **no advertiser performance.** |
+| **TikTok Commercial Content Library (EU/UK)** | Ad volume (EU/UK) | Application + review; carries no engagement/spend/audience data | Norway via EEA. Commercial eligibility to be confirmed. |
+| **Snap Ads Gallery** | (potential) ad volume | **Terms not yet located — do not use until checked.** | Flagged open in the design doc §9. |
+| **Google Trends** | Category/interest demand over time (relative) | Free; relative, not absolute | Context/prior only. |
+| **SSB (Statistics Norway)** | Prices, retail/consumption, population, regions | Open data, attribution | Source for some industry price-band anchors. |
+| **Norges Bank** | FX rates | Open data | Already used by the planner's currency layer. |
 
-## Quality grades
+## Pooled data (designed, off by default)
 
-| Grade | Meaning |
-|-------|---------|
-| **A** | Primary, measured data for the relevant Norwegian market and segment. |
-| **B** | Credible published benchmark, close market/segment (e.g. Nordic proxy). |
-| **C** | Wider proxy (EU/UK/global) or older figure, used with adjustment. |
-| **D** | Rough, explicitly labelled assumption with a wide editable range. |
+Pooled "similar accounts" figures are **not** pulled from any platform API. They are
+aggregates each account computes locally from its **own exports** and contributes
+opt-in, above a minimum-5-accounts floor, carrying no names, IDs, creatives, copy or
+personal data. The full model, anonymity rules and the single remaining legal step
+are in [docs/design/pooled-evidence.md](docs/design/pooled-evidence.md); the
+contributor terms are in [docs/contributing-data.md](docs/contributing-data.md).
+Pooling stays off until that legal review is complete.
 
-## Market-similarity weighting
+## Specific anchors cited in this repo
 
-Price-dependent figures are normalised for purchasing power and currency before
-use, and proxies are weighted by similarity to Norway for the given industry and
-price band (Norway → Sweden/Denmark/Finland → wider EU/UK → global). The weights
-and the reasoning behind them live in `config/planner/weights.yaml`, and every
-estimate shows the user which markets it drew on.
+- **Hotel room rate (hotel_travel band):** SSB hotel price-per-room (StatBank table
+  12897); The Local (2023) citing SSB — Oslo ~1,232 / Bergen ~1,076 NOK per night
+  ex. VAT.
+- **New-car average (automotive band):** OFV (Opplysningsrådet for veitrafikken) via
+  tek.no (2024) — average new passenger car ~560,000 NOK.
+- **Cinema ticket (culture hint only):** FILM&KINO (2021, via Statista) — ~120 NOK;
+  one narrow point, used only as a hint in an expert_estimate slot.
+- Benchmark-library figures (CPM/CTR/CVR/ROAS, perf multipliers) each carry their own
+  `source_url` in `data/benchmarks/benchmarks.yaml`.
 
-## Refreshing and staleness
-
-`scripts/refresh_benchmarks.py` helps refresh the library from public sources and
-flags any entry older than **18 months** as stale. It never scrapes paywalled
-content.
+**This is not legal advice.** Platform terms change; verify against the platforms'
+current terms before relying on any source above.
