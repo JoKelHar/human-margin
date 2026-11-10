@@ -13,6 +13,16 @@ outputs and interfaces.
 
 from __future__ import annotations
 
+from .benchmarks import (
+    BenchmarkError,
+    Estimate,
+    estimate,
+    is_stale,
+    load_benchmarks,
+    load_weights,
+    market_weight,
+    stale_entries,
+)
 from .currency import FxRates, Money, SUPPORTED, load_fx_rates
 from .schema import (
     AgencyQuote,
@@ -31,4 +41,6 @@ __all__ = [
     "Money", "FxRates", "load_fx_rates", "SUPPORTED",
     "Scenario", "ScenarioError", "Costs", "HumanCosts", "AiCosts", "AgencyQuote",
     "load_scenario", "scenario_from_dict", "load_industries", "price_band",
+    "load_benchmarks", "load_weights", "estimate", "Estimate", "market_weight",
+    "is_stale", "stale_entries", "BenchmarkError",
 ]

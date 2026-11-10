@@ -4,15 +4,19 @@
 # Editable list of B2C industries (bransjer) and the price thresholds that put a
 # scenario's price into a low / mid / high band.
 #
-# PROVISIONAL: the band thresholds below are placeholders so Phase 1 is testable.
-# Phase 2 replaces them with researched, sourced figures and the user approves
-# them before they ship. Thresholds are in NOK (the planner's internal currency);
-# a scenario's price is converted to NOK before banding.
+# ASSUMPTION: the band thresholds below are unresearched placeholders, not sourced
+# figures. No credible per-industry Norwegian price-band source was found, so they
+# remain editable assumptions (listed by scripts/assumptions.py) until replaced by
+# real data, including pooled account data. Thresholds are in NOK (the planner's
+# internal currency); a scenario's price is converted to NOK before banding.
 #
 #   band(price_nok) = low  if price_nok <= low_max
 #                     high if price_nok >= high_min
 #                     mid  otherwise
 # =============================================================================
+
+# True while the thresholds below are assumptions rather than sourced figures.
+price_bands_are_assumptions: true
 
 industries:
   - { key: events_concerts,     label: "Events and concerts",        low_max: 250,    high_min: 800 }
