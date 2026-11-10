@@ -30,7 +30,7 @@ in development; see the status table below.
 
 > **Live demo dashboard** → https://jokelhar.github.io/human-margin/
 > A prototype console rendering the human-vs-AI decision matrix
-> with exhaustion and opportunity alerts, on **synthetic** Norwegian data in
+> with exhaustion and forward-pattern alerts, on **synthetic** Norwegian data in
 > which the patterns are deliberately planted.
 
 <!-- [[PLACEHOLDER: add a GIF or screenshot of the planner wizard here once Phase 7 lands]] -->
@@ -145,7 +145,7 @@ Built with [Claude Code](https://claude.com/claude-code).
 | **3** | Tagging: provenance (human **and AI** sub-types), Norwegian-ness (trust hierarchy) + untagged-spend reporting | ✅ complete |
 | 4 | Exhaustion module, mixed-effects stats, breakdowns | ⏸ on hold |
 | 5 | Norwegian sentiment / AI-callout detection | ◻ |
-| 6–10 | Decision matrix, opportunity, halo, recommendations, API connectors | ◻ |
+| 6–10 | Decision matrix, patterns, halo, recommendations, API connectors | ◻ |
 
 Also in progress, as a parallel module: the **Creative Approach Planner**
 (AI vs hybrid vs human), a standalone, offline planner backed by a cited
@@ -171,10 +171,11 @@ a grade (A–D) and a wider range when the evidence is distant or old. See
 [`docs/principles.md`](docs/principles.md) for the principle and the answer
 shape, and `scripts/assumptions.py` for the full assumptions register.
 
-A preview of forward **opportunities** is also in: the dashboard's calendar
-opportunities are config-driven and each names an advertiser category, a moment,
-a time window and a recommended approach (naming the AI sub-type where relevant).
-This is a descriptive preview, not the full Phase-7 engine.
+A preview of forward **patterns** is also in: the dashboard's calendar patterns
+are config-driven and each names an advertiser category, a moment and a time
+window, then what has happened in that window and the evidence behind it (naming
+the AI sub-type where relevant). Descriptive, never advice. This is a preview, not
+the full Phase-7 engine.
 
 Every remaining module exists as a documented stub (`src/mediekjop/*/__init__.py`).
 
@@ -212,7 +213,7 @@ ingest_into_db(con, sources, account, fx_lookup=const_fx({"EUR": 11.5}), tag=Tru
 
 ```
 ingest (DataSource: CSV now, API later) → unified placement-grain schema → DuckDB
-   → tagging → exhaustion / sentiment / opportunity / measurement → recommend → report + dashboard
+   → tagging → exhaustion / sentiment / patterns / measurement → recommend → report + dashboard
 ```
 
 - **One schema, defined once** in [`schema/ddl.py`](src/mediekjop/schema/ddl.py) as

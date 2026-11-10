@@ -40,12 +40,29 @@ def main() -> None:
 
     print("\n## Industry price bands  (config/planner/industries.yaml)")
     cfg = load_industries()
-    if cfg.get("price_bands_are_assumptions"):
-        for row in cfg["industries"]:
+    for row in cfg["industries"]:
+        if row.get("bands_tier") == "assumption":
             _line("config/planner/industries.yaml",
-                  f"price band / {row['key']}",
+                  f"price band / {row['key']} (assumption)",
                   f"low_max {row['low_max']} / high_min {row['high_min']} NOK",
                   "real per-industry Norwegian price distributions (sourced or pooled)")
+
+    print("\n## Expert-estimate slots to fill  (named, dated; never invented)")
+    slots = [r for r in cfg["industries"]
+             if r.get("bands_tier") == "expert_estimate" and not r.get("bands_filled")]
+    for row in slots:
+        _line("config/planner/industries.yaml",
+              f"price band / {row['key']} (expert_estimate, unfilled)",
+              f"low_max {row['low_max']} / high_min {row['high_min']} NOK  [bands_expert: '']",
+              "set bands_expert to '<name>, <YYYY-MM>', adjust thresholds, bands_filled: true")
+    for e in rows:
+        if provenance(e) == "expert_estimate":
+            _line("data/benchmarks/benchmarks.yaml",
+                  f"{e['metric']}/{e['industry']}/{e['channel']} (expert_estimate)",
+                  f"{e['value']} {e['unit']} - {e.get('source_name', '')}",
+                  "confirm or adjust; replace with a public figure or pooled data when available")
+    if not slots:
+        print("  (none unfilled in industries.yaml)")
 
     print("\n## Market-similarity config  (config/planner/weights.yaml)")
     w = load_weights()
