@@ -9,12 +9,15 @@ import datetime as dt
 import pytest
 
 from mediekjop.planner.benchmarks import (
+    PROVENANCE_LABEL,
     BenchmarkError,
     estimate,
     is_stale,
     load_benchmarks,
     load_weights,
     market_weight,
+    provenance,
+    tag,
 )
 
 AS_OF = dt.date(2026, 11, 10)
@@ -100,6 +103,24 @@ def test_staleness_flagging():
 
 def test_no_match_returns_none():
     assert estimate("cpm", channel="pinterest") is None
+
+
+def test_every_entry_has_a_provenance_tier():
+    for e in load_benchmarks():
+        assert provenance(e) in PROVENANCE_LABEL
+
+
+def test_every_estimate_carries_a_provenance_tag():
+    # nothing reaches output without a provenance tag
+    for args in [("cvr", "beauty_skincare", "meta"), ("cpm", "any", "snapchat"),
+                 ("agency_fee", "any", "any")]:
+        est = estimate(*args)
+        assert est is not None
+        assert est.provenance in PROVENANCE_LABEL
+        assert tag(est)  # non-empty plain-language tag
+    # a sourced estimate tags as a public benchmark; an assumption-only one as Assumption
+    assert estimate("cpm", industry="beauty_skincare", channel="meta").provenance == "public_benchmark"
+    assert estimate("cpm", channel="snapchat").provenance == "assumption"
 
 
 def test_uncited_non_assumption_is_rejected(tmp_path):

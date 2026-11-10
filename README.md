@@ -2,10 +2,13 @@
 
 **AI vs human led creative, measured**
 
-A recommend-only analysis tool for Norwegian B2C media buyers, built for
-marketers and business owners choosing between AI-led, hybrid and human-led
-creative. Working today: data ingestion, creative tagging and a prototype
-dashboard. In development: the AI-exhaustion engine and the creative-approach planner.
+**Human Margin is a sanity checker for Norwegian B2C media buyers** weighing
+AI-led, hybrid and human-led creative. It gives one advertiser more information
+than they could gather alone, then leaves the decision to them: every output
+compares and describes, [none instructs](docs/principles.md). It never changes
+budgets, bids or ad status. Working today: data ingestion, creative tagging and a
+prototype dashboard. In development: the AI-exhaustion engine and the
+creative-approach planner.
 
 **Live demo** → https://jokelhar.github.io/human-margin/ (runs on synthetic data)
 
@@ -86,8 +89,8 @@ and so on, never blurred together) and shows you, for example:
   (AA-PRD) behave close to human-led in feed, while synthetic UGC (AG-UGC) tires
   fastest and draws the most "this is AI" comments.
 - **Some of your spend is on creative nobody has labelled.** The agent reports
-  that as a share of your budget and tells you to go tag it, rather than guessing
-  what it was.
+  that as a share of your budget, so you can see what's unlabelled, rather than
+  guessing what it was.
 
 These figures are not real findings: the ~4-day versus ~10-day half-life comes
 from synthetic data in which the generator deliberately plants that pattern, and
@@ -158,7 +161,15 @@ assumption; none are invented.
 ```bash
 uv run python scripts/plan.py --all          # validate the example scenarios
 uv run python scripts/refresh_benchmarks.py  # flag benchmark entries over 18 months old
+uv run python scripts/assumptions.py         # list every assumption and what real data replaces it
 ```
+
+**Evidence tags.** Every figure carries a provenance tier so it is clear what
+rests on real data and what is still a placeholder: **Your data** · **pooled
+similar accounts** · **public benchmark (market · year)** · **Assumption**, with
+a grade (A–D) and a wider range when the evidence is distant or old. See
+[`docs/principles.md`](docs/principles.md) for the principle and the answer
+shape, and `scripts/assumptions.py` for the full assumptions register.
 
 A preview of forward **opportunities** is also in: the dashboard's calendar
 opportunities are config-driven and each names an advertiser category, a moment,

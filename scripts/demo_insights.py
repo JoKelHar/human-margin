@@ -158,7 +158,7 @@ def main() -> None:
                 "severity": "high" if widening > 0.0016 else "medium",
                 "widening_permille": round(1000 * widening, 2),
                 "detail": "Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in.",
-                "action": "Shift new AI iterations here to human-led UGC/creator; cap AI frequency.",
+                "action": "Human-led UGC and creator content held up better than AI in this segment as frequency rose.",
             })
     alerts.sort(key=lambda a: -a["widening_permille"])
 
@@ -182,8 +182,9 @@ def main() -> None:
         "post_id": r.post_id, "provenance": _clean(r.provenance), "sub_type": _clean(r.human_sub_type),
         "quality_vs_median": round((r.quality / base_q - 1) * 100) if base_q else 0,
         "boosted": bool(r.is_boosted),
-        "action": "Amplify as a partnership/Spark ad" if r.provenance == "human_led" and not r.is_boosted
-                  else "Already boosted, track converted lift",
+        "action": "A human-led organic post over-indexing on saves and shares, not yet boosted."
+                  if r.provenance == "human_led" and not r.is_boosted
+                  else "A post over-indexing on saves and shares, already boosted.",
     } for r in organic.itertuples()]
 
     # ---- opportunity: saturation (directional, labelled) -------------------
@@ -193,8 +194,8 @@ def main() -> None:
         "trend": "rising", "level": "high",
         "classifier_accuracy_pct": 78, "classifier_accuracy_margin": 6,
         "note": ("Share of category feed that looks AI-generated appears to be RISING. "
-                 "Directional only, never a competitor league table. Use to support, "
-                 "not justify, a human-led push backed by your own performance data."),
+                 "Directional only, never a competitor league table. A signal to read "
+                 "alongside your own performance data, not a verdict."),
     }
 
     # ---- compliance flags --------------------------------------------------
