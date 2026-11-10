@@ -1,0 +1,175 @@
+# =============================================================================
+# Creative Approach Planner - content formats, per-format priors and costs
+#
+# Content format is a dimension of its own, alongside the creative APPROACH
+# (human_led / ai_assisted / ai_generated). The same scenario run as a static
+# image and as a UGC talking-head gives different numbers, because format moves
+# both response (CTR/CVR) and production cost.
+#
+# Everything here is tiered for provenance, exactly like industries.yaml:
+#   tier: public_benchmark  a cited public figure (source given)
+#         expert_estimate   a named slot the owner fills from experience
+#                           (filled: false until set; provisional meanwhile)
+#         assumption        an unresearched placeholder, wide and editable
+#
+# IMPORTANT (from the brief): per-format performance priors come from public
+# marketing studies that CONFLICT and rarely isolate format cleanly. They are
+# graded honestly (mostly C source, low relevance to Norway) and carried with a
+# wide range. They are a starting shape, not a measured fact; pooled Norwegian
+# account data replaces them. See DATA_SOURCES.md and scripts/assumptions.py.
+#
+# Priors are multipliers vs the STATIC-IMAGE baseline (= 1.0). Costs are upfront
+# NOK for one creative set (before amortising over reuse_campaigns); a scenario's
+# own `costs` always override these defaults when the advertiser supplies them.
+# =============================================================================
+
+# The editable format list. Add or remove freely; the engine iterates whatever
+# is here. `approaches` lists which creative approaches can plausibly produce the
+# format (the engine only scores those cells).
+baseline_format: static_image
+
+formats:
+  - key: static_image
+    label: "Static image"
+    approaches: [human_led, ai_assisted, ai_generated]
+    ctr_mult: { low: 1.00, point: 1.00, high: 1.00 }   # the baseline, by definition
+    cvr_mult: { low: 1.00, point: 1.00, high: 1.00 }
+    priors_tier: public_benchmark
+    priors_source: >-
+      Baseline. Meta static-image CTR anchored at ~1.1-1.18% across two analyses
+      (67k-ad Meta analysis ~1.1%; AdAmigo 2026 ~1.18%). All other formats are
+      expressed relative to this.
+    priors_note: "Baseline = 1.0 by construction; absolute CTR comes from the cpm/ctr benchmarks."
+
+  - key: short_video
+    label: "Short video (Reels / Shorts / in-feed)"
+    approaches: [human_led, ai_assisted, ai_generated]
+    ctr_mult: { low: 1.10, point: 1.40, high: 1.70 }
+    cvr_mult: { low: 0.80, point: 0.95, high: 1.10 }
+    priors_tier: public_benchmark
+    priors_source: >-
+      Video CTR ~1.6-1.9% vs static ~1.1-1.18% (67k-ad Meta analysis; AdAmigo
+      2026) -> ctr_mult ~1.4. "Video 73% more clicks but static acquires ~28%
+      cheaper" (askneedle) -> cvr_mult held slightly below 1.0. C source, low
+      relevance (US/global, mixed method); wide range.
+
+  - key: ugc_talking_head
+    label: "UGC talking-head (creator to camera)"
+    approaches: [human_led, ai_generated]   # human = real creator; ai_generated = synthetic avatar
+    ctr_mult: { low: 1.20, point: 1.60, high: 2.20 }
+    cvr_mult: { low: 0.90, point: 1.10, high: 1.30 }
+    priors_tier: public_benchmark
+    priors_source: >-
+      UGC-style vs polished brand: +27% CTR / +19% CVR (webtonic) and 2.64% vs
+      1.78% CTR ~ +48% (foundrycro). Relative to static baseline that is ~1.5-2x.
+      The often-cited "4x UGC CTR" could NOT be traced to a named study (whatmore)
+      and is excluded. C source, low relevance; wide range.
+
+  - key: studio_shoot
+    label: "Studio / polished production"
+    approaches: [human_led]
+    ctr_mult: { low: 0.90, point: 1.20, high: 1.50 }
+    cvr_mult: { low: 0.90, point: 1.00, high: 1.15 }
+    priors_tier: assumption
+    priors_note: >-
+      Polished studio holds up better in Feed/in-stream than lo-fi, but no clean
+      public isolation vs static exists; modest edge, wide range. Replace with
+      pooled data.
+
+  - key: ai_mockup
+    label: "AI product mock-up / scene"
+    approaches: [ai_assisted, ai_generated]
+    ctr_mult: { low: 0.80, point: 1.00, high: 1.20 }
+    cvr_mult: { low: 0.80, point: 1.00, high: 1.15 }
+    priors_tier: assumption
+    priors_note: >-
+      Synthetic product imagery assumed near static parity on response; the
+      human-vs-AI difference is carried by the approach-level response prior and
+      the separate memory_brand line, not here. Placeholder, wide range.
+
+# -----------------------------------------------------------------------------
+# Production cost matrix: upfront NOK for one creative set, per (format x
+# approach). {low, point, high} feeds the Monte Carlo. tier/source/filled as
+# above. A scenario's own costs.human_led / costs.ai_driven override these.
+#
+# Cited anchors (see DATA_SOURCES.md):
+#  - Norwegian film-industry collective minimum daily rates, valid 2025-06-01,
+#    7.5h day (focal.ch rate table): stills ~2,301-3,395 NOK, camera operator
+#    ~2,726 NOK+ . These are FLOORS for crew, not commercial market day rates.
+#  - Oslo studio package pricing (firmafotografen.no, nordfotograf.com): product
+#    / business stills from ~3,490-4,900 NOK ex VAT.
+#  - UGC marketplace asking prices (Influee): ~$121 / 30s in Norway (~1,300 NOK);
+#    Nordic +15-25% (InfluenceFlow); usage rights +30-50% of base.
+#  - AI tool subscriptions (vendor pricing, monthly): Midjourney $10/30/60/120;
+#    Runway $12-76; ElevenLabs $6/22/99. Modelled as a monthly tool line.
+#
+# Commercial human day rates well above the union floors are NOT publicly
+# published for Norway -> left as expert_estimate slots (provisional until the
+# owner fills them). Values are never dressed up as sourced.
+# -----------------------------------------------------------------------------
+costs:
+  static_image:
+    human_led:
+      nok: { low: 4900, point: 8000, high: 15000 }
+      tier: expert_estimate
+      filled: false
+      source: ""   # set to "<name>, <YYYY-MM>" when confirmed
+      note: >-
+        Studio product stills: floor ~4,900 NOK ex VAT (Oslo studio package);
+        commercial half/full day with usage above that. Owner to confirm.
+    ai_assisted:
+      nok: { low: 800, point: 1600, high: 3500 }
+      tier: public_benchmark
+      source: "AI image tool (Midjourney ~$10-30/mo) + ~1-3h human selection/retouch."
+    ai_generated:
+      nok: { low: 300, point: 800, high: 1800 }
+      tier: public_benchmark
+      source: "AI image tool subscription + minimal human time."
+  short_video:
+    human_led:
+      nok: { low: 8000, point: 18000, high: 40000 }
+      tier: expert_estimate
+      filled: false
+      source: ""
+      note: >-
+        Commercial shoot day + edit + usage. Union camera-operator floor ~2,726
+        NOK/day is well below commercial market; owner to set a realistic band.
+    ai_assisted:
+      nok: { low: 2000, point: 5000, high: 12000 }
+      tier: expert_estimate
+      filled: false
+      source: ""
+      note: "AI b-roll / stock + human editor. Owner to confirm editor rates."
+    ai_generated:
+      nok: { low: 800, point: 2000, high: 5000 }
+      tier: public_benchmark
+      source: "AI video tool (Runway ~$12-76/mo, incl. likely credit overage) + minimal edit."
+  ugc_talking_head:
+    human_led:
+      nok: { low: 1000, point: 1800, high: 4000 }
+      tier: public_benchmark
+      source: >-
+        UGC creator per video: Influee ~$121/30s (~1,300 NOK) + Nordic premium
+        15-25% + usage rights 30-50%. Marketplace asking prices; C, low relevance.
+    ai_generated:
+      nok: { low: 500, point: 1200, high: 3000 }
+      tier: public_benchmark
+      source: "AI avatar / synthetic-UGC tool subscription + script + light edit."
+  studio_shoot:
+    human_led:
+      nok: { low: 15000, point: 28000, high: 60000 }
+      tier: expert_estimate
+      filled: false
+      source: ""
+      note: >-
+        Full studio production (crew, talent, location, usage). No public Norway
+        commercial figure; owner to set from agency-quote experience.
+  ai_mockup:
+    ai_assisted:
+      nok: { low: 800, point: 1600, high: 3500 }
+      tier: public_benchmark
+      source: "AI image tool + human art direction."
+    ai_generated:
+      nok: { low: 300, point: 800, high: 1800 }
+      tier: public_benchmark
+      source: "AI image tool subscription + minimal human time."

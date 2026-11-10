@@ -12,6 +12,7 @@ measured data; each line says what would replace it.
 from __future__ import annotations
 
 from mediekjop.planner.benchmarks import load_benchmarks, load_weights, provenance
+from mediekjop.planner.formats import load_costs, load_formats
 from mediekjop.planner.schema import load_industries
 
 
@@ -63,6 +64,25 @@ def main() -> None:
                   "confirm or adjust; replace with a public figure or pooled data when available")
     if not slots:
         print("  (none unfilled in industries.yaml)")
+
+    print("\n## Content-format priors  (config/planner/formats.yaml)")
+    for key, f in load_formats().items():
+        if f.priors_tier == "assumption":
+            _line("config/planner/formats.yaml",
+                  f"format priors / {key} (assumption)",
+                  f"ctr_mult {f.ctr_mult.point} / cvr_mult {f.cvr_mult.point}",
+                  "a sourced or pooled per-format response figure for Norway")
+
+    print("\n## Production-cost expert slots to fill  (config/planner/formats.yaml)")
+    slots = [c for c in load_costs().values()
+             if c.tier == "expert_estimate" and not c.filled]
+    for c in slots:
+        _line("config/planner/formats.yaml",
+              f"production cost / {c.fmt} x {c.approach} (expert_estimate, unfilled)",
+              f"{c.nok.low:.0f}-{c.nok.point:.0f}-{c.nok.high:.0f} NOK  [source: '']",
+              "set a realistic commercial band from experience and add source: '<name>, <YYYY-MM>'")
+    if not slots:
+        print("  (none unfilled in formats.yaml)")
 
     print("\n## Market-similarity config  (config/planner/weights.yaml)")
     w = load_weights()

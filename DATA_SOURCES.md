@@ -49,6 +49,49 @@ performance data**.
 | **SSB (Statistics Norway)** | Prices, retail/consumption, population, regions | Open data, attribution | Source for some industry price-band anchors. |
 | **Norges Bank** | FX rates | Open data | Already used by the planner's currency layer. |
 
+## Public ad-volume snapshots (day-one context layer)
+
+The planner can show a dated, versioned **snapshot** of public ad volume for a
+Norwegian industry (provenance tier `public_snapshot`), taken only through the
+**Meta Ad Library API** (`ads_archive`, `ad_type=ALL`, `country=NO`) within its
+terms — no scraping. It carries **no performance data**: sample size, content-type
+shares (tagged manually/semi-automatically), and a run-length longevity proxy.
+
+Access (verified Nov 2026; confirm against Meta's current docs): the Ad Library
+API needs a token from a **personal** account that has completed **identity
+verification** (government ID at facebook.com/ID); until approved, every query
+returns "Identity verification required". In the EEA (Norway qualifies) commercial
+ads are returned with `ad_type=ALL`, with coverage widely reported as incomplete,
+so the sample size is always shown. Shipped snapshots are empty placeholders
+(`status: awaiting_fetch`, `n: 0`) until fetched with `scripts/fetch_ad_library.py`;
+nothing is invented. If a token or the terms block this, the project stops and
+says so rather than scraping.
+
+## Production costs and content-format priors (Creative Approach Planner)
+
+`config/planner/formats.yaml` holds per-(format × approach) production costs and
+per-format response priors, each tiered. No single public source gives Norwegian
+commercial creative day rates, so solid anchors are cited and the owner's domains
+are left as `expert_estimate` slots (`scripts/assumptions.py` lists them):
+
+- **Production-cost anchors (cited):** Norwegian film-industry collective **minimum
+  daily rates**, valid 2025-06-01, 7.5h day (focal.ch rate table) — stills
+  ~2,301–3,395 NOK, camera operator ~2,726 NOK+ (crew **floors**, not commercial
+  market rates); Oslo studio package pricing (firmafotografen.no, nordfotograf.com)
+  — product/business stills from ~3,490–4,900 NOK ex VAT; UGC marketplace asking
+  prices (Influee) — ~$121/30s in Norway, Nordic premium +15–25% (InfluenceFlow),
+  usage rights +30–50%; AI-tool subscriptions (vendor pricing, monthly): Midjourney
+  $10/30/60/120, Runway ~$12–76, ElevenLabs $6/22/99.
+- **Expert-estimate slots (owner to fill):** commercial human day-rate cells
+  (static/short-video/studio human-led, short-video AI-assisted). Provisional
+  numbers until confirmed; never presented as sourced.
+- **Content-format priors (C source, low relevance):** static vs video CTR
+  ~1.1–1.18% vs ~1.6–1.9% (67k-ad Meta analysis; AdAmigo 2026); UGC vs polished
+  +27% CTR / +19% CVR (webtonic), 2.64% vs 1.78% (foundrycro). The often-cited
+  "4× UGC CTR" claim could not be traced to a named study and is excluded. These
+  conflict across sources and are carried as wide ranges, as multipliers vs a
+  static baseline; pooled Norwegian data replaces them.
+
 ## Pooled data (designed, off by default)
 
 Pooled "similar accounts" figures are **not** pulled from any platform API. They are

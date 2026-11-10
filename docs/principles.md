@@ -62,6 +62,7 @@ hover or expand:
 | `public_benchmark` | **C source · low relevance (US, 2024)** | A cited public figure, with source quality, relevance, market and date. |
 | `expert_estimate` | **C source · expert estimate · med relevance (NO, 2026)** | A named, dated estimate from experience where public data is thin. Ranked below public data, above a bare assumption. |
 | `assumption` | **Assumption** | A placeholder with no source; needs real data. |
+| `public_snapshot` | **120 sampled ads (Nov 2026)** | A dated, aggregate count of public ad volume from an official transparency product (Meta Ad Library), shown as context with its sample size; carries no performance data. |
 
 Own data takes over as it accumulates; public benchmarks, expert estimates and
 assumptions are the fallback, with relevance down-weighted the further they are

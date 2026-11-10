@@ -107,6 +107,7 @@ class Scenario:
     budget: float
     costs: Costs
     geography: str = ""
+    content_format: str | None = None         # optional: a key from formats.yaml
     audience_size: int | None = None
     lead_time_weeks: float = 0.0
     capacity: int | None = None
@@ -197,7 +198,8 @@ def scenario_from_dict(d: dict, fx: FxRates | None = None,
         brand_positioning=d["brand_positioning"], currency=d["currency"],
         price=float(d["price"]), budget=float(d["budget"]),
         costs=_costs_from_dict(d.get("costs") or {}),
-        geography=d.get("geography", ""), audience_size=d.get("audience_size"),
+        geography=d.get("geography", ""), content_format=d.get("content_format"),
+        audience_size=d.get("audience_size"),
         lead_time_weeks=float(d.get("lead_time_weeks", 0.0)),
         capacity=d.get("capacity"),
         margin=d.get("margin"), value_per_conversion=d.get("value_per_conversion"),
