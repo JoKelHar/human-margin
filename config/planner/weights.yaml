@@ -1,0 +1,60 @@
+# =============================================================================
+# Market-similarity weights for the Creative Approach Planner
+#
+# How much to trust a benchmark from market X as a proxy for Norway. The planner
+# weights benchmarks by these when it has no figure for Norway itself. The
+# reasoning for each weight is written next to it, as the brief requires.
+#
+# Priority: Norway -> Sweden/Denmark/Finland -> wider EU/UK -> global.
+#
+# Price-dependent metrics (CPM, CPA, agency fees) are normalised for purchasing
+# power and currency BEFORE weighting; rate metrics (CTR, CVR, ROAS) are not,
+# since a rate is already unit-free.
+# =============================================================================
+
+geography_weight:
+  "NO":
+    weight: 1.00
+    note: "Norway itself."
+  SE:
+    weight: 0.78
+    note: "Sweden: closest proxy. Similar purchasing power, platform mix, consumer behaviour and seasonality."
+  DK:
+    weight: 0.75
+    note: "Denmark: close Nordic proxy."
+  FI:
+    weight: 0.70
+    note: "Finland: Nordic proxy; slightly different media habits."
+  nordic:
+    weight: 0.75
+    note: "Generic Nordic (SE/DK/FI) when the source does not name a country."
+  EU:
+    weight: 0.55
+    note: "Wider EU: comparable regulation and platforms, lower income and price similarity."
+  UK:
+    weight: 0.55
+    note: "UK: mature market, English-language creative norms differ from Norway."
+  US:
+    weight: 0.40
+    note: "US: large samples, but different platform economics, CPMs and consumer behaviour; normalise for purchasing power."
+  global:
+    weight: 0.35
+    note: "Global/unspecified: use only as a last resort, with a wide range."
+
+# Metrics that are absolute local costs and must be purchasing-power normalised
+# before the weight is applied. Rate metrics (CTR, CVR, ROAS) and percentage fees
+# are unit-free and are not normalised.
+price_dependent_metrics: [cpm, cpa]
+
+# Rough purchasing-power / price-level index vs Norway (= 1.00), for normalising
+# the price-dependent metrics above. Provisional; refine with a sourced PPP table
+# in a later pass.
+price_level_vs_norway:
+  "NO": 1.00
+  SE: 0.82
+  DK: 0.95
+  FI: 0.88
+  EU: 0.75
+  UK: 0.85
+  US: 0.90
+  global: 0.70

@@ -147,12 +147,17 @@ Built with [Claude Code](https://claude.com/claude-code).
 Also in progress, as a parallel module: the **Creative Approach Planner**
 (AI vs hybrid vs human), a standalone, offline planner backed by a cited
 benchmark library, which sharpens its estimates with the exhaustion framework
-once account data exists. **Phase 1 is in**: the input schema, scenario YAML
+once account data exists. **Phases 1–2 are in**: the input schema, scenario YAML
 format and currency handling (NOK-internal, with a dated Norges Bank FX file and
-a fallback). Try it on the example scenarios:
+a fallback); and the versioned **benchmark library** (`data/benchmarks/`) with
+market-similarity weighting (Norway → Nordics → wider EU/UK → global) and the
+two-effect human-vs-AI performance priors (response at parity, a modest human
+memory/brand edge, cited). Every figure cites a source or is a labelled
+assumption; none are invented.
 
 ```bash
-uv run python scripts/plan.py --all   # validates scenarios/examples/*.yaml
+uv run python scripts/plan.py --all          # validate the example scenarios
+uv run python scripts/refresh_benchmarks.py  # flag benchmark entries over 18 months old
 ```
 
 A preview of forward **opportunities** is also in: the dashboard's calendar

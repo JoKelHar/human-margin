@@ -1,0 +1,248 @@
+# SPDX-License-Identifier: CC-BY-4.0
+# Copyright 2026 João Harrison
+# =============================================================================
+# Creative Approach Planner - benchmark library (versioned)
+#
+# Licence: CC BY 4.0 (see LICENSE-DATA). This licence covers the COMPILATION and
+# structure; each figure's original source keeps its own rights. See
+# DATA_SOURCES.md for the citation policy.
+#
+# Every entry is an INDIVIDUAL cited figure, never a reproduced table. Fields:
+#   metric       cpm | ctr | cvr | cpa | roas | agency_fee | perf_multiplier
+#   industry     an industries.yaml key, or 'any'
+#   price_band   low | mid | high | any
+#   channel      meta | snapchat | tiktok | youtube | any
+#   geography    NO | SE | DK | FI | nordic | EU | UK | US | global
+#   value        { low, point, high }  (a range, never a false point)
+#   unit         usd | nok | percent | ratio | multiplier
+#   source_name  / source_url / published (YYYY-MM-DD)
+#   quality      A primary/measured NO  ->  D rough labelled assumption
+#   notes        caveats, especially methodology and market mismatch
+#
+# Most public ad benchmarks are US/global; they are graded C (wider proxy) and
+# the planner down-weights them for Norway via config/planner/weights.yaml. Where
+# no credible public figure exists, the entry is a labelled assumption (quality D,
+# no source_url) with a wide range the user can edit - never an invented source.
+# NORWAY-SPECIFIC NOTE: credible public Norway-only benchmarks are scarce; these
+# are proxies pending access to Nordic account or vendor data.
+# =============================================================================
+
+benchmarks:
+
+  # --- human-vs-AI performance priors (the two-effect model) ----------------
+  # Expressed as human / AI (1.0 = parity, >1 = human better). These are the
+  # most prominent editable assumptions in the planner.
+  - metric: perf_multiplier
+    effect: response          # clicks / CTR / CVR response
+    industry: any
+    price_band: any
+    channel: any
+    geography: global
+    value: { low: 0.85, point: 1.00, high: 1.15 }
+    unit: multiplier
+    source_name: "AI Ads That Work (Columbia, Harvard, TU Munich, Carnegie Mellon; Taboola data)"
+    source_url: "https://www.taboola.com/marketing-hub/ai-ads-that-work"
+    published: 2026-01-28
+    quality: B
+    notes: >-
+      Response effect centred at parity. Matched sibling-ad design over 500M+
+      impressions: raw CTR AI 0.76% vs human 0.65% (AI slightly ahead), comparable
+      under tight controls; undetectable AI did best. Limits: native-ads platform
+      (not social), commissioned by Taboola. Default must not lean human.
+  - metric: perf_multiplier
+    effect: memory_brand      # recall, brand perception, longer-term value
+    industry: any
+    price_band: any
+    channel: any
+    geography: global
+    value: { low: 1.00, point: 1.18, high: 1.40 }
+    unit: multiplier
+    source_name: "NIQ: consumer attitudes toward AI-generated ads (EEG study)"
+    source_url: "https://nielseniq.com/global/en/news-center/2024/niq-research-uncovers-hidden-consumer-attitudes-toward-ai-generated-ads/"
+    published: 2024-12-01
+    quality: C
+    notes: >-
+      Modest human advantage on memory/brand. AI ads elicited weaker memory
+      activation even when high quality, and were rated more annoying/boring/
+      confusing (possible negative halo). 2,000+ participants, ~150 EEG; lab-based,
+      company-reported. Moderated by perceived artificiality.
+
+  # --- CPM (USD; price-dependent, normalised before weighting) ---------------
+  - metric: cpm
+    industry: any
+    price_band: any
+    channel: meta
+    geography: US
+    value: { low: 6, point: 11, high: 15 }
+    unit: usd
+    source_name: "WordStream / Triple Whale / Lebesgue Meta CPM benchmarks"
+    source_url: "https://www.wordstream.com/blog/facebook-ads-benchmarks-2024"
+    published: 2024-06-01
+    quality: C
+    notes: "Prospecting CPMs ~$6, retargeting ~$13; Triple Whale overall $13.30 -> $15.06 YoY. US proxy."
+  - metric: cpm
+    industry: beauty_skincare
+    price_band: any
+    channel: meta
+    geography: US
+    value: { low: 7, point: 8, high: 13 }
+    unit: usd
+    source_name: "Lebesgue Facebook benchmarks by industry"
+    source_url: "https://lebesgue.io/facebook-ads/facebook-benchmarks-by-industry-ctr-cpm-cr-and-cac"
+    published: 2024-04-01
+    quality: C
+    notes: "Health & Beauty prospecting ~$8 CPM, higher on retargeting. US proxy; page year unclear."
+  - metric: cpm
+    industry: any
+    price_band: any
+    channel: tiktok
+    geography: US
+    value: { low: 3.2, point: 6, high: 9.2 }
+    unit: usd
+    source_name: "Lebesgue / WebFX / Varos TikTok CPM"
+    source_url: "https://lebesgue.io/tiktok-ads/tiktok-ads-benchmarks-for-ctr-cr-and-cpm"
+    published: 2024-04-01
+    quality: C
+    notes: "Lebesgue ~$3.21, WebFX ~$9.16, Varos apparel $9.2 (Jun 2024). Wide because objective mixes differ."
+
+  # --- CTR (percent; rate metric, not currency-normalised) -------------------
+  - metric: ctr
+    industry: beauty_skincare
+    price_band: any
+    channel: meta
+    geography: US
+    value: { low: 0.9, point: 1.16, high: 1.4 }
+    unit: percent
+    source_name: "WordStream Facebook ads benchmarks by industry"
+    source_url: "https://www.wordstream.com/blog/facebook-ads-benchmarks"
+    published: 2024-06-01
+    quality: C
+    notes: "Beauty ~1.16% CTR. US proxy; verify report date."
+  - metric: ctr
+    industry: fashion_accessories
+    price_band: any
+    channel: meta
+    geography: US
+    value: { low: 0.9, point: 1.24, high: 1.5 }
+    unit: percent
+    source_name: "WordStream Facebook ads benchmarks by industry"
+    source_url: "https://www.wordstream.com/blog/facebook-ads-benchmarks"
+    published: 2024-06-01
+    quality: C
+    notes: "Apparel ~1.24% CTR. US proxy."
+  - metric: ctr
+    industry: any
+    price_band: any
+    channel: tiktok
+    geography: US
+    value: { low: 0.6, point: 0.84, high: 1.0 }
+    unit: percent
+    source_name: "Lebesgue / WebFX TikTok CTR"
+    source_url: "https://www.webfx.com/blog/social-media/tiktok-benchmarks/"
+    published: 2024-04-01
+    quality: C
+    notes: "~0.84% CTR commonly cited; newer conversion-campaign data ~0.61%."
+
+  # --- CVR (percent; e-commerce conversion, rate metric) ---------------------
+  - metric: cvr
+    industry: beauty_skincare
+    price_band: any
+    channel: any
+    geography: global
+    value: { low: 2.3, point: 3.3, high: 4.6 }
+    unit: percent
+    source_name: "Oberlo / Statista / Monetate e-commerce CVR (beauty)"
+    source_url: "https://www.oberlo.com/statistics/ecommerce-conversion-rate-by-industry"
+    published: 2024-11-01
+    quality: C
+    notes: "Oberlo 4.55% (Nov 2024), Statista skincare 2.3% (Q3 2024) to 3.2% (Q4 2025), Monetate 3.3% avg."
+  - metric: cvr
+    industry: fashion_accessories
+    price_band: any
+    channel: any
+    geography: global
+    value: { low: 2.0, point: 2.4, high: 3.2 }
+    unit: percent
+    source_name: "Oberlo / Monetate e-commerce CVR (fashion)"
+    source_url: "https://www.oberlo.com/statistics/ecommerce-conversion-rate-by-industry"
+    published: 2024-11-01
+    quality: C
+    notes: "Oberlo fashion 3.01%, Monetate 2.4% avg / 2.0% median. Lower than beauty."
+  - metric: cvr
+    industry: any
+    price_band: any
+    channel: tiktok
+    geography: US
+    value: { low: 0.46, point: 1.0, high: 1.92 }
+    unit: percent
+    source_name: "Lebesgue TikTok conversion rate"
+    source_url: "https://lebesgue.io/tiktok-ads/tiktok-ads-benchmarks-for-ctr-cr-and-cpm"
+    published: 2024-04-01
+    quality: C
+    notes: "0.46% general to 1.92% conversion-focused. US proxy."
+
+  # --- agency fees (Norway; general industry guidance) -----------------------
+  - metric: agency_fee
+    sub: media_management_pct
+    industry: any
+    price_band: any
+    channel: any
+    geography: global
+    value: { low: 8, point: 15, high: 20 }
+    unit: percent
+    source_name: "ClicksGeek / Econsultancy PPC agency fee models"
+    source_url: "https://econsultancy.com/ppc-agency-payment-models-percentage-of-spend/"
+    published: 2025-06-01
+    quality: C
+    notes: "10-20% of monthly media spend, sliding down with budget (15-20% <$10k, 8-10% >$50k). No Norway-specific source found."
+  - metric: agency_fee
+    sub: creative_production_pct
+    industry: any
+    price_band: any
+    channel: any
+    geography: global
+    value: { low: 10, point: 12, high: 15 }
+    unit: percent
+    source_name: "ClicksGeek agency fee structures"
+    source_url: "https://clicksgeek.com/"
+    published: 2025-06-01
+    quality: D
+    notes: "Net-new creative often billed at ~10-15% of media spend, separate SoW. Labelled assumption for Norway."
+
+  # --- labelled assumptions for gaps (quality D, no public source) -----------
+  - metric: cpm
+    industry: any
+    price_band: any
+    channel: snapchat
+    geography: "NO"
+    value: { low: 3, point: 5, high: 9 }
+    unit: usd
+    source_name: "Internal assumption (no credible public figure found)"
+    source_url: ""
+    published: 2026-11-01
+    quality: D
+    notes: "Snapchat CPM placeholder; wide range, edit with your own data. Snapchat has high Norway penetration."
+  - metric: cpm
+    industry: any
+    price_band: any
+    channel: youtube
+    geography: "NO"
+    value: { low: 4, point: 8, high: 14 }
+    unit: usd
+    source_name: "Internal assumption (no credible public figure found)"
+    source_url: ""
+    published: 2026-11-01
+    quality: D
+    notes: "YouTube CPM placeholder; edit with your own data."
+  - metric: roas
+    industry: any
+    price_band: any
+    channel: any
+    geography: "NO"
+    value: { low: 1.5, point: 3.0, high: 6.0 }
+    unit: ratio
+    source_name: "Internal assumption (ROAS is highly account-specific)"
+    source_url: ""
+    published: 2026-11-01
+    quality: D
+    notes: "ROAS depends on margin, price and funnel; a very wide placeholder. Always prefer the account's own ROAS."
