@@ -1,16 +1,17 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 João Harrison
-"""Forward calendar opportunities, each one actionable.
+"""Forward calendar **patterns** — descriptive, never prescriptive.
 
-Every opportunity names four things so a buyer can act without further
-interpretation: the **advertiser category**, the **moment**, the **time window**
-and the **recommended creative approach** (naming the AI sub-type where it is
-relevant). A moment with no obvious advertiser category is **dropped**, not
-reworded, so the list never pads itself with vague entries.
+Each pattern names an **advertiser category**, a **moment** and a **time window**,
+then states **what has happened** in that window (the observed pattern) and the
+**evidence** behind it: how many accounts, how many prior years, which market and
+how much confidence. It never tells the reader what to do — no "opportunity",
+"should" or "best time to". A moment with no obvious advertiser category is
+**dropped**, not reworded, so the list never pads itself with vague entries.
 
-Advertiser category and approach are configured per calendar moment in
+Advertiser category and the observed pattern are configured per calendar moment in
 ``config.calendar.moments``; the time window and lead time come from the dated
-calendar windows, and a short history read tells history from untested.
+calendar windows, and a short history read fills in the evidence line.
 """
 
 from __future__ import annotations
@@ -19,12 +20,13 @@ import datetime as dt
 
 from ..synthetic.calendar_effects import windows_for_years
 
-# The four fields every opportunity must carry.
-REQUIRED_FIELDS = ("category", "moment", "window", "approach")
+# The fields every pattern must carry.
+REQUIRED_FIELDS = ("category", "moment", "window", "pattern")
 
-# One shared rationale for the untested moments, instead of repeating it per card.
-UNTESTED_NOTE = ("Where there is no reliable history yet, queue a matched "
-                 "human-vs-AI test to establish a baseline.")
+# One shared line for moments with no established history, instead of repeating it.
+# Descriptive, not an instruction: it states the absence of a pattern.
+UNTESTED_NOTE = ("Some moments have no reliable history yet, so no pattern is "
+                 "established for them — a blank, not a recommendation.")
 
 
 def _timing(weeks: int) -> str:
@@ -36,12 +38,14 @@ def _timing(weeks: int) -> str:
     return f"in {weeks} weeks"
 
 
-def upcoming_opportunities(con, cfg: dict, today: dt.date, min_impr: int,
-                           limit: int = 5) -> list[dict]:
-    """Return up to ``limit`` upcoming, fully-actionable calendar opportunities.
+def upcoming_patterns(con, cfg: dict, today: dt.date, min_impr: int,
+                      limit: int = 5) -> list[dict]:
+    """Return up to ``limit`` upcoming calendar **patterns** (descriptive).
 
     ``con`` is a DuckDB connection over the (synthetic) data, used only for the
-    optional history read; the opportunities themselves are driven by config.
+    optional history read; the patterns themselves are driven by config. Each
+    item carries a ``pattern`` (what has happened) and an ``evidence`` line
+    (accounts, prior years, market, confidence) — never an instruction.
     """
     moment_meta = {m["key"]: m for m in cfg["calendar"]["moments"]}
     cal_windows = windows_for_years(cfg, [today.year, today.year + 1, 2025])
@@ -69,20 +73,22 @@ def upcoming_opportunities(con, cfg: dict, today: dt.date, min_impr: int,
         if hist and hist[3] and hist[3] > min_impr and hist[1] and hist[2]:
             lift = (hist[1] - hist[2]) / hist[2] * 100
             status = "history"
-            detail = f"Human-led ROAS beat AI by {lift:+.0f}% here last year."
+            # What happened + the evidence behind it (N, years, market, confidence).
+            evidence = (f"Human-led ROAS ran {lift:+.0f}% vs AI in this window last "
+                        f"year · 1 synthetic account · 1 prior year · NO · low confidence")
         else:
             status = "untested"
-            detail = None  # the single shared UNTESTED_NOTE covers these
+            evidence = "No established history · 0 prior years · no pattern yet"
 
         seen[w.key] = {
             "category": category,
             "moment": w.label,
             "window": f"{w.start.isoformat()} to {w.end.isoformat()}",
             "timing": _timing(weeks),
-            "approach": meta.get("approach", ""),
+            "pattern": meta.get("pattern", meta.get("approach", "")),
+            "evidence": evidence,
             "weeks_out": weeks,
             "status": status,
-            "detail": detail,
         }
         if len(seen) >= limit:
             break

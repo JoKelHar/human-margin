@@ -27,6 +27,12 @@ from ..config import repo_root
 REQUIRED = ("metric", "industry", "price_band", "channel", "geography",
             "value", "unit", "source_name", "published", "quality")
 QUALITY_WEIGHT = {"A": 1.0, "B": 0.8, "C": 0.6, "D": 0.3}
+QUALITY_RANK = {"A": 3, "B": 2, "C": 1, "D": 0}
+# Provenance tiers, most trustworthy first. Ranks order a blend's overall tier
+# and place `expert_estimate` between public data and a bare assumption.
+PROV_RANK = {"own_account": 4, "pooled": 3, "public_benchmark": 2,
+             "expert_estimate": 1, "assumption": 0}
+RELEVANCE_WEIGHT = {"high": 1.0, "med": 0.6, "low": 0.3}
 STALE_MONTHS = 18
 
 
@@ -57,10 +63,16 @@ def load_benchmarks(path: str | Path | None = None) -> list[dict]:
             raise BenchmarkError(f"benchmark {i} missing field(s): {missing}")
         if e["quality"] not in QUALITY_WEIGHT:
             raise BenchmarkError(f"benchmark {i}: bad quality {e['quality']!r}")
-        # Provenance: a real figure must cite a source URL; only a labelled D
-        # assumption may omit it (and must explain itself in notes).
-        if not e.get("source_url") and e["quality"] != "D":
-            raise BenchmarkError(f"benchmark {i} ({e['metric']}): no source_url and not a labelled assumption")
+        if e.get("provenance") and e["provenance"] not in PROV_RANK:
+            raise BenchmarkError(f"benchmark {i}: bad provenance {e['provenance']!r}")
+        # Provenance of the figure: a public figure must cite a source URL. Two
+        # kinds may omit it: a labelled D assumption, and a named `expert_estimate`
+        # (no public URL, but a named estimator in source_name and a date). An
+        # expert slot left blank for the owner to fill is marked value.filled: false.
+        tier = e.get("provenance")
+        exempt = e["quality"] == "D" or tier in ("expert_estimate", "assumption")
+        if not e.get("source_url") and not exempt:
+            raise BenchmarkError(f"benchmark {i} ({e['metric']}): no source_url and not a labelled assumption or expert estimate")
         if "point" not in (e.get("value") or {}):
             raise BenchmarkError(f"benchmark {i}: value needs a 'point'")
         if isinstance(e["published"], str):
@@ -116,9 +128,19 @@ class Estimate:
     point: float
     high: float
     unit: str
-    markets: list[str]     # geographies the estimate drew on ('assumption' = a guess)
-    grade: str             # A..D, lowered by distance from Norway and by staleness
-    confidence: str        # high | medium | low (distance + staleness)
+    markets: list[str]            # geographies the estimate drew on ('assumption' = a guess)
+    # Two separate tags, never one blended letter (see docs/principles.md):
+    source_quality: str          # A..D — how good the underlying study/data is. Fixed
+                                 # per source; geography does NOT change it.
+    relevance: str               # high | med | low — fit to the Norwegian user.
+    relevance_reasons: list[str] # why relevance stepped down: geography / industry /
+                                 # sample / recency, each with its detail. For expand.
+    confidence: str              # high | medium | low — derived from source_quality,
+                                 # relevance and staleness together.
+    provenance: str              # own_account | pooled | public_benchmark |
+                                 # expert_estimate | assumption
+    primary_market: str          # the market of the strongest contributing source
+    year: int | None             # publication year of that source (for the tag)
     n_sources: int
     any_stale: bool
 
@@ -146,14 +168,19 @@ def estimate(metric: str, industry: str = "any", channel: str = "any", band: str
     sourced = [e for e in matches if e["geography"] != "assumption"]
     if sourced:
         matches = sourced
+    # Did a specific-industry query fall back to generic ('any') rows? That lowers
+    # relevance (an industry proxy), without touching source quality.
+    generic_proxy = industry != "any" and all(e["industry"] == "any" for e in matches)
 
-    low = point = high = tot_w = eff_num = mw_num = 0.0
+    low = point = high = tot_w = mw_num = 0.0
     markets: set[str] = set()
     stale = False
+    best_score = -1.0
+    best_entry = matches[0]
     unit = matches[0]["unit"]
     for e in matches:
         mw = market_weight(e["geography"], wcfg)
-        score = mw * QUALITY_WEIGHT[e["quality"]]   # evidence: geography feeds it
+        score = mw * QUALITY_WEIGHT[e["quality"]]   # blend weight: market fit x study quality
         if score <= 0:
             continue
         v = e["value"]
@@ -162,30 +189,114 @@ def estimate(metric: str, industry: str = "any", channel: str = "any", band: str
         point += norm(v["point"]) * score
         high += norm(v.get("high", v["point"])) * score
         tot_w += score
-        eff_num += score * score
         mw_num += mw * score
         markets.add(e["geography"])
         stale = stale or is_stale(e, as_of)
+        if score > best_score:          # strongest contributor names the market/year
+            best_score, best_entry = score, e
     if tot_w == 0:
         return None
 
     pt, blo, bhi = point / tot_w, low / tot_w, high / tot_w
-    eff = eff_num / tot_w          # effective evidence (dominated by the strongest sources)
     avg_mw = mw_num / tot_w
     distance = max(0.0, 1.0 - avg_mw)   # 0 at Norway, up to ~0.8 for an assumption
-    # Distance from Norway and staleness WIDEN the range and lower confidence, so a
-    # single far-market match is not reported as if it were local and certain.
+
+    # --- two separate tags, never one blended letter -------------------------
+    # Source quality is the best underlying study; geography does NOT change it.
+    source_quality = max((e["quality"] for e in matches), key=lambda q: QUALITY_RANK[q])
+    # Relevance to the Norwegian user, with a reason for each step down.
+    reasons: list[str] = []
+    rel = avg_mw
+    mk_sourced = sorted(m for m in markets if m != "assumption")
+    if markets == {"assumption"}:
+        reasons.append("geography: assumption, no market data")
+    elif avg_mw < 0.95:
+        reasons.append(f"geography: {'/'.join(mk_sourced) or 'mixed'}, not Norway")
+    if generic_proxy:
+        rel *= 0.85
+        reasons.append("industry: generic proxy, not industry-specific")
+    if len(matches) == 1:
+        rel *= 0.90
+        reasons.append("sample: single source")
+    if stale:
+        rel *= 0.90
+        reasons.append("recency: older than 18 months")
+    relevance = "high" if rel >= 0.80 else "med" if rel >= 0.45 else "low"
+
+    # Distance from Norway and staleness WIDEN the range, so a single far-market
+    # match is not reported as if it were local and certain.
     widen = 1.0 + 0.6 * distance + (0.2 if stale else 0.0)
     lo = max(round(pt - (pt - blo) * widen, 3), round(pt * 0.25, 3))   # floor, not absurd
     hi = round(pt + (bhi - pt) * widen, 3)
 
-    grade = "A" if eff >= 0.75 else "B" if eff >= 0.50 else "C" if eff >= 0.25 else "D"
-    confidence = "high" if (eff >= 0.60 and not stale) else "medium" if eff >= 0.30 else "low"
+    # Confidence combines how good the source is with how relevant it is.
+    c = QUALITY_WEIGHT[source_quality] * RELEVANCE_WEIGHT[relevance] * (0.8 if stale else 1.0)
+    confidence = "high" if c >= 0.55 else "medium" if c >= 0.30 else "low"
+
+    # Overall provenance tier = the most trustworthy tier present (assumptions are
+    # already dropped when any sourced figure matches).
+    prov = max((provenance(e) for e in matches), key=lambda t: PROV_RANK[t])
+    year = best_entry["published"].year if isinstance(best_entry["published"], dt.date) else None
     return Estimate(
         metric=metric, low=lo, point=round(pt, 3), high=hi, unit=unit,
-        markets=sorted(markets), grade=grade, confidence=confidence,
+        markets=sorted(markets), source_quality=source_quality, relevance=relevance,
+        relevance_reasons=reasons, confidence=confidence, provenance=prov,
+        primary_market=best_entry["geography"], year=year,
         n_sources=len(matches), any_stale=stale,
     )
+
+
+# --- provenance tags (plain-language, for every figure shown) ----------------
+
+PROVENANCE_LABEL = {
+    "own_account": "Your data",
+    "pooled": "Pooled accounts",
+    "public_benchmark": "Public benchmark",
+    "expert_estimate": "Expert estimate",
+    "assumption": "Assumption",
+}
+
+LEGEND = ("Your data · pooled similar accounts · public benchmark · expert estimate · "
+          "assumption. Source quality A-D and relevance to Norway (high/med/low) are "
+          "shown separately; a wider range means less certain.")
+
+
+def provenance(entry: dict) -> str:
+    """Provenance tier of a single library entry.
+
+    An entry may name its tier explicitly (``provenance:`` in the YAML); otherwise
+    it is derived. ``expert_estimate`` is a named, dated figure with no public URL,
+    ranked between ``public_benchmark`` and a bare ``assumption``. ``own_account``
+    and ``pooled`` arrive once linked-account data is aggregated (see the design doc).
+    """
+    explicit = entry.get("provenance")
+    if explicit in PROV_RANK:
+        return explicit
+    if entry["geography"] == "assumption" or (not entry.get("source_url") and entry["quality"] == "D"):
+        return "assumption"
+    return "public_benchmark"
+
+
+def _market_year(est: Estimate) -> str:
+    mk = est.primary_market if est.primary_market != "assumption" else "no market"
+    return f"{mk}, {est.year}" if est.year else mk
+
+
+def tag(est: Estimate) -> str:
+    """A short, plain-language, two-part tag for an estimate (CLI/UI).
+
+    Source quality and relevance are shown separately, never blended into one
+    letter, e.g. ``C source · low relevance (US, 2024)``. The full breakdown
+    (``relevance_reasons``) is for an expanded view.
+    """
+    if est.provenance == "assumption":
+        return "Assumption"
+    if est.provenance == "own_account":
+        return "Your data"
+    if est.provenance == "pooled":
+        return f"{est.n_sources} similar accounts · {est.relevance} relevance"
+    kind = "expert estimate · " if est.provenance == "expert_estimate" else ""
+    return f"{est.source_quality} source · {kind}{est.relevance} relevance ({_market_year(est)})"
 
 
 def stale_entries(benchmarks: list[dict] | None = None, as_of: dt.date | None = None) -> list[dict]:

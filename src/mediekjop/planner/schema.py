@@ -115,6 +115,11 @@ class Scenario:
     reuse_campaigns: int = 1                   # for production-cost amortisation
     existing_assets: list[str] = field(default_factory=list)
     agency: AgencyQuote | None = None
+    # Optional representative price for the advertiser's industry (not this single
+    # campaign's price). Opt-in: if given, it can be contributed as an anonymised
+    # aggregate to refine the industry price bands via pooling (see the design doc
+    # and docs/contributing-data.md). Never required; banding uses `price`.
+    typical_price: float | None = None
 
     # derived (filled by resolve); all *_nok are NOK
     price_nok: float = 0.0
@@ -122,6 +127,7 @@ class Scenario:
     band: str = "mid"
     value_per_conversion_nok: float = 0.0
     value_is_assumed_from_price: bool = False
+    typical_price_nok: float = 0.0
     industry_label: str = ""
 
     def is_capacity_capped(self) -> bool:
@@ -157,6 +163,8 @@ def resolve(scn: Scenario, fx: FxRates, industries_cfg: dict | None = None) -> S
     scn.price_nok = _money_nok(scn.price, scn.currency, fx)
     scn.budget_nok = _money_nok(scn.budget, scn.currency, fx)
     scn.band = price_band(scn.price_nok, row)
+    if scn.typical_price is not None:
+        scn.typical_price_nok = _money_nok(scn.typical_price, scn.currency, fx)
 
     # value per conversion: explicit override, else margin x price, else price as
     # revenue (flagged as an assumption).
@@ -196,6 +204,7 @@ def scenario_from_dict(d: dict, fx: FxRates | None = None,
         reuse_campaigns=int(d.get("reuse_campaigns", 1)),
         existing_assets=list(d.get("existing_assets") or []),
         agency=agency,
+        typical_price=d.get("typical_price"),
     )
     return resolve(scn, fx, industries_cfg)
 

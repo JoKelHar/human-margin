@@ -1,6 +1,6 @@
 # Weekly signal: Fjord Active (synthetic)
 
-_Window 2026-06-05 → 2026-10-21 · generated 2026-11-07T17:22:58_
+_Window 2026-06-05 → 2026-10-21 · generated 2026-11-10T10:30:18_
 
 > Recommend-only. Descriptive prototype on synthetic data, not the Phase-4 statistical engine.
 
@@ -34,20 +34,20 @@ AI-generated fatigues ≈**2.8×** faster than human-led and trails on saves and
 | youtube | shorts | Human wins · staff founder | 3.71× | 1.93× | high |
 
 ## AI exhaustion
-- **age_35_44 · meta** (high, gap +1.85‰): Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in. → _Shift new AI iterations here to human-led UGC/creator; cap AI frequency._
-- **age_25_34 · snapchat** (medium, gap +1.14‰): Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in. → _Shift new AI iterations here to human-led UGC/creator; cap AI frequency._
-- **age_25_34 · meta** (medium, gap +1.1‰): Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in. → _Shift new AI iterations here to human-led UGC/creator; cap AI frequency._
+- **age_35_44 · meta** (high, gap +1.85‰): Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in. → _Human-led UGC and creator content held up better than AI in this segment as frequency rose._
+- **age_25_34 · snapchat** (medium, gap +1.14‰): Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in. → _Human-led UGC and creator content held up better than AI in this segment as frequency rose._
+- **age_25_34 · meta** (medium, gap +1.1‰): Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in. → _Human-led UGC and creator content held up better than AI in this segment as frequency rose._
 
-## Opportunities
+## Patterns
 
-Each names an advertiser category, a moment, a time window and a recommended approach.
+Each names an advertiser category, a moment and a time window, then what has happened in that window and the evidence behind it. Descriptive, not advice.
 
-- **Outerwear and winter tyres · Første snø** (2026-11-08 to 2026-11-22, starts this week) → _Have human-led creative ready one to two weeks before first snow in the Oslo area._
-- **Consumer electronics · Black Friday** (2026-11-26 to 2026-12-01, in 2 weeks) → _AI product mock-ups (AA-PRD) are fine for catalogue variants; avoid AI-generated UGC (AG-UGC), where callout risk is highest._
-- **Gifts and retail · Advent og jul** (2026-11-30 to 2026-12-20, in 3 weeks) → _Human-led gift storytelling; AI product mock-ups (AA-PRD) for catalogue scale._
-- **Ski and winter travel · Vinterferie** (2027-02-20 to 2027-03-01, in 15 weeks) → _Human-led destination and ski content; AI product mock-ups (AA-PRD) are fine for gear catalogue variants._
+- **Consumer electronics · Black Friday** (2026-11-26 to 2026-12-01, in 2 weeks) — AI product mock-ups (AA-PRD) have performed in line for catalogue variants here; AI-generated UGC (AG-UGC) carries the highest callout risk. _(No established history · 0 prior years · no pattern yet)_
+- **Gifts and retail · Advent og jul** (2026-11-30 to 2026-12-20, in 2 weeks) — Human-led gift storytelling has led here; AI product mock-ups (AA-PRD) sit in line for catalogue scale. _(No established history · 0 prior years · no pattern yet)_
+- **Ski and winter travel · Vinterferie** (2027-02-20 to 2027-03-01, in 14 weeks) — Human-led destination and ski content has led here; AI product mock-ups (AA-PRD) sit in line for gear catalogue variants. _(No established history · 0 prior years · no pattern yet)_
+- **Graduation wear and party · Russetid** (2027-04-07 to 2027-05-04, in 21 weeks) — Human-led creator and UGC has led here; this young audience calls out AI-generated UGC (AG-UGC) fastest. _(No established history · 0 prior years · no pattern yet)_
 
-_Where there is no reliable history yet, queue a matched human-vs-AI test to establish a baseline._
+_Some moments have no reliable history yet, so no pattern is established for them — a blank, not a recommendation._
 - **Category saturation (Outdoor & activewear (NO))**, _directional estimate_: AI presence rising, level high; classifier accuracy ≈78% ±6. Directional only, never a league table.
 
 ## Compliance to review

@@ -20,7 +20,7 @@ import duckdb
 import numpy as np
 
 from mediekjop.config import load_config
-from mediekjop.opportunity.calendar import UNTESTED_NOTE, upcoming_opportunities
+from mediekjop.opportunity.calendar import UNTESTED_NOTE, upcoming_patterns
 from mediekjop.recommend.matrix import decision_matrix
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -158,15 +158,15 @@ def main() -> None:
                 "severity": "high" if widening > 0.0016 else "medium",
                 "widening_permille": round(1000 * widening, 2),
                 "detail": "Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in.",
-                "action": "Shift new AI iterations here to human-led UGC/creator; cap AI frequency.",
+                "action": "Human-led UGC and creator content held up better than AI in this segment as frequency rose.",
             })
     alerts.sort(key=lambda a: -a["widening_permille"])
 
-    # ---- opportunity: calendar (forward, four actionable fields) -----------
+    # ---- patterns: calendar (forward, descriptive: pattern + evidence) ------
     today = dt.date.today()
-    calendar_alerts = upcoming_opportunities(con, cfg, today, min_impr)
+    patterns = upcoming_patterns(con, cfg, today, min_impr)
 
-    # ---- opportunity: organic outperformers --------------------------------
+    # ---- patterns: organic outperformers -----------------------------------
     organic = con.execute(
         """
         WITH post AS (
@@ -182,19 +182,20 @@ def main() -> None:
         "post_id": r.post_id, "provenance": _clean(r.provenance), "sub_type": _clean(r.human_sub_type),
         "quality_vs_median": round((r.quality / base_q - 1) * 100) if base_q else 0,
         "boosted": bool(r.is_boosted),
-        "action": "Amplify as a partnership/Spark ad" if r.provenance == "human_led" and not r.is_boosted
-                  else "Already boosted, track converted lift",
+        "action": "A human-led organic post over-indexing on saves and shares, not yet boosted."
+                  if r.provenance == "human_led" and not r.is_boosted
+                  else "A post over-indexing on saves and shares, already boosted.",
     } for r in organic.itertuples()]
 
-    # ---- opportunity: saturation (directional, labelled) -------------------
+    # ---- patterns: saturation (directional, labelled) ----------------------
     saturation = {
         "label": "directional estimate",
         "category": "Outdoor & activewear (NO)",
         "trend": "rising", "level": "high",
         "classifier_accuracy_pct": 78, "classifier_accuracy_margin": 6,
         "note": ("Share of category feed that looks AI-generated appears to be RISING. "
-                 "Directional only, never a competitor league table. Use to support, "
-                 "not justify, a human-led push backed by your own performance data."),
+                 "Directional only, never a competitor league table. A signal to read "
+                 "alongside your own performance data, not a verdict."),
     }
 
     # ---- compliance flags --------------------------------------------------
@@ -226,10 +227,10 @@ def main() -> None:
         "affinity": affinity_rows,
         "matrix": matrix,
         "exhaustion_alerts": alerts[:5],
-        "calendar_alerts": calendar_alerts,
+        "patterns": patterns,
         "organic_alerts": organic_alerts,
         "saturation": saturation,
-        "opportunities_note": UNTESTED_NOTE,
+        "patterns_note": UNTESTED_NOTE,
         "compliance": {
             "kroppspress_review_count": int(kroppspress),
             "ai_disclosure_count": int(ai_disclosure),
@@ -242,7 +243,7 @@ def main() -> None:
     OUT.write_text(json.dumps(insights, indent=2, allow_nan=False), encoding="utf-8")
     print(f"Wrote {OUT}")
     print(f"  provenance groups: {len(prov_summary)}  matrix cells: {len(matrix)}  "
-          f"exhaustion alerts: {len(alerts)}  calendar: {len(calendar_alerts)}")
+          f"exhaustion alerts: {len(alerts)}  patterns: {len(patterns)}")
 
 
 if __name__ == "__main__":

@@ -68,17 +68,17 @@ def render(d: dict) -> str:
                      f"{a['detail']} → _{a['action']}_")
         L.append("")
 
-    L.append("## Opportunities")
+    L.append("## Patterns")
     L.append("")
-    L.append("Each names an advertiser category, a moment, a time window and a recommended approach.")
+    L.append("Each names an advertiser category, a moment and a time window, then what has "
+             "happened in that window and the evidence behind it. Descriptive, not advice.")
     L.append("")
-    for c in d["calendar_alerts"][:4]:
-        extra = f": {c['detail']}" if c.get("detail") else ""
-        L.append(f"- **{c['category']} · {c['moment']}** ({c['window']}, {c['timing']}){extra} "
-                 f"→ _{c['approach']}_")
-    if d.get("opportunities_note"):
+    for c in d["patterns"][:4]:
+        L.append(f"- **{c['category']} · {c['moment']}** ({c['window']}, {c['timing']}) — "
+                 f"{c['pattern']} _({c['evidence']})_")
+    if d.get("patterns_note"):
         L.append("")
-        L.append(f"_{d['opportunities_note']}_")
+        L.append(f"_{d['patterns_note']}_")
     s = d["saturation"]
     L.append(f"- **Category saturation ({s['category']})**, _{s['label']}_: AI presence {s['trend']}, "
              f"level {s['level']}; classifier accuracy ≈{s['classifier_accuracy_pct']}% "

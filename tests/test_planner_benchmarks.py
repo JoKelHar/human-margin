@@ -9,12 +9,15 @@ import datetime as dt
 import pytest
 
 from mediekjop.planner.benchmarks import (
+    PROVENANCE_LABEL,
     BenchmarkError,
     estimate,
     is_stale,
     load_benchmarks,
     load_weights,
     market_weight,
+    provenance,
+    tag,
 )
 
 AS_OF = dt.date(2026, 11, 10)
@@ -37,20 +40,30 @@ def test_perf_multiplier_priors_present_and_centred():
     assert priors["memory_brand"]["value"]["point"] > 1.0           # modest human advantage
 
 
-def test_estimate_reports_markets_grade_confidence_and_unit():
+def test_estimate_reports_two_tags_confidence_and_unit():
     est = estimate("cvr", industry="beauty_skincare", channel="meta")
     assert est is not None
     assert est.unit == "percent"
     assert 2.0 <= est.point <= 5.0
-    assert est.markets and est.grade in ("A", "B", "C", "D")
+    assert est.markets and est.source_quality in ("A", "B", "C", "D")
+    assert est.relevance in ("high", "med", "low")
     assert est.confidence in ("high", "medium", "low")
+
+
+def test_source_quality_is_independent_of_geography():
+    # The CVR source is a quality-C study. Being a US/global proxy must lower
+    # RELEVANCE, never the source-quality letter (that is fixed per study).
+    est = estimate("cvr", industry="beauty_skincare", channel="meta")
+    assert est.source_quality == "C"          # study quality unchanged by distance
+    assert est.relevance == "low"             # but far from Norway -> low relevance
+    assert any("geography" in r for r in est.relevance_reasons)
 
 
 def test_assumption_is_not_credited_to_norway():
     est = estimate("cpm", channel="snapchat")   # only a labelled assumption matches
     assert est is not None
     assert est.markets == ["assumption"]         # not ['NO']
-    assert est.grade == "D" and est.confidence == "low"
+    assert est.source_quality == "D" and est.relevance == "low" and est.confidence == "low"
 
 
 def test_generic_query_does_not_pull_industry_specific_rows():
@@ -67,10 +80,11 @@ def test_distance_from_norway_widens_the_range():
     assert (est.high - est.low) > 2.5
 
 
-def test_distant_source_grades_low():
-    # all current sources are US/global, so evidence for Norway is weak -> D / low
+def test_distant_source_is_low_relevance_low_confidence():
+    # all current sources are US/global, so relevance to Norway is low and the
+    # combined confidence is low -- even though the study itself is a solid C.
     est = estimate("cvr", industry="beauty_skincare", channel="meta")
-    assert est.grade == "D" and est.confidence == "low"
+    assert est.relevance == "low" and est.confidence == "low"
 
 
 def test_market_weight_priority_norway_first():
@@ -100,6 +114,24 @@ def test_staleness_flagging():
 
 def test_no_match_returns_none():
     assert estimate("cpm", channel="pinterest") is None
+
+
+def test_every_entry_has_a_provenance_tier():
+    for e in load_benchmarks():
+        assert provenance(e) in PROVENANCE_LABEL
+
+
+def test_every_estimate_carries_a_provenance_tag():
+    # nothing reaches output without a provenance tag
+    for args in [("cvr", "beauty_skincare", "meta"), ("cpm", "any", "snapchat"),
+                 ("agency_fee", "any", "any")]:
+        est = estimate(*args)
+        assert est is not None
+        assert est.provenance in PROVENANCE_LABEL
+        assert tag(est)  # non-empty plain-language tag
+    # a sourced estimate tags as a public benchmark; an assumption-only one as Assumption
+    assert estimate("cpm", industry="beauty_skincare", channel="meta").provenance == "public_benchmark"
+    assert estimate("cpm", channel="snapchat").provenance == "assumption"
 
 
 def test_uncited_non_assumption_is_rejected(tmp_path):
