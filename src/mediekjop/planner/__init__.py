@@ -14,6 +14,8 @@ outputs and interfaces.
 from __future__ import annotations
 
 from .benchmarks import (
+    LEGEND,
+    PROVENANCE_LABEL,
     BenchmarkError,
     Estimate,
     estimate,
@@ -21,7 +23,9 @@ from .benchmarks import (
     load_benchmarks,
     load_weights,
     market_weight,
+    provenance,
     stale_entries,
+    tag,
 )
 from .currency import FxRates, Money, SUPPORTED, load_fx_rates
 from .schema import (
@@ -43,4 +47,5 @@ __all__ = [
     "load_scenario", "scenario_from_dict", "load_industries", "price_band",
     "load_benchmarks", "load_weights", "estimate", "Estimate", "market_weight",
     "is_stale", "stale_entries", "BenchmarkError",
+    "provenance", "tag", "LEGEND", "PROVENANCE_LABEL",
 ]

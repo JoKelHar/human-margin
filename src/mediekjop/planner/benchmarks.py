@@ -119,6 +119,7 @@ class Estimate:
     markets: list[str]     # geographies the estimate drew on ('assumption' = a guess)
     grade: str             # A..D, lowered by distance from Norway and by staleness
     confidence: str        # high | medium | low (distance + staleness)
+    provenance: str        # own_account | pooled | public_benchmark | assumption
     n_sources: int
     any_stale: bool
 
@@ -181,11 +182,48 @@ def estimate(metric: str, industry: str = "any", channel: str = "any", band: str
 
     grade = "A" if eff >= 0.75 else "B" if eff >= 0.50 else "C" if eff >= 0.25 else "D"
     confidence = "high" if (eff >= 0.60 and not stale) else "medium" if eff >= 0.30 else "low"
+    prov = "public_benchmark" if any(e["geography"] != "assumption" for e in matches) else "assumption"
     return Estimate(
         metric=metric, low=lo, point=round(pt, 3), high=hi, unit=unit,
-        markets=sorted(markets), grade=grade, confidence=confidence,
+        markets=sorted(markets), grade=grade, confidence=confidence, provenance=prov,
         n_sources=len(matches), any_stale=stale,
     )
+
+
+# --- provenance tags (plain-language, for every figure shown) ----------------
+
+PROVENANCE_LABEL = {
+    "own_account": "Your data",
+    "pooled": "Pooled accounts",
+    "public_benchmark": "Public benchmark",
+    "assumption": "Assumption",
+}
+
+LEGEND = ("Your data · pooled similar accounts · public benchmark (market · year) · "
+          "assumption. Grade A-D; a wider range means less certain.")
+
+
+def provenance(entry: dict) -> str:
+    """Provenance tier of a single library entry.
+
+    Only ``public_benchmark`` and ``assumption`` exist today; ``own_account`` and
+    ``pooled`` arrive once linked-account data is aggregated (see the design doc).
+    """
+    if entry["geography"] == "assumption" or (not entry.get("source_url") and entry["quality"] == "D"):
+        return "assumption"
+    return "public_benchmark"
+
+
+def tag(est: Estimate) -> str:
+    """A short, plain-language provenance tag for an estimate (CLI/UI)."""
+    if est.provenance == "assumption":
+        return "Assumption"
+    if est.provenance == "public_benchmark":
+        mk = "/".join(m for m in est.markets if m != "assumption") or "mixed"
+        return f"Public benchmark · {mk} · grade {est.grade}"
+    if est.provenance == "pooled":
+        return f"{est.n_sources} similar accounts · grade {est.grade}"
+    return f"Your data · grade {est.grade}"
 
 
 def stale_entries(benchmarks: list[dict] | None = None, as_of: dt.date | None = None) -> list[dict]:
