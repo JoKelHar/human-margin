@@ -37,12 +37,40 @@ def test_perf_multiplier_priors_present_and_centred():
     assert priors["memory_brand"]["value"]["point"] > 1.0           # modest human advantage
 
 
-def test_estimate_reports_markets_grade_and_unit():
+def test_estimate_reports_markets_grade_confidence_and_unit():
     est = estimate("cvr", industry="beauty_skincare", channel="meta")
     assert est is not None
     assert est.unit == "percent"
     assert 2.0 <= est.point <= 5.0
     assert est.markets and est.grade in ("A", "B", "C", "D")
+    assert est.confidence in ("high", "medium", "low")
+
+
+def test_assumption_is_not_credited_to_norway():
+    est = estimate("cpm", channel="snapchat")   # only a labelled assumption matches
+    assert est is not None
+    assert est.markets == ["assumption"]         # not ['NO']
+    assert est.grade == "D" and est.confidence == "low"
+
+
+def test_generic_query_does_not_pull_industry_specific_rows():
+    generic = estimate("cpm", industry="any", channel="meta")   # uses the 'any' meta row only
+    beauty = estimate("cpm", industry="beauty_skincare", channel="meta")  # beauty row ($8)
+    assert generic is not None and beauty is not None
+    # the generic estimate reflects the generic (~$13) row, not the lower beauty row
+    assert generic.point > beauty.point
+
+
+def test_distance_from_norway_widens_the_range():
+    est = estimate("cvr", industry="beauty_skincare", channel="meta")  # global source
+    # widened well beyond the raw 2.3-4.6 span (2.3)
+    assert (est.high - est.low) > 2.5
+
+
+def test_distant_source_grades_low():
+    # all current sources are US/global, so evidence for Norway is weak -> D / low
+    est = estimate("cvr", industry="beauty_skincare", channel="meta")
+    assert est.grade == "D" and est.confidence == "low"
 
 
 def test_market_weight_priority_norway_first():

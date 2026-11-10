@@ -78,14 +78,19 @@ def is_stale(entry: dict, as_of: dt.date | None = None, months: int = STALE_MONT
     return entry["published"] < as_of - dt.timedelta(days=months * 30)
 
 
-def _applies(e: dict, metric: str, industry: str, channel: str, band: str) -> bool:
+def _applies(e: dict, metric: str, industry: str, channel: str, band: str,
+             generic_industry_only: bool = True) -> bool:
     if e["metric"] != metric:
         return False
-
-    def ok(field: str, q: str) -> bool:
-        return q == "any" or e[field] in (q, "any")
-
-    return ok("industry", industry) and ok("channel", channel) and ok("price_band", band)
+    # A generic industry query uses generic ('any') rows, not industry-specific
+    # ones, unless the caller relaxes this because no generic row exists.
+    if industry == "any":
+        ind_ok = e["industry"] == "any" if generic_industry_only else True
+    else:
+        ind_ok = e["industry"] in (industry, "any")
+    chan_ok = channel == "any" or e["channel"] in (channel, "any")
+    band_ok = band == "any" or e["price_band"] in (band, "any")
+    return ind_ok and chan_ok and band_ok
 
 
 def _specificity(e: dict, industry: str, channel: str) -> int:
@@ -111,8 +116,9 @@ class Estimate:
     point: float
     high: float
     unit: str
-    markets: list[str]     # geographies the estimate drew on
-    grade: str             # overall A..D from the weighted evidence
+    markets: list[str]     # geographies the estimate drew on ('assumption' = a guess)
+    grade: str             # A..D, lowered by distance from Norway and by staleness
+    confidence: str        # high | medium | low (distance + staleness)
     n_sources: int
     any_stale: bool
 
@@ -125,43 +131,59 @@ def estimate(metric: str, industry: str = "any", channel: str = "any", band: str
     wcfg = weights if weights is not None else load_weights()
     price_dependent = set(wcfg.get("price_dependent_metrics") or [])
 
-    matches = [e for e in rows if _applies(e, metric, industry, channel, band)]
+    # Generic industry queries use generic rows; fall back to specific only if none.
+    matches = [e for e in rows if _applies(e, metric, industry, channel, band, True)]
+    if not matches:
+        matches = [e for e in rows if _applies(e, metric, industry, channel, band, False)]
     if not matches:
         return None
     # Prefer the most specific figures when industry/channel-specific ones exist.
     max_spec = max(_specificity(e, industry, channel) for e in matches)
     if max_spec > 0:
         matches = [e for e in matches if _specificity(e, industry, channel) == max_spec]
+    # A labelled assumption is used only when no sourced figure matches, so a D
+    # assumption can never outweigh (or dilute) a sourced figure.
+    sourced = [e for e in matches if e["geography"] != "assumption"]
+    if sourced:
+        matches = sourced
 
-    tot_w = low = point = high = 0.0
-    qsum = mwsum = 0.0
+    low = point = high = tot_w = eff_num = mw_num = 0.0
     markets: set[str] = set()
     stale = False
     unit = matches[0]["unit"]
     for e in matches:
         mw = market_weight(e["geography"], wcfg)
-        w = mw * QUALITY_WEIGHT[e["quality"]]
-        if w <= 0:
+        score = mw * QUALITY_WEIGHT[e["quality"]]   # evidence: geography feeds it
+        if score <= 0:
             continue
         v = e["value"]
         norm = (lambda x: _norm_price_level(x, e["geography"], wcfg)) if metric in price_dependent else (lambda x: x)
-        low += norm(v.get("low", v["point"])) * w
-        point += norm(v["point"]) * w
-        high += norm(v.get("high", v["point"])) * w
-        tot_w += w
-        qsum += QUALITY_WEIGHT[e["quality"]] * mw
-        mwsum += mw
+        low += norm(v.get("low", v["point"])) * score
+        point += norm(v["point"]) * score
+        high += norm(v.get("high", v["point"])) * score
+        tot_w += score
+        eff_num += score * score
+        mw_num += mw * score
         markets.add(e["geography"])
         stale = stale or is_stale(e, as_of)
     if tot_w == 0:
         return None
 
-    wq = qsum / mwsum if mwsum else 0.0
-    grade = "A" if wq >= 0.9 else "B" if wq >= 0.7 else "C" if wq >= 0.5 else "D"
+    pt, blo, bhi = point / tot_w, low / tot_w, high / tot_w
+    eff = eff_num / tot_w          # effective evidence (dominated by the strongest sources)
+    avg_mw = mw_num / tot_w
+    distance = max(0.0, 1.0 - avg_mw)   # 0 at Norway, up to ~0.8 for an assumption
+    # Distance from Norway and staleness WIDEN the range and lower confidence, so a
+    # single far-market match is not reported as if it were local and certain.
+    widen = 1.0 + 0.6 * distance + (0.2 if stale else 0.0)
+    lo = max(round(pt - (pt - blo) * widen, 3), round(pt * 0.25, 3))   # floor, not absurd
+    hi = round(pt + (bhi - pt) * widen, 3)
+
+    grade = "A" if eff >= 0.75 else "B" if eff >= 0.50 else "C" if eff >= 0.25 else "D"
+    confidence = "high" if (eff >= 0.60 and not stale) else "medium" if eff >= 0.30 else "low"
     return Estimate(
-        metric=metric,
-        low=round(low / tot_w, 3), point=round(point / tot_w, 3), high=round(high / tot_w, 3),
-        unit=unit, markets=sorted(markets), grade=grade,
+        metric=metric, low=lo, point=round(pt, 3), high=hi, unit=unit,
+        markets=sorted(markets), grade=grade, confidence=confidence,
         n_sources=len(matches), any_stale=stale,
     )
 

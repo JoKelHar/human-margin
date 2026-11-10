@@ -40,6 +40,9 @@ geography_weight:
   global:
     weight: 0.35
     note: "Global/unspecified: use only as a last resort, with a wide range."
+  assumption:
+    weight: 0.20
+    note: "A labelled assumption, not a market. Used only when no sourced figure exists; never credited to Norway and never allowed to outweigh a sourced figure."
 
 # Metrics that are absolute local costs and must be purchasing-power normalised
 # before the weight is applied. Rate metrics (CTR, CVR, ROAS) and percentage fees
@@ -58,3 +61,4 @@ price_level_vs_norway:
   UK: 0.85
   US: 0.90
   global: 0.70
+  assumption: 1.00   # assumptions are not price-level adjusted

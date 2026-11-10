@@ -73,13 +73,13 @@ benchmarks:
     price_band: any
     channel: meta
     geography: US
-    value: { low: 6, point: 11, high: 15 }
+    value: { low: 6, point: 13, high: 16 }
     unit: usd
-    source_name: "WordStream / Triple Whale / Lebesgue Meta CPM benchmarks"
-    source_url: "https://www.wordstream.com/blog/facebook-ads-benchmarks-2024"
-    published: 2024-06-01
+    source_name: "Triple Whale Facebook Ads benchmarks (2026 data); WordStream / Lebesgue"
+    source_url: "https://www.triplewhale.com/blog/facebook-ads-benchmarks.md"
+    published: 2026-01-01
     quality: C
-    notes: "Prospecting CPMs ~$6, retargeting ~$13; Triple Whale overall $13.30 -> $15.06 YoY. US proxy."
+    notes: "Triple Whale overall CPM $13.30 -> $15.06 YoY (2026 data); prospecting ~$6, retargeting ~$13. US proxy."
   - metric: cpm
     industry: beauty_skincare
     price_band: any
@@ -149,13 +149,13 @@ benchmarks:
     price_band: any
     channel: any
     geography: global
-    value: { low: 2.3, point: 3.3, high: 4.6 }
+    value: { low: 2.3, point: 3.2, high: 4.6 }
     unit: percent
-    source_name: "Oberlo / Statista / Monetate e-commerce CVR (beauty)"
-    source_url: "https://www.oberlo.com/statistics/ecommerce-conversion-rate-by-industry"
-    published: 2024-11-01
+    source_name: "Statista skincare e-commerce CVR (Q4 2025); Oberlo / Monetate"
+    source_url: "https://www.statista.com/statistics/1416165/global-conversion-rate-skincare"
+    published: 2025-12-01
     quality: C
-    notes: "Oberlo 4.55% (Nov 2024), Statista skincare 2.3% (Q3 2024) to 3.2% (Q4 2025), Monetate 3.3% avg."
+    notes: "Statista skincare 3.2% (Q4 2025), Oberlo beauty 4.55% (Nov 2024), Monetate 3.3% avg. Global proxy."
   - metric: cvr
     industry: fashion_accessories
     price_band: any
@@ -200,21 +200,21 @@ benchmarks:
     industry: any
     price_band: any
     channel: any
-    geography: global
+    geography: assumption
     value: { low: 10, point: 12, high: 15 }
     unit: percent
-    source_name: "ClicksGeek agency fee structures"
-    source_url: "https://clicksgeek.com/"
-    published: 2025-06-01
+    source_name: "Internal assumption (no verified public source)"
+    source_url: ""
+    published: 2026-11-01
     quality: D
-    notes: "Net-new creative often billed at ~10-15% of media spend, separate SoW. Labelled assumption for Norway."
+    notes: "Creative production is often ~10-15% of media spend as a separate SoW, but this is an unverified assumption, not a cited figure. Edit with real quotes."
 
   # --- labelled assumptions for gaps (quality D, no public source) -----------
   - metric: cpm
     industry: any
     price_band: any
     channel: snapchat
-    geography: "NO"
+    geography: assumption
     value: { low: 3, point: 5, high: 9 }
     unit: usd
     source_name: "Internal assumption (no credible public figure found)"
@@ -226,7 +226,7 @@ benchmarks:
     industry: any
     price_band: any
     channel: youtube
-    geography: "NO"
+    geography: assumption
     value: { low: 4, point: 8, high: 14 }
     unit: usd
     source_name: "Internal assumption (no credible public figure found)"
@@ -238,7 +238,7 @@ benchmarks:
     industry: any
     price_band: any
     channel: any
-    geography: "NO"
+    geography: assumption
     value: { low: 1.5, point: 3.0, high: 6.0 }
     unit: ratio
     source_name: "Internal assumption (ROAS is highly account-specific)"
