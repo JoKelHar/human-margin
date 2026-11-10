@@ -41,6 +41,15 @@ def test_price_band_boundaries():
     assert price_band(700, row) == "high"
 
 
+def test_typical_price_is_optional_and_converts_to_nok():
+    # absent by default
+    assert scenario_from_dict(_base(), FX).typical_price_nok == 0.0
+    # given in a foreign currency, it converts like any other money field
+    scn = scenario_from_dict(_base(currency="EUR", price=100, budget=1000, typical_price=50), FX)
+    assert scn.typical_price == 50
+    assert scn.typical_price_nok == 50 * 11.7
+
+
 def test_value_per_conversion_from_margin():
     scn = scenario_from_dict(_base(margin=0.5), FX)
     assert scn.value_per_conversion_nok == 450

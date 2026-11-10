@@ -4,16 +4,24 @@ version = "0.1.0"
 description = "Norwegian B2C media-buying analysis agent with AI-exhaustion detection (recommend-only)."
 readme = "README.md"
 requires-python = ">=3.11"
+# Core dependencies. The standalone Creative Approach Planner (scenario in,
+# recommendation out) needs only these -- no DuckDB. The agent's data store and
+# dashboard builder (DuckDB) are an optional extra, so the planner installs and
+# runs offline on its own. Install the full agent with: uv sync --extra agent
 dependencies = [
-    "duckdb>=1.1",
     "pandas>=2.2",
     "numpy>=1.26",
     "pyyaml>=6.0",
 ]
 
-# Heavier analysis/modelling dependencies are introduced in later phases so the
-# Phase 1 install stays small and fast. Install with: uv sync --extra modeling
 [project.optional-dependencies]
+# DuckDB-backed data store + synthetic generator + dashboard builder (demo_insights).
+# Required only for the agent/dashboard, never for the planner.
+agent = [
+    "duckdb>=1.1",
+]
+# Heavier analysis/modelling dependencies are introduced in later phases so the
+# base install stays small and fast. Install with: uv sync --extra modeling
 modeling = [
     "scipy>=1.13",
     "statsmodels>=0.14",
@@ -26,6 +34,7 @@ dashboard = [
 [dependency-groups]
 dev = [
     "pytest>=8.0",
+    "duckdb>=1.1",   # so the full (agent-side) test suite runs in development
 ]
 
 [build-system]

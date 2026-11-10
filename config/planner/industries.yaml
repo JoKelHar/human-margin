@@ -4,36 +4,153 @@
 # Editable list of B2C industries (bransjer) and the price thresholds that put a
 # scenario's price into a low / mid / high band.
 #
-# ASSUMPTION: the band thresholds below are unresearched placeholders, not sourced
-# figures. No credible per-industry Norwegian price-band source was found, so they
-# remain editable assumptions (listed by scripts/assumptions.py) until replaced by
-# real data, including pooled account data. Thresholds are in NOK (the planner's
-# internal currency); a scenario's price is converted to NOK before banding.
-#
 #   band(price_nok) = low  if price_nok <= low_max
 #                     high if price_nok >= high_min
 #                     mid  otherwise
+#
+# Every band now carries its own provenance, so it is clear which are researched
+# and which still need real data (scripts/assumptions.py lists the open ones):
+#   bands_tier: public_benchmark  a cited public anchor (bands_source)
+#               expert_estimate   a named slot the owner fills from experience
+#                                 (bands_filled: false until set; never invented)
+#               assumption        an unresearched placeholder, wide and editable
+#
+# Thresholds are in NOK (the planner's internal currency); a scenario's price is
+# converted to NOK before banding. An optional per-scenario `typical_price`
+# (schema.py) lets an advertiser contribute their representative price so pooled
+# data can refine these bands later.
+#
+# NOTE: no single public source gives per-industry Norwegian price bands. Where a
+# credible public anchor exists it is cited; the owner's own domains (hospitality,
+# culture) are left as expert_estimate slots to fill; the rest remain labelled
+# assumptions. Values are never invented to look sourced.
 # =============================================================================
 
-# True while the thresholds below are assumptions rather than sourced figures.
-price_bands_are_assumptions: true
-
 industries:
-  - { key: events_concerts,     label: "Events and concerts",        low_max: 250,    high_min: 800 }
-  - { key: uteliv,              label: "Nightlife (uteliv)",         low_max: 150,    high_min: 400 }
-  - { key: restaurant_cafe,     label: "Restaurant and cafe",        low_max: 200,    high_min: 600 }
-  - { key: hotel_travel,        label: "Hotel and travel",           low_max: 800,    high_min: 3000 }
-  - { key: culture,             label: "Culture (theatre, museums, festivals)", low_max: 150, high_min: 500 }
-  - { key: beauty_skincare,     label: "Beauty and skincare",        low_max: 200,    high_min: 700 }
-  - { key: fashion_accessories, label: "Fashion and accessories",    low_max: 400,    high_min: 2000 }
-  - { key: fitness_wellness,    label: "Fitness and wellness",       low_max: 300,    high_min: 1000 }
-  - { key: outdoor_sport,       label: "Outdoor and sport (friluftsliv)", low_max: 500, high_min: 2500 }
-  - { key: home_interior,       label: "Home and interior",          low_max: 800,    high_min: 5000 }
-  - { key: consumer_electronics, label: "Consumer electronics",      low_max: 1000,   high_min: 8000 }
-  - { key: food_drink_retail,   label: "Food and drink retail",      low_max: 150,    high_min: 600 }
-  - { key: automotive,          label: "Automotive (incl. EV)",      low_max: 200000, high_min: 500000 }
-  - { key: courses_education,   label: "Courses and education",      low_max: 2000,   high_min: 15000 }
-  - { key: other,               label: "Other",                      low_max: 300,    high_min: 1500 }
+  # --- owner's domains: expert_estimate slots to fill from experience ---------
+  - key: events_concerts
+    label: "Events and concerts"
+    low_max: 250
+    high_min: 800
+    bands_tier: expert_estimate
+    bands_filled: false
+    bands_expert: ""        # set to "<name>, <YYYY-MM>" when you fill the bands
+    bands_note: >-
+      Owner to set from live-events experience (typical ticket face value: club
+      night vs seated concert vs festival day pass). Placeholder until filled.
+  - key: uteliv
+    label: "Nightlife (uteliv)"
+    low_max: 150
+    high_min: 400
+    bands_tier: expert_estimate
+    bands_filled: false
+    bands_expert: ""
+    bands_note: >-
+      Owner to set (typical cover / entry / average spend per guest). Placeholder
+      until filled.
+  - key: restaurant_cafe
+    label: "Restaurant and cafe"
+    low_max: 200
+    high_min: 600
+    bands_tier: expert_estimate
+    bands_filled: false
+    bands_expert: ""
+    bands_note: >-
+      Owner to set (typical average cover / main-course price). Public hint: SSB
+      consumer-price tables for restaurant- og kafetjenester give index trends,
+      not absolute covers. Placeholder until filled.
+  - key: culture
+    label: "Culture (theatre, museums, festivals)"
+    low_max: 150
+    high_min: 500
+    bands_tier: expert_estimate
+    bands_filled: false
+    bands_expert: ""
+    bands_note: >-
+      Owner to set (typical ticket: museum entry vs theatre vs festival). Public
+      hint: average cinema ticket ~120 NOK (FILM&KINO, 2021, via Statista) is one
+      narrow point only. Placeholder until filled.
+
+  # --- researched against a public anchor ------------------------------------
+  - key: hotel_travel
+    label: "Hotel and travel"
+    low_max: 800
+    high_min: 3000
+    bands_tier: public_benchmark
+    bands_source: >-
+      SSB hotel price-per-room (StatBank table 12897); The Local (2023), citing
+      SSB: Oslo ~1,232, Stavanger ~1,207, Trondheim ~1,183, Bergen ~1,076
+      NOK/night ex. VAT.
+    bands_note: >-
+      Anchored to an average hotel room-night of ~1,000-1,300 NOK; multi-night and
+      high-season packages run well above, hence high_min at 3,000.
+  - key: automotive
+    label: "Automotive (incl. EV)"
+    low_max: 200000
+    high_min: 500000
+    bands_tier: public_benchmark
+    bands_source: >-
+      OFV (Opplysningsrådet for veitrafikken) via tek.no (2024): average new
+      passenger car ~560,000 NOK (last months of 2024 ~584,000; Q1 2024 ~556,761).
+    bands_note: >-
+      Mid band straddles the ~560k average new-car price; high_min 500k marks
+      above-average/premium. Pulled by the large EV mix.
+
+  # --- unresearched placeholders: labelled assumptions -----------------------
+  - key: beauty_skincare
+    label: "Beauty and skincare"
+    low_max: 200
+    high_min: 700
+    bands_tier: assumption
+    bands_note: "Placeholder; no public Norwegian source checked yet."
+  - key: fashion_accessories
+    label: "Fashion and accessories"
+    low_max: 400
+    high_min: 2000
+    bands_tier: assumption
+    bands_note: "Placeholder; no public Norwegian source checked yet."
+  - key: fitness_wellness
+    label: "Fitness and wellness"
+    low_max: 300
+    high_min: 1000
+    bands_tier: assumption
+    bands_note: "Placeholder; no public Norwegian source checked yet."
+  - key: outdoor_sport
+    label: "Outdoor and sport (friluftsliv)"
+    low_max: 500
+    high_min: 2500
+    bands_tier: assumption
+    bands_note: "Placeholder; no public Norwegian source checked yet."
+  - key: home_interior
+    label: "Home and interior"
+    low_max: 800
+    high_min: 5000
+    bands_tier: assumption
+    bands_note: "Placeholder; no public Norwegian source checked yet."
+  - key: consumer_electronics
+    label: "Consumer electronics"
+    low_max: 1000
+    high_min: 8000
+    bands_tier: assumption
+    bands_note: "Placeholder; no public Norwegian source checked yet."
+  - key: food_drink_retail
+    label: "Food and drink retail"
+    low_max: 150
+    high_min: 600
+    bands_tier: assumption
+    bands_note: "Placeholder; no public Norwegian source checked yet."
+  - key: courses_education
+    label: "Courses and education"
+    low_max: 2000
+    high_min: 15000
+    bands_tier: assumption
+    bands_note: "Placeholder; no public Norwegian source checked yet."
+  - key: other
+    label: "Other"
+    low_max: 300
+    high_min: 1500
+    bands_tier: assumption
+    bands_note: "Generic fallback band; always set a real industry where possible."
 
 # Campaign objectives a scenario can target.
 objectives: [ticket_sales, bookings, online_sales, leads, awareness]

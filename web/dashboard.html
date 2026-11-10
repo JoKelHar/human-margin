@@ -220,7 +220,7 @@
       <a href="#overview"><span class="dot"></span>Overview</a>
       <a href="#matrix"><span class="dot"></span>Decision matrix</a>
       <a href="#exhaustion"><span class="dot"></span>AI exhaustion</a>
-      <a href="#opportunity"><span class="dot"></span>Opportunities</a>
+      <a href="#patterns"><span class="dot"></span>Patterns</a>
       <a href="#compliance"><span class="dot"></span>Compliance</a>
     </nav>
     <div class="foot">
@@ -310,10 +310,10 @@
         <p class="caption">Audience segments where the human versus AI gap is widening over time, a sign that AI creative is tiring.</p>
         <div class="alerts" id="exhaustion-alerts"></div>
       </section>
-      <section id="opportunity" style="margin:0">
-        <div class="sec-head"><span class="eyebrow">Forward</span><h2>Opportunities</h2></div>
-        <p class="caption">Upcoming seasonal moments and strong organic posts worth a planned human versus AI test before spending.</p>
-        <div class="alerts" id="opportunity-alerts"></div>
+      <section id="patterns" style="margin:0">
+        <div class="sec-head"><span class="eyebrow">Forward</span><h2>Patterns</h2></div>
+        <p class="caption">Upcoming seasonal moments with what has happened in that window and the evidence behind it. Described, never prescribed.</p>
+        <div class="alerts" id="patterns-alerts"></div>
       </section>
     </div>
 
@@ -513,16 +513,15 @@
     ex.appendChild(makeAlert(a.severity, a.segment, "Gap +"+a.widening_permille+"‰", a.detail, a.action));
   });
 
-  // ---- opportunity alerts: calendar + organic + saturation
-  var op=document.getElementById("opportunity-alerts");
-  D.calendar_alerts.slice(0,4).forEach(function(c){
+  // ---- patterns: calendar + organic + saturation (descriptive)
+  var op=document.getElementById("patterns-alerts");
+  D.patterns.slice(0,4).forEach(function(c){
     var moment = MOMENT_GLOSS[c.moment]||c.moment;
-    // four fields: advertiser category + moment (title), plain-language timing, window, approach
-    var detail = "Window " + c.window + (c.detail ? ". " + c.detail : "");
+    // category + moment (title), plain-language timing, the observed pattern, the evidence line
     op.appendChild(makeAlert(c.status==="history"?"info":"medium",
-      c.category + " · " + moment, c.timing, detail, c.approach));
+      c.category + " · " + moment, c.timing, c.pattern, c.evidence));
   });
-  if (D.opportunities_note) op.appendChild(el("p", "caption", D.opportunities_note));
+  if (D.patterns_note) op.appendChild(el("p", "caption", D.patterns_note));
   D.organic_alerts.filter(function(o){return o.provenance==="human_led";}).slice(0,1).forEach(function(o){
     op.appendChild(makeAlert("ok","Organic outperformer","+"+o.quality_vs_median+"% vs median",
       "A human-led organic post is over-indexing on saves + shares.", o.action));
