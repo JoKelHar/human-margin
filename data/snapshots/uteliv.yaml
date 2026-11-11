@@ -1,0 +1,25 @@
+# Public ad-volume snapshot (day-one context layer) - PLACEHOLDER, not yet fetched.
+#
+# This slot is intentionally empty. It is populated either by:
+#     uv run python scripts/fetch_ad_library.py --industry uteliv \
+#         --market "Oslo nightlife" --terms "nattklubb,utested,bar oslo"
+# (needs an identity-verified Meta Ad Library API token, see that script), or by a
+# hand-coded manual sample:
+#     uv run python scripts/build_snapshot.py coded.csv --market "Oslo nightlife"
+# (see docs/snapshot-coding-guide.md). Until then n is 0 and the planner shows
+# "No market snapshot yet" rather than inventing any figures. Provenance is
+# public_snapshot: public, aggregate, dated, with the sample size always shown.
+# No performance data is ever stored here.
+industry: uteliv
+market: "Oslo nightlife"
+as_of: 2026-11-10
+n: 0
+status: awaiting_fetch
+provenance: public_snapshot
+source: >-
+  Meta Ad Library API (ads_archive, ad_type=ALL, country=NO) or a hand-coded
+  manual sample from the public Ad Library website; official transparency product,
+  within terms, no scraping. Not yet populated.
+method: ""
+median_run_days: null
+content_type_share: {}

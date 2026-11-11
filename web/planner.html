@@ -114,9 +114,11 @@ function pct(x){ return (x*100).toFixed(1) + "%"; }
 function esc(s){ return String(s).replace(/[&<>]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
 
 function tierBadge(tier, filled){
+  const label = { own_scenario:"your cost", public_benchmark:"public benchmark",
+                  expert_estimate:"expert estimate", assumption:"assumption" }[tier] || tier;
   const cls = tier==="expert_estimate" ? "expert" : (tier==="assumption"?"assumption":"");
-  const star = filled===false ? " ·provisional" : "";
-  return `<span class="tier ${cls}">${esc(tier)}${star}</span>`;
+  const star = filled===false ? " ·provisional (pending owner review)" : "";
+  return `<span class="tier ${cls}">${esc(label)}${star}</span>`;
 }
 
 function renderResult(d){

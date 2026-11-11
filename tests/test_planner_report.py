@@ -48,6 +48,23 @@ def test_dict_is_json_serialisable_and_non_prescriptive(path):
     assert d["cells"] and d["position"] and d["confidence"] in ("low", "medium", "high")
 
 
+def test_planner_runs_fully_offline_with_no_token_and_no_snapshot(monkeypatch):
+    # Zero-integration first run: no Ad Library token, no snapshot file -> the
+    # planner still produces a full position.
+    monkeypatch.delenv("META_AD_LIBRARY_TOKEN", raising=False)
+    scn = load_scenario(EXAMPLES[0])
+    r = plan(scn, draws=800)
+    text = render_text(r, check_agency(scn, r.leader), snapshot=None)
+    assert "POSITION" in text
+    assert not _prescriptive_hits(text)
+
+    # With an unpopulated snapshot, the market line is one quiet line, nothing else.
+    from mediekjop.planner.snapshot import Snapshot
+    empty = Snapshot(industry=scn.industry, market="Oslo nightlife", as_of=None,
+                     n=0, status="awaiting_fetch", source="")
+    assert "No market snapshot yet." in render_text(r, None, empty)
+
+
 def test_web_page_files_are_non_prescriptive_when_built():
     # The Pyodide demo runs this same report.py in-browser; its static template and
     # committed example data must also be free of prescriptive copy.

@@ -67,12 +67,28 @@ so the sample size is always shown. Shipped snapshots are empty placeholders
 nothing is invented. If a token or the terms block this, the project stops and
 says so rather than scraping.
 
+**Maintainer-built and bundled.** A snapshot is produced by the maintainer — fetched
+(or hand-coded, below), committed as a dated versioned file under `data/snapshots/`,
+and shipped to users bundled. No user ever needs a token or an account to benefit;
+with no snapshot present, the planner just says "No market snapshot yet" (see
+[docs/principles.md](docs/principles.md), zero-integration first run).
+
+**Manual-sample fallback (no API).** When a token is not available, a snapshot can
+be built by tagging 30–50 ads per industry **by hand** from the public Ad Library
+website into a CSV (template: `data/snapshots/manual_sample_template.csv`), then
+`uv run python scripts/build_snapshot.py <coded.csv> --market "…"`. Provenance is the
+same `public_snapshot` tier with `method: manual_sample` and the sample size shown.
+Reading the public transparency product and recording an aggregate count is not
+scraping. The coding procedure and content-type definitions (matching
+`formats.yaml`) are in [docs/snapshot-coding-guide.md](docs/snapshot-coding-guide.md).
+
 ## Production costs and content-format priors (Creative Approach Planner)
 
 `config/planner/formats.yaml` holds per-(format × approach) production costs and
 per-format response priors, each tiered. No single public source gives Norwegian
 commercial creative day rates, so solid anchors are cited and the owner's domains
-are left as `expert_estimate` slots (`scripts/assumptions.py` lists them):
+carry **drafted** provisional bands pending owner review (`scripts/assumptions.py`
+lists drafts and empty slots separately):
 
 - **Production-cost anchors (cited):** Norwegian film-industry collective **minimum
   daily rates**, valid 2025-06-01, 7.5h day (focal.ch rate table) — stills
@@ -82,9 +98,13 @@ are left as `expert_estimate` slots (`scripts/assumptions.py` lists them):
   prices (Influee) — ~$121/30s in Norway, Nordic premium +15–25% (InfluenceFlow),
   usage rights +30–50%; AI-tool subscriptions (vendor pricing, monthly): Midjourney
   $10/30/60/120, Runway ~$12–76, ElevenLabs $6/22/99.
-- **Expert-estimate slots (owner to fill):** commercial human day-rate cells
-  (static/short-video/studio human-led, short-video AI-assisted). Provisional
-  numbers until confirmed; never presented as sourced.
+- **Drafted cost bands (owner to review):** the four commercial human/hybrid
+  day-rate cells (static/short-video/studio human-led, short-video AI-assisted)
+  carry a drafted band (`tier: assumption`, `filled: false`, `source: "Claude draft,
+  2026-11, pending owner review"`): static human-led 6k–12k–25k, short-video
+  human-led 15k–30k–60k, short-video AI-assisted 4k–8k–15k, studio human-led
+  40k–80k–200k NOK. Provisional starting points, never presented as sourced; the
+  owner confirms and promotes them to `expert_estimate`.
 - **Content-format priors (C source, low relevance):** static vs video CTR
   ~1.1–1.18% vs ~1.6–1.9% (67k-ad Meta analysis; AdAmigo 2026); UGC vs polished
   +27% CTR / +19% CVR (webtonic), 2.64% vs 1.78% (foundrycro). The often-cited

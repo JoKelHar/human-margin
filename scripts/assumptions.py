@@ -12,7 +12,11 @@ measured data; each line says what would replace it.
 from __future__ import annotations
 
 from mediekjop.planner.benchmarks import load_benchmarks, load_weights, provenance
-from mediekjop.planner.formats import load_costs, load_formats
+from mediekjop.planner.formats import (
+    drafted_cost_slots,
+    load_formats,
+    unfilled_cost_slots,
+)
 from mediekjop.planner.schema import load_industries
 
 
@@ -73,16 +77,27 @@ def main() -> None:
                   f"ctr_mult {f.ctr_mult.point} / cvr_mult {f.cvr_mult.point}",
                   "a sourced or pooled per-format response figure for Norway")
 
-    print("\n## Production-cost expert slots to fill  (config/planner/formats.yaml)")
-    slots = [c for c in load_costs().values()
-             if c.tier == "expert_estimate" and not c.filled]
+    print("\n## Production-cost drafts awaiting owner review  (config/planner/formats.yaml)")
+    print("  (provisional values with a concrete band; confirm, then promote to expert_estimate)")
+    drafts = drafted_cost_slots()
+    for c in drafts:
+        _line("config/planner/formats.yaml",
+              f"production cost / {c.fmt} x {c.approach} (assumption, drafted — pending review)",
+              f"{c.nok.low:.0f}-{c.nok.point:.0f}-{c.nok.high:.0f} NOK  [source: '{c.source}']",
+              "confirm or adjust the band, then set tier: expert_estimate, filled: true, "
+              "source: '<name>, <YYYY-MM>'")
+    if not drafts:
+        print("  (no drafts pending in formats.yaml)")
+
+    print("\n## Production-cost expert slots still empty  (config/planner/formats.yaml)")
+    slots = unfilled_cost_slots()
     for c in slots:
         _line("config/planner/formats.yaml",
               f"production cost / {c.fmt} x {c.approach} (expert_estimate, unfilled)",
               f"{c.nok.low:.0f}-{c.nok.point:.0f}-{c.nok.high:.0f} NOK  [source: '']",
               "set a realistic commercial band from experience and add source: '<name>, <YYYY-MM>'")
     if not slots:
-        print("  (none unfilled in formats.yaml)")
+        print("  (none empty in formats.yaml)")
 
     print("\n## Market-similarity config  (config/planner/weights.yaml)")
     w = load_weights()

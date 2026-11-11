@@ -168,15 +168,18 @@ what the answer hinges on (sensitivity). Uncertainty is propagated by Monte Carl
 over triangular ranges (fixed seed; p10/p50/p90), not by multiplying lows and
 highs. The **agency-quote check** places a quote's fees against typical practice.
 A day-one **public-context layer** can show dated Meta Ad Library ad-volume
-snapshots (official API only, within terms; see `DATA_SOURCES.md`). Every figure
-cites a source or is a labelled assumption or expert-estimate slot; none are
-invented.
+snapshots (official API only, within terms, or a hand-coded manual sample; see
+`DATA_SOURCES.md`). Snapshots are **maintainer-built and bundled** — trying the
+planner needs no token, account or network call, and with none present it just
+says "No market snapshot yet". Every figure cites a source or is a labelled
+assumption or drafted slot; none are invented.
 
 ```bash
-uv run python scripts/plan.py --all          # full recommendation for the example scenarios
+uv run python scripts/plan.py --all          # full position for the example scenarios
 uv run python scripts/plan.py scenarios/examples/club_night.yaml --format ugc_talking_head
 uv run python scripts/build_planner_demo.py  # build the in-browser demo (web/ and docs/)
-uv run python scripts/assumptions.py         # every assumption + expert slot and what replaces it
+uv run python scripts/assumptions.py         # every assumption, drafted band and empty slot
+uv run python scripts/build_snapshot.py sample.csv --market "Oslo nightlife"  # manual snapshot (no API)
 uv run python scripts/refresh_benchmarks.py  # flag benchmark entries over 18 months old
 ```
 

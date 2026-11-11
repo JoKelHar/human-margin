@@ -294,12 +294,19 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
             conv_per_1000 = conv_eff / np.maximum(allin, 1e-9) * 1000.0
             cost_per_conv = allin / np.maximum(conv_eff, 1e-9)
             cell = costs.get((fkey, approach))
+            # If the advertiser supplied their own cost for this approach, that is
+            # what the cell used - so it is their real figure, not a library draft.
+            used_override = _scenario_cost(scn, approach) is not None
+            if used_override:
+                prod_tier, prod_filled = "own_scenario", True
+            else:
+                prod_tier = cell.tier if cell else "assumption"
+                prod_filled = cell.filled if cell else True
             cells.append(Cell(
                 approach=approach, fmt=fkey, conv=_pcts(conv_eff), margin=_pcts(margin),
                 conv_per_1000=float(np.median(conv_per_1000)),
                 cost_per_conv=float(np.median(cost_per_conv)),
-                prod_tier=(cell.tier if cell else "assumption"),
-                prod_filled=(cell.filled if cell else True),
+                prod_tier=prod_tier, prod_filled=prod_filled,
             ))
 
     # Leading approach = highest median conversions per krone across its formats.

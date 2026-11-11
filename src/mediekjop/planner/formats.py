@@ -141,6 +141,19 @@ def load_costs(path: str | None = None) -> dict[tuple[str, str], CostCell]:
 
 
 def unfilled_cost_slots(path: str | None = None) -> list[CostCell]:
-    """Expert-estimate cost cells the owner has not yet confirmed."""
+    """Expert-estimate cost cells that are still empty (no drafted value)."""
     return [c for c in load_costs(path).values()
             if c.tier == "expert_estimate" and not c.filled]
+
+
+def drafted_cost_slots(path: str | None = None) -> list[CostCell]:
+    """Cost cells carrying a *drafted* placeholder value awaiting owner review.
+
+    Distinct from :func:`unfilled_cost_slots`: these have a concrete starting band
+    and a ``source`` marked "pending owner review", to be confirmed and promoted
+    to ``expert_estimate`` by the owner. Surfaced separately by the assumptions
+    register so a drafted figure is never mistaken for an empty slot or for
+    sourced data.
+    """
+    return [c for c in load_costs(path).values()
+            if not c.filled and "pending owner review" in c.source.lower()]

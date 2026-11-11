@@ -33,7 +33,13 @@ from .benchmarks import (
 )
 from .currency import FxRates, Money, SUPPORTED, load_fx_rates
 from .engine import PlanResult, plan
-from .formats import FormatError, load_costs, load_formats, unfilled_cost_slots
+from .formats import (
+    FormatError,
+    drafted_cost_slots,
+    load_costs,
+    load_formats,
+    unfilled_cost_slots,
+)
 from .report import PRESCRIPTIVE, render_text, to_dict
 from .schema import (
     AgencyQuote,
@@ -47,7 +53,14 @@ from .schema import (
     price_band,
     scenario_from_dict,
 )
-from .snapshot import Snapshot, SnapshotError, context_line, load_snapshot, load_snapshots
+from .snapshot import (
+    Snapshot,
+    SnapshotError,
+    context_line,
+    load_manual_sample,
+    load_snapshot,
+    load_snapshots,
+)
 
 __all__ = [
     "Money", "FxRates", "load_fx_rates", "SUPPORTED",
@@ -56,9 +69,10 @@ __all__ = [
     "load_benchmarks", "load_weights", "estimate", "Estimate", "market_weight",
     "is_stale", "stale_entries", "BenchmarkError",
     "provenance", "tag", "LEGEND", "PROVENANCE_LABEL",
-    "load_formats", "load_costs", "unfilled_cost_slots", "FormatError",
+    "load_formats", "load_costs", "unfilled_cost_slots", "drafted_cost_slots", "FormatError",
     "plan", "PlanResult",
     "check_agency", "AgencyCheck",
-    "Snapshot", "SnapshotError", "load_snapshot", "load_snapshots", "context_line",
+    "Snapshot", "SnapshotError", "load_snapshot", "load_snapshots",
+    "load_manual_sample", "context_line",
     "render_text", "to_dict", "PRESCRIPTIVE",
 ]

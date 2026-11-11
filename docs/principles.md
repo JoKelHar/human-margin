@@ -12,6 +12,18 @@ none instructs.**
 This is the test for all copy in the README, the dashboard, the live demo, the
 planner and the reports. If a line tells the reader what to do, it is wrong.
 
+## Zero-integration first run
+
+**Trying the tool needs no token, no account, no upload and no network call.** The
+planner runs on bundled benchmarks, format priors and example scenarios; it works
+fully offline, and with no market snapshot present it simply says "No market
+snapshot yet" — no error, no prompt to connect.
+
+Everything beyond the first run is **optional and opt-in**: linking an ad account,
+contributing pooled data, and fetching or coding a public ad-volume snapshot. Each
+adds evidence when the user chooses it; none is a precondition for getting a useful
+position on day one.
+
 ## The three jobs it serves
 
 1. **Gut-check** — a freelance marketer checks their feel for an industry, and

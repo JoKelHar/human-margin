@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-10",
+  "generated": "2026-11-11",
   "fx_note": "FX as of 2026-11-01 (fallback (not live))",
   "draws": 5000,
   "seed": 20260101,
@@ -49,7 +49,7 @@
           "margin_p50": -4390.89878835856,
           "conv_per_1000": 1.276961991715622,
           "cost_per_conv": 783.1086645759325,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -63,7 +63,7 @@
           "margin_p50": -5042.621330020644,
           "conv_per_1000": 1.1590865746362569,
           "cost_per_conv": 862.7483258140517,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -77,7 +77,7 @@
           "margin_p50": -4944.018849247838,
           "conv_per_1000": 0.9339417989160693,
           "cost_per_conv": 1070.7305340776809,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -91,8 +91,8 @@
           "margin_p50": -5265.707002660457,
           "conv_per_1000": 0.8910954965842319,
           "cost_per_conv": 1122.2143280041864,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "human_led",
@@ -105,22 +105,8 @@
           "margin_p50": -5590.730337172504,
           "conv_per_1000": 0.8502927677901387,
           "cost_per_conv": 1176.0655133789128,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
-        },
-        {
-          "approach": "human_led",
-          "approach_label": "human-led",
-          "format": "studio_shoot",
-          "format_label": "Studio / polished production",
-          "conv_p10": 2.6802853904223523,
-          "conv_p50": 5.548404028848677,
-          "conv_p90": 10.90914960466333,
-          "margin_p50": -5712.89899278783,
-          "conv_per_1000": 0.78146535617587,
-          "cost_per_conv": 1279.647324095199,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "ai_generated",
@@ -133,7 +119,7 @@
           "margin_p50": -5310.759630785084,
           "conv_per_1000": 0.7065056553270795,
           "cost_per_conv": 1415.4168379806242,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -141,13 +127,27 @@
           "approach_label": "AI-generated",
           "format": "ai_mockup",
           "format_label": "AI product mock-up / scene",
-          "conv_p10": 2.155385783063603,
-          "conv_p50": 4.478096771057696,
-          "conv_p90": 8.797461578213017,
-          "margin_p50": -5330.475807235576,
-          "conv_per_1000": 0.6942785691562319,
-          "cost_per_conv": 1440.3440428551137,
-          "prod_tier": "public_benchmark",
+          "conv_p10": 2.127596580728086,
+          "conv_p50": 4.404569858365955,
+          "conv_p90": 8.618525105269542,
+          "margin_p50": -5348.8575354085115,
+          "conv_per_1000": 0.6828790478086753,
+          "cost_per_conv": 1464.388175134265,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "studio_shoot",
+          "format_label": "Studio / polished production",
+          "conv_p10": 2.3072439717646853,
+          "conv_p50": 4.78338852594826,
+          "conv_p90": 9.3828782988929,
+          "margin_p50": -5904.152868512935,
+          "conv_per_1000": 0.6737166937955295,
+          "cost_per_conv": 1484.303644524724,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -161,7 +161,7 @@
           "margin_p50": -5636.790614168996,
           "conv_per_1000": 0.6720055414500392,
           "cost_per_conv": 1488.0829759817316,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -169,13 +169,13 @@
           "approach_label": "hybrid (AI-assisted)",
           "format": "ai_mockup",
           "format_label": "AI product mock-up / scene",
-          "conv_p10": 2.1610720214315173,
-          "conv_p50": 4.474016809033687,
-          "conv_p90": 8.812952974091404,
-          "margin_p50": -5656.495797741578,
-          "conv_per_1000": 0.6603714847282196,
-          "cost_per_conv": 1514.2991844668963,
-          "prod_tier": "public_benchmark",
+          "conv_p10": 2.1324948385763265,
+          "conv_p50": 4.399399175014253,
+          "conv_p90": 8.59657211264639,
+          "margin_p50": -5675.150206246437,
+          "conv_per_1000": 0.6493578118102218,
+          "cost_per_conv": 1539.9830136982728,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -189,8 +189,8 @@
           "margin_p50": -5962.608150767461,
           "conv_per_1000": 0.6407841404126978,
           "cost_per_conv": 1560.5879661651193,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         }
       ],
       "sensitivity": [
@@ -240,7 +240,7 @@
       "draws": 5000,
       "seed": 20260101,
       "market_context": {
-        "line": "No public ad-volume snapshot for Oslo nightlife yet (awaiting an official Ad Library fetch; nothing is assumed).",
+        "line": "No market snapshot yet.",
         "populated": false,
         "n": 0,
         "as_of": "2026-11-10",
@@ -292,7 +292,7 @@
           "margin_p50": 27772.712604887427,
           "conv_per_1000": 1.4813126423851364,
           "cost_per_conv": 675.0769372566915,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -306,7 +306,7 @@
           "margin_p50": 27743.25283812179,
           "conv_per_1000": 1.476646287232906,
           "cost_per_conv": 677.2102491250957,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -320,8 +320,8 @@
           "margin_p50": 15933.558050407248,
           "conv_per_1000": 1.086674157235797,
           "cost_per_conv": 920.2390558520447,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "ai_assisted",
@@ -334,8 +334,8 @@
           "margin_p50": 15900.728742534131,
           "conv_per_1000": 1.084521914255959,
           "cost_per_conv": 922.0654011153708,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "ai_generated",
@@ -348,7 +348,7 @@
           "margin_p50": 15795.85952291336,
           "conv_per_1000": 1.079986482611112,
           "cost_per_conv": 925.9375161188557,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -356,14 +356,14 @@
           "approach_label": "human-led",
           "format": "studio_shoot",
           "format_label": "Studio / polished production",
-          "conv_p10": 8.040856171267057,
-          "conv_p50": 16.64521208654603,
-          "conv_p90": 32.72744881398999,
-          "margin_p50": 13294.715089116191,
-          "conv_per_1000": 0.9987127251927619,
-          "cost_per_conv": 1001.2889859899835,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "conv_p10": 6.921731915294058,
+          "conv_p50": 14.35016557784478,
+          "conv_p90": 28.148634896678708,
+          "margin_p50": 9163.631373453936,
+          "conv_per_1000": 0.8610099346706868,
+          "cost_per_conv": 1161.42695189728,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "human_led",
@@ -376,8 +376,8 @@
           "margin_p50": 7900.997276756168,
           "conv_per_1000": 0.8189221314474278,
           "cost_per_conv": 1221.1173444171513,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "ai_assisted",
@@ -390,7 +390,7 @@
           "margin_p50": 7885.322733949688,
           "conv_per_1000": 0.8178750077827575,
           "cost_per_conv": 1222.6807231928615,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -404,7 +404,7 @@
           "margin_p50": 7874.258641708845,
           "conv_per_1000": 0.8169851253334057,
           "cost_per_conv": 1224.012493826483,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -412,13 +412,13 @@
           "approach_label": "hybrid (AI-assisted)",
           "format": "ai_mockup",
           "format_label": "AI product mock-up / scene",
-          "conv_p10": 6.483216064294551,
-          "conv_p50": 13.422050427101063,
-          "conv_p90": 26.43885892227421,
-          "margin_p50": 7459.690768781911,
-          "conv_per_1000": 0.8037155944371893,
-          "cost_per_conv": 1244.2212241376224,
-          "prod_tier": "public_benchmark",
+          "conv_p10": 6.39748451572898,
+          "conv_p50": 13.198197525042758,
+          "conv_p90": 25.78971633793917,
+          "margin_p50": 7056.755545076963,
+          "conv_per_1000": 0.7903112290444765,
+          "cost_per_conv": 1265.324296618015,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -426,13 +426,13 @@
           "approach_label": "AI-generated",
           "format": "ai_mockup",
           "format_label": "AI product mock-up / scene",
-          "conv_p10": 6.4661573491908095,
-          "conv_p50": 13.434290313173088,
-          "conv_p90": 26.392384734639048,
-          "margin_p50": 7448.389230378226,
-          "conv_per_1000": 0.8028460346517783,
-          "cost_per_conv": 1245.5688363708302,
-          "prod_tier": "public_benchmark",
+          "conv_p10": 6.382789742184256,
+          "conv_p50": 13.213709575097866,
+          "conv_p90": 25.855575315808625,
+          "margin_p50": 7051.343901842826,
+          "conv_per_1000": 0.7896639188305499,
+          "cost_per_conv": 1266.361522682861,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         }
       ],
@@ -525,7 +525,7 @@
           "margin_p50": 7167.371631757835,
           "conv_per_1000": 1.0458926789289862,
           "cost_per_conv": 956.1210439589871,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -539,7 +539,7 @@
           "margin_p50": 3750.8352318018224,
           "conv_per_1000": 0.8229514679917426,
           "cost_per_conv": 1215.1384870620445,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -553,7 +553,7 @@
           "margin_p50": 1857.4190472207529,
           "conv_per_1000": 0.7649428067312567,
           "cost_per_conv": 1307.287279978564,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -567,8 +567,8 @@
           "margin_p50": 189.21277445961368,
           "conv_per_1000": 0.6754877750330822,
           "cost_per_conv": 1480.4118902638252,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "human_led",
@@ -581,8 +581,8 @@
           "margin_p50": -1511.0112368560358,
           "conv_per_1000": 0.6037078651309985,
           "cost_per_conv": 1656.43030053368,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "ai_generated",
@@ -595,7 +595,7 @@
           "margin_p50": -1663.29245553681,
           "conv_per_1000": 0.5786617748393221,
           "cost_per_conv": 1728.1252091623905,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -603,28 +603,14 @@
           "approach_label": "AI-generated",
           "format": "ai_mockup",
           "format_label": "AI product mock-up / scene",
-          "conv_p10": 3.448617252901765,
-          "conv_p50": 7.164954833692313,
-          "conv_p90": 14.075938525140826,
-          "margin_p50": -1852.567749461531,
-          "conv_per_1000": 0.5686472090231994,
-          "cost_per_conv": 1758.559587206825,
-          "prod_tier": "public_benchmark",
+          "conv_p10": 3.404154529164937,
+          "conv_p50": 7.047311773385529,
+          "conv_p90": 13.789640168431267,
+          "margin_p50": -2029.0323399217068,
+          "conv_per_1000": 0.5593104582052006,
+          "cost_per_conv": 1787.9157952220676,
+          "prod_tier": "own_scenario",
           "prod_filled": true
-        },
-        {
-          "approach": "human_led",
-          "approach_label": "human-led",
-          "format": "studio_shoot",
-          "format_label": "Studio / polished production",
-          "conv_p10": 4.288456624675764,
-          "conv_p50": 8.877446446157883,
-          "conv_p90": 17.454639367461326,
-          "margin_p50": -2683.830330763175,
-          "conv_per_1000": 0.5548404028848677,
-          "cost_per_conv": 1802.3201747819703,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
         },
         {
           "approach": "ai_assisted",
@@ -637,7 +623,7 @@
           "margin_p50": -3373.1898960223616,
           "conv_per_1000": 0.509408396455834,
           "cost_per_conv": 1963.061490455605,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -645,13 +631,27 @@
           "approach_label": "hybrid (AI-assisted)",
           "format": "ai_mockup",
           "format_label": "AI product mock-up / scene",
-          "conv_p10": 3.4577152342904274,
-          "conv_p50": 7.1584268944539,
-          "conv_p90": 14.100724758546244,
-          "margin_p50": -3562.35965831915,
-          "conv_per_1000": 0.5005892933184546,
-          "cost_per_conv": 1997.6456031251491,
-          "prod_tier": "public_benchmark",
+          "conv_p10": 3.4119917417221224,
+          "conv_p50": 7.039038680022804,
+          "conv_p90": 13.754515380234222,
+          "margin_p50": -3741.4419799657935,
+          "conv_per_1000": 0.4922404671344618,
+          "cost_per_conv": 2031.5274073694927,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "studio_shoot",
+          "format_label": "Studio / polished production",
+          "conv_p10": 3.691590354823497,
+          "conv_p50": 7.653421641517216,
+          "conv_p90": 15.012605278228643,
+          "margin_p50": -4519.867537724175,
+          "conv_per_1000": 0.478338852594826,
+          "cost_per_conv": 2090.5685134151036,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -665,8 +665,8 @@
           "margin_p50": -5081.038247367629,
           "conv_per_1000": 0.4549567396930154,
           "cost_per_conv": 2198.011219950872,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         }
       ],
       "sensitivity": [
@@ -760,7 +760,7 @@
           "margin_p50": 84025.19898292015,
           "conv_per_1000": 5.384251859541773,
           "cost_per_conv": 185.72682572595374,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -774,7 +774,7 @@
           "margin_p50": 80990.49211213904,
           "conv_per_1000": 5.009375910804641,
           "cost_per_conv": 199.62566642724354,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -788,7 +788,7 @@
           "margin_p50": 49605.72348938373,
           "conv_per_1000": 3.937265039281277,
           "cost_per_conv": 253.9834157301849,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -802,8 +802,8 @@
           "margin_p50": 47962.35202190661,
           "conv_per_1000": 3.7921941874266887,
           "cost_per_conv": 263.69957618235736,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "human_led",
@@ -816,22 +816,8 @@
           "margin_p50": 46250.79710442097,
           "conv_per_1000": 3.6550018364296673,
           "cost_per_conv": 273.5977083272918,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
-        },
-        {
-          "approach": "human_led",
-          "approach_label": "human-led",
-          "format": "studio_shoot",
-          "format_label": "Studio / polished production",
-          "conv_p10": 101.81203459246774,
-          "conv_p50": 159.563060342977,
-          "conv_p90": 240.99128659727205,
-          "margin_p50": 38664.05258520759,
-          "conv_per_1000": 3.359222323010042,
-          "cost_per_conv": 297.68795027339524,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         },
         {
           "approach": "ai_generated",
@@ -844,7 +830,21 @@
           "margin_p50": 26617.701598147833,
           "conv_per_1000": 2.970853894906791,
           "cost_per_conv": 336.60356247486527,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "studio_shoot",
+          "format_label": "Studio / polished production",
+          "conv_p10": 87.85325434573609,
+          "conv_p50": 137.5457178935963,
+          "conv_p90": 207.71663656878906,
+          "margin_p50": 26774.687662542012,
+          "conv_per_1000": 2.895699324075712,
+          "cost_per_conv": 345.33972265067166,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -852,13 +852,13 @@
           "approach_label": "AI-generated",
           "format": "ai_mockup",
           "format_label": "AI product mock-up / scene",
-          "conv_p10": 81.27999558826701,
-          "conv_p50": 128.62557328122838,
-          "conv_p90": 195.64658938400783,
-          "margin_p50": 25407.809571863327,
-          "conv_per_1000": 2.91999031285422,
-          "cost_per_conv": 342.46688964160825,
-          "prod_tier": "public_benchmark",
+          "conv_p10": 80.44886058020482,
+          "conv_p50": 126.79901696581774,
+          "conv_p90": 191.67177673985324,
+          "margin_p50": 24421.469161541572,
+          "conv_per_1000": 2.878524789235363,
+          "cost_per_conv": 347.40016976311637,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -872,7 +872,7 @@
           "margin_p50": 25282.37621383097,
           "conv_per_1000": 2.874663762519205,
           "cost_per_conv": 347.866783701753,
-          "prod_tier": "public_benchmark",
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -880,13 +880,13 @@
           "approach_label": "hybrid (AI-assisted)",
           "format": "ai_mockup",
           "format_label": "AI product mock-up / scene",
-          "conv_p10": 81.415191494734,
-          "conv_p50": 129.04399899145926,
-          "conv_p90": 195.32473020956448,
-          "margin_p50": 23908.759455387997,
-          "conv_per_1000": 2.819093369556729,
-          "cost_per_conv": 354.72397358472165,
-          "prod_tier": "public_benchmark",
+          "conv_p10": 80.44740870948581,
+          "conv_p50": 126.98047161683928,
+          "conv_p90": 191.59229017057427,
+          "margin_p50": 22794.454673093212,
+          "conv_per_1000": 2.774013579832644,
+          "cost_per_conv": 360.48850216436654,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -900,8 +900,8 @@
           "margin_p50": 23421.217024896476,
           "conv_per_1000": 2.76495972806614,
           "cost_per_conv": 361.6689209713337,
-          "prod_tier": "expert_estimate",
-          "prod_filled": false
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         }
       ],
       "sensitivity": [

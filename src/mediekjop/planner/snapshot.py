@@ -18,6 +18,9 @@ and nothing is invented.
 
 from __future__ import annotations
 
+import csv
+import statistics
+from collections import Counter
 from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
@@ -25,8 +28,15 @@ from pathlib import Path
 import yaml
 
 from ..config import repo_root
+from .formats import load_formats
 
 PROVENANCE = "public_snapshot"
+
+# Content types a coder may record in a manual sample. The format keys from
+# formats.yaml, plus "other" for anything that fits none (kept, never dropped).
+_MANUAL_COLUMNS = ("ad_url", "industry", "content_type", "start_date",
+                   "still_active", "coder", "date_coded")
+_TRUE = {"y", "yes", "true", "1", "active"}
 
 
 class SnapshotError(ValueError):
@@ -86,11 +96,95 @@ def load_snapshots(directory: str | Path | None = None) -> dict[str, Snapshot]:
     return out
 
 
+def _valid_content_types() -> set[str]:
+    return set(load_formats().keys()) | {"other"}
+
+
+def _parse_date(s: str, where: str) -> date:
+    try:
+        return date.fromisoformat(s.strip()[:10])
+    except (ValueError, AttributeError) as exc:
+        raise SnapshotError(f"{where}: bad date {s!r} (want YYYY-MM-DD)") from exc
+
+
+def load_manual_sample(
+    csv_path: str | Path,
+    *,
+    market: str | dict[str, str] | None = None,
+    source: str | None = None,
+) -> dict[str, Snapshot]:
+    """Build snapshots from a hand-coded CSV of public Ad Library ads.
+
+    The manual fallback to :mod:`scripts.fetch_ad_library` when an API token is
+    not available: a maintainer tags 30-50 ads per industry straight from the
+    public Ad Library website into a CSV (template at
+    ``data/snapshots/manual_sample_template.csv``; coding guide at
+    ``docs/snapshot-coding-guide.md``). Columns: ``ad_url, industry,
+    content_type, start_date, still_active, coder, date_coded``.
+
+    Aggregates per industry into a :class:`Snapshot` with ``method="manual_sample"``
+    and provenance ``public_snapshot``: content-type shares, a run-length
+    longevity proxy (``date_coded - start_date``, in days) and the sample size N.
+    No performance data is read or stored. ``content_type`` must be one of the
+    formats in formats.yaml (or ``other``); an unknown value raises rather than
+    being silently dropped.
+    """
+    rows = list(csv.DictReader(Path(csv_path).read_text(encoding="utf-8").splitlines()))
+    valid = _valid_content_types()
+    by_industry: dict[str, list[dict]] = {}
+    for i, row in enumerate(rows, start=2):  # row 1 is the header
+        missing = [c for c in _MANUAL_COLUMNS if c not in row]
+        if missing:
+            raise SnapshotError(f"manual sample {csv_path} row {i}: missing column(s) {missing}")
+        ind = (row["industry"] or "").strip()
+        ctype = (row["content_type"] or "").strip()
+        if not ind:
+            raise SnapshotError(f"manual sample row {i}: empty industry")
+        if ctype not in valid:
+            raise SnapshotError(
+                f"manual sample row {i}: content_type {ctype!r} is not a known format "
+                f"(expected one of {sorted(valid)}; see docs/snapshot-coding-guide.md)")
+        by_industry.setdefault(ind, []).append(row)
+
+    def _market_for(ind: str) -> str:
+        if isinstance(market, dict):
+            return market.get(ind, ind)
+        return market or ind
+
+    src = source or (
+        "Manual sample, tagged by hand from the public Meta Ad Library website "
+        "(no API, no scraping); official transparency product, within terms.")
+    out: dict[str, Snapshot] = {}
+    for ind, items in by_industry.items():
+        shares = Counter((r["content_type"] or "").strip() for r in items)
+        n = len(items)
+        content_share = {k: v / n for k, v in shares.items()}
+        runs: list[float] = []
+        coded_dates: list[date] = []
+        for r in items:
+            start = _parse_date(r["start_date"], f"row for {r.get('ad_url', '?')}")
+            coded = _parse_date(r["date_coded"], f"row for {r.get('ad_url', '?')}")
+            coded_dates.append(coded)
+            runs.append(float(max((coded - start).days, 0)))
+        out[ind] = Snapshot(
+            industry=ind, market=_market_for(ind), as_of=max(coded_dates),
+            n=n, status="sampled", source=src,
+            content_type_share=content_share,
+            median_run_days=float(statistics.median(runs)) if runs else None,
+            method="manual_sample",
+        )
+    return out
+
+
 def context_line(snap: Snapshot) -> str:
-    """One plain-language context line (a position), or an honest 'not yet' note."""
+    """One plain-language context line (a position), or one quiet 'not yet' line.
+
+    When no snapshot is populated the planner says one quiet line and nothing
+    else - no error, no prompt to connect or fetch. Trying the tool never needs a
+    token, an account or a network call (docs/principles.md, zero-integration).
+    """
     if not snap.populated:
-        return (f"No public ad-volume snapshot for {snap.market} yet "
-                f"(awaiting an official Ad Library fetch; nothing is assumed).")
+        return "No market snapshot yet."
     parts = []
     if snap.content_type_share:
         top = max(snap.content_type_share.items(), key=lambda kv: kv[1])

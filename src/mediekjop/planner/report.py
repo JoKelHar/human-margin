@@ -117,7 +117,7 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
 
     out.append("\nConversions per krone, by approach x format  (p50; wider ranges = less certain)")
     for c in sorted(r.cells, key=lambda c: -c.conv_per_1000):
-        star = "" if c.prod_filled else "  [expert slot — provisional cost]"
+        star = "" if c.prod_filled else "  [draft cost — pending owner review]"
         out.append(f"  {APPROACH_LABEL.get(c.approach, c.approach):20} {_fmt_label(c.fmt):28} "
                    f"{c.conv_per_1000:6.2f} conv/1000kr · cost/conv {c.cost_per_conv:,.0f} NOK"
                    .replace(",", " ") + star)

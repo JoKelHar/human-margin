@@ -68,24 +68,24 @@ formats:
   - key: studio_shoot
     label: "Studio / polished production"
     approaches: [human_led]
-    ctr_mult: { low: 0.90, point: 1.20, high: 1.50 }
+    ctr_mult: { low: 0.80, point: 1.00, high: 1.30 }
     cvr_mult: { low: 0.90, point: 1.00, high: 1.15 }
     priors_tier: assumption
     priors_note: >-
-      Polished studio holds up better in Feed/in-stream than lo-fi, but no clean
-      public isolation vs static exists; modest edge, wide range. Replace with
-      pooled data.
+      No clean public isolation vs static exists; drafted near static parity with
+      a slight edge possible either way, wide range. Replace with pooled data.
 
   - key: ai_mockup
     label: "AI product mock-up / scene"
     approaches: [ai_assisted, ai_generated]
     ctr_mult: { low: 0.80, point: 1.00, high: 1.20 }
-    cvr_mult: { low: 0.80, point: 1.00, high: 1.15 }
+    cvr_mult: { low: 0.85, point: 0.95, high: 1.10 }
     priors_tier: assumption
     priors_note: >-
-      Synthetic product imagery assumed near static parity on response; the
-      human-vs-AI difference is carried by the approach-level response prior and
-      the separate memory_brand line, not here. Placeholder, wide range.
+      Synthetic product imagery assumed near static parity on response, with a
+      slight CVR drag for product-misrepresentation risk (format-level, not the
+      human-vs-AI prior — that is carried by the approach-level response prior and
+      the separate memory_brand line). Placeholder, wide range.
 
 # -----------------------------------------------------------------------------
 # Production cost matrix: upfront NOK for one creative set, per (format x
@@ -104,19 +104,23 @@ formats:
 #    Runway $12-76; ElevenLabs $6/22/99. Modelled as a monthly tool line.
 #
 # Commercial human day rates well above the union floors are NOT publicly
-# published for Norway -> left as expert_estimate slots (provisional until the
-# owner fills them). Values are never dressed up as sourced.
+# published for Norway. The four human/hybrid cells that depend on them carry a
+# DRAFTED band (tier: assumption, filled: false, source: "Claude draft ... pending
+# owner review"): a provisional starting point the owner confirms and promotes to
+# expert_estimate. They are listed separately from truly empty slots by
+# scripts/assumptions.py. Values are never dressed up as sourced.
 # -----------------------------------------------------------------------------
 costs:
   static_image:
     human_led:
-      nok: { low: 4900, point: 8000, high: 15000 }
-      tier: expert_estimate
+      nok: { low: 6000, point: 12000, high: 25000 }
+      tier: assumption
       filled: false
-      source: ""   # set to "<name>, <YYYY-MM>" when confirmed
+      source: "Claude draft, 2026-11, pending owner review"
       note: >-
-        Studio product stills: floor ~4,900 NOK ex VAT (Oslo studio package);
-        commercial half/full day with usage above that. Owner to confirm.
+        Half-to-full photographer day + retouch + paid-social usage. Oslo studio
+        product-stills floor ~4,900 NOK ex VAT anchors the low end. Drafted value,
+        awaiting owner review before promotion to expert_estimate.
     ai_assisted:
       nok: { low: 800, point: 1600, high: 3500 }
       tier: public_benchmark
@@ -127,19 +131,22 @@ costs:
       source: "AI image tool subscription + minimal human time."
   short_video:
     human_led:
-      nok: { low: 8000, point: 18000, high: 40000 }
-      tier: expert_estimate
+      nok: { low: 15000, point: 30000, high: 60000 }
+      tier: assumption
       filled: false
-      source: ""
+      source: "Claude draft, 2026-11, pending owner review"
       note: >-
-        Commercial shoot day + edit + usage. Union camera-operator floor ~2,726
-        NOK/day is well below commercial market; owner to set a realistic band.
+        1 shoot day + 1-2 edit days + cutdowns + usage. Union camera-operator
+        floor ~2,726 NOK/day sits well below this commercial band. Drafted value,
+        awaiting owner review before promotion to expert_estimate.
     ai_assisted:
-      nok: { low: 2000, point: 5000, high: 12000 }
-      tier: expert_estimate
+      nok: { low: 4000, point: 8000, high: 15000 }
+      tier: assumption
       filled: false
-      source: ""
-      note: "AI b-roll / stock + human editor. Owner to confirm editor rates."
+      source: "Claude draft, 2026-11, pending owner review"
+      note: >-
+        ~1 editor day + AI tools/stock. Drafted value, awaiting owner review
+        before promotion to expert_estimate.
     ai_generated:
       nok: { low: 800, point: 2000, high: 5000 }
       tier: public_benchmark
@@ -157,13 +164,14 @@ costs:
       source: "AI avatar / synthetic-UGC tool subscription + script + light edit."
   studio_shoot:
     human_led:
-      nok: { low: 15000, point: 28000, high: 60000 }
-      tier: expert_estimate
+      nok: { low: 40000, point: 80000, high: 200000 }
+      tier: assumption
       filled: false
-      source: ""
+      source: "Claude draft, 2026-11, pending owner review"
       note: >-
-        Full studio production (crew, talent, location, usage). No public Norway
-        commercial figure; owner to set from agency-quote experience.
+        Full studio production: crew, producer, studio, talent + buyout. No public
+        Norway commercial figure. Drafted value, awaiting owner review before
+        promotion to expert_estimate.
   ai_mockup:
     ai_assisted:
       nok: { low: 800, point: 1600, high: 3500 }

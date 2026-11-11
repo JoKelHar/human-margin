@@ -76,6 +76,24 @@ def test_production_cost_changes_the_result():
     assert dear.breakeven.lift[1] > cheap.breakeven.lift[1]
 
 
+def test_scenario_supplied_cost_is_not_marked_a_draft():
+    # The advertiser's own production cost is their real figure (own_scenario),
+    # never flagged as a library draft.
+    r = plan(_scn(costs={"human_led": {"photographer": 9000},
+                         "ai_driven": {"tool_subscriptions": 1200}}),
+             benchmarks=_bench(), weights=WEIGHTS, draws=1500)
+    human = [c for c in r.cells if c.approach == "human_led"]
+    assert human and all(c.prod_filled and c.prod_tier == "own_scenario" for c in human)
+
+
+def test_library_draft_costs_bite_when_no_cost_is_supplied():
+    # With no supplied costs, human cells fall back to the drafted library band
+    # and are flagged provisional.
+    r = plan(_scn(), benchmarks=_bench(), weights=WEIGHTS, draws=1500)
+    human = [c for c in r.cells if c.approach == "human_led"]
+    assert any(not c.prod_filled for c in human)
+
+
 def test_memory_brand_never_enters_conversions():
     # response forced to parity; memory_brand large. Human and AI conversions (same
     # format) must be identical -> the brand prior does NOT touch the funnel.

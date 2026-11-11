@@ -11,6 +11,7 @@ from mediekjop.planner.formats import (
     FormatError,
     Tri,
     baseline_format,
+    drafted_cost_slots,
     load_costs,
     load_formats,
     unfilled_cost_slots,
@@ -36,10 +37,25 @@ def test_cost_matrix_is_keyed_by_format_and_approach():
         assert cell.nok.low <= cell.nok.point <= cell.nok.high
 
 
-def test_unfilled_expert_slots_are_flagged():
-    slots = unfilled_cost_slots()
-    assert slots, "the owner's commercial day-rate cells are expert slots to fill"
-    assert all(c.tier == "expert_estimate" and not c.filled for c in slots)
+def test_drafted_cost_slots_are_flagged_separately_from_empty_ones():
+    drafts = drafted_cost_slots()
+    # The four commercial human/hybrid cells carry a drafted band pending review.
+    keys = {(c.fmt, c.approach) for c in drafts}
+    assert keys == {
+        ("static_image", "human_led"), ("short_video", "human_led"),
+        ("short_video", "ai_assisted"), ("studio_shoot", "human_led"),
+    }
+    for c in drafts:
+        assert c.tier == "assumption" and not c.filled          # never dressed up as sourced
+        assert "pending owner review" in c.source.lower()
+    # No bare expert slot is left empty once drafted.
+    assert unfilled_cost_slots() == []
+
+
+def test_drafted_bands_match_the_reviewed_values():
+    by_key = {(c.fmt, c.approach): c for c in drafted_cost_slots()}
+    cell = by_key[("studio_shoot", "human_led")]
+    assert (cell.nok.low, cell.nok.point, cell.nok.high) == (40000, 80000, 200000)
 
 
 def test_tri_rejects_unordered_range():
