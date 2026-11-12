@@ -1,25 +1,43 @@
-# Public ad-volume snapshot (day-one context layer) - PLACEHOLDER, not yet fetched.
-#
-# This slot is intentionally empty. It is populated either by:
-#     uv run python scripts/fetch_ad_library.py --industry uteliv \
-#         --market "Oslo nightlife" --terms "nattklubb,utested,bar oslo"
-# (needs an identity-verified Meta Ad Library API token, see that script), or by a
-# hand-coded manual sample:
-#     uv run python scripts/build_snapshot.py coded.csv --market "Oslo nightlife"
-# (see docs/snapshot-coding-guide.md). Until then n is 0 and the planner shows
-# "No market snapshot yet" rather than inventing any figures. Provenance is
-# public_snapshot: public, aggregate, dated, with the sample size always shown.
-# No performance data is ever stored here.
+# Public ad-volume snapshot (manual sample). Maintainer-built, committed,
+# bundled to users. No performance data. See docs/snapshot-coding-guide.md.
 industry: uteliv
-market: "Oslo nightlife"
-as_of: 2026-11-10
-n: 0
-status: awaiting_fetch
+market: Norwegian nightlife
+as_of: '2026-11-11'
+n: 35
+status: sampled
 provenance: public_snapshot
-source: >-
-  Meta Ad Library API (ads_archive, ad_type=ALL, country=NO) or a hand-coded
-  manual sample from the public Ad Library website; official transparency product,
-  within terms, no scraping. Not yet populated.
-method: ""
-median_run_days: null
-content_type_share: {}
+source: 'Best-effort sweep of live Norwegian nightlife ads: ~50 venues across Norway
+  and ~25 keywords searched; 35 relevant live ads found; max 4 ads per venue. No per-venue
+  log kept this round. Live ads only — Norway ads are not retained in the Ad Library
+  after they stop. November sweep: julebord-heavy, seasonal. Finding 35 took an exhaustive
+  search: Norwegian nightlife runs light on paid Meta ads. Show this as context, not
+  an error.'
+method: manual_sample
+median_run_days: 22.0
+all_active: true
+content_type_share:
+  static_image: 0.4286
+  short_video: 0.3429
+  ugc_talking_head: 0.1143
+  studio_shoot: 0.1143
+ai_read_share:
+  heavy: 0.2571
+  some: 0.2286
+  none: 0.5143
+ai_read_basis: coder judgement (perceived artificiality, not provenance)
+format_by_ai_read:
+  static_image:
+    heavy: 6
+    some: 2
+    none: 7
+  short_video:
+    none: 7
+    some: 3
+    heavy: 2
+  ugc_talking_head:
+    none: 2
+    some: 2
+  studio_shoot:
+    none: 2
+    heavy: 1
+    some: 1

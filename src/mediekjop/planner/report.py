@@ -50,9 +50,33 @@ def confidence_clause(r: PlanResult) -> str:
 
 
 def position_line(r: PlanResult) -> str:
+    if r.level and len(r.level_pair) >= 2:
+        a, b = (APPROACH_LABEL.get(x, x) for x in r.level_pair[:2])
+        basis = "cost to sell out" if r.capacity_capped else "conversions per krone"
+        return (f"On these inputs, {a} and {b} are effectively level on {basis} "
+                f"(within ~5%); no single approach leads.")
     verb = "costs the least to sell out" if r.capacity_capped else "delivers the most conversions per krone"
     return (f"On these inputs, {APPROACH_LABEL.get(r.leader, r.leader)} creative "
             f"{verb} (p50 across the formats it can produce).")
+
+
+def sanity_lines(r: PlanResult) -> list[str]:
+    """Plain budget-vs-reality flags that lead the POSITION block (position wording,
+    never advice): the budget cannot reach capacity; the cost per sale exceeds value."""
+    scn = r.scenario
+    lines: list[str] = []
+    if r.capacity_capped and scn.capacity and r.reach_p50 < scn.capacity * 0.995:
+        lines.append(f"On this budget: ~{r.reach_p50:.0f} of {scn.capacity} sales "
+                     f"(the budget reaches well under capacity).")
+    if r.over_value:
+        present = {c.approach for c in r.cells}
+        worth = "the ticket price" if scn.value_is_assumed_from_price else "the value per conversion"
+        if set(r.over_value) >= present:
+            lines.append(f"Cost per sale sits above {worth} for every approach on these inputs.")
+        else:
+            who = ", ".join(APPROACH_LABEL.get(a, a) for a in r.over_value)
+            lines.append(f"Cost per sale sits above {worth} for {who} on these inputs.")
+    return lines
 
 
 # --- text (CLI) -------------------------------------------------------------
@@ -70,6 +94,8 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
         out.append(f"Capacity-capped at {scn.capacity}: the objective is lowest cost to sell out.")
 
     out.append("\nPOSITION")
+    for ln in sanity_lines(r):
+        out.append(ln)
     out.append(position_line(r))
     out.append(confidence_clause(r))
 
@@ -82,10 +108,11 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
             ch = min(c.cost_per_conv for c in hcells)
             ca = min(c.cost_per_conv for c in acells)
             cap = r.scenario.capacity
-            out.append(f"  Once capacity ({cap}) is reached, extra reach is wasted, so the figure "
-                       f"that matters is cost to sell out. At the cheapest format for each: "
-                       f"AI-generated ~{_nok(ca)}/sale, human-led ~{_nok(ch)}/sale — a gap of "
-                       f"~{_nok(abs(ch - ca) * cap)} over the full {cap}.")
+            vol = min(r.reach_p50, cap)
+            out.append(f"  Capacity is {cap}; on this budget the campaign reaches ~{r.reach_p50:.0f} "
+                       f"sales. At the cheapest format for each: AI-generated ~{_nok(ca)}/sale, "
+                       f"human-led ~{_nok(ch)}/sale — a gap of ~{_nok(abs(ch - ca) * vol)} over the "
+                       f"~{vol:.0f} sales this budget reaches.")
     else:
         delta = be.prod_human - be.prod_ai
         out.append("\nBreak-even (the headline)")
@@ -174,11 +201,18 @@ def to_dict(r: PlanResult, agency: AgencyCheck | None = None,
         "scenario": {
             "name": scn.name, "industry": scn.industry_label, "positioning": scn.brand_positioning,
             "band": scn.band, "budget_nok": round(scn.budget_nok),
-            "capacity_capped": r.capacity_capped,
+            "capacity_capped": r.capacity_capped, "capacity": scn.capacity,
+            "channel": scn.channel,
         },
         "headline_format": r.headline_format,
         "headline_format_label": _fmt_label(r.headline_format),
         "position": position_line(r),
+        "sanity": sanity_lines(r),
+        "level": r.level,
+        "level_pair": r.level_pair,
+        "channel": r.channel,
+        "reach_p50": r.reach_p50,
+        "over_value": r.over_value,
         "confidence": r.confidence,
         "confidence_clause": confidence_clause(r),
         "leader": r.leader,

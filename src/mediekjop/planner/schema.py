@@ -29,6 +29,11 @@ class ScenarioError(ValueError):
     """Raised when a scenario file is missing fields or has invalid values."""
 
 
+# Ad channels the planner can query benchmarks for. `meta` is the default; a
+# scenario names one and the engine queries that channel (see engine/benchmarks).
+CHANNELS = ("meta", "tiktok", "snapchat", "youtube")
+
+
 # --- industries / vocab config ----------------------------------------------
 
 @lru_cache(maxsize=2)
@@ -83,6 +88,11 @@ class AiCosts:
 class Costs:
     human: HumanCosts = field(default_factory=HumanCosts)
     ai: AiCosts = field(default_factory=AiCosts)
+    # Which content format the supplied costs are FOR. A supplied cost applies only
+    # to this format (or to the headline format if None); every other cell uses the
+    # formats.yaml bands. Without this, one quoted figure would wrongly price every
+    # format (a studio shoot as cheaply as a UGC clip).
+    format: str | None = None
 
 
 @dataclass
@@ -106,6 +116,7 @@ class Scenario:
     price: float
     budget: float
     costs: Costs
+    channel: str = "meta"                      # meta | tiktok | snapchat | youtube
     geography: str = ""
     content_format: str | None = None         # optional: a key from formats.yaml
     audience_size: int | None = None
@@ -152,6 +163,8 @@ def resolve(scn: Scenario, fx: FxRates, industries_cfg: dict | None = None) -> S
         raise ScenarioError(f"unknown objective {scn.objective!r}")
     if scn.brand_positioning not in cfg.get("brand_positioning", []):
         raise ScenarioError(f"unknown brand_positioning {scn.brand_positioning!r}")
+    if scn.channel not in CHANNELS:
+        raise ScenarioError(f"unknown channel {scn.channel!r}; expected one of {CHANNELS}")
     if scn.agency and scn.agency.stated_approach not in cfg.get("agency_approaches", []):
         raise ScenarioError(f"unknown agency stated_approach {scn.agency.stated_approach!r}")
     if scn.price < 0 or scn.budget < 0:
@@ -182,7 +195,7 @@ def resolve(scn: Scenario, fx: FxRates, industries_cfg: dict | None = None) -> S
 def _costs_from_dict(d: dict) -> Costs:
     human = HumanCosts(**(d.get("human_led") or d.get("human") or {}))
     ai = AiCosts(**(d.get("ai_driven") or d.get("ai") or {}))
-    return Costs(human=human, ai=ai)
+    return Costs(human=human, ai=ai, format=d.get("format"))
 
 
 def scenario_from_dict(d: dict, fx: FxRates | None = None,
@@ -198,6 +211,7 @@ def scenario_from_dict(d: dict, fx: FxRates | None = None,
         brand_positioning=d["brand_positioning"], currency=d["currency"],
         price=float(d["price"]), budget=float(d["budget"]),
         costs=_costs_from_dict(d.get("costs") or {}),
+        channel=d.get("channel", "meta"),
         geography=d.get("geography", ""), content_format=d.get("content_format"),
         audience_size=d.get("audience_size"),
         lead_time_weeks=float(d.get("lead_time_weeks", 0.0)),

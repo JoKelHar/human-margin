@@ -33,9 +33,11 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="Build manual-sample snapshots from a coded CSV.")
     ap.add_argument("csv", help="path to the hand-coded CSV")
     ap.add_argument("--market", default=None, help="market label applied to every industry")
+    ap.add_argument("--source", default=None,
+                    help="method note written verbatim to the snapshot's source field")
     args = ap.parse_args()
 
-    snaps = load_manual_sample(args.csv, market=args.market)
+    snaps = load_manual_sample(args.csv, market=args.market, source=args.source)
     if not snaps:
         raise SystemExit("No rows found in the CSV.")
 
@@ -46,8 +48,12 @@ def main() -> None:
             "as_of": snap.as_of.isoformat() if snap.as_of else None,
             "n": snap.n, "status": snap.status, "provenance": snap.provenance,
             "source": snap.source, "method": snap.method,
-            "median_run_days": snap.median_run_days,
+            # Run length is days LIVE SO FAR (a lower bound): every ad is still running.
+            "median_run_days": snap.median_run_days, "all_active": snap.all_active,
             "content_type_share": {k: round(v, 4) for k, v in snap.content_type_share.items()},
+            "ai_read_share": {k: round(v, 4) for k, v in snap.ai_read_share.items()},
+            "ai_read_basis": "coder judgement (perceived artificiality, not provenance)",
+            "format_by_ai_read": {k: dict(v) for k, v in snap.format_by_ai_read.items()},
         }
         out = SNAP_DIR / f"{ind}.yaml"
         out.write_text(
@@ -55,9 +61,36 @@ def main() -> None:
             "# bundled to users. No performance data. See docs/snapshot-coding-guide.md.\n"
             + yaml.safe_dump(doc, allow_unicode=True, sort_keys=False),
             encoding="utf-8")
-        top = max(snap.content_type_share.items(), key=lambda kv: kv[1], default=("-", 0.0))
-        print(f"Wrote {out}  (N={snap.n}, as_of {snap.as_of}, top {top[0]} ~{top[1] * 100:.0f}%, "
-              f"median run {snap.median_run_days} days)")
+        print(f"Wrote {out}\n")
+        _report(snap)
+
+
+def _report(snap) -> None:
+    """Print format share, ai_read share and the format x ai_read cross-tab, each with N."""
+    n = snap.n
+    run = (f"median {snap.median_run_days:g} days live so far (lower bound; all still active)"
+           if snap.all_active else f"median run length {snap.median_run_days} days")
+    print(f"  N={n}  as_of={snap.as_of}  {run}")
+
+    print(f"\n  Format share (n={n}):")
+    for k, v in sorted(snap.content_type_share.items(), key=lambda kv: -kv[1]):
+        print(f"    {k:18} {v * 100:5.1f}%  ({round(v * n)})")
+
+    print(f"\n  ai_read share (coder judgement; perceived artificiality, n={n}):")
+    for k in ("none", "some", "heavy", "unsure"):
+        if k in snap.ai_read_share:
+            v = snap.ai_read_share[k]
+            print(f"    {k:18} {v * 100:5.1f}%  ({round(v * n)})")
+
+    reads = [r for r in ("none", "some", "heavy", "unsure")
+             if any(r in row for row in snap.format_by_ai_read.values())]
+    print(f"\n  Format x ai_read cross-tab (counts, n={n}):")
+    print("    " + "format".ljust(18) + "".join(r.rjust(8) for r in reads) + "   total")
+    for fmt, row in sorted(snap.format_by_ai_read.items(),
+                           key=lambda kv: -sum(kv[1].values())):
+        tot = sum(row.values())
+        print("    " + fmt.ljust(18) + "".join(str(row.get(r, 0)).rjust(8) for r in reads)
+              + f"   {tot}")
 
 
 if __name__ == "__main__":

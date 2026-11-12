@@ -35,6 +35,14 @@ PROV_RANK = {"own_account": 4, "pooled": 3, "public_benchmark": 2,
 RELEVANCE_WEIGHT = {"high": 1.0, "med": 0.6, "low": 0.3}
 STALE_MONTHS = 18
 
+# Plain-language channel labels for tags and relevance reasons.
+CHANNEL_LABEL = {"meta": "Meta", "tiktok": "TikTok", "snapchat": "Snapchat",
+                 "youtube": "YouTube"}
+
+
+def _channel_label(ch: str) -> str:
+    return CHANNEL_LABEL.get(ch, ch.title())
+
 
 class BenchmarkError(ValueError):
     """Raised for a malformed library entry (missing fields or uncited figure)."""
@@ -143,6 +151,9 @@ class Estimate:
     year: int | None             # publication year of that source (for the tag)
     n_sources: int
     any_stale: bool
+    channel_note: str = ""       # set when the figure fell back to another channel
+                                 # (e.g. "Meta/TikTok proxy"); shown in the tag so a
+                                 # cross-channel borrow is never silent.
 
 
 def estimate(metric: str, industry: str = "any", channel: str = "any", band: str = "any", *,
@@ -157,6 +168,16 @@ def estimate(metric: str, industry: str = "any", channel: str = "any", band: str
     matches = [e for e in rows if _applies(e, metric, industry, channel, band, True)]
     if not matches:
         matches = [e for e in rows if _applies(e, metric, industry, channel, band, False)]
+    # Cross-channel fallback: the requested channel has no figure for this metric,
+    # but it is a channel the library knows elsewhere, so borrow the other channels
+    # rather than return nothing - and flag the borrow (never blend silently). An
+    # entirely unknown channel (not attested anywhere) still returns None.
+    channel_fallback = False
+    if not matches and channel != "any" and channel in {e["channel"] for e in rows}:
+        matches = [e for e in rows if _applies(e, metric, industry, "any", band, True)]
+        if not matches:
+            matches = [e for e in rows if _applies(e, metric, industry, "any", band, False)]
+        channel_fallback = bool(matches)
     if not matches:
         return None
     # Prefer the most specific figures when industry/channel-specific ones exist.
@@ -215,6 +236,14 @@ def estimate(metric: str, industry: str = "any", channel: str = "any", band: str
     if generic_proxy:
         rel *= 0.85
         reasons.append("industry: generic proxy, not industry-specific")
+    channel_note = ""
+    if channel_fallback:
+        used = sorted({e["channel"] for e in matches if e["channel"] != "any"})
+        if used:
+            lbl = "/".join(_channel_label(c) for c in used)
+            channel_note = f"{lbl} proxy"
+            rel *= 0.85
+            reasons.append(f"channel: {lbl} proxy, not {_channel_label(channel)}")
     if len(matches) == 1:
         rel *= 0.90
         reasons.append("sample: single source")
@@ -242,7 +271,7 @@ def estimate(metric: str, industry: str = "any", channel: str = "any", band: str
         markets=sorted(markets), source_quality=source_quality, relevance=relevance,
         relevance_reasons=reasons, confidence=confidence, provenance=prov,
         primary_market=best_entry["geography"], year=year,
-        n_sources=len(matches), any_stale=stale,
+        n_sources=len(matches), any_stale=stale, channel_note=channel_note,
     )
 
 
@@ -279,7 +308,8 @@ def provenance(entry: dict) -> str:
 
 def _market_year(est: Estimate) -> str:
     mk = est.primary_market if est.primary_market != "assumption" else "no market"
-    return f"{mk}, {est.year}" if est.year else mk
+    base = f"{mk}, {est.year}" if est.year else mk
+    return f"{base}, {est.channel_note}" if est.channel_note else base
 
 
 def tag(est: Estimate) -> str:

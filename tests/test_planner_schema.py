@@ -33,6 +33,19 @@ def test_example_scenarios_load_and_resolve(path):
     assert scn.value_per_conversion_nok > 0
 
 
+def test_channel_defaults_to_meta_and_rejects_unknown():
+    assert scenario_from_dict(_base(), FX).channel == "meta"
+    assert scenario_from_dict(_base(channel="tiktok"), FX).channel == "tiktok"
+    with pytest.raises(ScenarioError):
+        scenario_from_dict(_base(channel="pinterest"), FX)
+
+
+def test_cost_override_format_is_carried():
+    scn = scenario_from_dict(_base(costs={"human_led": {"photographer": 9000},
+                                          "format": "ugc_talking_head"}), FX)
+    assert scn.costs.format == "ugc_talking_head"
+
+
 def test_price_band_boundaries():
     row = _industry_map(load_industries())["beauty_skincare"]  # low_max 200, high_min 700
     assert price_band(200, row) == "low"

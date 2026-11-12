@@ -116,6 +116,17 @@ def test_no_match_returns_none():
     assert estimate("cpm", channel="pinterest") is None
 
 
+def test_meta_query_flags_a_cross_channel_borrow_never_silent():
+    # uteliv has no Meta CTR, so the estimate borrows another channel (TikTok) - but
+    # the borrow is flagged in the tag, never used silently.
+    est = estimate("ctr", industry="uteliv", channel="meta")
+    assert est is not None and est.channel_note          # non-empty -> flagged
+    assert "proxy" in tag(est).lower()
+    assert any("channel" in r for r in est.relevance_reasons)
+    # an entirely unknown channel is not borrowed for; it returns nothing.
+    assert estimate("ctr", industry="uteliv", channel="pinterest") is None
+
+
 def test_every_entry_has_a_provenance_tier():
     for e in load_benchmarks():
         assert provenance(e) in PROVENANCE_LABEL

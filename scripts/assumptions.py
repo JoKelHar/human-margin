@@ -18,6 +18,7 @@ from mediekjop.planner.formats import (
     unfilled_cost_slots,
 )
 from mediekjop.planner.schema import load_industries
+from mediekjop.planner.snapshot import load_snapshots
 
 
 def _line(where: str, key: str, value: str, replace_with: str) -> None:
@@ -107,6 +108,26 @@ def main() -> None:
     _line("config/planner/weights.yaml", "price_level_vs_norway",
           str(w.get("price_level_vs_norway")),
           "a sourced purchasing-power-parity table")
+
+    print("\n## Public ad-volume snapshots  (data/snapshots/)")
+    print("  (context layer, no performance data; provenance public_snapshot. A manual")
+    print("   sample is a hand-coded public-library sweep; ai_read is coder judgement.)")
+    snaps = load_snapshots()
+    if not snaps:
+        print("  (no snapshots populated)")
+    for ind, s in sorted(snaps.items()):
+        if not s.populated:
+            _line(f"data/snapshots/{ind}.yaml", f"{ind} (awaiting_fetch)",
+                  "no sample yet (planner says 'No market snapshot yet.')",
+                  "fetch via the API or hand-code a manual sample")
+            continue
+        run = (f"median {s.median_run_days:g} days live so far (lower bound; all active)"
+               if s.all_active else f"median run {s.median_run_days} days")
+        _line(f"data/snapshots/{ind}.yaml",
+              f"{ind} ({s.method}, N={s.n})",
+              f"{s.market}, as_of {s.as_of}; {run}; ai_read is coder judgement",
+              "a larger / API-pulled sample, and pooled linked-account performance for the "
+              "approach-vs-outcome question (the snapshot carries no performance data)")
 
     print("\n## Synthetic demo data  (src/mediekjop/synthetic/, config/config.yaml)")
     _line("src/mediekjop/synthetic/generator.py",

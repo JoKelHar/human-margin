@@ -12,9 +12,14 @@ import datetime as dt
 
 import pytest
 
-from mediekjop.planner import load_weights, scenario_from_dict
+from pathlib import Path
+
+from mediekjop.planner import load_scenario, load_weights, scenario_from_dict
 from mediekjop.planner.currency import FxRates
 from mediekjop.planner.engine import plan
+
+ROOT = Path(__file__).resolve().parents[1]
+EXAMPLES = ROOT / "scenarios" / "examples"
 
 FX = FxRates(rates={"NOK": 1.0, "EUR": 11.7, "USD": 10.8, "GBP": 13.6},
              as_of=dt.date(2026, 1, 1), is_fallback=True)
@@ -76,14 +81,29 @@ def test_production_cost_changes_the_result():
     assert dear.breakeven.lift[1] > cheap.breakeven.lift[1]
 
 
-def test_scenario_supplied_cost_is_not_marked_a_draft():
-    # The advertiser's own production cost is their real figure (own_scenario),
-    # never flagged as a library draft.
+def test_scenario_supplied_cost_applies_to_the_headline_format_only():
+    # The advertiser's own production cost is their real figure (own_scenario) for
+    # the ONE format it is for (the headline, no `format` given). Every other format
+    # for that approach falls back to the library band - one quote must not price a
+    # studio shoot as cheaply as a UGC clip.
     r = plan(_scn(costs={"human_led": {"photographer": 9000},
                          "ai_driven": {"tool_subscriptions": 1200}}),
              benchmarks=_bench(), weights=WEIGHTS, draws=1500)
-    human = [c for c in r.cells if c.approach == "human_led"]
-    assert human and all(c.prod_filled and c.prod_tier == "own_scenario" for c in human)
+    hf = r.headline_format
+    head = [c for c in r.cells if c.approach == "human_led" and c.fmt == hf]
+    other = [c for c in r.cells if c.approach == "human_led" and c.fmt != hf]
+    assert head and all(c.prod_filled and c.prod_tier == "own_scenario" for c in head)
+    assert other and all(c.prod_tier != "own_scenario" for c in other)
+
+
+def test_cost_override_can_target_a_named_format():
+    # `costs.format` points the supplied figure at one specific format.
+    r = plan(_scn(costs={"human_led": {"photographer": 9000},
+                         "ai_driven": {"tool_subscriptions": 1200},
+                         "format": "ugc_talking_head"}),
+             benchmarks=_bench(), weights=WEIGHTS, draws=1500)
+    own = [c for c in r.cells if c.prod_tier == "own_scenario"]
+    assert own and all(c.fmt == "ugc_talking_head" for c in own)
 
 
 def test_library_draft_costs_bite_when_no_cost_is_supplied():
@@ -92,6 +112,39 @@ def test_library_draft_costs_bite_when_no_cost_is_supplied():
     r = plan(_scn(), benchmarks=_bench(), weights=WEIGHTS, draws=1500)
     human = [c for c in r.cells if c.approach == "human_led"]
     assert any(not c.prod_filled for c in human)
+
+
+def test_production_cost_can_be_named_in_hinges_on():
+    # Sensitivity must be able to surface production cost as a driver (it is the
+    # tool's core lever); at least one example scenario names it.
+    named = set()
+    for p in sorted(EXAMPLES.glob("*.yaml")):
+        r = plan(load_scenario(p), draws=1500)
+        named |= {s.driver for s in r.sensitivity}
+    assert any("production cost" in d for d in named)
+
+
+def test_budget_short_of_capacity_is_flagged():
+    # club_night: a 5,000 NOK budget cannot reach 300 tickets.
+    r = plan(load_scenario(EXAMPLES / "club_night.yaml"), draws=1500)
+    assert r.capacity_capped and r.reach_p50 < r.scenario.capacity
+
+
+def test_cost_above_value_is_flagged_for_every_affected_approach():
+    # club_night: cost per sale sits above the 250 NOK ticket for every approach.
+    r = plan(load_scenario(EXAMPLES / "club_night.yaml"), draws=1500)
+    assert set(r.over_value) >= {c.approach for c in r.cells}
+
+
+def test_local_gym_reads_as_effectively_level():
+    # The two leading approaches sit within ~5%, so no single leader is named.
+    r = plan(load_scenario(EXAMPLES / "local_gym.yaml"), draws=2500)
+    assert r.level and len(r.level_pair) == 2
+
+
+def test_channel_defaults_to_meta_and_is_queried():
+    r = plan(load_scenario(EXAMPLES / "club_night.yaml"), draws=800)
+    assert r.channel == "meta"
 
 
 def test_memory_brand_never_enters_conversions():

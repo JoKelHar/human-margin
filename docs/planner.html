@@ -40,6 +40,9 @@
   .tab[aria-selected="true"] { background:var(--accent); color:#06121f; border-color:var(--accent); font-weight:600; }
   .position { font-size:1.12rem; font-weight:600; }
   .confidence { color:var(--muted); margin-top:2px; }
+  .sanity { list-style:none; margin:8px 0 0; padding:8px 12px; border-left:3px solid var(--warn);
+            background:var(--chip); border-radius:0 8px 8px 0; }
+  .sanity li { margin:2px 0; font-weight:600; }
   table { width:100%; border-collapse:collapse; font-size:.88rem; }
   th, td { text-align:left; padding:7px 8px; border-bottom:1px solid var(--line); }
   th { color:var(--muted); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.03em; }
@@ -127,7 +130,11 @@ function renderResult(d){
   h += `<h2>${esc(s.name||"Scenario")}</h2>`;
   h += `<p class="sub">${esc(s.industry)} · ${esc(s.positioning)} · price band ${esc((s.band||"").toUpperCase())} · budget ${nok(s.budget_nok)}${s.capacity_capped?" · capacity-capped":""}</p>`;
 
-  h += `<div style="margin:12px 0;"><div class="position">${esc(d.position)}</div>`;
+  h += `<div style="margin:12px 0;">`;
+  if (d.sanity && d.sanity.length){
+    h += `<ul class="sanity">` + d.sanity.map(x=>`<li>${esc(x)}</li>`).join("") + `</ul>`;
+  }
+  h += `<div class="position" style="margin-top:8px;">${esc(d.position)}</div>`;
   h += `<div class="confidence">${esc(d.confidence_clause)}</div></div>`;
 
   // Break-even or cost-to-sell-out
@@ -137,10 +144,11 @@ function renderResult(d){
     if (human.length && ai.length){
       const ch = Math.min(...human.map(c=>c.cost_per_conv));
       const ca = Math.min(...ai.map(c=>c.cost_per_conv));
+      const vol = Math.min(d.reach_p50, s.capacity||d.reach_p50);
       h += `<h3>Cost to sell out (headline, capacity-capped)</h3>`;
-      h += `<p>Once capacity is reached, extra reach is wasted, so the figure that matters is
-        cost to sell out: at the cheapest format for each, AI-generated ~${nok(ca)}/sale,
-        human-led ~${nok(ch)}/sale.</p>`;
+      h += `<p>Capacity is ${s.capacity}; on this budget the campaign reaches ~${Math.round(d.reach_p50)}
+        sales. At the cheapest format for each: AI-generated ~${nok(ca)}/sale, human-led ~${nok(ch)}/sale
+        — a gap of ~${nok(Math.abs(ch-ca)*vol)} over the ~${Math.round(vol)} sales this budget reaches.</p>`;
     }
   } else {
     const be = d.breakeven;

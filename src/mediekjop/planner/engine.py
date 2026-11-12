@@ -57,6 +57,7 @@ APPROACH_LABEL = {
 }
 DEFAULT_SEED = 20260101
 DEFAULT_DRAWS = 5000
+OVERRIDE_SPREAD = 0.15          # ±band around a supplied cost (so it can swing)
 
 
 # --- helpers ----------------------------------------------------------------
@@ -190,6 +191,13 @@ class PlanResult:
     capacity_capped: bool
     draws: int
     seed: int
+    # Sanity flags (the product's core job: say plainly when the economics don't work).
+    reach_p50: float = 0.0                  # best uncapped conversions the budget buys (p50)
+    over_value: list[str] = field(default_factory=list)  # approaches whose cheapest sale
+                                            # still costs more than one conversion is worth
+    level: bool = False                     # leading approaches are within ~5% -> no single leader
+    level_pair: list[str] = field(default_factory=list)  # the two approaches that are level
+    channel: str = "meta"
     notes: list[str] = field(default_factory=list)
 
 
@@ -236,11 +244,11 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
     costs = load_costs()
     rng = np.random.default_rng(seed)
 
-    ind, band = scn.industry, scn.band
-    cpm_e = bm.estimate("cpm", ind, "any", band, benchmarks=rows, weights=wcfg)
-    ctr_e = bm.estimate("ctr", ind, "any", band, benchmarks=rows, weights=wcfg)
-    cvr_e = bm.estimate("cvr", ind, "any", band, benchmarks=rows, weights=wcfg)
-    roas_e = bm.estimate("roas", ind, "any", band, benchmarks=rows, weights=wcfg)
+    ind, band, chan = scn.industry, scn.band, scn.channel
+    cpm_e = bm.estimate("cpm", ind, chan, band, benchmarks=rows, weights=wcfg)
+    ctr_e = bm.estimate("ctr", ind, chan, band, benchmarks=rows, weights=wcfg)
+    cvr_e = bm.estimate("cvr", ind, chan, band, benchmarks=rows, weights=wcfg)
+    roas_e = bm.estimate("roas", ind, chan, band, benchmarks=rows, weights=wcfg)
     if not (cpm_e and ctr_e and cvr_e):
         raise bm.BenchmarkError("missing a core funnel benchmark (cpm/ctr/cvr)")
 
@@ -262,6 +270,10 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
     fmt_ctr = {k: _draw(f.ctr_mult, draws, rng) for k, f in formats.items()}
     fmt_cvr = {k: _draw(f.cvr_mult, draws, rng) for k, f in formats.items()}
 
+    # Headline format and the one format a supplied cost prices (others use the library).
+    hf = _headline_format(scn, formats)
+    ov_fmt = _override_format(scn, formats, hf)
+
     def _conversions(approach: str, fkey: str) -> np.ndarray:
         rm = _response_mult(approach, resp)
         ctr = base_ctr * fmt_ctr[fkey] * rm
@@ -269,22 +281,25 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
         return impressions * ctr * cvr
 
     def _prod(approach: str, fkey: str) -> np.ndarray:
-        # Scenario-supplied costs override the library defaults, per approach.
-        override = _scenario_cost(scn, approach)
-        if override is not None:
-            return np.full(draws, override) / R
+        # A supplied cost overrides the library default for its one format only; every
+        # other (format, approach) cell uses the formats.yaml band.
+        ov = _override_tri(scn, approach, fkey, ov_fmt)
+        if ov is not None:
+            return _draw(ov, draws, rng) / R
         cell = costs.get((fkey, approach))
         if cell is None:
             return None  # type: ignore[return-value]
         return _draw(cell.nok, draws, rng) / R
 
     cells: list[Cell] = []
+    reach_p50 = 0.0
     for fkey, f in formats.items():
         for approach in f.approaches:
             prod = _prod(approach, fkey)
             if prod is None:
                 continue
             conv = _conversions(approach, fkey)
+            reach_p50 = max(reach_p50, float(np.median(conv)))   # best uncapped volume
             # Capacity-capped: you cannot sell more than capacity, so value and the
             # headline metric saturate there and the objective becomes lowest cost
             # to reach it (cheapest sell-out), not most volume.
@@ -294,9 +309,9 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
             conv_per_1000 = conv_eff / np.maximum(allin, 1e-9) * 1000.0
             cost_per_conv = allin / np.maximum(conv_eff, 1e-9)
             cell = costs.get((fkey, approach))
-            # If the advertiser supplied their own cost for this approach, that is
-            # what the cell used - so it is their real figure, not a library draft.
-            used_override = _scenario_cost(scn, approach) is not None
+            # If the advertiser supplied a cost for THIS format+approach, that is what
+            # the cell used - their real figure, not a library draft.
+            used_override = _override_amount(scn, approach, fkey, ov_fmt) is not None
             if used_override:
                 prod_tier, prod_filled = "own_scenario", True
             else:
@@ -311,11 +326,25 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
 
     # Leading approach = highest median conversions per krone across its formats.
     by_approach: dict[str, float] = {}
+    best_cost: dict[str, float] = {}
     for c in cells:
         by_approach[c.approach] = max(by_approach.get(c.approach, -np.inf), c.conv_per_1000)
+        best_cost[c.approach] = min(best_cost.get(c.approach, np.inf), c.cost_per_conv)
     leader = max(by_approach, key=by_approach.get) if by_approach else "ai_generated"
 
-    hf = _headline_format(scn, formats)
+    # "Effectively level": the two leading approaches sit within ~5% on conversions
+    # per krone, so the engine names no single leader.
+    ranked = sorted(by_approach.items(), key=lambda kv: kv[1], reverse=True)
+    level = (len(ranked) >= 2 and ranked[0][1] > 0
+             and (ranked[0][1] - ranked[1][1]) / ranked[0][1] <= 0.05)
+    level_pair = [ranked[0][0], ranked[1][0]] if level else []
+
+    # Cost-per-sale sanity: approaches whose cheapest cell still costs more per
+    # conversion than one conversion is worth.
+    V_conv = scn.value_per_conversion_nok
+    over_value = sorted((a for a, c in best_cost.items() if c > V_conv > 0),
+                        key=lambda a: APPROACHES.index(a) if a in APPROACHES else 9)
+
     breakeven = _break_even(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
                             fmt_ctr, fmt_cvr, resp, V, R, draws, rng)
     brand = _brand_line(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
@@ -343,11 +372,13 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
     return PlanResult(
         scenario=scn, headline_format=hf, leader=leader, cells=cells, breakeven=breakeven,
         brand=brand, sensitivity=sens, roas=roas, metrics=metrics, confidence=confidence,
-        capacity_capped=cap, draws=draws, seed=seed, notes=notes,
+        capacity_capped=cap, draws=draws, seed=seed,
+        reach_p50=reach_p50, over_value=over_value, level=level, level_pair=level_pair,
+        channel=scn.channel, notes=notes,
     )
 
 
-def _scenario_cost(scn: Scenario, approach: str) -> float | None:
+def _approach_upfront(scn: Scenario, approach: str) -> float | None:
     """Upfront production cost (NOK) the advertiser supplied, if any, for an approach."""
     h = scn.costs.human.upfront()
     a = scn.costs.ai.upfront()
@@ -361,6 +392,29 @@ def _scenario_cost(scn: Scenario, approach: str) -> float | None:
     return None
 
 
+def _override_format(scn: Scenario, formats: dict[str, Format], hf: str) -> str:
+    """The format a supplied cost applies to: the scenario's `costs.format`, else the
+    headline format. A supplied cost prices only this one format, not every cell."""
+    f = scn.costs.format
+    return f if (f and f in formats) else hf
+
+
+def _override_amount(scn: Scenario, approach: str, fkey: str, ov_fmt: str) -> float | None:
+    """The supplied upfront cost for (approach, fkey), or None if it does not apply here."""
+    if fkey != ov_fmt:
+        return None
+    return _approach_upfront(scn, approach)
+
+
+def _override_tri(scn: Scenario, approach: str, fkey: str, ov_fmt: str) -> Tri | None:
+    """A supplied cost carried as a narrow ±15% band, so it can swing in the Monte
+    Carlo and be named in sensitivity (a point value would have zero swing)."""
+    amt = _override_amount(scn, approach, fkey, ov_fmt)
+    if amt is None:
+        return None
+    return Tri(amt * (1 - OVERRIDE_SPREAD), amt, amt * (1 + OVERRIDE_SPREAD))
+
+
 def _break_even(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
                 fmt_ctr, fmt_cvr, resp, V, R, draws, rng) -> BreakEven:
     f = formats[hf]
@@ -371,11 +425,13 @@ def _break_even(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
     if scn.is_capacity_capped():
         conv_ai = np.minimum(conv_ai, scn.capacity)
 
+    ov_fmt = _override_format(scn, formats, hf)
+
     def _cost(approach, fallback_fmt):
-        c = costs.get((hf, approach)) or costs.get((fallback_fmt, approach))
-        ov = _scenario_cost(scn, approach)
+        ov = _override_tri(scn, approach, hf, ov_fmt)
         if ov is not None:
-            return np.full(draws, ov) / R
+            return _draw(ov, draws, rng) / R
+        c = costs.get((hf, approach)) or costs.get((fallback_fmt, approach))
         return _draw(c.nok, draws, rng) / R if c else np.zeros(draws)
 
     prod_h = _cost("human_led", "studio_shoot")
@@ -391,11 +447,13 @@ def _break_even(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
 
 def _brand_line(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
                 fmt_ctr, fmt_cvr, resp, mb, mb_tri, mb_est, V, R, draws, rng) -> BrandLine:
+    ov_fmt = _override_format(scn, formats, hf)
+
     def _cost(approach, fallback_fmt):
-        c = costs.get((hf, approach)) or costs.get((fallback_fmt, approach))
-        ov = _scenario_cost(scn, approach)
+        ov = _override_tri(scn, approach, hf, ov_fmt)
         if ov is not None:
-            return np.full(draws, ov) / R
+            return _draw(ov, draws, rng) / R
+        c = costs.get((hf, approach)) or costs.get((fallback_fmt, approach))
         return _draw(c.nok, draws, rng) / R if c else np.zeros(draws)
 
     conv_h = impressions * base_ctr * fmt_ctr[hf] * 1.0 * base_cvr * fmt_cvr[hf]
@@ -419,10 +477,11 @@ def _brand_line(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
 def _sensitivity(scn, hf, costs, formats, cpm_tri, ctr_e, cvr_e, resp_tri, V, R) -> list[Sensitivity]:
     """Which inputs move the break-even lift most, swept low->high at point otherwise."""
     f = formats[hf]
+    ov_fmt = _override_format(scn, formats, hf)
     ch = costs.get((hf, "human_led")) or costs.get(("studio_shoot", "human_led"))
     ca = costs.get((hf, "ai_generated")) or costs.get(("ai_mockup", "ai_generated"))
-    ph = _scenario_cost(scn, "human_led")
-    pa = _scenario_cost(scn, "ai_generated")
+    ph = _override_amount(scn, "human_led", hf, ov_fmt)
+    pa = _override_amount(scn, "ai_generated", hf, ov_fmt)
 
     ctr_pt = _rate_to_fraction(ctr_e.point, ctr_e.unit)
     cvr_pt = _rate_to_fraction(cvr_e.point, cvr_e.unit)
@@ -447,11 +506,11 @@ def _sensitivity(scn, hf, costs, formats, cpm_tri, ctr_e, cvr_e, resp_tri, V, R)
     base = lift({})
     ranges = {
         "production cost (human-led)": ("prod_human",
-            (ch.nok.low / R if ch and ph is None else (ph / R if ph else 0.0)),
-            (ch.nok.high / R if ch and ph is None else (ph / R if ph else 0.0))),
+            (ph * (1 - OVERRIDE_SPREAD) / R if ph is not None else (ch.nok.low / R if ch else 0.0)),
+            (ph * (1 + OVERRIDE_SPREAD) / R if ph is not None else (ch.nok.high / R if ch else 0.0))),
         "production cost (AI)": ("prod_ai",
-            (ca.nok.low / R if ca and pa is None else (pa / R if pa else 0.0)),
-            (ca.nok.high / R if ca and pa is None else (pa / R if pa else 0.0))),
+            (pa * (1 - OVERRIDE_SPREAD) / R if pa is not None else (ca.nok.low / R if ca else 0.0)),
+            (pa * (1 + OVERRIDE_SPREAD) / R if pa is not None else (ca.nok.high / R if ca else 0.0))),
         "CPM": ("cpm", cpm_tri.low, cpm_tri.high),
         "click-through rate": ("ctr", _rate_to_fraction(ctr_e.low, ctr_e.unit),
                                _rate_to_fraction(ctr_e.high, ctr_e.unit)),

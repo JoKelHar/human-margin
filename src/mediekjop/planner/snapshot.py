@@ -32,11 +32,23 @@ from .formats import load_formats
 
 PROVENANCE = "public_snapshot"
 
-# Content types a coder may record in a manual sample. The format keys from
-# formats.yaml, plus "other" for anything that fits none (kept, never dropped).
+# Columns every coded row must carry. `ai_read` and `advertiser` are optional
+# (added for next round); a missing `ai_read` is read as "unsure".
 _MANUAL_COLUMNS = ("ad_url", "industry", "content_type", "start_date",
                    "still_active", "coder", "date_coded")
 _TRUE = {"y", "yes", "true", "1", "active"}
+
+# content_type is a FORMAT only. ai_mockup stays a planner format but is NOT a
+# snapshot coding option (you cannot reliably tell a mock-up from the public
+# library), so it is excluded here; `other` catches anything that fits none.
+_EXCLUDE_FROM_CODING = {"ai_mockup"}
+
+# ai_read = how artificial the ad READS to an experienced coder (perceived
+# artificiality), NOT a claim about how it was actually made. Always tagged
+# "coder judgement". A missing value is "unsure" (counted, never dropped).
+AI_READ_VALUES = ("none", "some", "heavy", "unsure")
+AI_READ_TAG = "coder judgement"
+_AI_READ_DEFAULT = "unsure"
 
 
 class SnapshotError(ValueError):
@@ -51,10 +63,13 @@ class Snapshot:
     n: int                            # sample size (0 until fetched)
     status: str                       # "awaiting_fetch" | "sampled"
     source: str                       # which transparency product + access
-    content_type_share: dict[str, float] = field(default_factory=dict)  # tag -> share 0..1
+    content_type_share: dict[str, float] = field(default_factory=dict)  # format -> share 0..1
     median_run_days: float | None = None
     method: str = ""                  # how the sample was taken (manual / API)
     provenance: str = PROVENANCE
+    ai_read_share: dict[str, float] = field(default_factory=dict)       # ai_read -> share 0..1
+    format_by_ai_read: dict[str, dict[str, int]] = field(default_factory=dict)  # format x ai_read counts
+    all_active: bool = False          # every sampled ad was still running (run length is a lower bound)
 
     @property
     def populated(self) -> bool:
@@ -81,6 +96,9 @@ def load_snapshot(path: str | Path) -> Snapshot:
         status=d["status"], source=d["source"],
         content_type_share=dict(d.get("content_type_share") or {}),
         median_run_days=d.get("median_run_days"), method=d.get("method", ""), provenance=prov,
+        ai_read_share=dict(d.get("ai_read_share") or {}),
+        format_by_ai_read={k: dict(v) for k, v in (d.get("format_by_ai_read") or {}).items()},
+        all_active=bool(d.get("all_active", False)),
     )
 
 
@@ -97,14 +115,35 @@ def load_snapshots(directory: str | Path | None = None) -> dict[str, Snapshot]:
 
 
 def _valid_content_types() -> set[str]:
-    return set(load_formats().keys()) | {"other"}
+    return (set(load_formats().keys()) - _EXCLUDE_FROM_CODING) | {"other"}
 
 
 def _parse_date(s: str, where: str) -> date:
     try:
-        return date.fromisoformat(s.strip()[:10])
+        return date.fromisoformat((s or "").strip()[:10])
     except (ValueError, AttributeError) as exc:
         raise SnapshotError(f"{where}: bad date {s!r} (want YYYY-MM-DD)") from exc
+
+
+def _norm(s: str | None) -> str:
+    """Normalise a categorical cell: trim and lower-case. The literal string
+    'None' is a value (e.g. ai_read reads as none/real), never treated as missing."""
+    return (s or "").strip().lower()
+
+
+def _ai_read(row: dict, where: str) -> str:
+    """Perceived-artificiality tag for one row. A missing/blank value is 'unsure'
+    (counted, never dropped); an unknown non-blank value is rejected, not guessed."""
+    if "ai_read" not in row:
+        return _AI_READ_DEFAULT
+    v = _norm(row.get("ai_read"))
+    if v == "":
+        return _AI_READ_DEFAULT
+    if v not in AI_READ_VALUES:
+        raise SnapshotError(
+            f"{where}: ai_read {row.get('ai_read')!r} is not one of {AI_READ_VALUES} "
+            f"(see docs/snapshot-coding-guide.md)")
+    return v
 
 
 def load_manual_sample(
@@ -123,11 +162,13 @@ def load_manual_sample(
     content_type, start_date, still_active, coder, date_coded``.
 
     Aggregates per industry into a :class:`Snapshot` with ``method="manual_sample"``
-    and provenance ``public_snapshot``: content-type shares, a run-length
-    longevity proxy (``date_coded - start_date``, in days) and the sample size N.
-    No performance data is read or stored. ``content_type`` must be one of the
-    formats in formats.yaml (or ``other``); an unknown value raises rather than
-    being silently dropped.
+    and provenance ``public_snapshot``: content-type (format) shares, an ``ai_read``
+    perception share, the format x ai_read cross-tab, a run-length longevity proxy
+    (``date_coded - start_date``, in days) and the sample size N. No performance data
+    is read or stored. ``content_type`` must be one of the snapshot coding formats
+    (or ``other``); an unknown content_type or ai_read value raises rather than being
+    silently dropped. Case is normalised on load; a start date later than its coding
+    date is rejected; the literal string ``"None"`` is a value, never "missing".
     """
     rows = list(csv.DictReader(Path(csv_path).read_text(encoding="utf-8").splitlines()))
     valid = _valid_content_types()
@@ -136,14 +177,27 @@ def load_manual_sample(
         missing = [c for c in _MANUAL_COLUMNS if c not in row]
         if missing:
             raise SnapshotError(f"manual sample {csv_path} row {i}: missing column(s) {missing}")
-        ind = (row["industry"] or "").strip()
-        ctype = (row["content_type"] or "").strip()
+        where = f"manual sample row {i} ({row.get('ad_url', '?')})"
+        ind = _norm(row["industry"])
+        ctype = _norm(row["content_type"])
         if not ind:
-            raise SnapshotError(f"manual sample row {i}: empty industry")
+            raise SnapshotError(f"{where}: empty industry")
         if ctype not in valid:
             raise SnapshotError(
-                f"manual sample row {i}: content_type {ctype!r} is not a known format "
-                f"(expected one of {sorted(valid)}; see docs/snapshot-coding-guide.md)")
+                f"{where}: content_type {row['content_type']!r} is not a snapshot coding "
+                f"format (expected one of {sorted(valid)}; see docs/snapshot-coding-guide.md)")
+        start = _parse_date(row["start_date"], where)
+        coded = _parse_date(row["date_coded"], where)
+        if start > coded:
+            raise SnapshotError(
+                f"{where}: start_date {start} is after the coding date {coded} "
+                f"(a future start date is rejected, not clamped)")
+        row["_industry"] = ind
+        row["_content_type"] = ctype
+        row["_ai_read"] = _ai_read(row, where)
+        row["_start"] = start
+        row["_coded"] = coded
+        row["_active"] = _norm(row["still_active"]) in _TRUE
         by_industry.setdefault(ind, []).append(row)
 
     def _market_for(ind: str) -> str:
@@ -156,22 +210,22 @@ def load_manual_sample(
         "(no API, no scraping); official transparency product, within terms.")
     out: dict[str, Snapshot] = {}
     for ind, items in by_industry.items():
-        shares = Counter((r["content_type"] or "").strip() for r in items)
         n = len(items)
-        content_share = {k: v / n for k, v in shares.items()}
-        runs: list[float] = []
-        coded_dates: list[date] = []
+        content_share = {k: v / n for k, v in Counter(r["_content_type"] for r in items).items()}
+        ai_read_share = {k: v / n for k, v in Counter(r["_ai_read"] for r in items).items()}
+        cross: dict[str, dict[str, int]] = {}
         for r in items:
-            start = _parse_date(r["start_date"], f"row for {r.get('ad_url', '?')}")
-            coded = _parse_date(r["date_coded"], f"row for {r.get('ad_url', '?')}")
-            coded_dates.append(coded)
-            runs.append(float(max((coded - start).days, 0)))
+            cross.setdefault(r["_content_type"], {})
+            cross[r["_content_type"]][r["_ai_read"]] = cross[r["_content_type"]].get(r["_ai_read"], 0) + 1
+        runs = [float(max((r["_coded"] - r["_start"]).days, 0)) for r in items]
         out[ind] = Snapshot(
-            industry=ind, market=_market_for(ind), as_of=max(coded_dates),
+            industry=ind, market=_market_for(ind), as_of=max(r["_coded"] for r in items),
             n=n, status="sampled", source=src,
             content_type_share=content_share,
             median_run_days=float(statistics.median(runs)) if runs else None,
             method="manual_sample",
+            ai_read_share=ai_read_share, format_by_ai_read=cross,
+            all_active=all(r["_active"] for r in items),
         )
     return out
 
@@ -189,8 +243,15 @@ def context_line(snap: Snapshot) -> str:
     if snap.content_type_share:
         top = max(snap.content_type_share.items(), key=lambda kv: kv[1])
         parts.append(f"~{top[1] * 100:.0f}% were {top[0]}")
+    if snap.ai_read_share:
+        touched = snap.ai_read_share.get("some", 0.0) + snap.ai_read_share.get("heavy", 0.0)
+        parts.append(f"~{touched * 100:.0f}% read as AI-touched ({AI_READ_TAG})")
     if snap.median_run_days is not None:
-        parts.append(f"median run length {snap.median_run_days:g} days")
+        # All Ad Library ads here are still live (Norway ads are not retained once
+        # stopped), so the run length is days live so far - a lower bound, not a total.
+        run = (f"median {snap.median_run_days:g} days live so far (lower bound; all still running)"
+               if snap.all_active else f"median run length {snap.median_run_days:g} days")
+        parts.append(run)
     tail = "; ".join(parts) if parts else "content types pending tagging"
     when = f" ({snap.as_of:%b %Y})" if snap.as_of else ""
     return f"Of ~{snap.n} sampled {snap.market} ads{when}, {tail}. [{PROVENANCE}]"

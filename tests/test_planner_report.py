@@ -48,6 +48,18 @@ def test_dict_is_json_serialisable_and_non_prescriptive(path):
     assert d["cells"] and d["position"] and d["confidence"] in ("low", "medium", "high")
 
 
+def test_club_night_leads_with_both_sanity_flags():
+    # The product's core job: say plainly when the budget cannot reach capacity and
+    # when cost per sale exceeds value - ahead of the approach comparison.
+    scn = load_scenario(ROOT / "scenarios" / "examples" / "club_night.yaml")
+    r = plan(scn, draws=1500)
+    text = render_text(r, check_agency(scn, r.leader), None)
+    assert "of 300 sales" in text
+    assert "above the ticket price for every approach" in text
+    pos = text.index("POSITION")
+    assert text.index("of 300 sales") < text.index("costs the least to sell out", pos)
+
+
 def test_planner_runs_fully_offline_with_no_token_and_no_snapshot(monkeypatch):
     # Zero-integration first run: no Ad Library token, no snapshot file -> the
     # planner still produces a full position.
