@@ -151,10 +151,13 @@ function renderResult(d){
   if (bc){
     h += `<h3>Break-even production cost (the headline)</h3>`;
     const vs = bc.ai_label ? `AI's strongest option here (${esc(bc.ai_label)})` : "AI's strongest option here";
+    const fullyClamped = bc.funnel_p90 <= 0 && bc.brand_p90 <= 0;
     if (bc.funnel_p90 <= 0){
       const base = `Compared with ${vs}, human-led does not match it at any production cost on these inputs`;
-      h += (bc.brand_p90 <= 0)
-        ? `<p>${base}, even with the longer-term brand effect.</p>`
+      h += fullyClamped
+        ? `<p>${base}, even with the longer-term brand effect.</p>
+           <p>No production cost closes the gap on these inputs, so any quote for this format sits
+           behind AI's strongest option on the short-term numbers.</p>`
         : `<p>${base} on the funnel alone; including the longer-term brand effect it matches at
            <strong>~${nok(bc.brand_p50)}</strong> (low confidence).</p>`;
     } else {
@@ -169,20 +172,23 @@ function renderResult(d){
     if (bc.feasible === false){
       h += `<p class="sub">(The scenario's format is AI-only; shown for the nearest human-capable format.)</p>`;
     }
-    if (bc.own_cost_nok && bc.own_placement){
-      h += `<p><strong>Your cost of ${nok(bc.own_cost_nok)}</strong> sits ${PLACE[bc.own_placement]}.</p>`;
+    // Placement / slider only when a break-even exists to place against.
+    if (!fullyClamped){
+      if (bc.own_cost_nok && bc.own_placement){
+        h += `<p><strong>Your cost of ${nok(bc.own_cost_nok)}</strong> sits ${PLACE[bc.own_placement]}.</p>`;
+      }
+      const qmax = Math.max(bc.brand_p50*1.5, bc.funnel_p90*2, (bc.quote_nok||0)*1.5, (bc.own_cost_nok||0)*1.5, 2000);
+      const qinit = (bc.quote_nok!=null && bc.quote_nok>0) ? bc.quote_nok
+                    : (bc.own_cost_nok || Math.round(bc.funnel_p50));
+      h += `<div class="quotebox">
+        <label class="quotelabel">Test a different human-led quote <span id="quote-val"></span>
+          <input type="range" id="quote-slider" min="0" max="${Math.round(qmax)}" step="500"
+            value="${Math.round(qinit)}" data-funnel="${bc.funnel_p50}" data-brand="${bc.brand_p50}">
+        </label>
+        <p class="quoteplace" id="quote-place"></p>
+        <p class="sub" style="font-size:.78rem;">Position only — the planner never suggests a price to offer.</p>
+      </div>`;
     }
-    const qmax = Math.max(bc.brand_p50*1.5, bc.funnel_p90*2, (bc.quote_nok||0)*1.5, (bc.own_cost_nok||0)*1.5, 2000);
-    const qinit = (bc.quote_nok!=null && bc.quote_nok>0) ? bc.quote_nok
-                  : (bc.own_cost_nok || Math.round(bc.funnel_p50));
-    h += `<div class="quotebox">
-      <label class="quotelabel">Test a different human-led quote <span id="quote-val"></span>
-        <input type="range" id="quote-slider" min="0" max="${Math.round(qmax)}" step="500"
-          value="${Math.round(qinit)}" data-funnel="${bc.funnel_p50}" data-brand="${bc.brand_p50}">
-      </label>
-      <p class="quoteplace" id="quote-place"></p>
-      <p class="sub" style="font-size:.78rem;">Position only — the planner never suggests a price to offer.</p>
-    </div>`;
   }
 
   // Cost to sell out / cost per sale (capacity-capped only)

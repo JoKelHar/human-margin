@@ -74,6 +74,26 @@ def test_every_output_carries_the_time_rule_and_breakeven_cost():
     assert d["breakeven_cost"]["own_placement"] in ("above_both", "between", "below_both")
 
 
+def test_position_flags_a_format_mismatch_with_the_headline():
+    # skincare is level at UGC, but its priced (headline) format is studio - the
+    # position must say so, so it doesn't look like it disagrees with the break-even.
+    scn = load_scenario(ROOT / "scenarios" / "examples" / "skincare_brand.yaml")
+    text = render_text(plan(scn, draws=1500), None, None)
+    assert "At their best format" in text and "UGC talking-head" in text and "Studio" in text
+    assert "see the break-even below" in text
+
+
+def test_no_gap_replaces_the_quote_placement():
+    # When no production cost closes the gap, the quote is NOT placed "above both
+    # break-evens"; one sentence says where any quote sits instead.
+    scn = load_scenario(ROOT / "scenarios" / "examples" / "skincare_brand.yaml")
+    text = render_text(plan(scn, draws=1500), None, None)
+    assert "No production cost closes the gap on these inputs" in text
+    assert "sits behind AI's strongest option on the short-term numbers" in text
+    bx = text[text.index("Break-even production cost"):text.index("Longer-term brand effect")]
+    assert "sits above both break-evens" not in bx and "Your cost of" not in bx
+
+
 def test_response_lift_moves_into_a_detail_section_under_the_headline():
     # Production-cost break-even stays the headline; response-lift becomes detail,
     # placed after the matrix (lower than the headline break-even).
