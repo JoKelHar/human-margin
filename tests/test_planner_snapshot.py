@@ -29,7 +29,9 @@ def test_shipped_uteliv_snapshot_is_populated_from_the_manual_sample():
     assert snap.all_active                             # Norway live-only sweep
     assert snap.ai_read_share and snap.format_by_ai_read
     line = context_line(snap)
-    assert "~35 sampled" in line and "coder judgement" in line
+    assert "Of 35 sampled" in line and "~35 sampled" not in line   # exact count, no "~"
+    assert "coder judgement" in line
+    assert "static image" in line and "static_image" not in line   # label, never the key
     assert "days live so far" in line                  # run length as a lower bound, not a total
 
 
@@ -51,7 +53,7 @@ def test_populated_snapshot_renders_a_context_position(tmp_path):
     snap = load_snapshot(p)
     assert snap.populated and snap.n == 120
     line = context_line(snap)
-    assert "~120 sampled" in line and "42%" in line and "14 days" in line
+    assert "120 sampled" in line and "~120 sampled" not in line and "42%" in line and "14 days" in line
     assert "public_snapshot" in line
 
 
@@ -93,7 +95,7 @@ def test_manual_sample_builds_a_public_snapshot(tmp_path):
     assert abs(sum(snap.content_type_share.values()) - 1.0) < 1e-9
     assert snap.median_run_days is not None
     line = context_line(snap)
-    assert "~4 sampled" in line and "public_snapshot" in line
+    assert "4 sampled" in line and "~4 sampled" not in line and "public_snapshot" in line
 
 
 def test_manual_sample_rejects_unknown_content_type(tmp_path):

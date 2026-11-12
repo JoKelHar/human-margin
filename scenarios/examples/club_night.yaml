@@ -15,11 +15,10 @@ reuse_campaigns: 2
 existing_assets: [creator_relationship]
 
 costs:
+  format: ugc_talking_head      # the quoted human cost is for a creator talking-head
   human_led:
-    ugc_creator: 3000
-    editing: 1200
+    ugc_creator: 3000           # paid to the creator
+    editing: 1200               # paid editor
     usage_rights_months: 6
   ai_driven:
-    tool_subscriptions: 300
-    hours: 4
-    hourly_rate: 650
+    tool_subscriptions: 300     # money paid out; own prompting time is not costed

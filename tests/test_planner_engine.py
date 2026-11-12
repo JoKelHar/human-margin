@@ -136,15 +136,47 @@ def test_cost_above_value_is_flagged_for_every_affected_approach():
     assert set(r.over_value) >= {c.approach for c in r.cells}
 
 
-def test_local_gym_reads_as_effectively_level():
+def test_skincare_reads_as_effectively_level():
     # The two leading approaches sit within ~5%, so no single leader is named.
-    r = plan(load_scenario(EXAMPLES / "local_gym.yaml"), draws=2500)
+    r = plan(load_scenario(EXAMPLES / "skincare_brand.yaml"), draws=2500)
     assert r.level and len(r.level_pair) == 2
+
+
+def test_time_rule_makes_local_gym_read_ai_led():
+    # The buyer's own AI-prompting time is not costed, so AI's per-krone cost drops
+    # and AI-generated leads (the "slightly flatters AI" effect the time note warns of).
+    r = plan(load_scenario(EXAMPLES / "local_gym.yaml"), draws=2500)
+    assert not r.level and r.leader == "ai_generated"
 
 
 def test_channel_defaults_to_meta_and_is_queried():
     r = plan(load_scenario(EXAMPLES / "club_night.yaml"), draws=800)
     assert r.channel == "meta"
+
+
+def test_breakeven_cost_rises_when_the_brand_effect_is_included():
+    # The human brand edge lets human-led bear a higher production cost, so the
+    # brand-inclusive break-even is >= the funnel-only one (mb > 1).
+    r = plan(_scn(), benchmarks=_bench(memory=1.3), weights=WEIGHTS, draws=3000)
+    bc = r.breakeven_cost
+    assert bc.with_brand[1] > bc.funnel[1]
+    # p10<=p50<=p90 on both.
+    assert bc.funnel[0] <= bc.funnel[1] <= bc.funnel[2]
+    assert bc.with_brand[0] <= bc.with_brand[1] <= bc.with_brand[2]
+
+
+def test_quote_placement_is_correct_at_the_boundaries():
+    r = plan(_scn(), benchmarks=_bench(), weights=WEIGHTS, draws=2500)
+    funnel, brand = r.breakeven_cost.funnel[1], r.breakeven_cost.with_brand[1]
+    lo, hi = min(funnel, brand), max(funnel, brand)
+
+    def place(q):
+        return plan(_scn(human_quote=q), benchmarks=_bench(), weights=WEIGHTS,
+                    draws=2500).breakeven_cost.placement
+
+    assert place(lo * 0.5) == "below_both"
+    assert place((lo + hi) / 2) == "between"
+    assert place(hi * 2 + 1000) == "above_both"
 
 
 def test_memory_brand_never_enters_conversions():

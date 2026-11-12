@@ -14,7 +14,7 @@ live here.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -76,12 +76,16 @@ class HumanCosts:
 @dataclass
 class AiCosts:
     tool_subscriptions: float = 0.0
-    hours: float = 0.0
-    hourly_rate: float = 0.0
+    external_hours: float = 0.0          # PAID freelancer/contractor time only
+    external_hourly_rate: float = 0.0
     agency_freelancer_fee: float = 0.0   # AI is not free; model the labour behind it
 
     def upfront(self) -> float:
-        return self.tool_subscriptions + self.hours * self.hourly_rate + self.agency_freelancer_fee
+        # Money paid out only: tools + PAID external labour. The buyer's own time
+        # prompting, iterating or directing AI is NOT costed (see TIME_NOTE / the
+        # time rule); that is why legacy `hours`/`hourly_rate` are not counted.
+        return (self.tool_subscriptions + self.external_hours * self.external_hourly_rate
+                + self.agency_freelancer_fee)
 
 
 @dataclass
@@ -127,6 +131,10 @@ class Scenario:
     reuse_campaigns: int = 1                   # for production-cost amortisation
     existing_assets: list[str] = field(default_factory=list)
     agency: AgencyQuote | None = None
+    # Optional human-led production quote to place against the break-even cost (the
+    # agency / studio figure the advertiser is weighing). Position only; the planner
+    # never suggests a price to offer. Set via the CLI --quote flag or the web slider.
+    human_quote: float | None = None
     # Optional representative price for the advertiser's industry (not this single
     # campaign's price). Opt-in: if given, it can be contributed as an anonymised
     # aggregate to refine the industry price bands via pooling (see the design doc
@@ -140,6 +148,7 @@ class Scenario:
     value_per_conversion_nok: float = 0.0
     value_is_assumed_from_price: bool = False
     typical_price_nok: float = 0.0
+    human_quote_nok: float = 0.0
     industry_label: str = ""
 
     def is_capacity_capped(self) -> bool:
@@ -179,6 +188,10 @@ def resolve(scn: Scenario, fx: FxRates, industries_cfg: dict | None = None) -> S
     scn.band = price_band(scn.price_nok, row)
     if scn.typical_price is not None:
         scn.typical_price_nok = _money_nok(scn.typical_price, scn.currency, fx)
+    if scn.human_quote is not None:
+        if scn.human_quote < 0:
+            raise ScenarioError("human_quote must be non-negative")
+        scn.human_quote_nok = _money_nok(scn.human_quote, scn.currency, fx)
 
     # value per conversion: explicit override, else margin x price, else price as
     # revenue (flagged as an assumption).
@@ -192,9 +205,17 @@ def resolve(scn: Scenario, fx: FxRates, industries_cfg: dict | None = None) -> S
     return scn
 
 
+def _only_known(cls, d: dict) -> dict:
+    """Keep only the dataclass's own fields. Legacy own-time keys (`hours`,
+    `hourly_rate`) are dropped rather than costed: the buyer's own time prompting
+    or directing AI is not money paid out (the time rule)."""
+    known = {f.name for f in fields(cls)}
+    return {k: v for k, v in (d or {}).items() if k in known}
+
+
 def _costs_from_dict(d: dict) -> Costs:
-    human = HumanCosts(**(d.get("human_led") or d.get("human") or {}))
-    ai = AiCosts(**(d.get("ai_driven") or d.get("ai") or {}))
+    human = HumanCosts(**_only_known(HumanCosts, d.get("human_led") or d.get("human") or {}))
+    ai = AiCosts(**_only_known(AiCosts, d.get("ai_driven") or d.get("ai") or {}))
     return Costs(human=human, ai=ai, format=d.get("format"))
 
 
@@ -221,6 +242,7 @@ def scenario_from_dict(d: dict, fx: FxRates | None = None,
         existing_assets=list(d.get("existing_assets") or []),
         agency=agency,
         typical_price=d.get("typical_price"),
+        human_quote=d.get("human_quote"),
     )
     return resolve(scn, fx, industries_cfg)
 

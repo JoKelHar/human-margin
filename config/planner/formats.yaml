@@ -104,80 +104,104 @@ formats:
 #    Runway $12-76; ElevenLabs $6/22/99. Modelled as a monthly tool line.
 #
 # Commercial human day rates well above the union floors are NOT publicly
-# published for Norway. The four human/hybrid cells that depend on them carry a
-# DRAFTED band (tier: assumption, filled: false, source: "Claude draft ... pending
-# owner review"): a provisional starting point the owner confirms and promotes to
-# expert_estimate. They are listed separately from truly empty slots by
+# published for Norway. The human/hybrid cells that depend on them carry a DRAFTED
+# band (tier: assumption, filled: false, source: "Owner-adjusted Claude draft,
+# 2026-11"): a provisional starting point the owner has adjusted and will promote
+# to expert_estimate. They are listed separately from truly empty slots by
 # scripts/assumptions.py. Values are never dressed up as sourced.
+#
+# TIME RULE: every cost here is MONEY PAID OUT only (tools, freelancers, studios,
+# talent). The buyer's own time - sourcing or comparing quotes, prompting,
+# iterating or directing AI - is never costed. AI rows therefore carry more
+# uncounted own-time than human rows, which slightly flatters AI (surfaced to the
+# user as a fixed note). A scenario counts paid external labour via
+# costs.ai_driven.external_hours x external_hourly_rate, never own hours.
 # -----------------------------------------------------------------------------
 costs:
   static_image:
     human_led:
-      nok: { low: 6000, point: 12000, high: 25000 }
+      nok: { low: 4000, point: 12000, high: 25000 }
       tier: assumption
       filled: false
-      source: "Claude draft, 2026-11, pending owner review"
+      source: "Owner-adjusted Claude draft, 2026-11"
       note: >-
         Half-to-full photographer day + retouch + paid-social usage. Oslo studio
-        product-stills floor ~4,900 NOK ex VAT anchors the low end. Drafted value,
-        awaiting owner review before promotion to expert_estimate.
+        product-stills floor ~4,900 NOK ex VAT anchors the low end. Owner-adjusted
+        draft; still tier assumption, awaiting promotion to expert_estimate.
     ai_assisted:
       nok: { low: 800, point: 1600, high: 3500 }
       tier: public_benchmark
-      source: "AI image tool (Midjourney ~$10-30/mo) + ~1-3h human selection/retouch."
+      source: >-
+        AI image tool subscription (Midjourney ~$10-30/mo). Money paid out only;
+        own prompting/selection time is not costed. Paid retouch would add
+        external_hours.
     ai_generated:
       nok: { low: 300, point: 800, high: 1800 }
       tier: public_benchmark
-      source: "AI image tool subscription + minimal human time."
+      source: >-
+        AI image tool subscription. Money paid out only; own prompting time is not
+        costed.
   short_video:
     human_led:
-      nok: { low: 15000, point: 30000, high: 60000 }
+      nok: { low: 10000, point: 25000, high: 50000 }
       tier: assumption
       filled: false
-      source: "Claude draft, 2026-11, pending owner review"
+      source: "Owner-adjusted Claude draft, 2026-11"
       note: >-
         1 shoot day + 1-2 edit days + cutdowns + usage. Union camera-operator
-        floor ~2,726 NOK/day sits well below this commercial band. Drafted value,
-        awaiting owner review before promotion to expert_estimate.
+        floor ~2,726 NOK/day sits well below this commercial band. Owner-adjusted
+        draft; still tier assumption, awaiting promotion to expert_estimate.
     ai_assisted:
       nok: { low: 4000, point: 8000, high: 15000 }
       tier: assumption
       filled: false
-      source: "Claude draft, 2026-11, pending owner review"
+      source: "Owner-adjusted Claude draft, 2026-11"
       note: >-
-        ~1 editor day + AI tools/stock. Drafted value, awaiting owner review
-        before promotion to expert_estimate.
+        ~1 editor day (paid) + AI tools/stock. Owner-confirmed band; still tier
+        assumption, awaiting promotion to expert_estimate.
     ai_generated:
       nok: { low: 800, point: 2000, high: 5000 }
       tier: public_benchmark
-      source: "AI video tool (Runway ~$12-76/mo, incl. likely credit overage) + minimal edit."
+      source: >-
+        AI video tool subscription (Runway ~$12-76/mo, incl. likely credit
+        overage). Money paid out only; own prompting/edit time is not costed.
   ugc_talking_head:
     human_led:
-      nok: { low: 1000, point: 1800, high: 4000 }
-      tier: public_benchmark
-      source: >-
-        UGC creator per video: Influee ~$121/30s (~1,300 NOK) + Nordic premium
-        15-25% + usage rights 30-50%. Marketplace asking prices; C, low relevance.
+      nok: { low: 2000, point: 3600, high: 8000 }
+      tier: assumption
+      filled: false
+      source: "Owner-adjusted Claude draft, 2026-11"
+      note: >-
+        Norwegian creator per video, incl. usage rights. Anchored on Influee
+        ~$121/30s (~1,300 NOK) + Nordic premium + rights, adjusted up to the real
+        booked rate. Owner-adjusted draft; still tier assumption, awaiting
+        promotion to expert_estimate.
     ai_generated:
       nok: { low: 500, point: 1200, high: 3000 }
       tier: public_benchmark
-      source: "AI avatar / synthetic-UGC tool subscription + script + light edit."
+      source: >-
+        AI avatar / synthetic-UGC tool subscription + paid script. Money paid out
+        only; own prompting/edit time is not costed.
   studio_shoot:
     human_led:
-      nok: { low: 40000, point: 80000, high: 200000 }
+      nok: { low: 20000, point: 60000, high: 150000 }
       tier: assumption
       filled: false
-      source: "Claude draft, 2026-11, pending owner review"
+      source: "Owner-adjusted Claude draft, 2026-11"
       note: >-
         Full studio production: crew, producer, studio, talent + buyout. No public
-        Norway commercial figure. Drafted value, awaiting owner review before
-        promotion to expert_estimate.
+        Norway commercial figure. Owner-adjusted draft; still tier assumption,
+        awaiting promotion to expert_estimate.
   ai_mockup:
     ai_assisted:
       nok: { low: 800, point: 1600, high: 3500 }
       tier: public_benchmark
-      source: "AI image tool + human art direction."
+      source: >-
+        AI image tool subscription + paid art direction. Money paid out only; own
+        prompting time is not costed.
     ai_generated:
       nok: { low: 300, point: 800, high: 1800 }
       tier: public_benchmark
-      source: "AI image tool subscription + minimal human time."
+      source: >-
+        AI image tool subscription. Money paid out only; own prompting time is not
+        costed.

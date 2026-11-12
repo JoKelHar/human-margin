@@ -9,9 +9,9 @@ how many ads were sampled, what content types they are (tagged with the existing
 tagging module), and a run-length longevity proxy. Its provenance tier is
 ``public_snapshot``: public, aggregate, dated, with the sample size always shown.
 
-The planner shows a snapshot as *context* only, as a position ("of ~N sampled
-Oslo nightlife ads, ~X% were UGC-style; median run length Y days"), never as a
-recommendation. A snapshot is populated by ``scripts/fetch_ad_library.py`` (which
+The planner shows a snapshot as *context* only, as a position ("of N sampled
+Oslo nightlife ads, ~X% were UGC-style; median run length Y days"; N is an exact
+count so it carries no "~", the shares do), never as a recommendation. A snapshot is populated by ``scripts/fetch_ad_library.py`` (which
 needs a Meta Ad Library API token); until then its status is ``awaiting_fetch``
 and nothing is invented.
 """
@@ -116,6 +116,14 @@ def load_snapshots(directory: str | Path | None = None) -> dict[str, Snapshot]:
 
 def _valid_content_types() -> set[str]:
     return (set(load_formats().keys()) - _EXCLUDE_FROM_CODING) | {"other"}
+
+
+def _ctype_label(key: str) -> str:
+    """Display label for a content_type: the formats.yaml label (lower-cased for
+    mid-sentence copy), never the raw key. Falls back to the key for `other` or any
+    non-format code (the copy rule: user-facing text uses labels, not keys)."""
+    f = load_formats().get(key)
+    return f.label.lower() if f else key
 
 
 def _parse_date(s: str, where: str) -> date:
@@ -242,7 +250,7 @@ def context_line(snap: Snapshot) -> str:
     parts = []
     if snap.content_type_share:
         top = max(snap.content_type_share.items(), key=lambda kv: kv[1])
-        parts.append(f"~{top[1] * 100:.0f}% were {top[0]}")
+        parts.append(f"~{top[1] * 100:.0f}% were {_ctype_label(top[0])}")
     if snap.ai_read_share:
         touched = snap.ai_read_share.get("some", 0.0) + snap.ai_read_share.get("heavy", 0.0)
         parts.append(f"~{touched * 100:.0f}% read as AI-touched ({AI_READ_TAG})")
@@ -254,4 +262,5 @@ def context_line(snap: Snapshot) -> str:
         parts.append(run)
     tail = "; ".join(parts) if parts else "content types pending tagging"
     when = f" ({snap.as_of:%b %Y})" if snap.as_of else ""
-    return f"Of ~{snap.n} sampled {snap.market} ads{when}, {tail}. [{PROVENANCE}]"
+    # N is an exact count, so no "~" on it (the copy rule); the shares keep "~".
+    return f"Of {snap.n} sampled {snap.market} ads{when}, {tail}. [{PROVENANCE}]"

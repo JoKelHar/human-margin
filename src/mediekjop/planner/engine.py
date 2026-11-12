@@ -154,6 +154,20 @@ class BreakEven:
 
 
 @dataclass
+class BreakEvenCost:
+    """Headline break-even expressed as a PRODUCTION COST (the natural lever): the
+    human-led production cost at which human-led matches the best AI option on
+    margin, p10/p50/p90 - funnel only, and again with the human brand effect added
+    (which raises it). A supplied quote is placed against the two, position only."""
+    fmt: str
+    funnel: tuple[float, float, float]        # p10/p50/p90 NOK, funnel only
+    with_brand: tuple[float, float, float]    # p10/p50/p90 NOK, incl. brand effect
+    feasible: bool                            # human_led can make the headline format
+    quote_nok: float | None = None
+    placement: str | None = None              # above_both | between | below_both
+
+
+@dataclass
 class BrandLine:
     fmt: str
     funnel_gap: float                       # p50 (ai_margin - human_margin); >0 = AI ahead on funnel
@@ -183,6 +197,7 @@ class PlanResult:
     leader: str                             # approach with most conversions per krone (p50)
     cells: list[Cell]
     breakeven: BreakEven
+    breakeven_cost: BreakEvenCost
     brand: BrandLine
     sensitivity: list[Sensitivity]
     roas: RoasCheck
@@ -347,6 +362,8 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
 
     breakeven = _break_even(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
                             fmt_ctr, fmt_cvr, resp, V, R, draws, rng)
+    breakeven_cost = _break_even_cost(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
+                                      fmt_ctr, fmt_cvr, resp, mb, V, R, draws, rng)
     brand = _brand_line(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
                         fmt_ctr, fmt_cvr, resp, mb, mb_tri, mb_est, V, R, draws, rng)
     sens = _sensitivity(scn, hf, costs, formats, cpm_tri, ctr_e, cvr_e, resp_tri, V, R)
@@ -371,6 +388,7 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
                      f"{hf}; shown for the nearest available cells.")
     return PlanResult(
         scenario=scn, headline_format=hf, leader=leader, cells=cells, breakeven=breakeven,
+        breakeven_cost=breakeven_cost,
         brand=brand, sensitivity=sens, roas=roas, metrics=metrics, confidence=confidence,
         capacity_capped=cap, draws=draws, seed=seed,
         reach_p50=reach_p50, over_value=over_value, level=level, level_pair=level_pair,
@@ -443,6 +461,77 @@ def _break_even(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
         fmt=hf, lift=_pcts(lift), prod_human=float(np.median(prod_h)),
         prod_ai=float(np.median(prod_a)), conv_ai=float(np.median(conv_ai)), feasible=feasible,
     )
+
+
+def _quote_placement(quote: float, funnel_p50: float, brand_p50: float) -> str:
+    """Where a human-led quote sits relative to the two break-evens (funnel is the
+    lower bound, brand-inclusive the higher). Position only - never a price to offer."""
+    lo, hi = min(funnel_p50, brand_p50), max(funnel_p50, brand_p50)
+    if quote > hi:
+        return "above_both"
+    if quote < lo:
+        return "below_both"
+    return "between"
+
+
+def _break_even_cost(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
+                     fmt_ctr, fmt_cvr, resp, mb, V, R, draws, rng) -> BreakEvenCost:
+    """Solve for the human-led production cost at which human-led matches the best AI
+    option on margin, at the scenario's (headline) format - so the comparison is
+    like-for-like and isolates the human-vs-AI question. Funnel only, and again with
+    the human brand effect added (which raises the cost human-led can bear). Carried
+    as p10/p50/p90. If the headline format has no AI approach, the best AI option
+    overall is the fallback comparator (and the caveat is flagged)."""
+    f = formats[hf]
+    feasible = "human_led" in f.approaches
+    cap = scn.capacity if scn.is_capacity_capped() else None
+    ov_fmt = _override_format(scn, formats, hf)
+
+    def _conv(approach: str, fkey: str) -> np.ndarray:
+        c = impressions * base_ctr * fmt_ctr[fkey] * _response_mult(approach, resp) * base_cvr * fmt_cvr[fkey]
+        return np.minimum(c, cap) if cap is not None else c
+
+    def _prod_amort(approach: str, fkey: str) -> np.ndarray | None:
+        ov = _override_tri(scn, approach, fkey, ov_fmt)
+        if ov is not None:
+            return _draw(ov, draws, rng) / R
+        cell = costs.get((fkey, approach))
+        return _draw(cell.nok, draws, rng) / R if cell else None
+
+    # Human-led at the headline format (or its best human-capable format if the
+    # headline is AI-only, so a number always exists; feasible flags the caveat).
+    h_fmt = hf if feasible else max(
+        (k for k, ff in formats.items() if "human_led" in ff.approaches),
+        key=lambda k: float(np.median(_conv("human_led", k))), default=hf)
+    conv_h = _conv("human_led", h_fmt)
+
+    # AI comparator: the best AI APPROACH at the SAME format as human (like-for-like).
+    # Only if that format has no AI approach do we fall back to the best AI option on
+    # any format.
+    best_ai = np.full(draws, -np.inf)
+    for approach in ("ai_assisted", "ai_generated"):
+        if approach in formats[h_fmt].approaches:
+            prod = _prod_amort(approach, h_fmt)
+            if prod is not None:
+                best_ai = np.maximum(best_ai, _conv(approach, h_fmt) * V - scn.budget_nok - prod)
+    if not np.isfinite(best_ai).all():
+        for fkey, fmt in formats.items():
+            for approach in ("ai_assisted", "ai_generated"):
+                if approach not in fmt.approaches:
+                    continue
+                prod = _prod_amort(approach, fkey)
+                if prod is not None:
+                    best_ai = np.maximum(best_ai, _conv(approach, fkey) * V - scn.budget_nok - prod)
+
+    # P solves  conv_h*V - budget - P/R == best_ai_margin ; brand adds human value.
+    p_funnel = np.maximum(R * (conv_h * V - scn.budget_nok - best_ai), 0.0)
+    p_brand = np.maximum(R * (conv_h * V * mb - scn.budget_nok - best_ai), 0.0)
+
+    quote = scn.human_quote_nok if (scn.human_quote is not None and scn.human_quote_nok > 0) else None
+    placement = (_quote_placement(quote, float(np.median(p_funnel)), float(np.median(p_brand)))
+                 if quote is not None else None)
+    return BreakEvenCost(fmt=h_fmt, funnel=_pcts(p_funnel), with_brand=_pcts(p_brand),
+                         feasible=feasible, quote_nok=quote, placement=placement)
 
 
 def _brand_line(scn, hf, costs, formats, impressions, base_ctr, base_cvr,

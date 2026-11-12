@@ -24,6 +24,20 @@ PRESCRIPTIVE = (
     "pick ", "go with", "the winner",
 )
 
+# The fixed time-rule line every rendered output carries: costs are money paid out
+# only; the buyer's own time is never counted, which slightly flatters AI.
+TIME_NOTE = (
+    "Costs count money paid out only, not your own time sourcing, comparing or "
+    "prompting. AI work usually carries more of that uncounted time, so this "
+    "slightly flatters AI."
+)
+
+
+def format_keys() -> tuple[str, ...]:
+    """The raw format keys (e.g. ``static_image``) that must NEVER appear in rendered
+    copy - user-facing text uses the formats.yaml labels. Asserted by the copy guard."""
+    return tuple(load_formats().keys())
+
 
 def _nok(x: float) -> str:
     return f"{x:,.0f} NOK".replace(",", " ")
@@ -58,6 +72,28 @@ def position_line(r: PlanResult) -> str:
     verb = "costs the least to sell out" if r.capacity_capped else "delivers the most conversions per krone"
     return (f"On these inputs, {APPROACH_LABEL.get(r.leader, r.leader)} creative "
             f"{verb} (p50 across the formats it can produce).")
+
+
+def breakeven_cost_lines(r: PlanResult) -> list[str]:
+    """The headline break-even expressed as a production cost: what human-led can
+    cost and still match the best AI option, funnel-only and with the brand effect,
+    plus a placement of the user's quote if one was given. Position only."""
+    bc = r.breakeven_cost
+    x, (lo, _, hi), w = bc.funnel[1], bc.funnel, bc.with_brand[1]
+    lines = [
+        f"Human-led matches AI at a production cost of ~{_nok(x)} "
+        f"(likely {_nok(lo)}–{_nok(hi)}). Including the longer-term brand effect: "
+        f"~{_nok(w)} (low confidence)."
+    ]
+    if not bc.feasible:
+        lines.append("(The scenario's format is AI-only; shown for the nearest "
+                     "human-capable format.)")
+    if bc.placement and bc.quote_nok:
+        where = {"above_both": "above both break-evens",
+                 "between": "between them",
+                 "below_both": "below both"}[bc.placement]
+        lines.append(f"Your quote of {_nok(bc.quote_nok)} sits {where}.")
+    return lines
 
 
 def sanity_lines(r: PlanResult) -> list[str]:
@@ -98,6 +134,11 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
         out.append(ln)
     out.append(position_line(r))
     out.append(confidence_clause(r))
+    out.append(TIME_NOTE)
+
+    out.append("\nBreak-even production cost (the headline)")
+    for ln in breakeven_cost_lines(r):
+        out.append(f"  {ln}")
 
     be = r.breakeven
     if r.capacity_capped:
@@ -115,7 +156,7 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
                        f"~{vol:.0f} sales this budget reaches.")
     else:
         delta = be.prod_human - be.prod_ai
-        out.append("\nBreak-even (the headline)")
+        out.append("\nBreak-even response lift (the same trade-off, as a response gap)")
         if be.lift[1] <= 0:
             out.append(f"  In {_fmt_label(be.fmt)}, human-led already matches or sits ahead of "
                        f"AI-generated on margin on these inputs (its production cost here is at or "
@@ -144,7 +185,7 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
 
     out.append("\nConversions per krone, by approach x format  (p50; wider ranges = less certain)")
     for c in sorted(r.cells, key=lambda c: -c.conv_per_1000):
-        star = "" if c.prod_filled else "  [draft cost — pending owner review]"
+        star = "" if c.prod_filled else "  [draft cost — pending promotion]"
         out.append(f"  {APPROACH_LABEL.get(c.approach, c.approach):20} {_fmt_label(c.fmt):28} "
                    f"{c.conv_per_1000:6.2f} conv/1000kr · cost/conv {c.cost_per_conv:,.0f} NOK"
                    .replace(",", " ") + star)
@@ -208,6 +249,7 @@ def to_dict(r: PlanResult, agency: AgencyCheck | None = None,
         "headline_format_label": _fmt_label(r.headline_format),
         "position": position_line(r),
         "sanity": sanity_lines(r),
+        "time_note": TIME_NOTE,
         "level": r.level,
         "level_pair": r.level_pair,
         "channel": r.channel,
@@ -221,6 +263,16 @@ def to_dict(r: PlanResult, agency: AgencyCheck | None = None,
             "lift_p10": r.breakeven.lift[0], "lift_p50": r.breakeven.lift[1],
             "lift_p90": r.breakeven.lift[2], "prod_human": r.breakeven.prod_human,
             "prod_ai": r.breakeven.prod_ai, "feasible": r.breakeven.feasible,
+        },
+        "breakeven_cost": {
+            "format": r.breakeven_cost.fmt, "format_label": _fmt_label(r.breakeven_cost.fmt),
+            "funnel_p10": r.breakeven_cost.funnel[0], "funnel_p50": r.breakeven_cost.funnel[1],
+            "funnel_p90": r.breakeven_cost.funnel[2],
+            "brand_p10": r.breakeven_cost.with_brand[0], "brand_p50": r.breakeven_cost.with_brand[1],
+            "brand_p90": r.breakeven_cost.with_brand[2],
+            "feasible": r.breakeven_cost.feasible,
+            "quote_nok": r.breakeven_cost.quote_nok, "placement": r.breakeven_cost.placement,
+            "lines": breakeven_cost_lines(r),
         },
         "brand": {
             "worth_to_close": r.brand.worth_to_close, "brand_value": r.brand.brand_value,

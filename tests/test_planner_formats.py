@@ -39,23 +39,30 @@ def test_cost_matrix_is_keyed_by_format_and_approach():
 
 def test_drafted_cost_slots_are_flagged_separately_from_empty_ones():
     drafts = drafted_cost_slots()
-    # The four commercial human/hybrid cells carry a drafted band pending review.
+    # The commercial human/hybrid cells carry an owner-adjusted drafted band, still
+    # tier assumption and awaiting promotion to expert_estimate.
     keys = {(c.fmt, c.approach) for c in drafts}
     assert keys == {
         ("static_image", "human_led"), ("short_video", "human_led"),
-        ("short_video", "ai_assisted"), ("studio_shoot", "human_led"),
+        ("short_video", "ai_assisted"), ("ugc_talking_head", "human_led"),
+        ("studio_shoot", "human_led"),
     }
     for c in drafts:
         assert c.tier == "assumption" and not c.filled          # never dressed up as sourced
-        assert "pending owner review" in c.source.lower()
+        assert "draft" in c.source.lower()
     # No bare expert slot is left empty once drafted.
     assert unfilled_cost_slots() == []
 
 
-def test_drafted_bands_match_the_reviewed_values():
+def test_drafted_bands_match_the_owner_adjusted_values():
     by_key = {(c.fmt, c.approach): c for c in drafted_cost_slots()}
-    cell = by_key[("studio_shoot", "human_led")]
-    assert (cell.nok.low, cell.nok.point, cell.nok.high) == (40000, 80000, 200000)
+    assert (lambda c: (c.nok.low, c.nok.point, c.nok.high))(
+        by_key[("studio_shoot", "human_led")]) == (20000, 60000, 150000)
+    assert (lambda c: (c.nok.low, c.nok.point, c.nok.high))(
+        by_key[("ugc_talking_head", "human_led")]) == (2000, 3600, 8000)
+    # Every owner-adjusted draft carries the owner's source marker.
+    for c in drafted_cost_slots():
+        assert c.source == "Owner-adjusted Claude draft, 2026-11"
 
 
 def test_tri_rejects_unordered_range():

@@ -20,6 +20,7 @@ from pathlib import Path
 
 from mediekjop.planner import load_fx_rates, load_scenario
 from mediekjop.planner.agency import check_agency
+from mediekjop.planner.currency import Money
 from mediekjop.planner.engine import DEFAULT_DRAWS, DEFAULT_SEED, plan
 from mediekjop.planner.report import render_text
 from mediekjop.planner.snapshot import load_snapshots
@@ -34,6 +35,9 @@ def main() -> None:
     ap.add_argument("--all", action="store_true", help="run every example scenario")
     ap.add_argument("--format", dest="content_format", default=None,
                     help="override the headline content format (a key from formats.yaml)")
+    ap.add_argument("--quote", type=float, default=None,
+                    help="a human-led production quote (scenario currency) to place "
+                         "against the break-even cost")
     ap.add_argument("--draws", type=int, default=DEFAULT_DRAWS, help="Monte Carlo draws")
     ap.add_argument("--seed", type=int, default=DEFAULT_SEED, help="random seed (fixed by default)")
     args = ap.parse_args()
@@ -53,6 +57,9 @@ def main() -> None:
         scn = load_scenario(p, fx)
         if args.content_format:
             scn.content_format = args.content_format
+        if args.quote is not None:
+            scn.human_quote = args.quote
+            scn.human_quote_nok = fx.to_nok(Money(args.quote, scn.currency))
         r = plan(scn, fx=fx, draws=args.draws, seed=args.seed)
         ac = check_agency(scn, r.leader)
         if i:

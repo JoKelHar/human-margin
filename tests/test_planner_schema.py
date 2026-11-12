@@ -46,6 +46,26 @@ def test_cost_override_format_is_carried():
     assert scn.costs.format == "ugc_talking_head"
 
 
+def test_own_time_is_not_costed_but_paid_external_time_is():
+    # The time rule: the buyer's own prompting time (legacy `hours`/`hourly_rate`) is
+    # dropped, not costed; only PAID external labour counts.
+    own = scenario_from_dict(_base(costs={"ai_driven": {"tool_subscriptions": 300,
+                                                        "hours": 10, "hourly_rate": 800}}), FX)
+    assert own.costs.ai.upfront() == 300            # the 10h of own time is not added
+    paid = scenario_from_dict(_base(costs={"ai_driven": {"tool_subscriptions": 300,
+                                                         "external_hours": 4,
+                                                         "external_hourly_rate": 500}}), FX)
+    assert paid.costs.ai.upfront() == 300 + 4 * 500  # paid freelancer time IS counted
+
+
+def test_human_quote_is_carried_and_converted():
+    assert scenario_from_dict(_base(), FX).human_quote is None
+    scn = scenario_from_dict(_base(currency="EUR", price=100, budget=1000, human_quote=2000), FX)
+    assert scn.human_quote == 2000 and scn.human_quote_nok == 2000 * 11.7
+    with pytest.raises(ScenarioError):
+        scenario_from_dict(_base(human_quote=-5), FX)
+
+
 def test_price_band_boundaries():
     row = _industry_map(load_industries())["beauty_skincare"]  # low_max 200, high_min 700
     assert price_band(200, row) == "low"

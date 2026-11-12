@@ -78,14 +78,14 @@ def main() -> None:
                   f"ctr_mult {f.ctr_mult.point} / cvr_mult {f.cvr_mult.point}",
                   "a sourced or pooled per-format response figure for Norway")
 
-    print("\n## Production-cost drafts awaiting owner review  (config/planner/formats.yaml)")
-    print("  (provisional values with a concrete band; confirm, then promote to expert_estimate)")
+    print("\n## Production-cost drafts awaiting promotion  (config/planner/formats.yaml)")
+    print("  (owner-adjusted bands, still tier assumption; promote to expert_estimate when settled)")
     drafts = drafted_cost_slots()
     for c in drafts:
         _line("config/planner/formats.yaml",
-              f"production cost / {c.fmt} x {c.approach} (assumption, drafted — pending review)",
+              f"production cost / {c.fmt} x {c.approach} (assumption, draft — pending promotion)",
               f"{c.nok.low:.0f}-{c.nok.point:.0f}-{c.nok.high:.0f} NOK  [source: '{c.source}']",
-              "confirm or adjust the band, then set tier: expert_estimate, filled: true, "
+              "promote when settled: set tier: expert_estimate, filled: true, "
               "source: '<name>, <YYYY-MM>'")
     if not drafts:
         print("  (no drafts pending in formats.yaml)")

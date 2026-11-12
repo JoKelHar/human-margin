@@ -23,6 +23,7 @@
         "On this budget: ~6 of 300 sales (the budget reaches well under capacity).",
         "Cost per sale sits above the ticket price for every approach on these inputs."
       ],
+      "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
       "level": false,
       "level_pair": [],
       "channel": "meta",
@@ -38,17 +39,33 @@
       "breakeven": {
         "format": "short_video",
         "format_label": "Short video (Reels / Shorts / in-feed)",
-        "lift_p10": 0.2608387910673932,
-        "lift_p50": 0.5403202481570004,
-        "lift_p90": 1.1588462596092088,
-        "prod_human": 2098.748387024688,
-        "prod_ai": 1449.4176352709087,
+        "lift_p10": 4.693809744789271,
+        "lift_p50": 10.587410610977642,
+        "lift_p90": 23.51683846715843,
+        "prod_human": 13775.412252079746,
+        "prod_ai": 1241.6586497462897,
         "feasible": true
       },
+      "breakeven_cost": {
+        "format": "short_video",
+        "format_label": "Short video (Reels / Shorts / in-feed)",
+        "funnel_p10": 1527.343752380888,
+        "funnel_p50": 2505.2525424140085,
+        "funnel_p90": 3903.624569051921,
+        "brand_p10": 1938.5872866321238,
+        "brand_p50": 3007.049954364358,
+        "brand_p90": 4467.949133298064,
+        "feasible": true,
+        "quote_nok": null,
+        "placement": null,
+        "lines": [
+          "Human-led matches AI at a production cost of ~2 505 NOK (likely 1 527 NOK–3 904 NOK). Including the longer-term brand effect: ~3 007 NOK (low confidence)."
+        ]
+      },
       "brand": {
-        "worth_to_close": 642.8048746597974,
+        "worth_to_close": 12522.494478814762,
         "brand_value": 213.68111878801625,
-        "funnel_gap": 642.8048746597974,
+        "funnel_gap": 12522.494478814762,
         "tag": "C source · low relevance (global, 2024)",
         "tier": "public_benchmark"
       },
@@ -61,10 +78,10 @@
           "conv_p10": 3.13469517063081,
           "conv_p50": 6.398038331295866,
           "conv_p90": 12.514972188683835,
-          "margin_p50": -4150.943397727183,
-          "conv_per_1000": 1.111830340753046,
-          "cost_per_conv": 899.4178011187623,
-          "prod_tier": "public_benchmark",
+          "margin_p50": -3551.0475510173046,
+          "conv_per_1000": 1.2419653813399605,
+          "cost_per_conv": 805.1754235449318,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -75,10 +92,10 @@
           "conv_p10": 3.1730502154995746,
           "conv_p50": 6.422867507301479,
           "conv_p90": 12.593854286550485,
-          "margin_p50": -4499.50683215093,
-          "conv_per_1000": 1.0458816362681878,
-          "cost_per_conv": 956.1311439425383,
-          "prod_tier": "public_benchmark",
+          "margin_p50": -5494.66112053492,
+          "conv_per_1000": 0.9016308539690971,
+          "cost_per_conv": 1109.101378084969,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -89,38 +106,10 @@
           "conv_p10": 2.305515507200903,
           "conv_p50": 4.671638188221761,
           "conv_p90": 8.952473009322675,
-          "margin_p50": -5277.705407219872,
-          "conv_per_1000": 0.7248976678325263,
-          "cost_per_conv": 1379.5051100997894,
-          "prod_tier": "own_scenario",
-          "prod_filled": true
-        },
-        {
-          "approach": "ai_assisted",
-          "approach_label": "hybrid (AI-assisted)",
-          "format": "short_video",
-          "format_label": "Short video (Reels / Shorts / in-feed)",
-          "conv_p10": 2.3214315929999394,
-          "conv_p50": 4.687932975552906,
-          "conv_p90": 8.931903207356092,
-          "margin_p50": -5591.406484822781,
-          "conv_per_1000": 0.6919324587227376,
-          "cost_per_conv": 1445.2277686526465,
-          "prod_tier": "own_scenario",
-          "prod_filled": true
-        },
-        {
-          "approach": "human_led",
-          "approach_label": "human-led",
-          "format": "short_video",
-          "format_label": "Short video (Reels / Shorts / in-feed)",
-          "conv_p10": 2.3440763321304723,
-          "conv_p50": 4.686667180581255,
-          "conv_p90": 8.927359096371191,
-          "margin_p50": -5922.517973701016,
-          "conv_per_1000": 0.6598477158724643,
-          "cost_per_conv": 1515.501192397282,
-          "prod_tier": "own_scenario",
+          "margin_p50": -5064.804319970806,
+          "conv_per_1000": 0.7443202515078623,
+          "cost_per_conv": 1343.5077177488993,
+          "prod_tier": "public_benchmark",
           "prod_filled": true
         },
         {
@@ -180,6 +169,20 @@
           "prod_filled": true
         },
         {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 2.3214315929999394,
+          "conv_p50": 4.687932975552906,
+          "conv_p90": 8.931903207356092,
+          "margin_p50": -8121.449004275404,
+          "conv_per_1000": 0.500825198252911,
+          "cost_per_conv": 1996.7046466201582,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
           "approach": "human_led",
           "approach_label": "human-led",
           "format": "static_image",
@@ -187,9 +190,23 @@
           "conv_p10": 1.7909765230930659,
           "conv_p50": 3.540959917410724,
           "conv_p90": 6.654397721620178,
-          "margin_p50": -11044.318317745696,
-          "conv_per_1000": 0.2935194575700161,
-          "cost_per_conv": 3406.929186705395,
+          "margin_p50": -10758.081112503489,
+          "conv_per_1000": 0.30169377972328837,
+          "cost_per_conv": 3314.6192361341164,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 2.3440763321304723,
+          "conv_p50": 4.686667180581255,
+          "conv_p90": 8.927359096371191,
+          "margin_p50": -17602.083466309174,
+          "conv_per_1000": 0.24787686655082009,
+          "cost_per_conv": 4034.2611136906626,
           "prod_tier": "assumption",
           "prod_filled": false
         },
@@ -201,9 +218,9 @@
           "conv_p10": 1.81362679714014,
           "conv_p50": 3.7236474138022437,
           "conv_p90": 7.078776906722499,
-          "margin_p50": -55093.6031255121,
-          "conv_per_1000": 0.06622643483809376,
-          "cost_per_conv": 15099.710645444173,
+          "margin_p50": -40794.03895194783,
+          "conv_per_1000": 0.08933950983670924,
+          "cost_per_conv": 11193.256926373213,
           "prod_tier": "assumption",
           "prod_filled": false
         }
@@ -211,15 +228,15 @@
       "sensitivity": [
         {
           "driver": "conversion rate",
-          "swing": 2.6061302602355116
+          "swing": 46.1084584503206
+        },
+        {
+          "driver": "production cost (human-led)",
+          "swing": 22.340880773361985
         },
         {
           "driver": "CPM",
-          "swing": 0.759607733619764
-        },
-        {
-          "driver": "click-through rate",
-          "swing": 0.7492644252281294
+          "swing": 13.439213748657362
         }
       ],
       "roas": {
@@ -255,7 +272,7 @@
       "draws": 5000,
       "seed": 20260101,
       "market_context": {
-        "line": "Of ~35 sampled Norwegian nightlife ads (Nov 2026), ~43% were static_image; ~49% read as AI-touched (coder judgement); median 22 days live so far (lower bound; all still running). [public_snapshot]",
+        "line": "Of 35 sampled Norwegian nightlife ads (Nov 2026), ~43% were static image; ~49% read as AI-touched (coder judgement); median 22 days live so far (lower bound; all still running). [public_snapshot]",
         "populated": true,
         "n": 35,
         "as_of": "2026-11-11",
@@ -276,13 +293,11 @@
       },
       "headline_format": "short_video",
       "headline_format_label": "Short video (Reels / Shorts / in-feed)",
-      "position": "On these inputs, AI-generated and human-led are effectively level on conversions per krone (within ~5%); no single approach leads.",
+      "position": "On these inputs, AI-generated creative delivers the most conversions per krone (p50 across the formats it can produce).",
       "sanity": [],
-      "level": true,
-      "level_pair": [
-        "ai_generated",
-        "human_led"
-      ],
+      "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
+      "level": false,
+      "level_pair": [],
       "channel": "meta",
       "reach_p50": 19.268602521904434,
       "over_value": [],
@@ -292,17 +307,33 @@
       "breakeven": {
         "format": "short_video",
         "format_label": "Short video (Reels / Shorts / in-feed)",
-        "lift_p10": -0.012109033630355757,
-        "lift_p50": -0.0023142082645332936,
-        "lift_p90": 0.0049822526382495525,
+        "lift_p10": 0.031370606918143994,
+        "lift_p50": 0.06044395534281445,
+        "lift_p90": 0.12219239391067678,
         "prod_human": 1665.6733230354662,
-        "prod_ai": 1732.6371731974082,
+        "prod_ai": 133.27978255364678,
         "feasible": true
       },
+      "breakeven_cost": {
+        "format": "short_video",
+        "format_label": "Short video (Reels / Shorts / in-feed)",
+        "funnel_p10": 0.0,
+        "funnel_p50": 453.528068189411,
+        "funnel_p90": 6182.93832491511,
+        "brand_p10": 3873.2840385873715,
+        "brand_p50": 13953.076143138638,
+        "brand_p90": 32985.743277829024,
+        "feasible": true,
+        "quote_nok": null,
+        "placement": null,
+        "lines": [
+          "Human-led matches AI at a production cost of ~454 NOK (likely 0 NOK–6 183 NOK). Including the longer-term brand effect: ~13 953 NOK (low confidence)."
+        ]
+      },
       "brand": {
-        "worth_to_close": 0.0,
+        "worth_to_close": 1515.5326119835165,
         "brand_value": 4615.51216582115,
-        "funnel_gap": -83.86833386021772,
+        "funnel_gap": 1515.5326119835165,
         "tag": "C source · low relevance (global, 2024)",
         "tier": "public_benchmark"
       },
@@ -329,10 +360,38 @@
           "conv_p10": 9.519150646498723,
           "conv_p50": 19.268602521904434,
           "conv_p90": 37.78156285965146,
-          "margin_p50": 18879.381980462807,
-          "conv_per_1000": 1.2203194454344488,
-          "cost_per_conv": 819.4575640927894,
-          "prod_tier": "public_benchmark",
+          "margin_p50": 18095.44629967311,
+          "conv_per_1000": 1.1634456981709873,
+          "cost_per_conv": 859.5158431842349,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 6.916546521602709,
+          "conv_p50": 14.014914564665283,
+          "conv_p90": 26.857419027968024,
+          "margin_p50": 10096.585271958138,
+          "conv_per_1000": 0.9262244359377103,
+          "cost_per_conv": 1079.6519379450353,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 6.964294778999819,
+          "conv_p50": 14.06379892665872,
+          "conv_p90": 26.795709622068284,
+          "margin_p50": 9396.827649117353,
+          "conv_per_1000": 0.8844375278585639,
+          "cost_per_conv": 1130.6621677406733,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -346,34 +405,6 @@
           "margin_p50": 8664.39547088559,
           "conv_per_1000": 0.8428826856339855,
           "cost_per_conv": 1186.4052336937148,
-          "prod_tier": "own_scenario",
-          "prod_filled": true
-        },
-        {
-          "approach": "ai_assisted",
-          "approach_label": "hybrid (AI-assisted)",
-          "format": "short_video",
-          "format_label": "Short video (Reels / Shorts / in-feed)",
-          "conv_p10": 6.964294778999819,
-          "conv_p50": 14.06379892665872,
-          "conv_p90": 26.795709622068284,
-          "margin_p50": 8626.758284501213,
-          "conv_per_1000": 0.8425461181680307,
-          "cost_per_conv": 1186.8788858388302,
-          "prod_tier": "own_scenario",
-          "prod_filled": true
-        },
-        {
-          "approach": "ai_generated",
-          "approach_label": "AI-generated",
-          "format": "short_video",
-          "format_label": "Short video (Reels / Shorts / in-feed)",
-          "conv_p10": 6.916546521602709,
-          "conv_p50": 14.014914564665283,
-          "conv_p90": 26.857419027968024,
-          "margin_p50": 8493.16470670907,
-          "conv_per_1000": 0.8376408272834873,
-          "cost_per_conv": 1193.8291064034474,
           "prod_tier": "own_scenario",
           "prod_filled": true
         },
@@ -441,9 +472,9 @@
           "conv_p10": 5.372929569279198,
           "conv_p50": 10.62287975223217,
           "conv_p90": 19.963193164860535,
-          "margin_p50": -653.3128570114573,
-          "conv_per_1000": 0.5367389942261969,
-          "cost_per_conv": 1863.1029682720264,
+          "margin_p50": -399.34813992036334,
+          "conv_per_1000": 0.5437863477409723,
+          "cost_per_conv": 1838.9575331241863,
           "prod_tier": "assumption",
           "prod_filled": false
         },
@@ -455,25 +486,25 @@
           "conv_p10": 5.44088039142042,
           "conv_p50": 11.170942241406731,
           "conv_p90": 21.236330720167498,
-          "margin_p50": -28643.047709971674,
-          "conv_per_1000": 0.2254805563877283,
-          "cost_per_conv": 4434.972284033192,
+          "margin_p50": -19170.390817079606,
+          "conv_per_1000": 0.28090396373176335,
+          "cost_per_conv": 3559.9355403347313,
           "prod_tier": "assumption",
           "prod_filled": false
         }
       ],
       "sensitivity": [
         {
-          "driver": "production cost (AI)",
-          "swing": 0.026891800930898668
-        },
-        {
-          "driver": "production cost (human-led)",
-          "swing": 0.025857500895094886
-        },
-        {
           "driver": "conversion rate",
-          "swing": 0.012374787560472486
+          "swing": 0.28462011389086783
+        },
+        {
+          "driver": "CPM",
+          "swing": 0.08295810955961336
+        },
+        {
+          "driver": "click-through rate",
+          "swing": 0.08182849848170454
         }
       ],
       "roas": {
@@ -525,6 +556,7 @@
         "On this budget: ~10 of 40 sales (the budget reaches well under capacity).",
         "Cost per sale sits above the ticket price for hybrid (AI-assisted) on these inputs."
       ],
+      "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
       "level": false,
       "level_pair": [],
       "channel": "meta",
@@ -538,17 +570,33 @@
       "breakeven": {
         "format": "short_video",
         "format_label": "Short video (Reels / Shorts / in-feed)",
-        "lift_p10": 0.14865211607522805,
-        "lift_p50": 0.2994264308129992,
-        "lift_p90": 0.6238639925508017,
-        "prod_human": 7995.231950570238,
-        "prod_ai": 4598.152498100813,
+        "lift_p10": 0.9778770301644311,
+        "lift_p50": 2.2057105439536753,
+        "lift_p90": 4.899341347324673,
+        "prod_human": 27550.824504159493,
+        "prod_ai": 2483.3172994925794,
         "feasible": true
       },
+      "breakeven_cost": {
+        "format": "short_video",
+        "format_label": "Short video (Reels / Shorts / in-feed)",
+        "funnel_p10": 1134.9564998723124,
+        "funnel_p50": 2543.8702942707996,
+        "funnel_p90": 4222.145813437873,
+        "brand_p10": 2786.6478406593396,
+        "brand_p50": 4704.107946294983,
+        "brand_p90": 7740.3933100285685,
+        "feasible": true,
+        "quote_nok": null,
+        "placement": null,
+        "lines": [
+          "Human-led matches AI at a production cost of ~2 544 NOK (likely 1 135 NOK–4 222 NOK). Including the longer-term brand effect: ~4 704 NOK (low confidence)."
+        ]
+      },
       "brand": {
-        "worth_to_close": 3373.978521955974,
+        "worth_to_close": 25072.783360711164,
         "brand_value": 2051.338740364956,
-        "funnel_gap": 3373.978521955974,
+        "funnel_gap": 25072.783360711164,
         "tag": "C source · low relevance (global, 2024)",
         "tier": "public_benchmark"
       },
@@ -575,9 +623,23 @@
           "conv_p10": 5.076880344799319,
           "conv_p50": 10.276588011682367,
           "conv_p90": 20.15016685848078,
-          "margin_p50": 5107.463088692057,
-          "conv_per_1000": 1.0002499692699862,
-          "cost_per_conv": 999.7500934647703,
+          "margin_p50": 2907.6667596852185,
+          "conv_per_1000": 0.8235769586786357,
+          "cost_per_conv": 1214.2156133736462,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 3.688824811521445,
+          "conv_p50": 7.474621101154817,
+          "conv_p90": 14.323956814916277,
+          "margin_p50": 670.9721886655852,
+          "conv_per_1000": 0.7096521968945735,
+          "cost_per_conv": 1409.1409948647974,
           "prod_tier": "public_benchmark",
           "prod_filled": true
         },
@@ -589,10 +651,10 @@
           "conv_p10": 2.84519206945264,
           "conv_p50": 5.67645771786145,
           "conv_p90": 10.609534511979776,
-          "margin_p50": -467.98369726336654,
-          "conv_per_1000": 0.63135836150506,
-          "cost_per_conv": 1583.886564104601,
-          "prod_tier": "public_benchmark",
+          "margin_p50": 114.34611387134134,
+          "conv_per_1000": 0.6757460400689895,
+          "cost_per_conv": 1479.8459321741784,
+          "prod_tier": "own_scenario",
           "prod_filled": true
         },
         {
@@ -606,34 +668,6 @@
           "margin_p50": -754.6771102300565,
           "conv_per_1000": 0.609763653025349,
           "cost_per_conv": 1639.9798028235423,
-          "prod_tier": "public_benchmark",
-          "prod_filled": true
-        },
-        {
-          "approach": "ai_generated",
-          "approach_label": "AI-generated",
-          "format": "short_video",
-          "format_label": "Short video (Reels / Shorts / in-feed)",
-          "conv_p10": 3.688824811521445,
-          "conv_p50": 7.474621101154817,
-          "conv_p90": 14.323956814916277,
-          "margin_p50": -1368.7335460929853,
-          "conv_per_1000": 0.5938385599828193,
-          "cost_per_conv": 1683.9593585803805,
-          "prod_tier": "own_scenario",
-          "prod_filled": true
-        },
-        {
-          "approach": "ai_assisted",
-          "approach_label": "hybrid (AI-assisted)",
-          "format": "static_image",
-          "format_label": "Static image",
-          "conv_p10": 2.868144792205231,
-          "conv_p50": 5.67967956109082,
-          "conv_p90": 10.690492155989714,
-          "margin_p50": -1444.264330786235,
-          "conv_per_1000": 0.5693417717069222,
-          "cost_per_conv": 1756.4142946468157,
           "prod_tier": "public_benchmark",
           "prod_filled": true
         },
@@ -654,14 +688,42 @@
         {
           "approach": "ai_assisted",
           "approach_label": "hybrid (AI-assisted)",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 2.868144792205231,
+          "conv_p50": 5.67967956109082,
+          "conv_p90": 10.690492155989714,
+          "margin_p50": -3670.1006256603396,
+          "conv_per_1000": 0.466356427493564,
+          "cost_per_conv": 2144.2826665274542,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
           "format": "short_video",
           "format_label": "Short video (Reels / Shorts / in-feed)",
           "conv_p10": 3.714290548799903,
           "conv_p50": 7.500692760884649,
           "conv_p90": 14.291045131769748,
-          "margin_p50": -3023.5465605532754,
-          "conv_per_1000": 0.5251596002491645,
-          "cost_per_conv": 1904.1830569505503,
+          "margin_p50": -5437.445135277853,
+          "conv_per_1000": 0.4480451275250502,
+          "cost_per_conv": 2231.9180339902005,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 2.8655624369489052,
+          "conv_p50": 5.665535867857158,
+          "conv_p90": 10.647036354592286,
+          "margin_p50": -7514.022897815054,
+          "conv_per_1000": 0.3537778484311973,
+          "cost_per_conv": 2826.63289192551,
           "prod_tier": "own_scenario",
           "prod_filled": true
         },
@@ -673,23 +735,9 @@
           "conv_p10": 3.7505221314087556,
           "conv_p50": 7.498667488930007,
           "conv_p90": 14.283774554193906,
-          "margin_p50": -4744.25347061753,
-          "conv_per_1000": 0.4686652755745986,
-          "cost_per_conv": 2133.7192987007447,
-          "prod_tier": "own_scenario",
-          "prod_filled": true
-        },
-        {
-          "approach": "human_led",
-          "approach_label": "human-led",
-          "format": "static_image",
-          "format_label": "Static image",
-          "conv_p10": 2.8655624369489052,
-          "conv_p50": 5.665535867857158,
-          "conv_p90": 10.647036354592286,
-          "margin_p50": -13328.705440035026,
-          "conv_per_1000": 0.25593850211424496,
-          "cost_per_conv": 3907.188641998254,
+          "margin_p50": -23793.37481825416,
+          "conv_per_1000": 0.21002486602175313,
+          "cost_per_conv": 4761.341074245933,
           "prod_tier": "assumption",
           "prod_filled": false
         },
@@ -701,9 +749,9 @@
           "conv_p10": 2.9018028754242247,
           "conv_p50": 5.95783586208359,
           "conv_p90": 11.326043050756,
-          "margin_p50": -100390.64619631547,
-          "conv_per_1000": 0.053887275176909694,
-          "cost_per_conv": 18557.256756574192,
+          "margin_p50": -71877.46589089648,
+          "conv_per_1000": 0.07325058203355284,
+          "cost_per_conv": 13651.768968516699,
           "prod_tier": "assumption",
           "prod_filled": false
         }
@@ -711,15 +759,15 @@
       "sensitivity": [
         {
           "driver": "conversion rate",
-          "swing": 1.4200068725642208
+          "swing": 9.605928843816788
+        },
+        {
+          "driver": "production cost (human-led)",
+          "swing": 4.654350161117079
         },
         {
           "driver": "CPM",
-          "swing": 0.413888829215897
-        },
-        {
-          "driver": "click-through rate",
-          "swing": 0.4082530522076346
+          "swing": 2.79983619763695
         }
       ],
       "roas": {
@@ -770,6 +818,7 @@
       "headline_format_label": "Short video (Reels / Shorts / in-feed)",
       "position": "On these inputs, AI-generated and human-led are effectively level on conversions per krone (within ~5%); no single approach leads.",
       "sanity": [],
+      "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
       "level": true,
       "level_pair": [
         "ai_generated",
@@ -784,17 +833,34 @@
       "breakeven": {
         "format": "short_video",
         "format_label": "Short video (Reels / Shorts / in-feed)",
-        "lift_p10": 0.022927490133101695,
-        "lift_p50": 0.036608635916174616,
-        "lift_p90": 0.059126794790978335,
-        "prod_human": 7495.529953659598,
-        "prod_ai": 4048.3733950670207,
+        "lift_p10": 0.03509296513960038,
+        "lift_p50": 0.0661542146866145,
+        "lift_p90": 0.11995984430377174,
+        "prod_human": 6887.706126039873,
+        "prod_ai": 620.8293248731449,
         "feasible": true
       },
+      "breakeven_cost": {
+        "format": "short_video",
+        "format_label": "Short video (Reels / Shorts / in-feed)",
+        "funnel_p10": 0.0,
+        "funnel_p50": 2852.970570899779,
+        "funnel_p90": 24978.036498628047,
+        "brand_p10": 23296.40275038406,
+        "brand_p50": 70012.70885882215,
+        "brand_p90": 138200.13095648654,
+        "feasible": true,
+        "quote_nok": 20000.0,
+        "placement": "between",
+        "lines": [
+          "Human-led matches AI at a production cost of ~2 853 NOK (likely 0 NOK–24 978 NOK). Including the longer-term brand effect: ~70 013 NOK (low confidence).",
+          "Your quote of 20 000 NOK sits between them."
+        ]
+      },
       "brand": {
-        "worth_to_close": 3366.1156347715587,
+        "worth_to_close": 6332.092560232542,
         "brand_value": 17437.14498738209,
-        "funnel_gap": 3366.1156347715587,
+        "funnel_gap": 6332.092560232542,
         "tag": "C source · low relevance (global, 2024)",
         "tier": "public_benchmark"
       },
@@ -821,11 +887,11 @@
           "conv_p10": 150.48999161693513,
           "conv_p50": 237.94535576322045,
           "conv_p90": 367.8490877470479,
-          "margin_p50": 87904.62710352405,
-          "conv_per_1000": 5.859406164151265,
-          "cost_per_conv": 170.66576132339014,
-          "prod_tier": "public_benchmark",
-          "prod_filled": true
+          "margin_p50": 87272.02291992921,
+          "conv_per_1000": 5.778240988785715,
+          "cost_per_conv": 173.06305535607441,
+          "prod_tier": "assumption",
+          "prod_filled": false
         },
         {
           "approach": "ai_generated",
@@ -835,10 +901,10 @@
           "conv_p10": 110.22159002449129,
           "conv_p50": 173.43652498034027,
           "conv_p90": 263.321906350164,
-          "margin_p50": 49538.064730059414,
-          "conv_per_1000": 3.9340628201373224,
-          "cost_per_conv": 254.19014560527341,
-          "prod_tier": "own_scenario",
+          "margin_p50": 52937.65950682388,
+          "conv_per_1000": 4.263745997578143,
+          "cost_per_conv": 234.53554979880292,
+          "prod_tier": "public_benchmark",
           "prod_filled": true
         },
         {
@@ -849,11 +915,11 @@
           "conv_p10": 110.57856238317791,
           "conv_p50": 173.5876889294567,
           "conv_p90": 262.5933610531235,
-          "margin_p50": 48096.132201059256,
-          "conv_per_1000": 3.7928294759279053,
-          "cost_per_conv": 263.6554072730015,
-          "prod_tier": "own_scenario",
-          "prod_filled": true
+          "margin_p50": 51618.903915622344,
+          "conv_per_1000": 4.113539338183971,
+          "cost_per_conv": 243.0996585189958,
+          "prod_tier": "assumption",
+          "prod_filled": false
         },
         {
           "approach": "human_led",
@@ -863,11 +929,11 @@
           "conv_p10": 110.77981290639312,
           "conv_p50": 173.6125872304092,
           "conv_p90": 262.35124619510157,
-          "margin_p50": 46261.990334422284,
-          "conv_per_1000": 3.6569835092810346,
-          "cost_per_conv": 273.4494149269357,
-          "prod_tier": "own_scenario",
-          "prod_filled": true
+          "margin_p50": 46787.28844998635,
+          "conv_per_1000": 3.685538053528579,
+          "cost_per_conv": 271.33080343393567,
+          "prod_tier": "assumption",
+          "prod_filled": false
         },
         {
           "approach": "ai_generated",
@@ -933,9 +999,9 @@
           "conv_p10": 86.161826883889,
           "conv_p50": 131.33558708314163,
           "conv_p90": 193.7862222565641,
-          "margin_p50": 27332.432975196185,
-          "conv_per_1000": 3.0074396176959675,
-          "cost_per_conv": 332.50875504070075,
+          "margin_p50": 27460.759290142512,
+          "conv_per_1000": 3.020397172677958,
+          "cost_per_conv": 331.0822860269027,
           "prod_tier": "assumption",
           "prod_filled": false
         },
@@ -947,25 +1013,25 @@
           "conv_p10": 87.85325434573609,
           "conv_p50": 137.5457178935963,
           "conv_p90": 207.71663656878906,
-          "margin_p50": 7731.88436705727,
-          "conv_per_1000": 2.0708256637864615,
-          "cost_per_conv": 482.8991751204684,
-          "prod_tier": "assumption",
-          "prod_filled": false
+          "margin_p50": 26725.28724973891,
+          "conv_per_1000": 2.8943977490219166,
+          "cost_per_conv": 345.4950171879494,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
         }
       ],
       "sensitivity": [
         {
+          "driver": "production cost (human-led)",
+          "swing": 0.09002503564946851
+        },
+        {
           "driver": "CPM",
-          "swing": 0.03633815141301529
+          "swing": 0.06056358568835882
         },
         {
           "driver": "conversion rate",
-          "swing": 0.0316805994587966
-        },
-        {
-          "driver": "click-through rate",
-          "swing": 0.02429619606185135
+          "swing": 0.052800999097994336
         }
       ],
       "roas": {

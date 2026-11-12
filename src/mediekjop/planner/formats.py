@@ -150,10 +150,10 @@ def drafted_cost_slots(path: str | None = None) -> list[CostCell]:
     """Cost cells carrying a *drafted* placeholder value awaiting owner review.
 
     Distinct from :func:`unfilled_cost_slots`: these have a concrete starting band
-    and a ``source`` marked "pending owner review", to be confirmed and promoted
-    to ``expert_estimate`` by the owner. Surfaced separately by the assumptions
-    register so a drafted figure is never mistaken for an empty slot or for
-    sourced data.
+    carrying a ``draft`` marker in ``source`` (a first Claude draft, or one the
+    owner has since adjusted), still tier ``assumption`` and awaiting promotion to
+    ``expert_estimate``. Surfaced separately by the assumptions register so a
+    drafted figure is never mistaken for an empty slot or for sourced data.
     """
     return [c for c in load_costs(path).values()
-            if not c.filled and "pending owner review" in c.source.lower()]
+            if not c.filled and "draft" in c.source.lower()]
