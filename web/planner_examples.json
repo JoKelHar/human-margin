@@ -298,7 +298,7 @@
       },
       "headline_format": "short_video",
       "headline_format_label": "Short video (Reels / Shorts / in-feed)",
-      "position": "On these inputs, AI-generated creative delivers the most conversions per krone (p50 across the formats it can produce).",
+      "position": "At their best format (UGC talking-head (creator to camera)), AI-generated creative delivers the most conversions per krone. Your priced format (Short video (Reels / Shorts / in-feed)) is a different case — see the break-even below.",
       "sanity": [],
       "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
       "level": false,
@@ -561,7 +561,7 @@
       },
       "headline_format": "static_image",
       "headline_format_label": "Static image",
-      "position": "On these inputs, AI-generated creative delivers the lowest cost per sale (p50 across the formats it can produce).",
+      "position": "At their best format (UGC talking-head (creator to camera)), AI-generated creative delivers the lowest cost per sale. Your priced format (Static image) is a different case — see the break-even below.",
       "sanity": [
         "On this budget: ~10 of 40 sales (the budget reaches well under capacity).",
         "Cost per sale sits above the ticket price for hybrid (AI-assisted) on these inputs."
@@ -831,7 +831,7 @@
       },
       "headline_format": "studio_shoot",
       "headline_format_label": "Studio / polished production",
-      "position": "On these inputs, AI-generated and human-led are effectively level on conversions per krone (within ~5%); no single approach leads.",
+      "position": "At their best format (UGC talking-head (creator to camera)), AI-generated and human-led are effectively level on conversions per krone (within ~5%); no single approach leads. Your priced format (Studio / polished production) is a different case — see the break-even below.",
       "sanity": [],
       "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
       "level": true,
@@ -872,8 +872,7 @@
         "placement": "above_both",
         "lines": [
           "Compared with AI's strongest option here (AI-generated UGC talking-head (creator to camera)), human-led does not match it at any production cost on these inputs, even with the longer-term brand effect.",
-          "Your cost of 30 000 NOK sits above both break-evens.",
-          "An alternative quote of 20 000 NOK being tested sits above both break-evens."
+          "No production cost closes the gap on these inputs, so any quote for this format sits behind AI's strongest option on the short-term numbers."
         ]
       },
       "brand": {

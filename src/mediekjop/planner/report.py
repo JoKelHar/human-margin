@@ -79,16 +79,27 @@ def position_line(r: PlanResult) -> str:
         basis = "cost to sell out" if _reachable(r) else "cost per sale"
     else:
         basis = "conversions per krone"
+
+    # The level/lead is driven by the best cell; its format may differ from the priced
+    # (headline) format the break-even runs on. When it does, say so, so the position
+    # and the break-even never look like they disagree.
+    best_fmt = max(r.cells, key=lambda c: c.conv_per_1000).fmt if r.cells else r.headline_format
+    mismatch = best_fmt != r.headline_format
+    at = f"At their best format ({_fmt_label(best_fmt)}), " if mismatch else "On these inputs, "
+    tail = (f" Your priced format ({_fmt_label(r.headline_format)}) is a different case "
+            f"— see the break-even below." if mismatch else "")
+
     if r.level and len(r.level_pair) >= 2:
         a, b = (APPROACH_LABEL.get(x, x) for x in r.level_pair[:2])
-        return (f"On these inputs, {a} and {b} are effectively level on {basis} "
-                f"(within ~5%); no single approach leads.")
+        return (f"{at}{a} and {b} are effectively level on {basis} "
+                f"(within ~5%); no single approach leads.{tail}")
     if r.capacity_capped:
         verb = "costs the least to sell out" if _reachable(r) else "delivers the lowest cost per sale"
     else:
         verb = "delivers the most conversions per krone"
-    return (f"On these inputs, {APPROACH_LABEL.get(r.leader, r.leader)} creative "
-            f"{verb} (p50 across the formats it can produce).")
+    span = "" if mismatch else " (p50 across the formats it can produce)"
+    return (f"{at}{APPROACH_LABEL.get(r.leader, r.leader)} creative "
+            f"{verb}{span}.{tail}")
 
 
 _PLACE = {"above_both": "above both break-evens", "between": "between them", "below_both": "below both"}
@@ -104,11 +115,14 @@ def breakeven_cost_lines(r: PlanResult) -> list[str]:
     brand_hi = bc.with_brand[2]
     # The single AI comparator, named, so the basis is explicit and nothing contradicts.
     vs = f"AI's strongest option here ({bc.ai_label})" if bc.ai_label else "AI's strongest option here"
+    fully_clamped = brand_hi <= 0           # no production cost closes the gap, even with brand
     if hi <= 0:
         # Fully clamped: human-led never matches the comparator on the funnel, at any cost.
         base = f"Compared with {vs}, human-led does not match it at any production cost on these inputs"
-        if brand_hi <= 0:
-            lines = [f"{base}, even with the longer-term brand effect."]
+        if fully_clamped:
+            lines = [f"{base}, even with the longer-term brand effect.",
+                     "No production cost closes the gap on these inputs, so any quote for this "
+                     "format sits behind AI's strongest option on the short-term numbers."]
         else:
             lines = [f"{base} on the funnel alone; including the longer-term brand effect it "
                      f"matches at ~{_nok(w)} (low confidence)."]
@@ -124,11 +138,14 @@ def breakeven_cost_lines(r: PlanResult) -> list[str]:
     if not bc.feasible:
         lines.append("(The scenario's format is AI-only; shown for the nearest "
                      "human-capable format.)")
-    if bc.own_cost_nok and bc.own_placement:
-        lines.append(f"Your cost of {_nok(bc.own_cost_nok)} sits {_PLACE[bc.own_placement]}.")
-    if bc.quote_nok and bc.placement:
-        lines.append(f"An alternative quote of {_nok(bc.quote_nok)} being tested sits "
-                     f"{_PLACE[bc.placement]}.")
+    # Placement only when a break-even exists to place against. When no production cost
+    # closes the gap, the sentence above already says where any quote sits.
+    if not fully_clamped:
+        if bc.own_cost_nok and bc.own_placement:
+            lines.append(f"Your cost of {_nok(bc.own_cost_nok)} sits {_PLACE[bc.own_placement]}.")
+        if bc.quote_nok and bc.placement:
+            lines.append(f"An alternative quote of {_nok(bc.quote_nok)} being tested sits "
+                         f"{_PLACE[bc.placement]}.")
     return lines
 
 
