@@ -14,7 +14,7 @@ live here.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, fields
 from functools import lru_cache
 from pathlib import Path
 from typing import Any
@@ -27,6 +27,11 @@ from .currency import SUPPORTED, FxRates, Money, load_fx_rates
 
 class ScenarioError(ValueError):
     """Raised when a scenario file is missing fields or has invalid values."""
+
+
+# Ad channels the planner can query benchmarks for. `meta` is the default; a
+# scenario names one and the engine queries that channel (see engine/benchmarks).
+CHANNELS = ("meta", "tiktok", "snapchat", "youtube")
 
 
 # --- industries / vocab config ----------------------------------------------
@@ -71,18 +76,27 @@ class HumanCosts:
 @dataclass
 class AiCosts:
     tool_subscriptions: float = 0.0
-    hours: float = 0.0
-    hourly_rate: float = 0.0
+    external_hours: float = 0.0          # PAID freelancer/contractor time only
+    external_hourly_rate: float = 0.0
     agency_freelancer_fee: float = 0.0   # AI is not free; model the labour behind it
 
     def upfront(self) -> float:
-        return self.tool_subscriptions + self.hours * self.hourly_rate + self.agency_freelancer_fee
+        # Money paid out only: tools + PAID external labour. The buyer's own time
+        # prompting, iterating or directing AI is NOT costed (see TIME_NOTE / the
+        # time rule); that is why legacy `hours`/`hourly_rate` are not counted.
+        return (self.tool_subscriptions + self.external_hours * self.external_hourly_rate
+                + self.agency_freelancer_fee)
 
 
 @dataclass
 class Costs:
     human: HumanCosts = field(default_factory=HumanCosts)
     ai: AiCosts = field(default_factory=AiCosts)
+    # Which content format the supplied costs are FOR. A supplied cost applies only
+    # to this format (or to the headline format if None); every other cell uses the
+    # formats.yaml bands. Without this, one quoted figure would wrongly price every
+    # format (a studio shoot as cheaply as a UGC clip).
+    format: str | None = None
 
 
 @dataclass
@@ -106,7 +120,9 @@ class Scenario:
     price: float
     budget: float
     costs: Costs
+    channel: str = "meta"                      # meta | tiktok | snapchat | youtube
     geography: str = ""
+    content_format: str | None = None         # optional: a key from formats.yaml
     audience_size: int | None = None
     lead_time_weeks: float = 0.0
     capacity: int | None = None
@@ -115,6 +131,10 @@ class Scenario:
     reuse_campaigns: int = 1                   # for production-cost amortisation
     existing_assets: list[str] = field(default_factory=list)
     agency: AgencyQuote | None = None
+    # Optional human-led production quote to place against the break-even cost (the
+    # agency / studio figure the advertiser is weighing). Position only; the planner
+    # never suggests a price to offer. Set via the CLI --quote flag or the web slider.
+    human_quote: float | None = None
     # Optional representative price for the advertiser's industry (not this single
     # campaign's price). Opt-in: if given, it can be contributed as an anonymised
     # aggregate to refine the industry price bands via pooling (see the design doc
@@ -128,6 +148,7 @@ class Scenario:
     value_per_conversion_nok: float = 0.0
     value_is_assumed_from_price: bool = False
     typical_price_nok: float = 0.0
+    human_quote_nok: float = 0.0
     industry_label: str = ""
 
     def is_capacity_capped(self) -> bool:
@@ -151,6 +172,8 @@ def resolve(scn: Scenario, fx: FxRates, industries_cfg: dict | None = None) -> S
         raise ScenarioError(f"unknown objective {scn.objective!r}")
     if scn.brand_positioning not in cfg.get("brand_positioning", []):
         raise ScenarioError(f"unknown brand_positioning {scn.brand_positioning!r}")
+    if scn.channel not in CHANNELS:
+        raise ScenarioError(f"unknown channel {scn.channel!r}; expected one of {CHANNELS}")
     if scn.agency and scn.agency.stated_approach not in cfg.get("agency_approaches", []):
         raise ScenarioError(f"unknown agency stated_approach {scn.agency.stated_approach!r}")
     if scn.price < 0 or scn.budget < 0:
@@ -165,6 +188,10 @@ def resolve(scn: Scenario, fx: FxRates, industries_cfg: dict | None = None) -> S
     scn.band = price_band(scn.price_nok, row)
     if scn.typical_price is not None:
         scn.typical_price_nok = _money_nok(scn.typical_price, scn.currency, fx)
+    if scn.human_quote is not None:
+        if scn.human_quote < 0:
+            raise ScenarioError("human_quote must be non-negative")
+        scn.human_quote_nok = _money_nok(scn.human_quote, scn.currency, fx)
 
     # value per conversion: explicit override, else margin x price, else price as
     # revenue (flagged as an assumption).
@@ -178,10 +205,18 @@ def resolve(scn: Scenario, fx: FxRates, industries_cfg: dict | None = None) -> S
     return scn
 
 
+def _only_known(cls, d: dict) -> dict:
+    """Keep only the dataclass's own fields. Legacy own-time keys (`hours`,
+    `hourly_rate`) are dropped rather than costed: the buyer's own time prompting
+    or directing AI is not money paid out (the time rule)."""
+    known = {f.name for f in fields(cls)}
+    return {k: v for k, v in (d or {}).items() if k in known}
+
+
 def _costs_from_dict(d: dict) -> Costs:
-    human = HumanCosts(**(d.get("human_led") or d.get("human") or {}))
-    ai = AiCosts(**(d.get("ai_driven") or d.get("ai") or {}))
-    return Costs(human=human, ai=ai)
+    human = HumanCosts(**_only_known(HumanCosts, d.get("human_led") or d.get("human") or {}))
+    ai = AiCosts(**_only_known(AiCosts, d.get("ai_driven") or d.get("ai") or {}))
+    return Costs(human=human, ai=ai, format=d.get("format"))
 
 
 def scenario_from_dict(d: dict, fx: FxRates | None = None,
@@ -197,7 +232,9 @@ def scenario_from_dict(d: dict, fx: FxRates | None = None,
         brand_positioning=d["brand_positioning"], currency=d["currency"],
         price=float(d["price"]), budget=float(d["budget"]),
         costs=_costs_from_dict(d.get("costs") or {}),
-        geography=d.get("geography", ""), audience_size=d.get("audience_size"),
+        channel=d.get("channel", "meta"),
+        geography=d.get("geography", ""), content_format=d.get("content_format"),
+        audience_size=d.get("audience_size"),
         lead_time_weeks=float(d.get("lead_time_weeks", 0.0)),
         capacity=d.get("capacity"),
         margin=d.get("margin"), value_per_conversion=d.get("value_per_conversion"),
@@ -205,6 +242,7 @@ def scenario_from_dict(d: dict, fx: FxRates | None = None,
         existing_assets=list(d.get("existing_assets") or []),
         agency=agency,
         typical_price=d.get("typical_price"),
+        human_quote=d.get("human_quote"),
     )
     return resolve(scn, fx, industries_cfg)
 

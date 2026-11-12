@@ -1,0 +1,1127 @@
+{
+  "generated": "2026-11-12",
+  "fx_note": "FX as of 2026-11-01 (fallback (not live))",
+  "draws": 5000,
+  "seed": 20260101,
+  "disclaimer": "Benchmarks are mostly US/global proxies and labelled assumptions; confidence is shown per figure. Positions describe where a number sits, never what to do.",
+  "scenarios": [
+    {
+      "scenario": {
+        "name": "Oslo club night",
+        "industry": "Nightlife (uteliv)",
+        "positioning": "mid_market",
+        "band": "mid",
+        "budget_nok": 5000,
+        "capacity_capped": true,
+        "capacity": 300,
+        "channel": "meta"
+      },
+      "headline_format": "ugc_talking_head",
+      "headline_format_label": "UGC talking-head (creator to camera)",
+      "position": "On these inputs, AI-generated creative delivers the lowest cost per sale (p50 across the formats it can produce).",
+      "sanity": [
+        "On this budget: ~6 of 300 sales (the budget reaches well under capacity).",
+        "Cost per sale sits above the ticket price for every approach on these inputs."
+      ],
+      "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
+      "level": false,
+      "level_pair": [],
+      "channel": "meta",
+      "reach_p50": 6.422867507301479,
+      "over_value": [
+        "human_led",
+        "ai_assisted",
+        "ai_generated"
+      ],
+      "confidence": "low",
+      "confidence_clause": "Confidence: low — the funnel rests on US and global proxies.",
+      "leader": "ai_generated",
+      "breakeven": {
+        "format": "ugc_talking_head",
+        "format_label": "UGC talking-head (creator to camera)",
+        "lift_p10": 0.6133593620099932,
+        "lift_p50": 1.210740058459607,
+        "lift_p90": 2.490876235122132,
+        "prod_human": 2098.748387024688,
+        "prod_ai": 149.93975537285263,
+        "feasible": true
+      },
+      "breakeven_cost": {
+        "format": "ugc_talking_head",
+        "format_label": "UGC talking-head (creator to camera)",
+        "funnel_p10": 11.147010870925808,
+        "funnel_p50": 301.7320699841821,
+        "funnel_p90": 595.3208441195426,
+        "brand_p10": 447.72078947398523,
+        "brand_p50": 876.0733628202042,
+        "brand_p90": 1769.1030362195747,
+        "feasible": true,
+        "ai_label": "AI-generated UGC talking-head (creator to camera)",
+        "own_cost_nok": 4200.0,
+        "own_placement": "above_both",
+        "quote_nok": null,
+        "placement": null,
+        "lines": [
+          "Compared with AI's strongest option here (AI-generated UGC talking-head (creator to camera)), human-led matches at a production cost of ~302 NOK (likely 11 NOK–595 NOK). Including the longer-term brand effect: ~876 NOK (low confidence).",
+          "Your cost of 4 200 NOK sits above both break-evens."
+        ]
+      },
+      "brand": {
+        "worth_to_close": 1947.6454316664112,
+        "brand_value": 295.05835118438506,
+        "funnel_gap": 1947.6454316664112,
+        "tag": "C source · low relevance (global, 2024)",
+        "tier": "public_benchmark",
+        "ai_label": "AI-generated UGC talking-head (creator to camera)"
+      },
+      "cells": [
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "ugc_talking_head",
+          "format_label": "UGC talking-head (creator to camera)",
+          "conv_p10": 3.13469517063081,
+          "conv_p50": 6.398038331295866,
+          "conv_p90": 12.514972188683835,
+          "margin_p50": -3551.0475510173046,
+          "conv_per_1000": 1.2419653813399605,
+          "cost_per_conv": 805.1754235449318,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "ugc_talking_head",
+          "format_label": "UGC talking-head (creator to camera)",
+          "conv_p10": 3.1730502154995746,
+          "conv_p50": 6.422867507301479,
+          "conv_p90": 12.593854286550485,
+          "margin_p50": -5494.66112053492,
+          "conv_per_1000": 0.9016308539690971,
+          "cost_per_conv": 1109.101378084969,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 2.305515507200903,
+          "conv_p50": 4.671638188221761,
+          "conv_p90": 8.952473009322675,
+          "margin_p50": -5064.804319970806,
+          "conv_per_1000": 0.7443202515078623,
+          "cost_per_conv": 1343.5077177488993,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 1.7782450434079005,
+          "conv_p50": 3.5477860736634064,
+          "conv_p90": 6.630959069987358,
+          "margin_p50": -4592.09117711231,
+          "conv_per_1000": 0.646441890847721,
+          "cost_per_conv": 1546.929506375248,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "ai_mockup",
+          "format_label": "AI product mock-up / scene",
+          "conv_p10": 1.6578608436946387,
+          "conv_p50": 3.42968744156242,
+          "conv_p90": 6.518675857497471,
+          "margin_p50": -4616.910604764954,
+          "conv_per_1000": 0.6243961055666947,
+          "cost_per_conv": 1601.547479651791,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 1.7925904951282694,
+          "conv_p50": 3.549799725681763,
+          "conv_p90": 6.681557597493572,
+          "margin_p50": -5068.344021207529,
+          "conv_per_1000": 0.5930348242968693,
+          "cost_per_conv": 1686.2416160231364,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "ai_mockup",
+          "format_label": "AI product mock-up / scene",
+          "conv_p10": 1.6655833734771528,
+          "conv_p50": 3.4252381538299463,
+          "conv_p90": 6.512360516153242,
+          "margin_p50": -5082.442471323435,
+          "conv_per_1000": 0.5757272151733404,
+          "cost_per_conv": 1736.9336965547686,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 2.3214315929999394,
+          "conv_p50": 4.687932975552906,
+          "conv_p90": 8.931903207356092,
+          "margin_p50": -8121.449004275404,
+          "conv_per_1000": 0.500825198252911,
+          "cost_per_conv": 1996.7046466201582,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 1.7909765230930659,
+          "conv_p50": 3.540959917410724,
+          "conv_p90": 6.654397721620178,
+          "margin_p50": -10758.081112503489,
+          "conv_per_1000": 0.30169377972328837,
+          "cost_per_conv": 3314.6192361341164,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 2.3440763321304723,
+          "conv_p50": 4.686667180581255,
+          "conv_p90": 8.927359096371191,
+          "margin_p50": -17602.083466309174,
+          "conv_per_1000": 0.24787686655082009,
+          "cost_per_conv": 4034.2611136906626,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "studio_shoot",
+          "format_label": "Studio / polished production",
+          "conv_p10": 1.81362679714014,
+          "conv_p50": 3.7236474138022437,
+          "conv_p90": 7.078776906722499,
+          "margin_p50": -40794.03895194783,
+          "conv_per_1000": 0.08933950983670924,
+          "cost_per_conv": 11193.256926373213,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        }
+      ],
+      "sensitivity": [
+        {
+          "driver": "conversion rate",
+          "swing": 5.908215760420277
+        },
+        {
+          "driver": "CPM",
+          "swing": 1.7220652597402601
+        },
+        {
+          "driver": "click-through rate",
+          "swing": 1.6986165094660437
+        }
+      ],
+      "roas": {
+        "implied": 0.3199019165647933,
+        "benchmark": 3.0,
+        "note": "funnel-implied ROAS ~0.3 sits well outside the benchmark ~3.0; treat the funnel figures as directional."
+      },
+      "evidence": [
+        {
+          "name": "CPM",
+          "tag": "C source · low relevance (US, 2026)"
+        },
+        {
+          "name": "Click-through rate",
+          "tag": "C source · low relevance (US, 2024, TikTok proxy)"
+        },
+        {
+          "name": "Conversion rate",
+          "tag": "C source · low relevance (US, 2024, TikTok proxy)"
+        },
+        {
+          "name": "AI-vs-human response",
+          "tag": "B source · low relevance (global, 2026)"
+        },
+        {
+          "name": "Human memory/brand edge",
+          "tag": "C source · low relevance (global, 2024)"
+        }
+      ],
+      "notes": [
+        "Capacity-capped and the budget cannot reach capacity: the objective is the lowest cost per sale, not to maximise volume."
+      ],
+      "draws": 5000,
+      "seed": 20260101,
+      "market_context": {
+        "line": "Of 35 sampled Norwegian nightlife ads (Nov 2026), ~43% were static image; ~49% read as AI-touched (coder judgement); median 22 days live so far (lower bound; all still running). [public_snapshot]",
+        "populated": true,
+        "n": 35,
+        "as_of": "2026-11-11",
+        "provenance": "public_snapshot",
+        "status": "sampled"
+      }
+    },
+    {
+      "scenario": {
+        "name": "Local gym memberships",
+        "industry": "Fitness and wellness",
+        "positioning": "mass",
+        "band": "mid",
+        "budget_nok": 15000,
+        "capacity_capped": false,
+        "capacity": null,
+        "channel": "meta"
+      },
+      "headline_format": "short_video",
+      "headline_format_label": "Short video (Reels / Shorts / in-feed)",
+      "position": "On these inputs, AI-generated creative delivers the most conversions per krone (p50 across the formats it can produce).",
+      "sanity": [],
+      "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
+      "level": false,
+      "level_pair": [],
+      "channel": "meta",
+      "reach_p50": 19.268602521904434,
+      "over_value": [],
+      "confidence": "low",
+      "confidence_clause": "Confidence: low — the funnel rests on US and global proxies.",
+      "leader": "ai_generated",
+      "breakeven": {
+        "format": "short_video",
+        "format_label": "Short video (Reels / Shorts / in-feed)",
+        "lift_p10": 0.031370606918143994,
+        "lift_p50": 0.06044395534281445,
+        "lift_p90": 0.12219239391067678,
+        "prod_human": 1665.6733230354662,
+        "prod_ai": 133.27978255364678,
+        "feasible": true
+      },
+      "breakeven_cost": {
+        "format": "short_video",
+        "format_label": "Short video (Reels / Shorts / in-feed)",
+        "funnel_p10": 0.0,
+        "funnel_p50": 463.90732233243125,
+        "funnel_p90": 7366.1196537729975,
+        "brand_p10": 3880.2369490805368,
+        "brand_p50": 14045.973588457275,
+        "brand_p90": 34214.37102125008,
+        "feasible": true,
+        "ai_label": "AI-generated Short video (Reels / Shorts / in-feed)",
+        "own_cost_nok": 5000.0,
+        "own_placement": "between",
+        "quote_nok": null,
+        "placement": null,
+        "lines": [
+          "Compared with AI's strongest option here (AI-generated Short video (Reels / Shorts / in-feed)), human-led matches at a production cost of ~464 NOK (up to ~7 366 NOK; in some draws human-led doesn't match even at zero production cost). Including the longer-term brand effect: ~14 046 NOK (low confidence).",
+          "Your cost of 5 000 NOK sits between them."
+        ]
+      },
+      "brand": {
+        "worth_to_close": 1508.7787662658207,
+        "brand_value": 4615.51216582115,
+        "funnel_gap": 1508.7787662658207,
+        "tag": "C source · low relevance (global, 2024)",
+        "tier": "public_benchmark",
+        "ai_label": "AI-generated Short video (Reels / Shorts / in-feed)"
+      },
+      "cells": [
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "ugc_talking_head",
+          "format_label": "UGC talking-head (creator to camera)",
+          "conv_p10": 9.40408551189243,
+          "conv_p50": 19.194114993887595,
+          "conv_p90": 37.5449165660515,
+          "margin_p50": 19022.668163821087,
+          "conv_per_1000": 1.2353805509203724,
+          "cost_per_conv": 809.467171446384,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "ugc_talking_head",
+          "format_label": "UGC talking-head (creator to camera)",
+          "conv_p10": 9.519150646498723,
+          "conv_p50": 19.268602521904434,
+          "conv_p90": 37.78156285965146,
+          "margin_p50": 18095.44629967311,
+          "conv_per_1000": 1.1634456981709873,
+          "cost_per_conv": 859.5158431842349,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 6.916546521602709,
+          "conv_p50": 14.014914564665283,
+          "conv_p90": 26.857419027968024,
+          "margin_p50": 10096.585271958138,
+          "conv_per_1000": 0.9262244359377103,
+          "cost_per_conv": 1079.6519379450353,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 6.964294778999819,
+          "conv_p50": 14.06379892665872,
+          "conv_p90": 26.795709622068284,
+          "margin_p50": 9396.827649117353,
+          "conv_per_1000": 0.8844375278585639,
+          "cost_per_conv": 1130.6621677406733,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 7.032228996391416,
+          "conv_p50": 14.060001541743762,
+          "conv_p90": 26.782077289113573,
+          "margin_p50": 8664.39547088559,
+          "conv_per_1000": 0.8428826856339855,
+          "cost_per_conv": 1186.4052336937148,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 5.3347351302237005,
+          "conv_p50": 10.643358220990219,
+          "conv_p90": 19.892877209962073,
+          "margin_p50": 3819.90616363143,
+          "conv_per_1000": 0.6938852463322288,
+          "cost_per_conv": 1441.1605715997753,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 5.377771485384809,
+          "conv_p50": 10.64939917704529,
+          "conv_p90": 20.044672792480714,
+          "margin_p50": 3538.923687470617,
+          "conv_per_1000": 0.6815025798602965,
+          "cost_per_conv": 1467.3459289875398,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "ai_mockup",
+          "format_label": "AI product mock-up / scene",
+          "conv_p10": 4.973582531083916,
+          "conv_p50": 10.289062324687261,
+          "conv_p90": 19.55602757249241,
+          "margin_p50": 3140.3452166357583,
+          "conv_per_1000": 0.6694964905050589,
+          "cost_per_conv": 1493.659812901763,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "ai_mockup",
+          "format_label": "AI product mock-up / scene",
+          "conv_p10": 4.996750120431459,
+          "conv_p50": 10.275714461489837,
+          "conv_p90": 19.537081548459724,
+          "margin_p50": 2856.3845763703553,
+          "conv_per_1000": 0.6573740375492809,
+          "cost_per_conv": 1521.2039952948876,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 5.372929569279198,
+          "conv_p50": 10.62287975223217,
+          "conv_p90": 19.963193164860535,
+          "margin_p50": -399.34813992036334,
+          "conv_per_1000": 0.5437863477409723,
+          "cost_per_conv": 1838.9575331241863,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "studio_shoot",
+          "format_label": "Studio / polished production",
+          "conv_p10": 5.44088039142042,
+          "conv_p50": 11.170942241406731,
+          "conv_p90": 21.236330720167498,
+          "margin_p50": -19170.390817079606,
+          "conv_per_1000": 0.28090396373176335,
+          "cost_per_conv": 3559.9355403347313,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        }
+      ],
+      "sensitivity": [
+        {
+          "driver": "conversion rate",
+          "swing": 0.28462011389086783
+        },
+        {
+          "driver": "CPM",
+          "swing": 0.08295810955961336
+        },
+        {
+          "driver": "click-through rate",
+          "swing": 0.08182849848170454
+        }
+      ],
+      "roas": {
+        "implied": 2.3032937992665117,
+        "benchmark": 3.0,
+        "note": "funnel-implied ROAS is a cross-check only; the roas benchmark is a wide D-tier assumption."
+      },
+      "evidence": [
+        {
+          "name": "CPM",
+          "tag": "C source · low relevance (US, 2026)"
+        },
+        {
+          "name": "Click-through rate",
+          "tag": "C source · low relevance (US, 2024, TikTok proxy)"
+        },
+        {
+          "name": "Conversion rate",
+          "tag": "C source · low relevance (US, 2024, TikTok proxy)"
+        },
+        {
+          "name": "AI-vs-human response",
+          "tag": "B source · low relevance (global, 2026)"
+        },
+        {
+          "name": "Human memory/brand edge",
+          "tag": "C source · low relevance (global, 2024)"
+        }
+      ],
+      "notes": [],
+      "draws": 5000,
+      "seed": 20260101
+    },
+    {
+      "scenario": {
+        "name": "Exclusive Oslo dinner",
+        "industry": "Events and concerts",
+        "positioning": "exclusive",
+        "band": "high",
+        "budget_nok": 8000,
+        "capacity_capped": true,
+        "capacity": 40,
+        "channel": "meta"
+      },
+      "headline_format": "static_image",
+      "headline_format_label": "Static image",
+      "position": "On these inputs, AI-generated creative delivers the lowest cost per sale (p50 across the formats it can produce).",
+      "sanity": [
+        "On this budget: ~10 of 40 sales (the budget reaches well under capacity).",
+        "Cost per sale sits above the ticket price for hybrid (AI-assisted) on these inputs."
+      ],
+      "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
+      "level": false,
+      "level_pair": [],
+      "channel": "meta",
+      "reach_p50": 10.276588011682367,
+      "over_value": [
+        "ai_assisted"
+      ],
+      "confidence": "low",
+      "confidence_clause": "Confidence: low — the funnel rests on US and global proxies.",
+      "leader": "ai_generated",
+      "breakeven": {
+        "format": "static_image",
+        "format_label": "Static image",
+        "lift_p10": 0.4722311352984824,
+        "lift_p50": 0.8898002907874829,
+        "lift_p90": 1.787006380310173,
+        "prod_human": 7995.231950570238,
+        "prod_ai": 399.8393476609403,
+        "feasible": true
+      },
+      "breakeven_cost": {
+        "format": "static_image",
+        "format_label": "Static image",
+        "funnel_p10": 0.0,
+        "funnel_p50": 409.8023777909727,
+        "funnel_p90": 1170.359596873211,
+        "brand_p10": 792.9122771523733,
+        "brand_p50": 1937.937101236543,
+        "brand_p90": 4155.65213274195,
+        "feasible": true,
+        "ai_label": "AI-generated Static image",
+        "own_cost_nok": 8000.0,
+        "own_placement": "above_both",
+        "quote_nok": null,
+        "placement": null,
+        "lines": [
+          "Compared with AI's strongest option here (AI-generated Static image), human-led matches at a production cost of ~410 NOK (up to ~1 170 NOK; in some draws human-led doesn't match even at zero production cost). Including the longer-term brand effect: ~1 938 NOK (low confidence).",
+          "Your cost of 8 000 NOK sits above both break-evens."
+        ]
+      },
+      "brand": {
+        "worth_to_close": 7574.8189228586325,
+        "brand_value": 1551.364568546182,
+        "funnel_gap": 7574.8189228586325,
+        "tag": "C source · low relevance (global, 2024)",
+        "tier": "public_benchmark",
+        "ai_label": "AI-generated Static image"
+      },
+      "cells": [
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "ugc_talking_head",
+          "format_label": "UGC talking-head (creator to camera)",
+          "conv_p10": 5.015512273009296,
+          "conv_p50": 10.236861330073383,
+          "conv_p90": 20.023955501894132,
+          "margin_p50": 5835.887774742025,
+          "conv_per_1000": 1.07492177232433,
+          "cost_per_conv": 930.3002585967289,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "ugc_talking_head",
+          "format_label": "UGC talking-head (creator to camera)",
+          "conv_p10": 5.076880344799319,
+          "conv_p50": 10.276588011682367,
+          "conv_p90": 20.15016685848078,
+          "margin_p50": 2907.6667596852185,
+          "conv_per_1000": 0.8235769586786357,
+          "cost_per_conv": 1214.2156133736462,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 3.688824811521445,
+          "conv_p50": 7.474621101154817,
+          "conv_p90": 14.323956814916277,
+          "margin_p50": 670.9721886655852,
+          "conv_per_1000": 0.7096521968945735,
+          "cost_per_conv": 1409.1409948647974,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 2.84519206945264,
+          "conv_p50": 5.67645771786145,
+          "conv_p90": 10.609534511979776,
+          "margin_p50": 114.34611387134134,
+          "conv_per_1000": 0.6757460400689895,
+          "cost_per_conv": 1479.8459321741784,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "ai_mockup",
+          "format_label": "AI product mock-up / scene",
+          "conv_p10": 2.652577349911422,
+          "conv_p50": 5.487499906499873,
+          "conv_p90": 10.429881371995956,
+          "margin_p50": -754.6771102300565,
+          "conv_per_1000": 0.609763653025349,
+          "cost_per_conv": 1639.9798028235423,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "ai_mockup",
+          "format_label": "AI product mock-up / scene",
+          "conv_p10": 2.664933397563445,
+          "conv_p50": 5.480381046127914,
+          "conv_p90": 10.419776825845187,
+          "margin_p50": -1712.1210398810758,
+          "conv_per_1000": 0.5530467039890412,
+          "cost_per_conv": 1808.1655981548868,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 2.868144792205231,
+          "conv_p50": 5.67967956109082,
+          "conv_p90": 10.690492155989714,
+          "margin_p50": -3670.1006256603396,
+          "conv_per_1000": 0.466356427493564,
+          "cost_per_conv": 2144.2826665274542,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 3.714290548799903,
+          "conv_p50": 7.500692760884649,
+          "conv_p90": 14.291045131769748,
+          "margin_p50": -5437.445135277853,
+          "conv_per_1000": 0.4480451275250502,
+          "cost_per_conv": 2231.9180339902005,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 2.8655624369489052,
+          "conv_p50": 5.665535867857158,
+          "conv_p90": 10.647036354592286,
+          "margin_p50": -7514.022897815054,
+          "conv_per_1000": 0.3537778484311973,
+          "cost_per_conv": 2826.63289192551,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 3.7505221314087556,
+          "conv_p50": 7.498667488930007,
+          "conv_p90": 14.283774554193906,
+          "margin_p50": -23793.37481825416,
+          "conv_per_1000": 0.21002486602175313,
+          "cost_per_conv": 4761.341074245933,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "studio_shoot",
+          "format_label": "Studio / polished production",
+          "conv_p10": 2.9018028754242247,
+          "conv_p50": 5.95783586208359,
+          "conv_p90": 11.326043050756,
+          "margin_p50": -71877.46589089648,
+          "conv_per_1000": 0.07325058203355284,
+          "cost_per_conv": 13651.768968516699,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        }
+      ],
+      "sensitivity": [
+        {
+          "driver": "conversion rate",
+          "swing": 4.221596902317395
+        },
+        {
+          "driver": "CPM",
+          "swing": 1.230467142857143
+        },
+        {
+          "driver": "click-through rate",
+          "swing": 1.2137123093278732
+        }
+      ],
+      "roas": {
+        "implied": 1.9194114993887592,
+        "benchmark": 3.0,
+        "note": "funnel-implied ROAS is a cross-check only; the roas benchmark is a wide D-tier assumption."
+      },
+      "evidence": [
+        {
+          "name": "CPM",
+          "tag": "C source · low relevance (US, 2026)"
+        },
+        {
+          "name": "Click-through rate",
+          "tag": "C source · low relevance (US, 2024, TikTok proxy)"
+        },
+        {
+          "name": "Conversion rate",
+          "tag": "C source · low relevance (US, 2024, TikTok proxy)"
+        },
+        {
+          "name": "AI-vs-human response",
+          "tag": "B source · low relevance (global, 2026)"
+        },
+        {
+          "name": "Human memory/brand edge",
+          "tag": "C source · low relevance (global, 2024)"
+        }
+      ],
+      "notes": [
+        "Capacity-capped and the budget cannot reach capacity: the objective is the lowest cost per sale, not to maximise volume."
+      ],
+      "draws": 5000,
+      "seed": 20260101
+    },
+    {
+      "scenario": {
+        "name": "Premium skincare brand",
+        "industry": "Beauty and skincare",
+        "positioning": "premium",
+        "band": "high",
+        "budget_nok": 40000,
+        "capacity_capped": false,
+        "capacity": null,
+        "channel": "meta"
+      },
+      "headline_format": "studio_shoot",
+      "headline_format_label": "Studio / polished production",
+      "position": "On these inputs, AI-generated and human-led are effectively level on conversions per krone (within ~5%); no single approach leads.",
+      "sanity": [],
+      "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
+      "level": true,
+      "level_pair": [
+        "ai_generated",
+        "human_led"
+      ],
+      "channel": "meta",
+      "reach_p50": 237.94535576322045,
+      "over_value": [],
+      "confidence": "low",
+      "confidence_clause": "Confidence: low — the funnel rests on US and global proxies.",
+      "leader": "ai_generated",
+      "breakeven": {
+        "format": "studio_shoot",
+        "format_label": "Studio / polished production",
+        "lift_p10": 0.0633703711388605,
+        "lift_p50": 0.09720092665849726,
+        "lift_p90": 0.15397205726800486,
+        "prod_human": 7495.529953659598,
+        "prod_ai": 299.87951074570526,
+        "feasible": false
+      },
+      "breakeven_cost": {
+        "format": "studio_shoot",
+        "format_label": "Studio / polished production",
+        "funnel_p10": 0.0,
+        "funnel_p50": 0.0,
+        "funnel_p90": 0.0,
+        "brand_p10": 0.0,
+        "brand_p50": 0.0,
+        "brand_p90": 0.0,
+        "feasible": true,
+        "ai_label": "AI-generated UGC talking-head (creator to camera)",
+        "own_cost_nok": 30000.0,
+        "own_placement": "above_both",
+        "quote_nok": 20000.0,
+        "placement": "above_both",
+        "lines": [
+          "Compared with AI's strongest option here (AI-generated UGC talking-head (creator to camera)), human-led does not match it at any production cost on these inputs, even with the longer-term brand effect.",
+          "Your cost of 30 000 NOK sits above both break-evens.",
+          "An alternative quote of 20 000 NOK being tested sits above both break-evens."
+        ]
+      },
+      "brand": {
+        "worth_to_close": 59829.87726950417,
+        "brand_value": 13744.795798805793,
+        "funnel_gap": 59829.87726950417,
+        "tag": "C source · low relevance (global, 2024)",
+        "tier": "public_benchmark",
+        "ai_label": "AI-generated UGC talking-head (creator to camera)"
+      },
+      "cells": [
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "ugc_talking_head",
+          "format_label": "UGC talking-head (creator to camera)",
+          "conv_p10": 149.25510219111564,
+          "conv_p50": 237.17629441281508,
+          "conv_p90": 370.78224617408205,
+          "margin_p50": 87606.70204015341,
+          "conv_per_1000": 5.8675404980802535,
+          "cost_per_conv": 170.42916305138087,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "ugc_talking_head",
+          "format_label": "UGC talking-head (creator to camera)",
+          "conv_p10": 150.48999161693513,
+          "conv_p50": 237.94535576322045,
+          "conv_p90": 367.8490877470479,
+          "margin_p50": 87272.02291992921,
+          "conv_per_1000": 5.778240988785715,
+          "cost_per_conv": 173.06305535607441,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 110.22159002449129,
+          "conv_p50": 173.43652498034027,
+          "conv_p90": 263.321906350164,
+          "margin_p50": 52937.65950682388,
+          "conv_per_1000": 4.263745997578143,
+          "cost_per_conv": 234.53554979880292,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 110.57856238317791,
+          "conv_p50": 173.5876889294567,
+          "conv_p90": 262.5933610531235,
+          "margin_p50": 51618.903915622344,
+          "conv_per_1000": 4.113539338183971,
+          "cost_per_conv": 243.0996585189958,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "short_video",
+          "format_label": "Short video (Reels / Shorts / in-feed)",
+          "conv_p10": 110.77981290639312,
+          "conv_p50": 173.6125872304092,
+          "conv_p90": 262.35124619510157,
+          "margin_p50": 46787.28844998635,
+          "conv_per_1000": 3.685538053528579,
+          "cost_per_conv": 271.33080343393567,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 85.78191702330828,
+          "conv_p50": 130.86611407064413,
+          "conv_p90": 194.10871891146053,
+          "margin_p50": 30437.261282393403,
+          "conv_per_1000": 3.2534530646808375,
+          "cost_per_conv": 307.3657373948779,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 86.12700836150123,
+          "conv_p50": 131.5877337293166,
+          "conv_p90": 194.21121934420998,
+          "margin_p50": 30553.137131325908,
+          "conv_per_1000": 3.248190887841004,
+          "cost_per_conv": 307.8636799839139,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_generated",
+          "approach_label": "AI-generated",
+          "format": "ai_mockup",
+          "format_label": "AI product mock-up / scene",
+          "conv_p10": 80.44886058020482,
+          "conv_p50": 126.79901696581774,
+          "conv_p90": 191.67177673985324,
+          "margin_p50": 28263.32316839854,
+          "conv_per_1000": 3.1519185753047476,
+          "cost_per_conv": 317.267082967007,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "ai_assisted",
+          "approach_label": "hybrid (AI-assisted)",
+          "format": "ai_mockup",
+          "format_label": "AI product mock-up / scene",
+          "conv_p10": 80.44740870948581,
+          "conv_p50": 126.98047161683928,
+          "conv_p90": 191.59229017057427,
+          "margin_p50": 28194.637432931024,
+          "conv_per_1000": 3.1410787598723298,
+          "cost_per_conv": 318.3619649032279,
+          "prod_tier": "public_benchmark",
+          "prod_filled": true
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "static_image",
+          "format_label": "Static image",
+          "conv_p10": 86.161826883889,
+          "conv_p50": 131.33558708314163,
+          "conv_p90": 193.7862222565641,
+          "margin_p50": 27460.759290142512,
+          "conv_per_1000": 3.020397172677958,
+          "cost_per_conv": 331.0822860269027,
+          "prod_tier": "assumption",
+          "prod_filled": false
+        },
+        {
+          "approach": "human_led",
+          "approach_label": "human-led",
+          "format": "studio_shoot",
+          "format_label": "Studio / polished production",
+          "conv_p10": 87.85325434573609,
+          "conv_p50": 137.5457178935963,
+          "conv_p90": 207.71663656878906,
+          "margin_p50": 26725.28724973891,
+          "conv_per_1000": 2.8943977490219166,
+          "cost_per_conv": 345.4950171879494,
+          "prod_tier": "own_scenario",
+          "prod_filled": true
+        }
+      ],
+      "sensitivity": [
+        {
+          "driver": "CPM",
+          "swing": 0.05730799373040752
+        },
+        {
+          "driver": "conversion rate",
+          "swing": 0.049962684521975644
+        },
+        {
+          "driver": "click-through rate",
+          "swing": 0.038316925805054074
+        }
+      ],
+      "roas": {
+        "implied": 3.2018799745730036,
+        "benchmark": 3.0,
+        "note": "funnel-implied ROAS is a cross-check only; the roas benchmark is a wide D-tier assumption."
+      },
+      "evidence": [
+        {
+          "name": "CPM",
+          "tag": "C source · low relevance (US, 2024)"
+        },
+        {
+          "name": "Click-through rate",
+          "tag": "C source · low relevance (US, 2024)"
+        },
+        {
+          "name": "Conversion rate",
+          "tag": "C source · low relevance (global, 2025)"
+        },
+        {
+          "name": "AI-vs-human response",
+          "tag": "B source · low relevance (global, 2026)"
+        },
+        {
+          "name": "Human memory/brand edge",
+          "tag": "C source · low relevance (global, 2024)"
+        }
+      ],
+      "notes": [
+        "No shared format for a like-for-like human-vs-AI break-even at Studio / polished production; shown for the nearest available cells."
+      ],
+      "draws": 5000,
+      "seed": 20260101,
+      "agency": {
+        "loaded_total_nok": 28000,
+        "monthly_fee_nok": 18000,
+        "lines": [
+          {
+            "name": "Management fee (% of media spend)",
+            "your_value": 15,
+            "unit": "%",
+            "typical": [
+              8.0,
+              15.0,
+              20.0
+            ],
+            "position": "within typical",
+            "tag": "C source · low relevance (global, 2025)",
+            "detail": "Agency fees slide down with budget (nearer the high end below ~$10k/mo, the low end above ~$50k/mo)."
+          },
+          {
+            "name": "Creative production (% of media spend)",
+            "your_value": 62.5,
+            "unit": "%",
+            "typical": [
+              10.0,
+              12.0,
+              15.0
+            ],
+            "position": "above typical",
+            "tag": "Assumption",
+            "detail": "Often quoted as a separate statement of work; the typical figure here is an unverified assumption."
+          }
+        ],
+        "approach_note": "The quote's stated approach (ai_generated, AI-generated) sits level with human-led on these inputs; no single approach leads.",
+        "notes": [
+          "Fee ranges are global proxies (no Norway-specific agency-fee source found); relevance to Norway is low."
+        ]
+      }
+    }
+  ]
+}

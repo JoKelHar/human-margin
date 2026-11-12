@@ -24,7 +24,7 @@ in development; see the status table below.
 ![Code licence: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)
 ![Data licence: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)
-![Tests](https://img.shields.io/badge/tests-40%20passing-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-126%20passing-brightgreen.svg)
 
 ## Demo
 
@@ -150,18 +150,37 @@ Built with [Claude Code](https://claude.com/claude-code).
 Also in progress, as a parallel module: the **Creative Approach Planner**
 (AI vs hybrid vs human), a standalone, offline planner backed by a cited
 benchmark library, which sharpens its estimates with the exhaustion framework
-once account data exists. **Phases 1–2 are in**: the input schema, scenario YAML
-format and currency handling (NOK-internal, with a dated Norges Bank FX file and
-a fallback); and the versioned **benchmark library** (`data/benchmarks/`) with
+once account data exists. **Try it in the browser (no install):**
+[the planner demo](https://jokelhar.github.io/human-margin/planner.html) runs the
+real engine locally via Pyodide, with four worked examples as the instant view.
+
+**Phases 1–3 and 5 are in.** The input schema, scenario YAML and currency
+handling; the versioned **benchmark library** (`data/benchmarks/`) with
 market-similarity weighting (Norway → Nordics → wider EU/UK → global) and the
-two-effect human-vs-AI performance priors (response at parity, a modest human
-memory/brand edge, cited). Every figure cites a source or is a labelled
-assumption; none are invented.
+two-effect human-vs-AI priors (response at parity, a modest human memory/brand
+edge, cited); a **content-format dimension** (static, short video, UGC talking
+head, studio, AI mock-up) with per-format priors and a per-(format × approach)
+**production-cost matrix** (`config/planner/formats.yaml`); and the **decision
+engine** itself — it reports, as a *position* never a pick, which approach
+delivers the most conversions per krone, the **break-even** response lift a
+higher-cost approach would need, a separate (not-in-funnel) **brand line**, and
+what the answer hinges on (sensitivity). Uncertainty is propagated by Monte Carlo
+over triangular ranges (fixed seed; p10/p50/p90), not by multiplying lows and
+highs. The **agency-quote check** places a quote's fees against typical practice.
+A day-one **public-context layer** can show dated Meta Ad Library ad-volume
+snapshots (official API only, within terms, or a hand-coded manual sample; see
+`DATA_SOURCES.md`). Snapshots are **maintainer-built and bundled** — trying the
+planner needs no token, account or network call, and with none present it just
+says "No market snapshot yet". Every figure cites a source or is a labelled
+assumption or drafted slot; none are invented.
 
 ```bash
-uv run python scripts/plan.py --all          # validate the example scenarios
+uv run python scripts/plan.py --all          # full position for the example scenarios
+uv run python scripts/plan.py scenarios/examples/club_night.yaml --format ugc_talking_head
+uv run python scripts/build_planner_demo.py  # build the in-browser demo (web/ and docs/)
+uv run python scripts/assumptions.py         # every assumption, drafted band and empty slot
+uv run python scripts/build_snapshot.py sample.csv --market "Oslo nightlife"  # manual snapshot (no API)
 uv run python scripts/refresh_benchmarks.py  # flag benchmark entries over 18 months old
-uv run python scripts/assumptions.py         # list every assumption and what real data replaces it
 ```
 
 **Evidence tags.** Every figure carries a provenance tier so it is clear what

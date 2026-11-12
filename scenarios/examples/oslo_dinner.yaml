@@ -16,11 +16,10 @@ reuse_campaigns: 1
 existing_assets: [last_year_footage]
 
 costs:
+  format: static_image          # the quoted human cost is for a static image set
   human_led:
-    photographer: 6000
-    editing: 2000
+    photographer: 6000          # paid photographer
+    editing: 2000               # paid editor
     usage_rights_months: 12
   ai_driven:
-    tool_subscriptions: 400
-    hours: 6
-    hourly_rate: 700
+    tool_subscriptions: 400     # money paid out; own prompting time is not costed

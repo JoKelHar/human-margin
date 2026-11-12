@@ -12,6 +12,18 @@ none instructs.**
 This is the test for all copy in the README, the dashboard, the live demo, the
 planner and the reports. If a line tells the reader what to do, it is wrong.
 
+## Zero-integration first run
+
+**Trying the tool needs no token, no account, no upload and no network call.** The
+planner runs on bundled benchmarks, format priors and example scenarios; it works
+fully offline, and with no market snapshot present it simply says "No market
+snapshot yet" — no error, no prompt to connect.
+
+Everything beyond the first run is **optional and opt-in**: linking an ad account,
+contributing pooled data, and fetching or coding a public ad-volume snapshot. Each
+adds evidence when the user chooses it; none is a precondition for getting a useful
+position on day one.
+
 ## The three jobs it serves
 
 1. **Gut-check** — a freelance marketer checks their feel for an industry, and
@@ -62,6 +74,7 @@ hover or expand:
 | `public_benchmark` | **C source · low relevance (US, 2024)** | A cited public figure, with source quality, relevance, market and date. |
 | `expert_estimate` | **C source · expert estimate · med relevance (NO, 2026)** | A named, dated estimate from experience where public data is thin. Ranked below public data, above a bare assumption. |
 | `assumption` | **Assumption** | A placeholder with no source; needs real data. |
+| `public_snapshot` | **120 sampled ads (Nov 2026)** | A dated, aggregate count of public ad volume from an official transparency product (Meta Ad Library), shown as context with its sample size; carries no performance data. |
 
 Own data takes over as it accumulates; public benchmarks, expert estimates and
 assumptions are the fallback, with relevance down-weighted the further they are

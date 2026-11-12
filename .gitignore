@@ -16,6 +16,11 @@ ground_truth.json
 /data/*
 !/data/benchmarks/
 !/data/fx/
+# Public ad-volume snapshots are maintainer-built, versioned and bundled to users
+# (empty placeholders until fetched/coded). The *_review.csv dumps carry raw
+# creative text from the API pull and stay local.
+!/data/snapshots/
+/data/snapshots/*_review.csv
 
 # Secrets — credentials must only ever come from environment variables
 .env

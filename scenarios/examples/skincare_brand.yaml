@@ -16,16 +16,19 @@ reuse_campaigns: 4
 existing_assets: [product_photos]
 
 costs:
+  format: studio_shoot          # the quoted human cost is for a studio shoot
   human_led:
-    photographer: 12000
-    videographer: 8000
-    talent: 6000
-    editing: 4000
+    photographer: 12000         # paid photographer
+    videographer: 8000          # paid videographer
+    talent: 6000                # paid talent
+    editing: 4000               # paid editor
     usage_rights_months: 12
   ai_driven:
-    tool_subscriptions: 1200
-    hours: 20
-    hourly_rate: 750
+    tool_subscriptions: 1200    # money paid out; own prompting time is not costed
+
+# A studio production quote the brand is weighing, placed against the break-even
+# cost (position only; the planner never suggests a price to offer).
+human_quote: 20000
 
 agency:
   setup_fee: 15000

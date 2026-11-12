@@ -1,0 +1,43 @@
+# Public ad-volume snapshot (manual sample). Maintainer-built, committed,
+# bundled to users. No performance data. See docs/snapshot-coding-guide.md.
+industry: uteliv
+market: Norwegian nightlife
+as_of: '2026-11-11'
+n: 35
+status: sampled
+provenance: public_snapshot
+source: 'Best-effort sweep of live Norwegian nightlife ads: ~50 venues across Norway
+  and ~25 keywords searched; 35 relevant live ads found; max 4 ads per venue. No per-venue
+  log kept this round. Live ads only — Norway ads are not retained in the Ad Library
+  after they stop. November sweep: julebord-heavy, seasonal. Finding 35 took an exhaustive
+  search: Norwegian nightlife runs light on paid Meta ads. Show this as context, not
+  an error.'
+method: manual_sample
+median_run_days: 22.0
+all_active: true
+content_type_share:
+  static_image: 0.4286
+  short_video: 0.3429
+  ugc_talking_head: 0.1143
+  studio_shoot: 0.1143
+ai_read_share:
+  heavy: 0.2571
+  some: 0.2286
+  none: 0.5143
+ai_read_basis: coder judgement (perceived artificiality, not provenance)
+format_by_ai_read:
+  static_image:
+    heavy: 6
+    some: 2
+    none: 7
+  short_video:
+    none: 7
+    some: 3
+    heavy: 2
+  ugc_talking_head:
+    none: 2
+    some: 2
+  studio_shoot:
+    none: 2
+    heavy: 1
+    some: 1

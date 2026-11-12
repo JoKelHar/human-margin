@@ -1,14 +1,16 @@
 # SPDX-License-Identifier: Apache-2.0
 # Copyright 2026 João Harrison
-"""Creative Approach Planner CLI (Phase 1 preview).
+"""Creative Approach Planner CLI.
 
-Loads and validates a scenario YAML (or every example), and prints the parsed
-inputs with the currency converted to NOK and back. The decision engine arrives
-in Phase 3; for now this shows that the input schema, scenario format and
-currency handling work end to end.
+Loads a scenario YAML (or every example), runs the decision engine and prints a
+*position* on the AI-vs-hybrid-vs-human trade-off: which approach delivers the
+most conversions per krone on these inputs, the break-even response lift, a
+separate brand line, what the answer hinges on, and the agency-quote check. It
+never tells you what to do; it says where the numbers sit and how sure they are.
 
-    uv run python scripts/plan.py scenarios/examples/oslo_dinner.yaml
+    uv run python scripts/plan.py scenarios/examples/skincare_brand.yaml
     uv run python scripts/plan.py --all
+    uv run python scripts/plan.py scenarios/examples/club_night.yaml --format ugc_talking_head
 """
 
 from __future__ import annotations
@@ -16,65 +18,53 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from mediekjop.planner import Money, load_fx_rates, load_scenario
+from mediekjop.planner import load_fx_rates, load_scenario
+from mediekjop.planner.agency import check_agency
+from mediekjop.planner.currency import Money
+from mediekjop.planner.engine import DEFAULT_DRAWS, DEFAULT_SEED, plan
+from mediekjop.planner.report import render_text
+from mediekjop.planner.snapshot import load_snapshots
 
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = ROOT / "scenarios" / "examples"
 
 
-def _fmt(amount_nok: float, scn, fx) -> str:
-    """Show an NOK amount in the scenario's own currency, with NOK alongside."""
-    if scn.currency == "NOK":
-        return f"{amount_nok:,.0f} NOK"
-    disp = fx.from_nok(amount_nok, scn.currency)
-    return f"{disp.amount:,.0f} {scn.currency} ({amount_nok:,.0f} NOK)"
-
-
-def show(scn, fx) -> None:
-    print(f"\n=== {scn.name} ===")
-    print(f"  Industry        {scn.industry_label} ({scn.industry})")
-    print(f"  Objective       {scn.objective} · positioning {scn.brand_positioning}")
-    print(f"  Price           {_fmt(scn.price_nok, scn, fx)}  ->  band: {scn.band.upper()}")
-    vpc = _fmt(scn.value_per_conversion_nok, scn, fx)
-    assumed = "  (assumed = price; no margin given)" if scn.value_is_assumed_from_price else ""
-    print(f"  Value / conv.   {vpc}{assumed}")
-    if scn.is_capacity_capped():
-        print(f"  Capacity        {scn.capacity} (objective becomes: sell out at lowest cost)")
-    print(f"  Media budget    {_fmt(scn.budget_nok, scn, fx)}")
-    print(f"  Lead time       {scn.lead_time_weeks:g} weeks · audience ~{scn.audience_size:,}"
-          if scn.audience_size else f"  Lead time       {scn.lead_time_weeks:g} weeks")
-    print(f"  Reuse           {scn.reuse_campaigns} campaign(s) · assets: "
-          f"{', '.join(scn.existing_assets) or 'none'}")
-
-    h = scn.costs.human
-    a = scn.costs.ai
-    print(f"  Production      human-led {h.upfront():,.0f} {scn.currency} "
-          f"(usage rights {h.usage_rights_months}m) · AI {a.upfront():,.0f} {scn.currency}")
-    if scn.agency:
-        ag = scn.agency
-        print(f"  Agency          setup {ag.setup_fee:,.0f} · mgmt {ag.monthly_management_fee:,.0f}/mo "
-              f"· media {ag.media_management_pct:g}% · creative {ag.creative_production_fee:,.0f} "
-              f"· approach: {ag.stated_approach}")
-
-
 def main() -> None:
-    ap = argparse.ArgumentParser(description="Creative Approach Planner (Phase 1 preview).")
+    ap = argparse.ArgumentParser(description="Creative Approach Planner (recommend-only).")
     ap.add_argument("scenario", nargs="?", help="path to a scenario YAML")
     ap.add_argument("--all", action="store_true", help="run every example scenario")
+    ap.add_argument("--format", dest="content_format", default=None,
+                    help="override the headline content format (a key from formats.yaml)")
+    ap.add_argument("--quote", type=float, default=None,
+                    help="a human-led production quote (scenario currency) to place "
+                         "against the break-even cost")
+    ap.add_argument("--draws", type=int, default=DEFAULT_DRAWS, help="Monte Carlo draws")
+    ap.add_argument("--seed", type=int, default=DEFAULT_SEED, help="random seed (fixed by default)")
     args = ap.parse_args()
 
     fx = load_fx_rates()
     print(f"FX basis: {fx.note()}  (NOK per unit: "
           + ", ".join(f"{c} {fx.nok_per_unit(c):g}" for c in ("EUR", "USD", "GBP")) + ")")
-    print("Phase 1 preview: inputs validated and converted to NOK. The decision "
-          "engine (recommendation) arrives in Phase 3.")
+    print(f"Monte Carlo: {args.draws} draws, seed {args.seed} (fixed -> reproducible).\n")
 
     if args.all or not args.scenario:
         paths = sorted(EXAMPLES.glob("*.yaml"))
     else:
         paths = [Path(args.scenario)]
-    for p in paths:
-        show(load_scenario(p, fx), fx)
+
+    snapshots = load_snapshots()
+    for i, p in enumerate(paths):
+        scn = load_scenario(p, fx)
+        if args.content_format:
+            scn.content_format = args.content_format
+        if args.quote is not None:
+            scn.human_quote = args.quote
+            scn.human_quote_nok = fx.to_nok(Money(args.quote, scn.currency))
+        r = plan(scn, fx=fx, draws=args.draws, seed=args.seed)
+        ac = check_agency(scn, r.leader, level=r.level, level_pair=r.level_pair)
+        if i:
+            print("\n" + "=" * 78 + "\n")
+        print(render_text(r, ac, snapshots.get(scn.industry)))
 
 
 if __name__ == "__main__":

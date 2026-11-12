@@ -12,7 +12,13 @@ measured data; each line says what would replace it.
 from __future__ import annotations
 
 from mediekjop.planner.benchmarks import load_benchmarks, load_weights, provenance
+from mediekjop.planner.formats import (
+    drafted_cost_slots,
+    load_formats,
+    unfilled_cost_slots,
+)
 from mediekjop.planner.schema import load_industries
+from mediekjop.planner.snapshot import load_snapshots
 
 
 def _line(where: str, key: str, value: str, replace_with: str) -> None:
@@ -64,6 +70,36 @@ def main() -> None:
     if not slots:
         print("  (none unfilled in industries.yaml)")
 
+    print("\n## Content-format priors  (config/planner/formats.yaml)")
+    for key, f in load_formats().items():
+        if f.priors_tier == "assumption":
+            _line("config/planner/formats.yaml",
+                  f"format priors / {key} (assumption)",
+                  f"ctr_mult {f.ctr_mult.point} / cvr_mult {f.cvr_mult.point}",
+                  "a sourced or pooled per-format response figure for Norway")
+
+    print("\n## Production-cost drafts awaiting promotion  (config/planner/formats.yaml)")
+    print("  (owner-adjusted bands, still tier assumption; promote to expert_estimate when settled)")
+    drafts = drafted_cost_slots()
+    for c in drafts:
+        _line("config/planner/formats.yaml",
+              f"production cost / {c.fmt} x {c.approach} (assumption, draft — pending promotion)",
+              f"{c.nok.low:.0f}-{c.nok.point:.0f}-{c.nok.high:.0f} NOK  [source: '{c.source}']",
+              "promote when settled: set tier: expert_estimate, filled: true, "
+              "source: '<name>, <YYYY-MM>'")
+    if not drafts:
+        print("  (no drafts pending in formats.yaml)")
+
+    print("\n## Production-cost expert slots still empty  (config/planner/formats.yaml)")
+    slots = unfilled_cost_slots()
+    for c in slots:
+        _line("config/planner/formats.yaml",
+              f"production cost / {c.fmt} x {c.approach} (expert_estimate, unfilled)",
+              f"{c.nok.low:.0f}-{c.nok.point:.0f}-{c.nok.high:.0f} NOK  [source: '']",
+              "set a realistic commercial band from experience and add source: '<name>, <YYYY-MM>'")
+    if not slots:
+        print("  (none empty in formats.yaml)")
+
     print("\n## Market-similarity config  (config/planner/weights.yaml)")
     w = load_weights()
     gw = {k: v.get("weight") for k, v in (w.get("geography_weight") or {}).items()}
@@ -72,6 +108,26 @@ def main() -> None:
     _line("config/planner/weights.yaml", "price_level_vs_norway",
           str(w.get("price_level_vs_norway")),
           "a sourced purchasing-power-parity table")
+
+    print("\n## Public ad-volume snapshots  (data/snapshots/)")
+    print("  (context layer, no performance data; provenance public_snapshot. A manual")
+    print("   sample is a hand-coded public-library sweep; ai_read is coder judgement.)")
+    snaps = load_snapshots()
+    if not snaps:
+        print("  (no snapshots populated)")
+    for ind, s in sorted(snaps.items()):
+        if not s.populated:
+            _line(f"data/snapshots/{ind}.yaml", f"{ind} (awaiting_fetch)",
+                  "no sample yet (planner says 'No market snapshot yet.')",
+                  "fetch via the API or hand-code a manual sample")
+            continue
+        run = (f"median {s.median_run_days:g} days live so far (lower bound; all active)"
+               if s.all_active else f"median run {s.median_run_days} days")
+        _line(f"data/snapshots/{ind}.yaml",
+              f"{ind} ({s.method}, N={s.n})",
+              f"{s.market}, as_of {s.as_of}; {run}; ai_read is coder judgement",
+              "a larger / API-pulled sample, and pooled linked-account performance for the "
+              "approach-vs-outcome question (the snapshot carries no performance data)")
 
     print("\n## Synthetic demo data  (src/mediekjop/synthetic/, config/config.yaml)")
     _line("src/mediekjop/synthetic/generator.py",

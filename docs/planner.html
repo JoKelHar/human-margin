@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Creative Approach Planner — Human Margin</title>
+<style>
+  :root {
+    --bg: #0f1216; --panel: #161b22; --panel2: #1c2230; --fg: #e6edf3; --muted: #9aa7b4;
+    --line: #2a3340; --accent: #5aa9e6; --good: #4bb37a; --warn: #d9a441; --chip: #223;
+    --font: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg:#f6f8fa; --panel:#fff; --panel2:#eef2f6; --fg:#1b2430; --muted:#5b6774;
+      --line:#dde3ea; --accent:#2f6fb0; --chip:#eef2f6; color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg:#f6f8fa; --panel:#fff; --panel2:#eef2f6; --fg:#1b2430; --muted:#5b6774;
+    --line:#dde3ea; --accent:#2f6fb0; --chip:#eef2f6; color-scheme: light;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font-family:var(--font);
+         line-height:1.5; padding: 0 max(16px, env(safe-area-inset-left)) 64px max(16px, env(safe-area-inset-right)); }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  header { padding-block: 28px 12px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  h2 { font-size: 1.05rem; margin: 22px 0 8px; color: var(--fg); }
+  h3 { font-size: .82rem; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); margin: 0 0 6px; }
+  p { margin: 6px 0; }
+  .sub { color: var(--muted); max-width: 70ch; }
+  .disclaimer { font-size:.82rem; color:var(--muted); border-left:2px solid var(--line); padding-left:10px; margin-top:10px; }
+  .panel { background:var(--panel); border:1px solid var(--line); border-radius:10px; padding:16px; margin:12px 0; }
+  .tabs { display:flex; flex-wrap:wrap; gap:6px; margin:12px 0; }
+  .tab { background:var(--panel2); color:var(--fg); border:1px solid var(--line); border-radius:999px;
+         padding:6px 14px; font-size:.85rem; cursor:pointer; }
+  .tab[aria-selected="true"] { background:var(--accent); color:#06121f; border-color:var(--accent); font-weight:600; }
+  .position { font-size:1.12rem; font-weight:600; }
+  .confidence { color:var(--muted); margin-top:2px; }
+  .timenote { color:var(--muted); font-size:.82rem; margin-top:6px; border-left:2px solid var(--line); padding-left:10px; }
+  .quotebox { background:var(--panel2); border:1px solid var(--line); border-radius:8px; padding:12px 14px; margin:10px 0; }
+  .quotelabel { display:flex; flex-direction:column; gap:6px; font-size:.8rem; color:var(--muted); }
+  .quotelabel #quote-val { color:var(--fg); font-family:var(--mono); }
+  #quote-slider { width:100%; accent-color:var(--accent); }
+  .quoteplace { font-weight:600; margin:8px 0 2px; }
+  .sanity { list-style:none; margin:8px 0 0; padding:8px 12px; border-left:3px solid var(--warn);
+            background:var(--chip); border-radius:0 8px 8px 0; }
+  .sanity li { margin:2px 0; font-weight:600; }
+  table { width:100%; border-collapse:collapse; font-size:.88rem; }
+  th, td { text-align:left; padding:7px 8px; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-weight:600; font-size:.78rem; text-transform:uppercase; letter-spacing:.03em; }
+  td.num { text-align:right; font-variant-numeric: tabular-nums; font-family:var(--mono); }
+  .tier { font-size:.72rem; padding:1px 7px; border-radius:999px; background:var(--chip); color:var(--muted); border:1px solid var(--line); }
+  .tier.expert { color:var(--warn); border-color:var(--warn); }
+  .tier.assumption { color:var(--muted); }
+  .lead td { color:var(--fg); }
+  .evidence li, .sens li { color:var(--muted); font-size:.88rem; }
+  ul { margin:6px 0; padding-left:18px; }
+  .ev-tag { font-family:var(--mono); font-size:.8rem; color:var(--fg); }
+  form { display:grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap:10px 14px; }
+  label { display:flex; flex-direction:column; font-size:.78rem; color:var(--muted); gap:3px; }
+  input, select { background:var(--bg); color:var(--fg); border:1px solid var(--line); border-radius:7px; padding:7px 8px; font-size:.9rem; font-family:var(--font); }
+  .run { grid-column: 1 / -1; display:flex; gap:10px; align-items:center; }
+  button.go { background:var(--accent); color:#06121f; border:none; border-radius:8px; padding:9px 18px; font-weight:600; font-size:.92rem; cursor:pointer; }
+  button.go:disabled { opacity:.5; cursor:progress; }
+  .status { font-size:.82rem; color:var(--muted); }
+  .brand, .note { background:var(--panel2); border-radius:8px; padding:10px 12px; font-size:.9rem; margin-top:8px; }
+  .kicker { color:var(--accent); font-size:.78rem; text-transform:uppercase; letter-spacing:.05em; }
+  code { font-family:var(--mono); background:var(--panel2); padding:1px 5px; border-radius:5px; font-size:.85em; }
+  a { color:var(--accent); }
+  @media (max-width:560px){ th.hide, td.hide { display:none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="kicker">Human Margin</div>
+    <h1>Creative Approach Planner</h1>
+    <p class="sub">Enter a budget, a price and a few campaign details. It reports where
+      AI-led, hybrid and human-led creative sit on conversions per krone, the break-even
+      a higher-cost approach would need, and what the answer hinges on — as a position,
+      never a pick. Runs fully in your browser; nothing is sent anywhere.</p>
+    <p class="disclaimer" id="disclaimer"></p>
+  </header>
+
+  <div class="panel">
+    <h3>Try an example, or run your own</h3>
+    <div class="tabs" id="tabs"></div>
+    <details id="formWrap">
+      <summary style="cursor:pointer; color:var(--accent); font-size:.9rem;">Run your own scenario</summary>
+      <form id="form" style="margin-top:12px;">
+        <label>Industry<select name="industry" id="f-industry"></select></label>
+        <label>Objective<select name="objective" id="f-objective"></select></label>
+        <label>Positioning<select name="brand_positioning" id="f-positioning"></select></label>
+        <label>Content format<select name="content_format" id="f-format"></select></label>
+        <label>Currency<select name="currency" id="f-currency"></select></label>
+        <label>Price<input name="price" id="f-price" type="number" value="900" min="0"></label>
+        <label>Gross margin (0–1)<input name="margin" id="f-margin" type="number" value="0.6" step="0.05" min="0" max="1"></label>
+        <label>Monthly budget<input name="budget" id="f-budget" type="number" value="40000" min="0"></label>
+        <label>Reuse campaigns<input name="reuse_campaigns" id="f-reuse" type="number" value="1" min="1"></label>
+        <label>Capacity (optional)<input name="capacity" id="f-capacity" type="number" min="0" placeholder="none"></label>
+        <div class="run">
+          <button class="go" id="run" type="submit" disabled>Loading engine…</button>
+          <span class="status" id="status">Booting the in-browser Python engine (first load downloads a few MB)…</span>
+        </div>
+      </form>
+    </details>
+  </div>
+
+  <div id="result"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script>
+const APPROACH_ORDER = ["human_led","ai_assisted","ai_generated"];
+const PLACE = {above_both:"above both break-evens", between:"between them", below_both:"below both"};
+let EXAMPLES = null, pyReady = false, pyodide = null, runPy = null;
+
+function nok(x){ return Math.round(x).toLocaleString("en-US").replace(/,/g," ") + " NOK"; }
+function pct(x){ return (x*100).toFixed(1) + "%"; }
+function esc(s){ return String(s).replace(/[&<>]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+
+function tierBadge(tier, filled){
+  const label = { own_scenario:"your cost", public_benchmark:"public benchmark",
+                  expert_estimate:"expert estimate", assumption:"assumption" }[tier] || tier;
+  const cls = tier==="expert_estimate" ? "expert" : (tier==="assumption"?"assumption":"");
+  const star = filled===false ? " ·provisional (pending owner review)" : "";
+  return `<span class="tier ${cls}">${esc(label)}${star}</span>`;
+}
+
+function renderResult(d){
+  const s = d.scenario;
+  let h = `<div class="panel">`;
+  h += `<h2>${esc(s.name||"Scenario")}</h2>`;
+  h += `<p class="sub">${esc(s.industry)} · ${esc(s.positioning)} · price band ${esc((s.band||"").toUpperCase())} · budget ${nok(s.budget_nok)}${s.capacity_capped?" · capacity-capped":""}</p>`;
+
+  h += `<div style="margin:12px 0;">`;
+  if (d.sanity && d.sanity.length){
+    h += `<ul class="sanity">` + d.sanity.map(x=>`<li>${esc(x)}</li>`).join("") + `</ul>`;
+  }
+  h += `<div class="position" style="margin-top:8px;">${esc(d.position)}</div>`;
+  h += `<div class="confidence">${esc(d.confidence_clause)}</div>`;
+  if (d.time_note) h += `<div class="timenote">${esc(d.time_note)}</div>`;
+  h += `</div>`;
+
+  // Break-even production cost (the headline) + a live "test another quote" slider
+  const bc = d.breakeven_cost;
+  if (bc){
+    h += `<h3>Break-even production cost (the headline)</h3>`;
+    const vs = bc.ai_label ? `AI's strongest option here (${esc(bc.ai_label)})` : "AI's strongest option here";
+    if (bc.funnel_p90 <= 0){
+      const base = `Compared with ${vs}, human-led does not match it at any production cost on these inputs`;
+      h += (bc.brand_p90 <= 0)
+        ? `<p>${base}, even with the longer-term brand effect.</p>`
+        : `<p>${base} on the funnel alone; including the longer-term brand effect it matches at
+           <strong>~${nok(bc.brand_p50)}</strong> (low confidence).</p>`;
+    } else {
+      const funnelTxt = (bc.funnel_p10 <= 0)
+        ? `Compared with ${vs}, human-led matches at a production cost of <strong>~${nok(bc.funnel_p50)}</strong>
+           (up to ~${nok(bc.funnel_p90)}; in some draws human-led doesn't match even at zero production cost).`
+        : `Compared with ${vs}, human-led matches at a production cost of <strong>~${nok(bc.funnel_p50)}</strong>
+           (likely ${nok(bc.funnel_p10)}–${nok(bc.funnel_p90)}).`;
+      h += `<p>${funnelTxt} Including the longer-term brand effect:
+        <strong>~${nok(bc.brand_p50)}</strong> (low confidence).</p>`;
+    }
+    if (bc.feasible === false){
+      h += `<p class="sub">(The scenario's format is AI-only; shown for the nearest human-capable format.)</p>`;
+    }
+    if (bc.own_cost_nok && bc.own_placement){
+      h += `<p><strong>Your cost of ${nok(bc.own_cost_nok)}</strong> sits ${PLACE[bc.own_placement]}.</p>`;
+    }
+    const qmax = Math.max(bc.brand_p50*1.5, bc.funnel_p90*2, (bc.quote_nok||0)*1.5, (bc.own_cost_nok||0)*1.5, 2000);
+    const qinit = (bc.quote_nok!=null && bc.quote_nok>0) ? bc.quote_nok
+                  : (bc.own_cost_nok || Math.round(bc.funnel_p50));
+    h += `<div class="quotebox">
+      <label class="quotelabel">Test a different human-led quote <span id="quote-val"></span>
+        <input type="range" id="quote-slider" min="0" max="${Math.round(qmax)}" step="500"
+          value="${Math.round(qinit)}" data-funnel="${bc.funnel_p50}" data-brand="${bc.brand_p50}">
+      </label>
+      <p class="quoteplace" id="quote-place"></p>
+      <p class="sub" style="font-size:.78rem;">Position only — the planner never suggests a price to offer.</p>
+    </div>`;
+  }
+
+  // Cost to sell out / cost per sale (capacity-capped only)
+  if (s.capacity_capped){
+    const human = d.cells.filter(c=>c.approach==="human_led");
+    const ai = d.cells.filter(c=>c.approach==="ai_generated");
+    const reachable = !(s.capacity && d.reach_p50 < s.capacity*0.995);
+    if (human.length && ai.length){
+      const ch = Math.min(...human.map(c=>c.cost_per_conv));
+      const ca = Math.min(...ai.map(c=>c.cost_per_conv));
+      const vol = Math.min(d.reach_p50, s.capacity||d.reach_p50);
+      h += `<h3>${reachable ? "Cost to sell out" : "Cost per sale"} (headline, capacity-capped)</h3>`;
+      h += `<p>Capacity is ${s.capacity}; on this budget the campaign reaches ~${Math.round(d.reach_p50)}
+        sales. At the cheapest format for each: AI-generated ~${nok(ca)}/sale, human-led ~${nok(ch)}/sale
+        — a gap of ~${nok(Math.abs(ch-ca)*vol)} over the ~${Math.round(vol)} sales this budget reaches.</p>`;
+    }
+  }
+
+  // Brand line
+  h += `<div class="brand"><h3>Longer-term brand effect (not in the numbers)</h3>`;
+  if (d.brand.worth_to_close <= 1){
+    h += `A human memory/brand edge is cited but kept out of the funnel. Here the funnel already
+      favours human-led, so no brand premium is needed to close a gap; the modelled edge
+      (~${nok(d.brand.brand_value)}) would sit on top. <span class="ev-tag">${esc(d.brand.tag)}</span>`;
+  } else {
+    h += `A human memory/brand edge is cited but kept out of the funnel. On these inputs it would need
+      to be worth about <strong>${nok(d.brand.worth_to_close)}</strong> over the campaign to close the
+      funnel-margin gap${d.brand.ai_label ? " to " + esc(d.brand.ai_label) : ""} (modelled brand value
+      ~${nok(d.brand.brand_value)}). <span class="ev-tag">${esc(d.brand.tag)}</span>`;
+  }
+  h += `</div>`;
+
+  // Matrix
+  h += `<h3 style="margin-top:16px;">Conversions per krone, by approach × format (p50)</h3>`;
+  h += `<table><thead><tr><th>Approach</th><th>Format</th><th class="num">conv/1000kr</th>
+    <th class="num hide">cost/conv</th><th class="num hide">margin p50</th><th>Production cost</th></tr></thead><tbody>`;
+  d.cells.forEach((c,i)=>{
+    h += `<tr class="${i===0?"lead":""}"><td>${esc(c.approach_label)}</td><td>${esc(c.format_label)}</td>
+      <td class="num">${c.conv_per_1000.toFixed(2)}</td>
+      <td class="num hide">${nok(c.cost_per_conv)}</td>
+      <td class="num hide">${nok(c.margin_p50)}</td>
+      <td>${tierBadge(c.prod_tier, c.prod_filled)}</td></tr>`;
+  });
+  h += `</tbody></table>`;
+
+  // Detail — break-even as a response gap (moved under the headline; non-capacity)
+  if (!s.capacity_capped){
+    const be = d.breakeven;
+    h += `<h3 style="margin-top:16px;">Detail — break-even as a response gap</h3>`;
+    if (be.lift_p50 <= 0){
+      h += `<p class="sub">In ${esc(be.format_label)}, human-led already matches or sits ahead of
+        AI-generated on margin here, so no response lift is needed to justify it.</p>`;
+    } else {
+      h += `<p class="sub">In ${esc(be.format_label)}, human-led would need its response to beat
+        AI-generated by about <strong>${pct(be.lift_p50)}</strong> (p10–p90 ${pct(be.lift_p10)}–${pct(be.lift_p90)})
+        to match on margin, because it costs ~${nok(Math.max(be.prod_human-be.prod_ai,0))} more to
+        produce per reuse. Below that, AI-generated sits ahead on margin; above it, human-led does.</p>`;
+    }
+  }
+
+  // Sensitivity
+  h += `<h3 style="margin-top:16px;">What this hinges on</h3><ul class="sens">`;
+  h += `<li>The answer moves most with: <strong>${d.sensitivity.map(x=>esc(x.driver)).join(", ")}</strong>.
+    These are where your own data would change the picture most.</li></ul>`;
+
+  // ROAS
+  h += `<h3>ROAS cross-check</h3><p class="sub">`;
+  h += s.capacity_capped ? `Not meaningful when capacity-capped; the cost-to-sell-out figure above is the relevant one.`
+    : `Funnel-implied ROAS ~${d.roas.implied.toFixed(1)}${d.roas.benchmark?` (benchmark ~${d.roas.benchmark.toFixed(1)})`:""}. ${esc(d.roas.note)}`;
+  h += `</p>`;
+
+  // Evidence
+  h += `<h3>Evidence — how sure, per figure</h3><ul class="evidence">`;
+  d.evidence.forEach(e=>{ h += `<li>${esc(e.name)}: <span class="ev-tag">${esc(e.tag)}</span></li>`; });
+  h += `</ul>`;
+
+  // Market context
+  if (d.market_context){
+    h += `<h3>Market context (public ad volume, no performance data)</h3>`;
+    h += `<p class="sub">${esc(d.market_context.line)}</p>`;
+  }
+
+  // Agency
+  if (d.agency){
+    h += `<h3 style="margin-top:16px;">Agency quote check</h3>`;
+    h += `<p class="sub">Loaded cost ~${nok(d.agency.loaded_total_nok)}/period (management + media% + amortised setup/creative).</p><ul class="evidence">`;
+    d.agency.lines.forEach(l=>{
+      const tr = l.typical ? `typical ${l.typical[0]}–${l.typical[2]}${l.unit}` : "no typical figure";
+      h += `<li>${esc(l.name)}: ${l.your_value}${l.unit} — <strong>${esc(l.position)}</strong> (${tr}; <span class="ev-tag">${esc(l.tag)}</span>)</li>`;
+    });
+    h += `</ul>`;
+    if (d.agency.approach_note) h += `<p class="sub">${esc(d.agency.approach_note)}</p>`;
+  }
+
+  h += `</div>`;
+  document.getElementById("result").innerHTML = h;
+  wireQuoteSlider();
+}
+
+function placeQuote(q, funnel, brand){
+  const lo = Math.min(funnel, brand), hi = Math.max(funnel, brand);
+  if (q > hi) return "above both break-evens";
+  if (q < lo) return "below both";
+  return "between them";
+}
+
+// The quote slider updates the placement live (pure comparison against the two
+// break-evens — no need to re-run the engine).
+function wireQuoteSlider(){
+  const s = document.getElementById("quote-slider");
+  if (!s) return;
+  const funnel = parseFloat(s.dataset.funnel), brand = parseFloat(s.dataset.brand);
+  const val = document.getElementById("quote-val");
+  const place = document.getElementById("quote-place");
+  const update = ()=>{
+    const q = parseFloat(s.value);
+    val.textContent = "— " + nok(q);
+    place.textContent = `A quote of ${nok(q)} would sit ${placeQuote(q, funnel, brand)}.`;
+  };
+  s.addEventListener("input", update);
+  update();
+}
+
+// --- examples (instant, no runtime) ---
+async function loadExamples(){
+  EXAMPLES = await (await fetch("planner_examples.json")).json();
+  document.getElementById("disclaimer").textContent = EXAMPLES.disclaimer + "  " + EXAMPLES.fx_note + " · " + EXAMPLES.draws + " Monte Carlo draws, fixed seed.";
+  const tabs = document.getElementById("tabs");
+  EXAMPLES.scenarios.forEach((sc,i)=>{
+    const b = document.createElement("button");
+    b.className="tab"; b.textContent=sc.scenario.name; b.setAttribute("role","tab");
+    b.setAttribute("aria-selected", i===0?"true":"false");
+    b.onclick=()=>{ [...tabs.children].forEach(c=>c.setAttribute("aria-selected","false"));
+      b.setAttribute("aria-selected","true"); renderResult(sc); };
+    tabs.appendChild(b);
+  });
+  renderResult(EXAMPLES.scenarios[0]);
+}
+
+// --- Pyodide (progressive enhancement: the real engine) ---
+async function bootPyodide(){
+  try {
+    pyodide = await loadPyodide();
+    await pyodide.loadPackage(["numpy","pyyaml"]);
+    const fs = await (await fetch("planner_fs.json")).json();
+    for (const [path, content] of Object.entries(fs)){
+      const full = "/repo/" + path;
+      const dir = full.substring(0, full.lastIndexOf("/"));
+      pyodide.FS.mkdirTree(dir); pyodide.FS.writeFile(full, content);
+    }
+    pyodide.runPython(`
+import json, sys
+sys.path.insert(0, '/repo/src')
+from mediekjop.planner import scenario_from_dict, load_industries, load_formats
+from mediekjop.planner.engine import plan
+from mediekjop.planner.agency import check_agency
+from mediekjop.planner.report import to_dict
+from mediekjop.planner.snapshot import load_snapshots
+
+def _options():
+    cfg = load_industries()
+    return json.dumps({
+      "industries":[{"key":r["key"],"label":r["label"]} for r in cfg["industries"]],
+      "objectives":cfg["objectives"], "positioning":cfg["brand_positioning"],
+      "formats":[{"key":k,"label":f.label} for k,f in load_formats().items()],
+      "currencies":["NOK","EUR","USD","GBP"],
+    })
+
+def _run(payload):
+    d = json.loads(payload)
+    scn = scenario_from_dict(d)
+    r = plan(scn, draws=4000)
+    ac = check_agency(scn, r.leader, level=r.level, level_pair=r.level_pair)
+    return json.dumps(to_dict(r, ac, load_snapshots().get(scn.industry)))
+`);
+    const opts = JSON.parse(pyodide.runPython("_options()"));
+    populateForm(opts);
+    runPy = (payload)=> pyodide.runPython(`_run(${JSON.stringify(payload)})`);
+    pyReady = true;
+    document.getElementById("run").disabled = false;
+    document.getElementById("run").textContent = "Run scenario";
+    document.getElementById("status").textContent = "Engine ready — runs locally in your browser.";
+  } catch(e){
+    document.getElementById("status").textContent =
+      "Interactive engine unavailable here; the examples above are fully worked. (" + e + ")";
+  }
+}
+
+function fill(id, items, valueKey, labelKey){
+  const el = document.getElementById(id);
+  el.innerHTML = "";
+  items.forEach(it=>{ const o=document.createElement("option");
+    o.value = valueKey?it[valueKey]:it; o.textContent = labelKey?it[labelKey]:it; el.appendChild(o); });
+}
+function populateForm(o){
+  fill("f-industry", o.industries, "key", "label");
+  fill("f-objective", o.objectives);
+  fill("f-positioning", o.positioning);
+  fill("f-format", o.formats, "key", "label");
+  fill("f-currency", o.currencies);
+}
+
+document.getElementById("form").addEventListener("submit", (e)=>{
+  e.preventDefault();
+  if(!pyReady) return;
+  const f = e.target;
+  const payload = {
+    name: "Your scenario", industry: f.industry.value, objective: f.objective.value,
+    brand_positioning: f.brand_positioning.value, content_format: f.content_format.value,
+    currency: f.currency.value, price: parseFloat(f.price.value), budget: parseFloat(f.budget.value),
+    margin: parseFloat(f.margin.value), reuse_campaigns: parseInt(f.reuse_campaigns.value||"1"),
+  };
+  if (f.capacity.value) payload.capacity = parseInt(f.capacity.value);
+  document.getElementById("status").textContent = "Running 4000 Monte Carlo draws…";
+  setTimeout(()=>{
+    try { renderResult(JSON.parse(runPy(JSON.stringify(payload))));
+          document.getElementById("status").textContent = "Engine ready — runs locally in your browser.";
+          [...document.getElementById("tabs").children].forEach(c=>c.setAttribute("aria-selected","false"));
+    } catch(err){ document.getElementById("status").textContent = "Could not run: " + err; }
+  }, 20);
+});
+
+loadExamples();
+bootPyodide();
+</script>
+</body>
+</html>

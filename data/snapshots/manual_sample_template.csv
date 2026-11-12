@@ -1,0 +1,4 @@
+ad_url,advertiser,industry,content_type,ai_read,start_date,still_active,coder,date_coded
+https://www.facebook.com/ads/library/?id=EXAMPLE_REPLACE_ME,EXAMPLE Venue AS,uteliv,ugc_talking_head,none,2026-10-01,y,EXAMPLE,2026-11-11
+https://www.facebook.com/ads/library/?id=EXAMPLE_REPLACE_ME,EXAMPLE Venue AS,uteliv,short_video,heavy,2026-09-15,y,EXAMPLE,2026-11-11
+https://www.facebook.com/ads/library/?id=EXAMPLE_REPLACE_ME,EXAMPLE Club BA,uteliv,static_image,some,2026-10-20,y,EXAMPLE,2026-11-11

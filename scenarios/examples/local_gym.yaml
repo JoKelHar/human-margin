@@ -16,12 +16,11 @@ reuse_campaigns: 3
 existing_assets: [staff_founder_access]
 
 costs:
+  format: short_video           # the quoted human cost is for a short video
   human_led:
-    ugc_creator: 2500
-    designer: 1500
-    editing: 1000
+    ugc_creator: 2500           # paid to the creator
+    designer: 1500              # paid designer
+    editing: 1000               # paid editor
     usage_rights_months: 12
   ai_driven:
-    tool_subscriptions: 400
-    hours: 8
-    hourly_rate: 600
+    tool_subscriptions: 400     # money paid out; own prompting time is not costed
