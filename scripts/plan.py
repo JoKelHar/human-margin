@@ -61,7 +61,7 @@ def main() -> None:
             scn.human_quote = args.quote
             scn.human_quote_nok = fx.to_nok(Money(args.quote, scn.currency))
         r = plan(scn, fx=fx, draws=args.draws, seed=args.seed)
-        ac = check_agency(scn, r.leader)
+        ac = check_agency(scn, r.leader, level=r.level, level_pair=r.level_pair)
         if i:
             print("\n" + "=" * 78 + "\n")
         print(render_text(r, ac, snapshots.get(scn.industry)))

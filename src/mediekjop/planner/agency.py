@@ -81,6 +81,7 @@ def _position(value: float, lo: float, hi: float) -> str:
 
 
 def check_agency(scn: Scenario, leader: str | None = None, *,
+                 level: bool = False, level_pair: list[str] | None = None,
                  benchmarks: list[dict] | None = None) -> AgencyCheck:
     rows = benchmarks if benchmarks is not None else bm.load_benchmarks()
     q = scn.agency
@@ -120,7 +121,13 @@ def check_agency(scn: Scenario, leader: str | None = None, *,
 
     approach_note = ""
     mapped = _STATED_TO_APPROACH.get(q.stated_approach)
-    if leader and mapped:
+    if level and mapped:
+        # Same logic as the headline: when the leaders are effectively level, name no
+        # single leader — the quote's approach sits level with human-led on these inputs.
+        approach_note = (f"The quote's stated approach ({q.stated_approach}, "
+                         f"{APPROACH_LABEL.get(mapped, mapped)}) sits level with human-led on "
+                         f"these inputs; no single approach leads.")
+    elif leader and mapped:
         if mapped == leader:
             approach_note = (f"The quote's stated approach ({q.stated_approach}) matches the "
                              f"approach that leads on conversions per krone on these inputs "

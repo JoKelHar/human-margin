@@ -16,9 +16,9 @@
         "capacity": 300,
         "channel": "meta"
       },
-      "headline_format": "short_video",
-      "headline_format_label": "Short video (Reels / Shorts / in-feed)",
-      "position": "On these inputs, AI-generated creative costs the least to sell out (p50 across the formats it can produce).",
+      "headline_format": "ugc_talking_head",
+      "headline_format_label": "UGC talking-head (creator to camera)",
+      "position": "On these inputs, AI-generated creative delivers the lowest cost per sale (p50 across the formats it can produce).",
       "sanity": [
         "On this budget: ~6 of 300 sales (the budget reaches well under capacity).",
         "Cost per sale sits above the ticket price for every approach on these inputs."
@@ -37,35 +37,38 @@
       "confidence_clause": "Confidence: low — the funnel rests on US and global proxies.",
       "leader": "ai_generated",
       "breakeven": {
-        "format": "short_video",
-        "format_label": "Short video (Reels / Shorts / in-feed)",
-        "lift_p10": 4.693809744789271,
-        "lift_p50": 10.587410610977642,
-        "lift_p90": 23.51683846715843,
-        "prod_human": 13775.412252079746,
-        "prod_ai": 1241.6586497462897,
+        "format": "ugc_talking_head",
+        "format_label": "UGC talking-head (creator to camera)",
+        "lift_p10": 0.6133593620099932,
+        "lift_p50": 1.210740058459607,
+        "lift_p90": 2.490876235122132,
+        "prod_human": 2098.748387024688,
+        "prod_ai": 149.93975537285263,
         "feasible": true
       },
       "breakeven_cost": {
-        "format": "short_video",
-        "format_label": "Short video (Reels / Shorts / in-feed)",
-        "funnel_p10": 1527.343752380888,
-        "funnel_p50": 2505.2525424140085,
-        "funnel_p90": 3903.624569051921,
-        "brand_p10": 1938.5872866321238,
-        "brand_p50": 3007.049954364358,
-        "brand_p90": 4467.949133298064,
+        "format": "ugc_talking_head",
+        "format_label": "UGC talking-head (creator to camera)",
+        "funnel_p10": 7.794018556650103,
+        "funnel_p50": 301.3176015040117,
+        "funnel_p90": 591.3427337770541,
+        "brand_p10": 447.1955269738009,
+        "brand_p50": 874.7331647569722,
+        "brand_p90": 1778.7693590686058,
         "feasible": true,
+        "own_cost_nok": 4200.0,
+        "own_placement": "above_both",
         "quote_nok": null,
         "placement": null,
         "lines": [
-          "Human-led matches AI at a production cost of ~2 505 NOK (likely 1 527 NOK–3 904 NOK). Including the longer-term brand effect: ~3 007 NOK (low confidence)."
+          "Human-led matches AI at a production cost of ~301 NOK (likely 8 NOK–591 NOK). Including the longer-term brand effect: ~875 NOK (low confidence).",
+          "Your cost of 4 200 NOK sits above both break-evens."
         ]
       },
       "brand": {
-        "worth_to_close": 12522.494478814762,
-        "brand_value": 213.68111878801625,
-        "funnel_gap": 12522.494478814762,
+        "worth_to_close": 1951.8940147697263,
+        "brand_value": 295.05835118438506,
+        "funnel_gap": 1951.8940147697263,
         "tag": "C source · low relevance (global, 2024)",
         "tier": "public_benchmark"
       },
@@ -228,15 +231,15 @@
       "sensitivity": [
         {
           "driver": "conversion rate",
-          "swing": 46.1084584503206
-        },
-        {
-          "driver": "production cost (human-led)",
-          "swing": 22.340880773361985
+          "swing": 5.908215760420277
         },
         {
           "driver": "CPM",
-          "swing": 13.439213748657362
+          "swing": 1.7220652597402601
+        },
+        {
+          "driver": "click-through rate",
+          "swing": 1.6986165094660437
         }
       ],
       "roas": {
@@ -267,7 +270,7 @@
         }
       ],
       "notes": [
-        "Capacity-capped: the objective is to sell out at the lowest cost per needed conversion, not to maximise volume."
+        "Capacity-capped and the budget cannot reach capacity: the objective is the lowest cost per sale, not to maximise volume."
       ],
       "draws": 5000,
       "seed": 20260101,
@@ -324,10 +327,13 @@
         "brand_p50": 13953.076143138638,
         "brand_p90": 32985.743277829024,
         "feasible": true,
+        "own_cost_nok": 5000.0,
+        "own_placement": "between",
         "quote_nok": null,
         "placement": null,
         "lines": [
-          "Human-led matches AI at a production cost of ~454 NOK (likely 0 NOK–6 183 NOK). Including the longer-term brand effect: ~13 953 NOK (low confidence)."
+          "Human-led matches AI at a production cost of ~454 NOK (up to ~6 183 NOK; in some draws human-led doesn't match even at zero production cost). Including the longer-term brand effect: ~13 953 NOK (low confidence).",
+          "Your cost of 5 000 NOK sits between them."
         ]
       },
       "brand": {
@@ -549,9 +555,9 @@
         "capacity": 40,
         "channel": "meta"
       },
-      "headline_format": "short_video",
-      "headline_format_label": "Short video (Reels / Shorts / in-feed)",
-      "position": "On these inputs, AI-generated creative costs the least to sell out (p50 across the formats it can produce).",
+      "headline_format": "static_image",
+      "headline_format_label": "Static image",
+      "position": "On these inputs, AI-generated creative delivers the lowest cost per sale (p50 across the formats it can produce).",
       "sanity": [
         "On this budget: ~10 of 40 sales (the budget reaches well under capacity).",
         "Cost per sale sits above the ticket price for hybrid (AI-assisted) on these inputs."
@@ -568,35 +574,38 @@
       "confidence_clause": "Confidence: low — the funnel rests on US and global proxies.",
       "leader": "ai_generated",
       "breakeven": {
-        "format": "short_video",
-        "format_label": "Short video (Reels / Shorts / in-feed)",
-        "lift_p10": 0.9778770301644311,
-        "lift_p50": 2.2057105439536753,
-        "lift_p90": 4.899341347324673,
-        "prod_human": 27550.824504159493,
-        "prod_ai": 2483.3172994925794,
+        "format": "static_image",
+        "format_label": "Static image",
+        "lift_p10": 0.4722311352984824,
+        "lift_p50": 0.8898002907874829,
+        "lift_p90": 1.787006380310173,
+        "prod_human": 7995.231950570238,
+        "prod_ai": 399.8393476609403,
         "feasible": true
       },
       "breakeven_cost": {
-        "format": "short_video",
-        "format_label": "Short video (Reels / Shorts / in-feed)",
-        "funnel_p10": 1134.9564998723124,
-        "funnel_p50": 2543.8702942707996,
-        "funnel_p90": 4222.145813437873,
-        "brand_p10": 2786.6478406593396,
-        "brand_p50": 4704.107946294983,
-        "brand_p90": 7740.3933100285685,
+        "format": "static_image",
+        "format_label": "Static image",
+        "funnel_p10": 0.0,
+        "funnel_p50": 404.5362839798486,
+        "funnel_p90": 1171.5101914565514,
+        "brand_p10": 797.2516579866543,
+        "brand_p50": 1930.3434899214008,
+        "brand_p90": 4162.035860586748,
         "feasible": true,
+        "own_cost_nok": 8000.0,
+        "own_placement": "above_both",
         "quote_nok": null,
         "placement": null,
         "lines": [
-          "Human-led matches AI at a production cost of ~2 544 NOK (likely 1 135 NOK–4 222 NOK). Including the longer-term brand effect: ~4 704 NOK (low confidence)."
+          "Human-led matches AI at a production cost of ~405 NOK (up to ~1 172 NOK; in some draws human-led doesn't match even at zero production cost). Including the longer-term brand effect: ~1 930 NOK (low confidence).",
+          "Your cost of 8 000 NOK sits above both break-evens."
         ]
       },
       "brand": {
-        "worth_to_close": 25072.783360711164,
-        "brand_value": 2051.338740364956,
-        "funnel_gap": 25072.783360711164,
+        "worth_to_close": 7594.558697505612,
+        "brand_value": 1551.364568546182,
+        "funnel_gap": 7594.558697505612,
         "tag": "C source · low relevance (global, 2024)",
         "tier": "public_benchmark"
       },
@@ -759,15 +768,15 @@
       "sensitivity": [
         {
           "driver": "conversion rate",
-          "swing": 9.605928843816788
-        },
-        {
-          "driver": "production cost (human-led)",
-          "swing": 4.654350161117079
+          "swing": 4.221596902317395
         },
         {
           "driver": "CPM",
-          "swing": 2.79983619763695
+          "swing": 1.230467142857143
+        },
+        {
+          "driver": "click-through rate",
+          "swing": 1.2137123093278732
         }
       ],
       "roas": {
@@ -798,7 +807,7 @@
         }
       ],
       "notes": [
-        "Capacity-capped: the objective is to sell out at the lowest cost per needed conversion, not to maximise volume."
+        "Capacity-capped and the budget cannot reach capacity: the objective is the lowest cost per sale, not to maximise volume."
       ],
       "draws": 5000,
       "seed": 20260101
@@ -814,8 +823,8 @@
         "capacity": null,
         "channel": "meta"
       },
-      "headline_format": "short_video",
-      "headline_format_label": "Short video (Reels / Shorts / in-feed)",
+      "headline_format": "studio_shoot",
+      "headline_format_label": "Studio / polished production",
       "position": "On these inputs, AI-generated and human-led are effectively level on conversions per krone (within ~5%); no single approach leads.",
       "sanity": [],
       "time_note": "Costs count money paid out only, not your own time sourcing, comparing or prompting. AI work usually carries more of that uncounted time, so this slightly flatters AI.",
@@ -831,36 +840,37 @@
       "confidence_clause": "Confidence: low — the funnel rests on US and global proxies.",
       "leader": "ai_generated",
       "breakeven": {
-        "format": "short_video",
-        "format_label": "Short video (Reels / Shorts / in-feed)",
-        "lift_p10": 0.03509296513960038,
-        "lift_p50": 0.0661542146866145,
-        "lift_p90": 0.11995984430377174,
-        "prod_human": 6887.706126039873,
-        "prod_ai": 620.8293248731449,
-        "feasible": true
+        "format": "studio_shoot",
+        "format_label": "Studio / polished production",
+        "lift_p10": 0.0633703711388605,
+        "lift_p50": 0.09720092665849726,
+        "lift_p90": 0.15397205726800486,
+        "prod_human": 7495.529953659598,
+        "prod_ai": 299.87951074570526,
+        "feasible": false
       },
       "breakeven_cost": {
-        "format": "short_video",
-        "format_label": "Short video (Reels / Shorts / in-feed)",
+        "format": "studio_shoot",
+        "format_label": "Studio / polished production",
         "funnel_p10": 0.0,
-        "funnel_p50": 2852.970570899779,
-        "funnel_p90": 24978.036498628047,
-        "brand_p10": 23296.40275038406,
-        "brand_p50": 70012.70885882215,
-        "brand_p90": 138200.13095648654,
+        "funnel_p50": 0.0,
+        "funnel_p90": 0.0,
+        "brand_p10": 0.0,
+        "brand_p50": 0.0,
+        "brand_p90": 0.0,
         "feasible": true,
+        "own_cost_nok": 30000.0,
+        "own_placement": "above_both",
         "quote_nok": 20000.0,
-        "placement": "between",
+        "placement": "above_both",
         "lines": [
-          "Human-led matches AI at a production cost of ~2 853 NOK (likely 0 NOK–24 978 NOK). Including the longer-term brand effect: ~70 013 NOK (low confidence).",
-          "Your quote of 20 000 NOK sits between them."
+          "Human-led does not match AI's strongest option at any production cost on these inputs, even with the longer-term brand effect."
         ]
       },
       "brand": {
-        "worth_to_close": 6332.092560232542,
-        "brand_value": 17437.14498738209,
-        "funnel_gap": 6332.092560232542,
+        "worth_to_close": 7122.900159773657,
+        "brand_value": 13744.795798805793,
+        "funnel_gap": 7122.900159773657,
         "tag": "C source · low relevance (global, 2024)",
         "tier": "public_benchmark"
       },
@@ -1022,16 +1032,16 @@
       ],
       "sensitivity": [
         {
-          "driver": "production cost (human-led)",
-          "swing": 0.09002503564946851
-        },
-        {
           "driver": "CPM",
-          "swing": 0.06056358568835882
+          "swing": 0.10086206896551723
         },
         {
           "driver": "conversion rate",
-          "swing": 0.052800999097994336
+          "swing": 0.08793432475867716
+        },
+        {
+          "driver": "click-through rate",
+          "swing": 0.06743778941689517
         }
       ],
       "roas": {
@@ -1061,7 +1071,9 @@
           "tag": "C source · low relevance (global, 2024)"
         }
       ],
-      "notes": [],
+      "notes": [
+        "No shared format for a like-for-like human-vs-AI break-even at Studio / polished production; shown for the nearest available cells."
+      ],
       "draws": 5000,
       "seed": 20260101,
       "agency": {
@@ -1095,7 +1107,7 @@
             "detail": "Often quoted as a separate statement of work; the typical figure here is an unverified assumption."
           }
         ],
-        "approach_note": "The quote's stated approach (ai_generated) matches the approach that leads on conversions per krone on these inputs (AI-generated).",
+        "approach_note": "The quote's stated approach (ai_generated, AI-generated) sits level with human-led on these inputs; no single approach leads.",
         "notes": [
           "Fee ranges are global proxies (no Norway-specific agency-fee source found); relevance to Norway is low."
         ]

@@ -163,6 +163,10 @@ class BreakEvenCost:
     funnel: tuple[float, float, float]        # p10/p50/p90 NOK, funnel only
     with_brand: tuple[float, float, float]    # p10/p50/p90 NOK, incl. brand effect
     feasible: bool                            # human_led can make the headline format
+    # The scenario's OWN human-led cost at the headline format, placed automatically.
+    own_cost_nok: float | None = None
+    own_placement: str | None = None          # above_both | between | below_both
+    # An optional override quote (human_quote / --quote) to test another figure.
     quote_nok: float | None = None
     placement: str | None = None              # above_both | between | below_both
 
@@ -236,10 +240,19 @@ def _mb_mult(approach: str, mb_draw: np.ndarray) -> np.ndarray:
 
 
 def _headline_format(scn: Scenario, formats: dict[str, Format]) -> str:
-    """The scenario's chosen format, or a sensible shared one for the comparison."""
+    """The scenario's chosen format, or a sensible shared one for the comparison.
+
+    Precedence: an explicit content_format (e.g. CLI --format) wins; otherwise the
+    scenario's ``costs.format`` drives the headline, so the position, break-even,
+    cost-per-sale, brand effect and sensitivity all run on the one format the
+    advertiser priced (and the supplied human cost for it is placed automatically).
+    Only when neither is given does the engine auto-pick a shared comparison format."""
     chosen = getattr(scn, "content_format", None)
     if chosen and chosen in formats:
         return chosen
+    cf = scn.costs.format
+    if cf and cf in formats:
+        return cf
     # Prefer a format both human_led and ai_generated can produce; favour short_video.
     both = [k for k, f in formats.items()
             if "human_led" in f.approaches and "ai_generated" in f.approaches]
@@ -381,11 +394,16 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
     notes: list[str] = []
     cap = scn.is_capacity_capped()
     if cap:
-        notes.append("Capacity-capped: the objective is to sell out at the lowest cost per "
-                     "needed conversion, not to maximise volume.")
+        reachable = (reach_p50 >= scn.capacity * 0.995) if scn.capacity else True
+        if reachable:
+            notes.append("Capacity-capped: the objective is the lowest cost to sell out, "
+                         "not to maximise volume.")
+        else:
+            notes.append("Capacity-capped and the budget cannot reach capacity: the objective "
+                         "is the lowest cost per sale, not to maximise volume.")
     if not breakeven.feasible:
         notes.append(f"No shared format for a like-for-like human-vs-AI break-even at "
-                     f"{hf}; shown for the nearest available cells.")
+                     f"{formats[hf].label}; shown for the nearest available cells.")
     return PlanResult(
         scenario=scn, headline_format=hf, leader=leader, cells=cells, breakeven=breakeven,
         breakeven_cost=breakeven_cost,
@@ -527,11 +545,20 @@ def _break_even_cost(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
     p_funnel = np.maximum(R * (conv_h * V - scn.budget_nok - best_ai), 0.0)
     p_brand = np.maximum(R * (conv_h * V * mb - scn.budget_nok - best_ai), 0.0)
 
+    fp50, bp50 = float(np.median(p_funnel)), float(np.median(p_brand))
+
+    # The scenario's own supplied human-led cost at the headline format is placed
+    # automatically (same figure the human cells used). h_fmt == ov_fmt when the
+    # headline is the priced format, which is the normal case now.
+    own = _override_amount(scn, "human_led", h_fmt, ov_fmt)
+    own_placement = _quote_placement(own, fp50, bp50) if (own and own > 0) else None
+
+    # An optional override quote tests a different figure.
     quote = scn.human_quote_nok if (scn.human_quote is not None and scn.human_quote_nok > 0) else None
-    placement = (_quote_placement(quote, float(np.median(p_funnel)), float(np.median(p_brand)))
-                 if quote is not None else None)
+    placement = _quote_placement(quote, fp50, bp50) if quote is not None else None
     return BreakEvenCost(fmt=h_fmt, funnel=_pcts(p_funnel), with_brand=_pcts(p_brand),
-                         feasible=feasible, quote_nok=quote, placement=placement)
+                         feasible=feasible, own_cost_nok=(own if own and own > 0 else None),
+                         own_placement=own_placement, quote_nok=quote, placement=placement)
 
 
 def _brand_line(scn, hf, costs, formats, impressions, base_ctr, base_cvr,

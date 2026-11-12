@@ -114,14 +114,12 @@ def test_library_draft_costs_bite_when_no_cost_is_supplied():
     assert any(not c.prod_filled for c in human)
 
 
-def test_production_cost_can_be_named_in_hinges_on():
-    # Sensitivity must be able to surface production cost as a driver (it is the
-    # tool's core lever); at least one example scenario names it.
-    named = set()
-    for p in sorted(EXAMPLES.glob("*.yaml")):
-        r = plan(load_scenario(p), draws=1500)
-        named |= {s.driver for s in r.sensitivity}
-    assert any("production cost" in d for d in named)
+def test_production_cost_surfaces_when_the_cost_is_uncertain():
+    # Sensitivity surfaces production cost when it is uncertain (the wide library
+    # draft band). A firm supplied quote is near-certain (a narrow +/-15% band), so it
+    # legitimately drops out of "what this hinges on" - that is honest, not a bug.
+    r = plan(_scn(), benchmarks=_bench(), weights=WEIGHTS, draws=1500)   # no supplied cost
+    assert any("production cost" in s.driver for s in r.sensitivity)
 
 
 def test_budget_short_of_capacity_is_flagged():
@@ -149,6 +147,30 @@ def test_time_rule_makes_local_gym_read_ai_led():
     assert not r.level and r.leader == "ai_generated"
 
 
+def test_costs_format_drives_the_headline_format():
+    # Item 1 (root fix): the headline runs on the format the advertiser priced, so
+    # every section uses the same format and the supplied human cost is placed.
+    want = {"club_night": "ugc_talking_head", "local_gym": "short_video",
+            "oslo_dinner": "static_image", "skincare_brand": "studio_shoot"}
+    for stem, fmt in want.items():
+        r = plan(load_scenario(EXAMPLES / f"{stem}.yaml"), draws=600)
+        assert r.headline_format == fmt
+        assert r.breakeven_cost.fmt == fmt or not r.breakeven_cost.feasible
+
+
+def test_explicit_content_format_still_overrides_costs_format():
+    scn = load_scenario(EXAMPLES / "club_night.yaml")
+    scn.content_format = "static_image"
+    assert plan(scn, draws=600).headline_format == "static_image"
+
+
+def test_scenario_human_cost_is_placed_against_the_breakeven():
+    # club_night prices a UGC talking-head at 3000 + 1200 = 4200; that cost is placed.
+    r = plan(load_scenario(EXAMPLES / "club_night.yaml"), draws=1500)
+    assert r.breakeven_cost.own_cost_nok == 4200
+    assert r.breakeven_cost.own_placement in ("above_both", "between", "below_both")
+
+
 def test_channel_defaults_to_meta_and_is_queried():
     r = plan(load_scenario(EXAMPLES / "club_night.yaml"), draws=800)
     assert r.channel == "meta"
@@ -163,6 +185,38 @@ def test_breakeven_cost_rises_when_the_brand_effect_is_included():
     # p10<=p50<=p90 on both.
     assert bc.funnel[0] <= bc.funnel[1] <= bc.funnel[2]
     assert bc.with_brand[0] <= bc.with_brand[1] <= bc.with_brand[2]
+
+
+def _bench_point(response=1.0, memory=1.25):
+    """A near-deterministic benchmark set (point-only funnel) so the brand identity
+    is checkable: only the format multipliers and cost bands still vary."""
+    def row(metric, value, unit, **extra):
+        return {"metric": metric, "industry": "any", "price_band": "any", "channel": "any",
+                "geography": "NO", "value": value, "unit": unit, "source_name": "test",
+                "source_url": "https://example.test", "published": dt.date(2026, 1, 1),
+                "quality": "A", **extra}
+    pt = lambda v: {"low": v, "point": v, "high": v}  # noqa: E731
+    return [
+        row("cpm", pt(100), "nok"), row("ctr", pt(1.2), "percent"),
+        row("cvr", pt(3.0), "percent"), row("roas", pt(3.0), "ratio"),
+        row("perf_multiplier", pt(response), "multiplier", effect="response"),
+        row("perf_multiplier", pt(memory), "multiplier", effect="memory_brand"),
+    ]
+
+
+def test_brand_breakeven_agrees_with_the_brand_line_worth():
+    # The brand-inclusive break-even and the brand line describe the same effect:
+    # including the brand edge raises the break-even by exactly the modelled brand
+    # value (per draw with_brand - funnel == R * brand_value), so the two numbers agree.
+    scn = _scn(content_format="short_video",
+               costs={"format": "short_video", "human_led": {"photographer": 9000}})
+    r = plan(scn, benchmarks=_bench_point(memory=1.25), weights=WEIGHTS, draws=6000)
+    bc = r.breakeven_cost
+    R = r.scenario.reuse_campaigns
+    assert bc.with_brand[1] - bc.funnel[1] == pytest.approx(R * r.brand.brand_value, rel=0.03)
+    # Direction also agrees: the human cost needs the brand edge (worth_to_close > 0)
+    # exactly when it sits above the funnel-only break-even.
+    assert (r.brand.worth_to_close > 0) == (bc.own_cost_nok > bc.funnel[1])
 
 
 def test_quote_placement_is_correct_at_the_boundaries():
@@ -213,7 +267,7 @@ def test_capacity_caps_conversions_and_sets_objective():
     assert r.capacity_capped
     for c in r.cells:
         assert c.conv[2] <= 50 + 1e-6                 # p90 conversions capped at capacity
-    assert any("sell out" in n.lower() for n in r.notes)
+    assert any("lowest cost" in n.lower() for n in r.notes)
 
 
 def test_breakeven_is_none_safe_when_only_one_approach_makes_the_format():

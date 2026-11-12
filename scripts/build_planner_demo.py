@@ -62,7 +62,8 @@ def build_examples() -> dict:
     for p in EXAMPLES:
         scn = load_scenario(p, fx)
         r = plan(scn, fx=fx, draws=DEFAULT_DRAWS, seed=DEFAULT_SEED)
-        out.append(to_dict(r, check_agency(scn, r.leader), snaps.get(scn.industry)))
+        ac = check_agency(scn, r.leader, level=r.level, level_pair=r.level_pair)
+        out.append(to_dict(r, ac, snaps.get(scn.industry)))
     return {
         "generated": dt.date.today().isoformat(),
         "fx_note": fx.note(), "draws": DEFAULT_DRAWS, "seed": DEFAULT_SEED,

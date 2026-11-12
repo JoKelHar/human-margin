@@ -46,6 +46,15 @@ def test_stated_approach_note_mentions_the_leader():
     assert "differs" in ac2.approach_note
 
 
+def test_stated_approach_note_uses_level_logic():
+    # When the headline is effectively level, the agency line names no single leader;
+    # the quote's approach sits level with human-led on these inputs.
+    ac = check_agency(_scn(15, approach="ai_generated"), leader="ai_generated",
+                      level=True, level_pair=["ai_generated", "human_led"])
+    assert "sits level with human-led" in ac.approach_note
+    assert "matches" not in ac.approach_note and "differs" not in ac.approach_note
+
+
 def test_loaded_cost_is_reported():
     ac = check_agency(_scn(15))
     assert ac.monthly_fee_nok > 0 and ac.loaded_total_nok >= ac.monthly_fee_nok

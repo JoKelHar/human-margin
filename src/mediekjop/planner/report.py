@@ -63,36 +63,93 @@ def confidence_clause(r: PlanResult) -> str:
     return f"Confidence: {r.confidence} — the funnel rests on {where}."
 
 
+def _reachable(r: PlanResult) -> bool:
+    """Whether the budget can actually reach capacity. When it can't, the objective
+    is the lowest cost per sale, not selling out (which the budget cannot do)."""
+    scn = r.scenario
+    if not (r.capacity_capped and scn.capacity):
+        return True
+    return r.reach_p50 >= scn.capacity * 0.995
+
+
 def position_line(r: PlanResult) -> str:
+    # Capacity-capped basis: "sell out" only when the budget can reach capacity;
+    # otherwise "cost per sale" (the budget cannot sell out, so never say it can).
+    if r.capacity_capped:
+        basis = "cost to sell out" if _reachable(r) else "cost per sale"
+    else:
+        basis = "conversions per krone"
     if r.level and len(r.level_pair) >= 2:
         a, b = (APPROACH_LABEL.get(x, x) for x in r.level_pair[:2])
-        basis = "cost to sell out" if r.capacity_capped else "conversions per krone"
         return (f"On these inputs, {a} and {b} are effectively level on {basis} "
                 f"(within ~5%); no single approach leads.")
-    verb = "costs the least to sell out" if r.capacity_capped else "delivers the most conversions per krone"
+    if r.capacity_capped:
+        verb = "costs the least to sell out" if _reachable(r) else "delivers the lowest cost per sale"
+    else:
+        verb = "delivers the most conversions per krone"
     return (f"On these inputs, {APPROACH_LABEL.get(r.leader, r.leader)} creative "
             f"{verb} (p50 across the formats it can produce).")
 
 
+_PLACE = {"above_both": "above both break-evens", "between": "between them", "below_both": "below both"}
+
+
 def breakeven_cost_lines(r: PlanResult) -> list[str]:
     """The headline break-even expressed as a production cost: what human-led can
-    cost and still match the best AI option, funnel-only and with the brand effect,
-    plus a placement of the user's quote if one was given. Position only."""
+    cost and still match the best AI option, funnel-only and with the brand effect.
+    The scenario's own human cost at the headline format is placed automatically; an
+    optional override quote tests a second figure. Position only."""
     bc = r.breakeven_cost
     x, (lo, _, hi), w = bc.funnel[1], bc.funnel, bc.with_brand[1]
-    lines = [
-        f"Human-led matches AI at a production cost of ~{_nok(x)} "
-        f"(likely {_nok(lo)}–{_nok(hi)}). Including the longer-term brand effect: "
-        f"~{_nok(w)} (low confidence)."
-    ]
+    brand_hi = bc.with_brand[2]
+    if hi <= 0:
+        # Fully clamped: human-led never matches AI's best option on the funnel, at any
+        # production cost (its format converts worse than AI's strongest option here).
+        base = "Human-led does not match AI's strongest option at any production cost on these inputs"
+        if brand_hi <= 0:
+            lines = [f"{base}, even with the longer-term brand effect."]
+        else:
+            lines = [f"{base} on the funnel alone; including the longer-term brand effect it "
+                     f"matches at ~{_nok(w)} (low confidence)."]
+    elif lo <= 0:
+        # Lower bound clamps at 0: in some draws human-led can't match at any cost.
+        lines = [f"Human-led matches AI at a production cost of ~{_nok(x)} "
+                 f"(up to ~{_nok(hi)}; in some draws human-led doesn't match even at zero "
+                 f"production cost). Including the longer-term brand effect: ~{_nok(w)} (low confidence)."]
+    else:
+        lines = [f"Human-led matches AI at a production cost of ~{_nok(x)} "
+                 f"(likely {_nok(lo)}–{_nok(hi)}). Including the longer-term brand effect: "
+                 f"~{_nok(w)} (low confidence)."]
     if not bc.feasible:
         lines.append("(The scenario's format is AI-only; shown for the nearest "
                      "human-capable format.)")
-    if bc.placement and bc.quote_nok:
-        where = {"above_both": "above both break-evens",
-                 "between": "between them",
-                 "below_both": "below both"}[bc.placement]
-        lines.append(f"Your quote of {_nok(bc.quote_nok)} sits {where}.")
+    # A placement is only meaningful when a positive break-even exists to place against.
+    if hi > 0:
+        if bc.own_cost_nok and bc.own_placement:
+            lines.append(f"Your cost of {_nok(bc.own_cost_nok)} sits {_PLACE[bc.own_placement]}.")
+        if bc.quote_nok and bc.placement:
+            lines.append(f"An alternative quote of {_nok(bc.quote_nok)} being tested sits "
+                         f"{_PLACE[bc.placement]}.")
+    return lines
+
+
+def response_lift_lines(r: PlanResult) -> list[str]:
+    """The same human-vs-AI trade-off expressed as a response gap (detail, under the
+    headline production-cost break-even). Non-capacity only."""
+    be = r.breakeven
+    delta = be.prod_human - be.prod_ai
+    if be.lift[1] <= 0:
+        lines = [f"In {_fmt_label(be.fmt)}, human-led already matches or sits ahead of "
+                 f"AI-generated on margin on these inputs (its production cost here is at or "
+                 f"below AI-generated's), so no response lift is needed to justify it."]
+    else:
+        lines = [f"In {_fmt_label(be.fmt)}, human-led would need its response to beat "
+                 f"AI-generated by about {_pct(be.lift[1])} "
+                 f"(p10-p90 {_pct(be.lift[0])}-{_pct(be.lift[2])}) to match on margin, because "
+                 f"it costs ~{_nok(max(delta, 0))} more to produce per reuse. Below that, "
+                 f"AI-generated sits ahead on margin; above it, human-led does."]
+    if not be.feasible:
+        lines.append("(No single format is produced by both; shown for the nearest cells.)")
     return lines
 
 
@@ -127,7 +184,8 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
     out.append(f"Headline format: {_fmt_label(r.headline_format)}  "
                f"(every format was scored — see the matrix below)")
     if r.capacity_capped:
-        out.append(f"Capacity-capped at {scn.capacity}: the objective is lowest cost to sell out.")
+        obj = "lowest cost to sell out" if _reachable(r) else "lowest cost per sale"
+        out.append(f"Capacity-capped at {scn.capacity}: the objective is {obj}.")
 
     out.append("\nPOSITION")
     for ln in sanity_lines(r):
@@ -140,11 +198,11 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
     for ln in breakeven_cost_lines(r):
         out.append(f"  {ln}")
 
-    be = r.breakeven
     if r.capacity_capped:
         hcells = [c for c in r.cells if c.approach == "human_led"]
         acells = [c for c in r.cells if c.approach == "ai_generated"]
-        out.append("\nCost to sell out (the headline, capacity-capped)")
+        header = "Cost to sell out" if _reachable(r) else "Cost per sale"
+        out.append(f"\n{header} (the headline, capacity-capped)")
         if hcells and acells:
             ch = min(c.cost_per_conv for c in hcells)
             ca = min(c.cost_per_conv for c in acells)
@@ -154,21 +212,6 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
                        f"sales. At the cheapest format for each: AI-generated ~{_nok(ca)}/sale, "
                        f"human-led ~{_nok(ch)}/sale — a gap of ~{_nok(abs(ch - ca) * vol)} over the "
                        f"~{vol:.0f} sales this budget reaches.")
-    else:
-        delta = be.prod_human - be.prod_ai
-        out.append("\nBreak-even response lift (the same trade-off, as a response gap)")
-        if be.lift[1] <= 0:
-            out.append(f"  In {_fmt_label(be.fmt)}, human-led already matches or sits ahead of "
-                       f"AI-generated on margin on these inputs (its production cost here is at or "
-                       f"below AI-generated's), so no response lift is needed to justify it.")
-        else:
-            out.append(f"  In {_fmt_label(be.fmt)}, human-led would need its response to beat "
-                       f"AI-generated by about {_pct(be.lift[1])} "
-                       f"(p10-p90 {_pct(be.lift[0])}-{_pct(be.lift[2])}) to match on margin, because "
-                       f"it costs ~{_nok(max(delta,0))} more to produce per reuse. Below that, "
-                       f"AI-generated sits ahead on margin; above it, human-led does.")
-        if not be.feasible:
-            out.append("  (No single format is produced by both; shown for the nearest cells.)")
 
     br = r.brand
     out.append("\nLonger-term brand effect (NOT in the numbers above)")
@@ -189,6 +232,11 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
         out.append(f"  {APPROACH_LABEL.get(c.approach, c.approach):20} {_fmt_label(c.fmt):28} "
                    f"{c.conv_per_1000:6.2f} conv/1000kr · cost/conv {c.cost_per_conv:,.0f} NOK"
                    .replace(",", " ") + star)
+
+    if not r.capacity_capped:
+        out.append("\nDetail — break-even as a response gap")
+        for ln in response_lift_lines(r):
+            out.append(f"  {ln}")
 
     out.append("\nWhat this hinges on")
     drivers = ", ".join(s.driver for s in r.sensitivity)
@@ -271,6 +319,8 @@ def to_dict(r: PlanResult, agency: AgencyCheck | None = None,
             "brand_p10": r.breakeven_cost.with_brand[0], "brand_p50": r.breakeven_cost.with_brand[1],
             "brand_p90": r.breakeven_cost.with_brand[2],
             "feasible": r.breakeven_cost.feasible,
+            "own_cost_nok": r.breakeven_cost.own_cost_nok,
+            "own_placement": r.breakeven_cost.own_placement,
             "quote_nok": r.breakeven_cost.quote_nok, "placement": r.breakeven_cost.placement,
             "lines": breakeven_cost_lines(r),
         },

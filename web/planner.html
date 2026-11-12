@@ -116,6 +116,7 @@
 <script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
 <script>
 const APPROACH_ORDER = ["human_led","ai_assisted","ai_generated"];
+const PLACE = {above_both:"above both break-evens", between:"between them", below_both:"below both"};
 let EXAMPLES = null, pyReady = false, pyodide = null, runPy = null;
 
 function nok(x){ return Math.round(x).toLocaleString("en-US").replace(/,/g," ") + " NOK"; }
@@ -145,52 +146,60 @@ function renderResult(d){
   if (d.time_note) h += `<div class="timenote">${esc(d.time_note)}</div>`;
   h += `</div>`;
 
-  // Break-even production cost (the headline) + a live quote slider
+  // Break-even production cost (the headline) + a live "test another quote" slider
   const bc = d.breakeven_cost;
   if (bc){
     h += `<h3>Break-even production cost (the headline)</h3>`;
-    h += `<p>Human-led matches AI at a production cost of <strong>~${nok(bc.funnel_p50)}</strong>
-      (likely ${nok(bc.funnel_p10)}–${nok(bc.funnel_p90)}). Including the longer-term brand effect:
-      <strong>~${nok(bc.brand_p50)}</strong> (low confidence).</p>`;
+    if (bc.funnel_p90 <= 0){
+      const base = "Human-led does not match AI's strongest option at any production cost on these inputs";
+      h += (bc.brand_p90 <= 0)
+        ? `<p>${base}, even with the longer-term brand effect.</p>`
+        : `<p>${base} on the funnel alone; including the longer-term brand effect it matches at
+           <strong>~${nok(bc.brand_p50)}</strong> (low confidence).</p>`;
+    } else {
+      const funnelTxt = (bc.funnel_p10 <= 0)
+        ? `Human-led matches AI at a production cost of <strong>~${nok(bc.funnel_p50)}</strong>
+           (up to ~${nok(bc.funnel_p90)}; in some draws human-led doesn't match even at zero production cost).`
+        : `Human-led matches AI at a production cost of <strong>~${nok(bc.funnel_p50)}</strong>
+           (likely ${nok(bc.funnel_p10)}–${nok(bc.funnel_p90)}).`;
+      h += `<p>${funnelTxt} Including the longer-term brand effect:
+        <strong>~${nok(bc.brand_p50)}</strong> (low confidence).</p>`;
+    }
     if (bc.feasible === false){
       h += `<p class="sub">(The scenario's format is AI-only; shown for the nearest human-capable format.)</p>`;
     }
-    const qmax = Math.max(bc.brand_p50*1.5, bc.funnel_p90*2, (bc.quote_nok||0)*1.5, 2000);
-    const qinit = (bc.quote_nok!=null && bc.quote_nok>0) ? bc.quote_nok : Math.round(bc.funnel_p50);
-    h += `<div class="quotebox">
-      <label class="quotelabel">A human-led quote to place <span id="quote-val"></span>
-        <input type="range" id="quote-slider" min="0" max="${Math.round(qmax)}" step="500"
-          value="${Math.round(qinit)}" data-funnel="${bc.funnel_p50}" data-brand="${bc.brand_p50}">
-      </label>
-      <p class="quoteplace" id="quote-place"></p>
-      <p class="sub" style="font-size:.78rem;">Position only — the planner never suggests a price to offer.</p>
-    </div>`;
+    // A placement / slider is only meaningful when a positive break-even exists.
+    if (bc.funnel_p90 > 0){
+      if (bc.own_cost_nok && bc.own_placement){
+        h += `<p><strong>Your cost of ${nok(bc.own_cost_nok)}</strong> sits ${PLACE[bc.own_placement]}.</p>`;
+      }
+      const qmax = Math.max(bc.brand_p50*1.5, bc.funnel_p90*2, (bc.quote_nok||0)*1.5, (bc.own_cost_nok||0)*1.5, 2000);
+      const qinit = (bc.quote_nok!=null && bc.quote_nok>0) ? bc.quote_nok
+                    : (bc.own_cost_nok || Math.round(bc.funnel_p50));
+      h += `<div class="quotebox">
+        <label class="quotelabel">Test a different human-led quote <span id="quote-val"></span>
+          <input type="range" id="quote-slider" min="0" max="${Math.round(qmax)}" step="500"
+            value="${Math.round(qinit)}" data-funnel="${bc.funnel_p50}" data-brand="${bc.brand_p50}">
+        </label>
+        <p class="quoteplace" id="quote-place"></p>
+        <p class="sub" style="font-size:.78rem;">Position only — the planner never suggests a price to offer.</p>
+      </div>`;
+    }
   }
 
-  // Cost to sell out, or the response-lift view of the same trade-off
+  // Cost to sell out / cost per sale (capacity-capped only)
   if (s.capacity_capped){
     const human = d.cells.filter(c=>c.approach==="human_led");
     const ai = d.cells.filter(c=>c.approach==="ai_generated");
+    const reachable = !(s.capacity && d.reach_p50 < s.capacity*0.995);
     if (human.length && ai.length){
       const ch = Math.min(...human.map(c=>c.cost_per_conv));
       const ca = Math.min(...ai.map(c=>c.cost_per_conv));
       const vol = Math.min(d.reach_p50, s.capacity||d.reach_p50);
-      h += `<h3>Cost to sell out (headline, capacity-capped)</h3>`;
+      h += `<h3>${reachable ? "Cost to sell out" : "Cost per sale"} (headline, capacity-capped)</h3>`;
       h += `<p>Capacity is ${s.capacity}; on this budget the campaign reaches ~${Math.round(d.reach_p50)}
         sales. At the cheapest format for each: AI-generated ~${nok(ca)}/sale, human-led ~${nok(ch)}/sale
         — a gap of ~${nok(Math.abs(ch-ca)*vol)} over the ~${Math.round(vol)} sales this budget reaches.</p>`;
-    }
-  } else {
-    const be = d.breakeven;
-    h += `<h3>Break-even response lift (the same trade-off, as a response gap)</h3>`;
-    if (be.lift_p50 <= 0){
-      h += `<p>In ${esc(be.format_label)}, human-led already matches or sits ahead of AI-generated
-        on margin here, so no response lift is needed to justify it.</p>`;
-    } else {
-      h += `<p>In ${esc(be.format_label)}, human-led would need its response to beat AI-generated by
-        about <strong>${pct(be.lift_p50)}</strong> (p10–p90 ${pct(be.lift_p10)}–${pct(be.lift_p90)})
-        to match on margin, because it costs ~${nok(Math.max(be.prod_human-be.prod_ai,0))} more to
-        produce per reuse. Below that, AI-generated sits ahead on margin; above it, human-led does.</p>`;
     }
   }
 
@@ -220,6 +229,21 @@ function renderResult(d){
       <td>${tierBadge(c.prod_tier, c.prod_filled)}</td></tr>`;
   });
   h += `</tbody></table>`;
+
+  // Detail — break-even as a response gap (moved under the headline; non-capacity)
+  if (!s.capacity_capped){
+    const be = d.breakeven;
+    h += `<h3 style="margin-top:16px;">Detail — break-even as a response gap</h3>`;
+    if (be.lift_p50 <= 0){
+      h += `<p class="sub">In ${esc(be.format_label)}, human-led already matches or sits ahead of
+        AI-generated on margin here, so no response lift is needed to justify it.</p>`;
+    } else {
+      h += `<p class="sub">In ${esc(be.format_label)}, human-led would need its response to beat
+        AI-generated by about <strong>${pct(be.lift_p50)}</strong> (p10–p90 ${pct(be.lift_p10)}–${pct(be.lift_p90)})
+        to match on margin, because it costs ~${nok(Math.max(be.prod_human-be.prod_ai,0))} more to
+        produce per reuse. Below that, AI-generated sits ahead on margin; above it, human-led does.</p>`;
+    }
+  }
 
   // Sensitivity
   h += `<h3 style="margin-top:16px;">What this hinges on</h3><ul class="sens">`;
@@ -278,7 +302,7 @@ function wireQuoteSlider(){
   const update = ()=>{
     const q = parseFloat(s.value);
     val.textContent = "— " + nok(q);
-    place.textContent = `Your quote of ${nok(q)} sits ${placeQuote(q, funnel, brand)}.`;
+    place.textContent = `A quote of ${nok(q)} would sit ${placeQuote(q, funnel, brand)}.`;
   };
   s.addEventListener("input", update);
   update();
@@ -333,7 +357,7 @@ def _run(payload):
     d = json.loads(payload)
     scn = scenario_from_dict(d)
     r = plan(scn, draws=4000)
-    ac = check_agency(scn, r.leader)
+    ac = check_agency(scn, r.leader, level=r.level, level_pair=r.level_pair)
     return json.dumps(to_dict(r, ac, load_snapshots().get(scn.industry)))
 `);
     const opts = JSON.parse(pyodide.runPython("_options()"));

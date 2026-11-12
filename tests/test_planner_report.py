@@ -47,7 +47,7 @@ def test_cli_text_is_a_position_not_a_pick(path):
     snaps = load_snapshots()
     text = render_text(r, check_agency(scn, r.leader), snaps.get(scn.industry))
     assert not _prescriptive_hits(text), f"prescriptive wording: {_prescriptive_hits(text)}"
-    assert "conversions per krone" in text or "sell out" in text
+    assert any(s in text for s in ("conversions per krone", "sell out", "cost per sale"))
 
 
 @pytest.mark.parametrize("path", EXAMPLES, ids=lambda p: p.stem)
@@ -60,19 +60,27 @@ def test_rendered_copy_uses_format_labels_never_keys(path):
 
 
 def test_every_output_carries_the_time_rule_and_breakeven_cost():
-    scn = load_scenario(ROOT / "scenarios" / "examples" / "skincare_brand.yaml")
+    # Headline = costs.format (short_video); the scenario's own human cost is placed.
+    scn = load_scenario(ROOT / "scenarios" / "examples" / "local_gym.yaml")
     r = plan(scn, draws=1500)
     text = render_text(r, check_agency(scn, r.leader), None)
     assert TIME_NOTE in text                                   # the fixed time-rule line
-    assert "Break-even production cost" in text
-    assert "matches AI at a production cost" in text
-    assert "Including the longer-term brand effect" in text
-    # skincare carries a human_quote, so a placement line is present.
-    assert "Your quote of" in text and "sits" in text
+    assert "Break-even production cost (the headline)" in text
+    assert r.headline_format == "short_video"                  # costs.format drives the headline
+    assert "Your cost of" in text and "sits" in text           # own cost placed automatically
     d = to_dict(r, check_agency(scn, r.leader), None)
     assert d["time_note"] == TIME_NOTE
-    assert d["breakeven_cost"]["funnel_p50"] >= 0 and d["breakeven_cost"]["placement"] in (
-        "above_both", "between", "below_both")
+    assert d["breakeven_cost"]["own_placement"] in ("above_both", "between", "below_both")
+
+
+def test_response_lift_moves_into_a_detail_section_under_the_headline():
+    # Production-cost break-even stays the headline; response-lift becomes detail,
+    # placed after the matrix (lower than the headline break-even).
+    scn = load_scenario(ROOT / "scenarios" / "examples" / "skincare_brand.yaml")
+    text = render_text(plan(scn, draws=1200), None, None)
+    assert "Detail — break-even as a response gap" in text
+    assert text.index("Break-even production cost (the headline)") < text.index(
+        "Detail — break-even as a response gap")
 
 
 @pytest.mark.parametrize("path", EXAMPLES, ids=lambda p: p.stem)
@@ -93,8 +101,26 @@ def test_club_night_leads_with_both_sanity_flags():
     text = render_text(r, check_agency(scn, r.leader), None)
     assert "of 300 sales" in text
     assert "above the ticket price for every approach" in text
+    # Capacity unreachable here, so the wording is "lowest cost per sale", never "sell out".
+    assert "lowest cost per sale" in text and "least to sell out" not in text
     pos = text.index("POSITION")
-    assert text.index("of 300 sales") < text.index("costs the least to sell out", pos)
+    assert text.index("of 300 sales") < text.index("delivers the lowest cost per sale", pos)
+
+
+def test_unreachable_capacity_never_says_sell_out():
+    for stem in ("club_night", "oslo_dinner"):
+        scn = load_scenario(ROOT / "scenarios" / "examples" / f"{stem}.yaml")
+        text = render_text(plan(scn, draws=1200), None, None)
+        assert "least to sell out" not in text and "lowest cost per sale" in text
+
+
+def test_breakeven_zero_lower_bound_has_its_own_wording():
+    # local_gym's funnel break-even has a 0 lower bound: say so explicitly rather
+    # than printing a misleading "likely 0 NOK - X".
+    scn = load_scenario(ROOT / "scenarios" / "examples" / "local_gym.yaml")
+    text = render_text(plan(scn, draws=2000), None, None)
+    assert "doesn't match even at zero production cost" in text
+    assert "likely 0 NOK" not in text
 
 
 def test_planner_runs_fully_offline_with_no_token_and_no_snapshot(monkeypatch):
