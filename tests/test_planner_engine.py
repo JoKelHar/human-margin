@@ -204,6 +204,28 @@ def _bench_point(response=1.0, memory=1.25):
     ]
 
 
+@pytest.mark.parametrize("path", sorted(EXAMPLES.glob("*.yaml")), ids=lambda p: p.stem)
+def test_breakeven_and_brand_verdicts_cannot_disagree(path):
+    # One shared AI comparator everywhere, so the two verdicts for the same scenario
+    # always agree: "human+brand matches AI" (own cost <= brand-inclusive break-even)
+    # iff "the brand effect closes the gap" (brand value >= what's needed to close it).
+    r = plan(load_scenario(path), draws=3000)
+    bc, br = r.breakeven_cost, r.brand
+    own = bc.own_cost_nok or 0.0
+    assert (own <= bc.with_brand[1]) == (br.brand_value >= br.worth_to_close)
+    # The comparator is named and shared between the two sections.
+    assert bc.ai_label and bc.ai_label == br.ai_label
+
+
+def test_ai_comparator_prefers_the_human_format_then_falls_back():
+    # Like-for-like where possible: local_gym (short_video) is compared with AI at
+    # short_video; skincare (studio, no AI cell) falls back to AI's strongest overall.
+    gym = plan(load_scenario(EXAMPLES / "local_gym.yaml"), draws=800).breakeven_cost
+    assert "Short video" in gym.ai_label
+    skin = plan(load_scenario(EXAMPLES / "skincare_brand.yaml"), draws=800).breakeven_cost
+    assert "UGC talking-head" in skin.ai_label and skin.feasible  # studio is human-capable
+
+
 def test_brand_breakeven_agrees_with_the_brand_line_worth():
     # The brand-inclusive break-even and the brand line describe the same effect:
     # including the brand edge raises the break-even by exactly the modelled brand

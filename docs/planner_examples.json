@@ -49,28 +49,30 @@
       "breakeven_cost": {
         "format": "ugc_talking_head",
         "format_label": "UGC talking-head (creator to camera)",
-        "funnel_p10": 7.794018556650103,
-        "funnel_p50": 301.3176015040117,
-        "funnel_p90": 591.3427337770541,
-        "brand_p10": 447.1955269738009,
-        "brand_p50": 874.7331647569722,
-        "brand_p90": 1778.7693590686058,
+        "funnel_p10": 11.147010870925808,
+        "funnel_p50": 301.7320699841821,
+        "funnel_p90": 595.3208441195426,
+        "brand_p10": 447.72078947398523,
+        "brand_p50": 876.0733628202042,
+        "brand_p90": 1769.1030362195747,
         "feasible": true,
+        "ai_label": "AI-generated UGC talking-head (creator to camera)",
         "own_cost_nok": 4200.0,
         "own_placement": "above_both",
         "quote_nok": null,
         "placement": null,
         "lines": [
-          "Human-led matches AI at a production cost of ~301 NOK (likely 8 NOK–591 NOK). Including the longer-term brand effect: ~875 NOK (low confidence).",
+          "Compared with AI's strongest option here (AI-generated UGC talking-head (creator to camera)), human-led matches at a production cost of ~302 NOK (likely 11 NOK–595 NOK). Including the longer-term brand effect: ~876 NOK (low confidence).",
           "Your cost of 4 200 NOK sits above both break-evens."
         ]
       },
       "brand": {
-        "worth_to_close": 1951.8940147697263,
+        "worth_to_close": 1947.6454316664112,
         "brand_value": 295.05835118438506,
-        "funnel_gap": 1951.8940147697263,
+        "funnel_gap": 1947.6454316664112,
         "tag": "C source · low relevance (global, 2024)",
-        "tier": "public_benchmark"
+        "tier": "public_benchmark",
+        "ai_label": "AI-generated UGC talking-head (creator to camera)"
       },
       "cells": [
         {
@@ -321,27 +323,29 @@
         "format": "short_video",
         "format_label": "Short video (Reels / Shorts / in-feed)",
         "funnel_p10": 0.0,
-        "funnel_p50": 453.528068189411,
-        "funnel_p90": 6182.93832491511,
-        "brand_p10": 3873.2840385873715,
-        "brand_p50": 13953.076143138638,
-        "brand_p90": 32985.743277829024,
+        "funnel_p50": 463.90732233243125,
+        "funnel_p90": 7366.1196537729975,
+        "brand_p10": 3880.2369490805368,
+        "brand_p50": 14045.973588457275,
+        "brand_p90": 34214.37102125008,
         "feasible": true,
+        "ai_label": "AI-generated Short video (Reels / Shorts / in-feed)",
         "own_cost_nok": 5000.0,
         "own_placement": "between",
         "quote_nok": null,
         "placement": null,
         "lines": [
-          "Human-led matches AI at a production cost of ~454 NOK (up to ~6 183 NOK; in some draws human-led doesn't match even at zero production cost). Including the longer-term brand effect: ~13 953 NOK (low confidence).",
+          "Compared with AI's strongest option here (AI-generated Short video (Reels / Shorts / in-feed)), human-led matches at a production cost of ~464 NOK (up to ~7 366 NOK; in some draws human-led doesn't match even at zero production cost). Including the longer-term brand effect: ~14 046 NOK (low confidence).",
           "Your cost of 5 000 NOK sits between them."
         ]
       },
       "brand": {
-        "worth_to_close": 1515.5326119835165,
+        "worth_to_close": 1508.7787662658207,
         "brand_value": 4615.51216582115,
-        "funnel_gap": 1515.5326119835165,
+        "funnel_gap": 1508.7787662658207,
         "tag": "C source · low relevance (global, 2024)",
-        "tier": "public_benchmark"
+        "tier": "public_benchmark",
+        "ai_label": "AI-generated Short video (Reels / Shorts / in-feed)"
       },
       "cells": [
         {
@@ -587,27 +591,29 @@
         "format": "static_image",
         "format_label": "Static image",
         "funnel_p10": 0.0,
-        "funnel_p50": 404.5362839798486,
-        "funnel_p90": 1171.5101914565514,
-        "brand_p10": 797.2516579866543,
-        "brand_p50": 1930.3434899214008,
-        "brand_p90": 4162.035860586748,
+        "funnel_p50": 409.8023777909727,
+        "funnel_p90": 1170.359596873211,
+        "brand_p10": 792.9122771523733,
+        "brand_p50": 1937.937101236543,
+        "brand_p90": 4155.65213274195,
         "feasible": true,
+        "ai_label": "AI-generated Static image",
         "own_cost_nok": 8000.0,
         "own_placement": "above_both",
         "quote_nok": null,
         "placement": null,
         "lines": [
-          "Human-led matches AI at a production cost of ~405 NOK (up to ~1 172 NOK; in some draws human-led doesn't match even at zero production cost). Including the longer-term brand effect: ~1 930 NOK (low confidence).",
+          "Compared with AI's strongest option here (AI-generated Static image), human-led matches at a production cost of ~410 NOK (up to ~1 170 NOK; in some draws human-led doesn't match even at zero production cost). Including the longer-term brand effect: ~1 938 NOK (low confidence).",
           "Your cost of 8 000 NOK sits above both break-evens."
         ]
       },
       "brand": {
-        "worth_to_close": 7594.558697505612,
+        "worth_to_close": 7574.8189228586325,
         "brand_value": 1551.364568546182,
-        "funnel_gap": 7594.558697505612,
+        "funnel_gap": 7574.8189228586325,
         "tag": "C source · low relevance (global, 2024)",
-        "tier": "public_benchmark"
+        "tier": "public_benchmark",
+        "ai_label": "AI-generated Static image"
       },
       "cells": [
         {
@@ -859,20 +865,24 @@
         "brand_p50": 0.0,
         "brand_p90": 0.0,
         "feasible": true,
+        "ai_label": "AI-generated UGC talking-head (creator to camera)",
         "own_cost_nok": 30000.0,
         "own_placement": "above_both",
         "quote_nok": 20000.0,
         "placement": "above_both",
         "lines": [
-          "Human-led does not match AI's strongest option at any production cost on these inputs, even with the longer-term brand effect."
+          "Compared with AI's strongest option here (AI-generated UGC talking-head (creator to camera)), human-led does not match it at any production cost on these inputs, even with the longer-term brand effect.",
+          "Your cost of 30 000 NOK sits above both break-evens.",
+          "An alternative quote of 20 000 NOK being tested sits above both break-evens."
         ]
       },
       "brand": {
-        "worth_to_close": 7122.900159773657,
+        "worth_to_close": 59829.87726950417,
         "brand_value": 13744.795798805793,
-        "funnel_gap": 7122.900159773657,
+        "funnel_gap": 59829.87726950417,
         "tag": "C source · low relevance (global, 2024)",
-        "tier": "public_benchmark"
+        "tier": "public_benchmark",
+        "ai_label": "AI-generated UGC talking-head (creator to camera)"
       },
       "cells": [
         {
@@ -1033,15 +1043,15 @@
       "sensitivity": [
         {
           "driver": "CPM",
-          "swing": 0.10086206896551723
+          "swing": 0.05730799373040752
         },
         {
           "driver": "conversion rate",
-          "swing": 0.08793432475867716
+          "swing": 0.049962684521975644
         },
         {
           "driver": "click-through rate",
-          "swing": 0.06743778941689517
+          "swing": 0.038316925805054074
         }
       ],
       "roas": {

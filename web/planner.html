@@ -150,17 +150,18 @@ function renderResult(d){
   const bc = d.breakeven_cost;
   if (bc){
     h += `<h3>Break-even production cost (the headline)</h3>`;
+    const vs = bc.ai_label ? `AI's strongest option here (${esc(bc.ai_label)})` : "AI's strongest option here";
     if (bc.funnel_p90 <= 0){
-      const base = "Human-led does not match AI's strongest option at any production cost on these inputs";
+      const base = `Compared with ${vs}, human-led does not match it at any production cost on these inputs`;
       h += (bc.brand_p90 <= 0)
         ? `<p>${base}, even with the longer-term brand effect.</p>`
         : `<p>${base} on the funnel alone; including the longer-term brand effect it matches at
            <strong>~${nok(bc.brand_p50)}</strong> (low confidence).</p>`;
     } else {
       const funnelTxt = (bc.funnel_p10 <= 0)
-        ? `Human-led matches AI at a production cost of <strong>~${nok(bc.funnel_p50)}</strong>
+        ? `Compared with ${vs}, human-led matches at a production cost of <strong>~${nok(bc.funnel_p50)}</strong>
            (up to ~${nok(bc.funnel_p90)}; in some draws human-led doesn't match even at zero production cost).`
-        : `Human-led matches AI at a production cost of <strong>~${nok(bc.funnel_p50)}</strong>
+        : `Compared with ${vs}, human-led matches at a production cost of <strong>~${nok(bc.funnel_p50)}</strong>
            (likely ${nok(bc.funnel_p10)}–${nok(bc.funnel_p90)}).`;
       h += `<p>${funnelTxt} Including the longer-term brand effect:
         <strong>~${nok(bc.brand_p50)}</strong> (low confidence).</p>`;
@@ -168,23 +169,20 @@ function renderResult(d){
     if (bc.feasible === false){
       h += `<p class="sub">(The scenario's format is AI-only; shown for the nearest human-capable format.)</p>`;
     }
-    // A placement / slider is only meaningful when a positive break-even exists.
-    if (bc.funnel_p90 > 0){
-      if (bc.own_cost_nok && bc.own_placement){
-        h += `<p><strong>Your cost of ${nok(bc.own_cost_nok)}</strong> sits ${PLACE[bc.own_placement]}.</p>`;
-      }
-      const qmax = Math.max(bc.brand_p50*1.5, bc.funnel_p90*2, (bc.quote_nok||0)*1.5, (bc.own_cost_nok||0)*1.5, 2000);
-      const qinit = (bc.quote_nok!=null && bc.quote_nok>0) ? bc.quote_nok
-                    : (bc.own_cost_nok || Math.round(bc.funnel_p50));
-      h += `<div class="quotebox">
-        <label class="quotelabel">Test a different human-led quote <span id="quote-val"></span>
-          <input type="range" id="quote-slider" min="0" max="${Math.round(qmax)}" step="500"
-            value="${Math.round(qinit)}" data-funnel="${bc.funnel_p50}" data-brand="${bc.brand_p50}">
-        </label>
-        <p class="quoteplace" id="quote-place"></p>
-        <p class="sub" style="font-size:.78rem;">Position only — the planner never suggests a price to offer.</p>
-      </div>`;
+    if (bc.own_cost_nok && bc.own_placement){
+      h += `<p><strong>Your cost of ${nok(bc.own_cost_nok)}</strong> sits ${PLACE[bc.own_placement]}.</p>`;
     }
+    const qmax = Math.max(bc.brand_p50*1.5, bc.funnel_p90*2, (bc.quote_nok||0)*1.5, (bc.own_cost_nok||0)*1.5, 2000);
+    const qinit = (bc.quote_nok!=null && bc.quote_nok>0) ? bc.quote_nok
+                  : (bc.own_cost_nok || Math.round(bc.funnel_p50));
+    h += `<div class="quotebox">
+      <label class="quotelabel">Test a different human-led quote <span id="quote-val"></span>
+        <input type="range" id="quote-slider" min="0" max="${Math.round(qmax)}" step="500"
+          value="${Math.round(qinit)}" data-funnel="${bc.funnel_p50}" data-brand="${bc.brand_p50}">
+      </label>
+      <p class="quoteplace" id="quote-place"></p>
+      <p class="sub" style="font-size:.78rem;">Position only — the planner never suggests a price to offer.</p>
+    </div>`;
   }
 
   // Cost to sell out / cost per sale (capacity-capped only)
@@ -212,8 +210,8 @@ function renderResult(d){
   } else {
     h += `A human memory/brand edge is cited but kept out of the funnel. On these inputs it would need
       to be worth about <strong>${nok(d.brand.worth_to_close)}</strong> over the campaign to close the
-      funnel-margin gap (modelled brand value ~${nok(d.brand.brand_value)}).
-      <span class="ev-tag">${esc(d.brand.tag)}</span>`;
+      funnel-margin gap${d.brand.ai_label ? " to " + esc(d.brand.ai_label) : ""} (modelled brand value
+      ~${nok(d.brand.brand_value)}). <span class="ev-tag">${esc(d.brand.tag)}</span>`;
   }
   h += `</div>`;
 

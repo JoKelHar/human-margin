@@ -102,10 +102,11 @@ def breakeven_cost_lines(r: PlanResult) -> list[str]:
     bc = r.breakeven_cost
     x, (lo, _, hi), w = bc.funnel[1], bc.funnel, bc.with_brand[1]
     brand_hi = bc.with_brand[2]
+    # The single AI comparator, named, so the basis is explicit and nothing contradicts.
+    vs = f"AI's strongest option here ({bc.ai_label})" if bc.ai_label else "AI's strongest option here"
     if hi <= 0:
-        # Fully clamped: human-led never matches AI's best option on the funnel, at any
-        # production cost (its format converts worse than AI's strongest option here).
-        base = "Human-led does not match AI's strongest option at any production cost on these inputs"
+        # Fully clamped: human-led never matches the comparator on the funnel, at any cost.
+        base = f"Compared with {vs}, human-led does not match it at any production cost on these inputs"
         if brand_hi <= 0:
             lines = [f"{base}, even with the longer-term brand effect."]
         else:
@@ -113,23 +114,21 @@ def breakeven_cost_lines(r: PlanResult) -> list[str]:
                      f"matches at ~{_nok(w)} (low confidence)."]
     elif lo <= 0:
         # Lower bound clamps at 0: in some draws human-led can't match at any cost.
-        lines = [f"Human-led matches AI at a production cost of ~{_nok(x)} "
+        lines = [f"Compared with {vs}, human-led matches at a production cost of ~{_nok(x)} "
                  f"(up to ~{_nok(hi)}; in some draws human-led doesn't match even at zero "
                  f"production cost). Including the longer-term brand effect: ~{_nok(w)} (low confidence)."]
     else:
-        lines = [f"Human-led matches AI at a production cost of ~{_nok(x)} "
+        lines = [f"Compared with {vs}, human-led matches at a production cost of ~{_nok(x)} "
                  f"(likely {_nok(lo)}–{_nok(hi)}). Including the longer-term brand effect: "
                  f"~{_nok(w)} (low confidence)."]
     if not bc.feasible:
         lines.append("(The scenario's format is AI-only; shown for the nearest "
                      "human-capable format.)")
-    # A placement is only meaningful when a positive break-even exists to place against.
-    if hi > 0:
-        if bc.own_cost_nok and bc.own_placement:
-            lines.append(f"Your cost of {_nok(bc.own_cost_nok)} sits {_PLACE[bc.own_placement]}.")
-        if bc.quote_nok and bc.placement:
-            lines.append(f"An alternative quote of {_nok(bc.quote_nok)} being tested sits "
-                         f"{_PLACE[bc.placement]}.")
+    if bc.own_cost_nok and bc.own_placement:
+        lines.append(f"Your cost of {_nok(bc.own_cost_nok)} sits {_PLACE[bc.own_placement]}.")
+    if bc.quote_nok and bc.placement:
+        lines.append(f"An alternative quote of {_nok(bc.quote_nok)} being tested sits "
+                     f"{_PLACE[bc.placement]}.")
     return lines
 
 
@@ -221,9 +220,10 @@ def render_text(r: PlanResult, agency: AgencyCheck | None = None,
                    f"gap; the modelled edge (~{_nok(br.brand_value)}) would sit on top. "
                    f"Tag: {br.mb_tag}.")
     else:
+        vs = f" to {br.ai_label}" if br.ai_label else ""
         out.append(f"  A human memory/brand edge is cited but kept out of the funnel. On these "
                    f"inputs it would need to be worth about {_nok(br.worth_to_close)} over the "
-                   f"campaign to close the funnel-margin gap (modelled brand value "
+                   f"campaign to close the funnel-margin gap{vs} (modelled brand value "
                    f"~{_nok(br.brand_value)}). Tag: {br.mb_tag}.")
 
     out.append("\nConversions per krone, by approach x format  (p50; wider ranges = less certain)")
@@ -319,6 +319,7 @@ def to_dict(r: PlanResult, agency: AgencyCheck | None = None,
             "brand_p10": r.breakeven_cost.with_brand[0], "brand_p50": r.breakeven_cost.with_brand[1],
             "brand_p90": r.breakeven_cost.with_brand[2],
             "feasible": r.breakeven_cost.feasible,
+            "ai_label": r.breakeven_cost.ai_label,
             "own_cost_nok": r.breakeven_cost.own_cost_nok,
             "own_placement": r.breakeven_cost.own_placement,
             "quote_nok": r.breakeven_cost.quote_nok, "placement": r.breakeven_cost.placement,
@@ -327,6 +328,7 @@ def to_dict(r: PlanResult, agency: AgencyCheck | None = None,
         "brand": {
             "worth_to_close": r.brand.worth_to_close, "brand_value": r.brand.brand_value,
             "funnel_gap": r.brand.funnel_gap, "tag": r.brand.mb_tag, "tier": r.brand.mb_tier,
+            "ai_label": r.brand.ai_label,
         },
         "cells": [
             {

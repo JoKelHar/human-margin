@@ -67,6 +67,7 @@ def test_every_output_carries_the_time_rule_and_breakeven_cost():
     assert TIME_NOTE in text                                   # the fixed time-rule line
     assert "Break-even production cost (the headline)" in text
     assert r.headline_format == "short_video"                  # costs.format drives the headline
+    assert "Compared with" in text and r.breakeven_cost.ai_label in text  # comparator named
     assert "Your cost of" in text and "sits" in text           # own cost placed automatically
     d = to_dict(r, check_agency(scn, r.leader), None)
     assert d["time_note"] == TIME_NOTE

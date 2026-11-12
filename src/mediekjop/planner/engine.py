@@ -163,6 +163,7 @@ class BreakEvenCost:
     funnel: tuple[float, float, float]        # p10/p50/p90 NOK, funnel only
     with_brand: tuple[float, float, float]    # p10/p50/p90 NOK, incl. brand effect
     feasible: bool                            # human_led can make the headline format
+    ai_label: str = ""                        # the one AI comparator, named (AI's strongest option)
     # The scenario's OWN human-led cost at the headline format, placed automatically.
     own_cost_nok: float | None = None
     own_placement: str | None = None          # above_both | between | below_both
@@ -179,6 +180,7 @@ class BrandLine:
     worth_to_close: float                   # p50 kr the brand effect must be worth to close the gap
     mb_tier: str
     mb_tag: str
+    ai_label: str = ""                      # the one AI comparator, named (AI's strongest option)
 
 
 @dataclass
@@ -321,6 +323,7 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
 
     cells: list[Cell] = []
     reach_p50 = 0.0
+    ai_options: list[dict] = []     # per-AI-cell arrays, to pick one shared comparator
     for fkey, f in formats.items():
         for approach in f.approaches:
             prod = _prod(approach, fkey)
@@ -333,6 +336,9 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
             # to reach it (cheapest sell-out), not most volume.
             conv_eff = np.minimum(conv, scn.capacity) if scn.is_capacity_capped() else conv
             margin = conv_eff * V - scn.budget_nok - prod
+            if approach in ("ai_assisted", "ai_generated"):
+                ai_options.append({"approach": approach, "fmt": fkey,
+                                   "margin": margin, "conv": conv_eff})
             allin = scn.budget_nok + prod
             conv_per_1000 = conv_eff / np.maximum(allin, 1e-9) * 1000.0
             cost_per_conv = allin / np.maximum(conv_eff, 1e-9)
@@ -373,13 +379,24 @@ def plan(scn: Scenario, *, benchmarks: list[dict] | None = None, weights: dict |
     over_value = sorted((a for a, c in best_cost.items() if c > V_conv > 0),
                         key=lambda a: APPROACHES.index(a) if a in APPROACHES else 9)
 
+    # ONE AI comparator used everywhere (break-even, brand line, sensitivity): AI's
+    # strongest option on margin AT THE HUMAN'S format (like-for-like), falling back to
+    # its strongest option on any format only when that format has no AI cell (e.g. a
+    # studio headline). Named in the output so the single basis is explicit and the
+    # three sections can never disagree.
+    _at_hf = [o for o in ai_options if o["fmt"] == hf]
+    _pool = _at_hf or ai_options
+    ai_bench = max(_pool, key=lambda o: float(np.median(o["margin"]))) if _pool else None
+    ai_bench_label = (f"{APPROACH_LABEL.get(ai_bench['approach'], ai_bench['approach'])} "
+                      f"{formats[ai_bench['fmt']].label}") if ai_bench else ""
+
     breakeven = _break_even(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
                             fmt_ctr, fmt_cvr, resp, V, R, draws, rng)
-    breakeven_cost = _break_even_cost(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
-                                      fmt_ctr, fmt_cvr, resp, mb, V, R, draws, rng)
+    breakeven_cost = _break_even_cost(scn, hf, formats, impressions, base_ctr, base_cvr,
+                                      fmt_ctr, fmt_cvr, resp, mb, V, R, ai_bench, ai_bench_label)
     brand = _brand_line(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
-                        fmt_ctr, fmt_cvr, resp, mb, mb_tri, mb_est, V, R, draws, rng)
-    sens = _sensitivity(scn, hf, costs, formats, cpm_tri, ctr_e, cvr_e, resp_tri, V, R)
+                        fmt_ctr, fmt_cvr, mb, mb_est, V, R, draws, rng, ai_bench, ai_bench_label)
+    sens = _sensitivity(scn, hf, costs, formats, cpm_tri, ctr_e, cvr_e, resp_tri, V, R, ai_bench)
     roas = _roas_check(cells, leader, scn, roas_e, V)
 
     metrics = [
@@ -492,14 +509,14 @@ def _quote_placement(quote: float, funnel_p50: float, brand_p50: float) -> str:
     return "between"
 
 
-def _break_even_cost(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
-                     fmt_ctr, fmt_cvr, resp, mb, V, R, draws, rng) -> BreakEvenCost:
-    """Solve for the human-led production cost at which human-led matches the best AI
-    option on margin, at the scenario's (headline) format - so the comparison is
-    like-for-like and isolates the human-vs-AI question. Funnel only, and again with
-    the human brand effect added (which raises the cost human-led can bear). Carried
-    as p10/p50/p90. If the headline format has no AI approach, the best AI option
-    overall is the fallback comparator (and the caveat is flagged)."""
+def _break_even_cost(scn, hf, formats, impressions, base_ctr, base_cvr,
+                     fmt_ctr, fmt_cvr, resp, mb, V, R, ai_bench, ai_label) -> BreakEvenCost:
+    """Solve for the human-led production cost at which human-led matches the ONE
+    shared AI comparator (``ai_bench`` - AI's strongest option) on margin, with the
+    human at the scenario's (headline) format. Funnel only, and again with the human
+    brand effect added (which raises the cost human-led can bear). Carried as
+    p10/p50/p90. The same comparator is used by the brand line and sensitivity, so
+    the three can never disagree."""
     f = formats[hf]
     feasible = "human_led" in f.approaches
     cap = scn.capacity if scn.is_capacity_capped() else None
@@ -509,13 +526,6 @@ def _break_even_cost(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
         c = impressions * base_ctr * fmt_ctr[fkey] * _response_mult(approach, resp) * base_cvr * fmt_cvr[fkey]
         return np.minimum(c, cap) if cap is not None else c
 
-    def _prod_amort(approach: str, fkey: str) -> np.ndarray | None:
-        ov = _override_tri(scn, approach, fkey, ov_fmt)
-        if ov is not None:
-            return _draw(ov, draws, rng) / R
-        cell = costs.get((fkey, approach))
-        return _draw(cell.nok, draws, rng) / R if cell else None
-
     # Human-led at the headline format (or its best human-capable format if the
     # headline is AI-only, so a number always exists; feasible flags the caveat).
     h_fmt = hf if feasible else max(
@@ -523,23 +533,12 @@ def _break_even_cost(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
         key=lambda k: float(np.median(_conv("human_led", k))), default=hf)
     conv_h = _conv("human_led", h_fmt)
 
-    # AI comparator: the best AI APPROACH at the SAME format as human (like-for-like).
-    # Only if that format has no AI approach do we fall back to the best AI option on
-    # any format.
-    best_ai = np.full(draws, -np.inf)
-    for approach in ("ai_assisted", "ai_generated"):
-        if approach in formats[h_fmt].approaches:
-            prod = _prod_amort(approach, h_fmt)
-            if prod is not None:
-                best_ai = np.maximum(best_ai, _conv(approach, h_fmt) * V - scn.budget_nok - prod)
-    if not np.isfinite(best_ai).all():
-        for fkey, fmt in formats.items():
-            for approach in ("ai_assisted", "ai_generated"):
-                if approach not in fmt.approaches:
-                    continue
-                prod = _prod_amort(approach, fkey)
-                if prod is not None:
-                    best_ai = np.maximum(best_ai, _conv(approach, fkey) * V - scn.budget_nok - prod)
+    draws = conv_h.shape[0]
+    if ai_bench is None:                          # no AI cell at all: nothing to match
+        z = np.zeros(draws)
+        return BreakEvenCost(fmt=h_fmt, funnel=_pcts(z), with_brand=_pcts(z), feasible=feasible,
+                             ai_label=ai_label)
+    best_ai = ai_bench["margin"]                  # the ONE shared comparator
 
     # P solves  conv_h*V - budget - P/R == best_ai_margin ; brand adds human value.
     p_funnel = np.maximum(R * (conv_h * V - scn.budget_nok - best_ai), 0.0)
@@ -557,12 +556,15 @@ def _break_even_cost(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
     quote = scn.human_quote_nok if (scn.human_quote is not None and scn.human_quote_nok > 0) else None
     placement = _quote_placement(quote, fp50, bp50) if quote is not None else None
     return BreakEvenCost(fmt=h_fmt, funnel=_pcts(p_funnel), with_brand=_pcts(p_brand),
-                         feasible=feasible, own_cost_nok=(own if own and own > 0 else None),
+                         feasible=feasible, ai_label=ai_label,
+                         own_cost_nok=(own if own and own > 0 else None),
                          own_placement=own_placement, quote_nok=quote, placement=placement)
 
 
 def _brand_line(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
-                fmt_ctr, fmt_cvr, resp, mb, mb_tri, mb_est, V, R, draws, rng) -> BrandLine:
+                fmt_ctr, fmt_cvr, mb, mb_est, V, R, draws, rng, ai_bench, ai_label) -> BrandLine:
+    """The human brand gap, measured against the SAME comparator as the break-even
+    (``ai_bench`` - AI's strongest option), so the two verdicts can never disagree."""
     ov_fmt = _override_format(scn, formats, hf)
 
     def _cost(approach, fallback_fmt):
@@ -573,31 +575,35 @@ def _brand_line(scn, hf, costs, formats, impressions, base_ctr, base_cvr,
         return _draw(c.nok, draws, rng) / R if c else np.zeros(draws)
 
     conv_h = impressions * base_ctr * fmt_ctr[hf] * 1.0 * base_cvr * fmt_cvr[hf]
-    conv_a = impressions * base_ctr * fmt_ctr[hf] * resp * base_cvr * fmt_cvr[hf]
     if scn.is_capacity_capped():
         conv_h = np.minimum(conv_h, scn.capacity)
-        conv_a = np.minimum(conv_a, scn.capacity)
     margin_h = conv_h * V - scn.budget_nok - _cost("human_led", "studio_shoot")
-    margin_a = conv_a * V - scn.budget_nok - _cost("ai_generated", "ai_mockup")
+    margin_a = ai_bench["margin"] if ai_bench is not None else margin_h   # the shared comparator
     gap = margin_a - margin_h                    # >0: AI ahead on the funnel alone
     brand_value = conv_h * V * (mb - 1.0)        # human long-term edge, NOT in the funnel
     worth = np.maximum(gap, 0.0)                 # kr the brand effect must be worth to close it
     return BrandLine(
         fmt=hf, funnel_gap=float(np.median(gap)), brand_value=float(np.median(brand_value)),
-        worth_to_close=float(np.median(worth)),
+        worth_to_close=float(np.median(worth)), ai_label=ai_label,
         mb_tier=(mb_est.provenance if mb_est else "assumption"),
         mb_tag=(bm.tag(mb_est) if mb_est else "Assumption"),
     )
 
 
-def _sensitivity(scn, hf, costs, formats, cpm_tri, ctr_e, cvr_e, resp_tri, V, R) -> list[Sensitivity]:
-    """Which inputs move the break-even lift most, swept low->high at point otherwise."""
-    f = formats[hf]
+def _sensitivity(scn, hf, costs, formats, cpm_tri, ctr_e, cvr_e, resp_tri, V, R, ai_bench) -> list[Sensitivity]:
+    """Which inputs move the break-even most, swept low->high at point otherwise. The
+    AI side is the ONE shared comparator (``ai_bench`` - AI's strongest option), so
+    "production cost (AI)" and the AI response/format are measured on the same basis
+    the headline break-even and the brand line use."""
     ov_fmt = _override_format(scn, formats, hf)
+    ai_fmt = ai_bench["fmt"] if ai_bench else hf
+    ai_approach = ai_bench["approach"] if ai_bench else "ai_generated"
+    af = formats[ai_fmt]
+    half = ai_approach == "ai_assisted"           # hybrid response is midway to parity
     ch = costs.get((hf, "human_led")) or costs.get(("studio_shoot", "human_led"))
-    ca = costs.get((hf, "ai_generated")) or costs.get(("ai_mockup", "ai_generated"))
+    ca = costs.get((ai_fmt, ai_approach)) or costs.get(("ai_mockup", "ai_generated"))
     ph = _override_amount(scn, "human_led", hf, ov_fmt)
-    pa = _override_amount(scn, "ai_generated", hf, ov_fmt)
+    pa = _override_amount(scn, ai_approach, ai_fmt, ov_fmt)
 
     ctr_pt = _rate_to_fraction(ctr_e.point, ctr_e.unit)
     cvr_pt = _rate_to_fraction(cvr_e.point, cvr_e.unit)
@@ -608,7 +614,7 @@ def _sensitivity(scn, hf, costs, formats, cpm_tri, ctr_e, cvr_e, resp_tri, V, R)
             "resp": resp_tri.point,
             "prod_human": (ph / R if ph is not None else (ch.nok.point / R if ch else 0.0)),
             "prod_ai": (pa / R if pa is not None else (ca.nok.point / R if ca else 0.0)),
-            "ctr_mult": f.ctr_mult.point, "cvr_mult": f.cvr_mult.point,
+            "ctr_mult": af.ctr_mult.point, "cvr_mult": af.cvr_mult.point,
         }[name]
 
     def lift(over):
@@ -616,7 +622,8 @@ def _sensitivity(scn, hf, costs, formats, cpm_tri, ctr_e, cvr_e, resp_tri, V, R)
                                    "ctr_mult", "cvr_mult")}
         p.update(over)
         impr = scn.budget_nok / max(p["cpm"], 1e-9) * 1000.0
-        conv_ai = impr * p["ctr"] * p["ctr_mult"] * p["resp"] * p["cvr"] * p["cvr_mult"]
+        rm = (1.0 + p["resp"]) / 2.0 if half else p["resp"]
+        conv_ai = impr * p["ctr"] * p["ctr_mult"] * rm * p["cvr"] * p["cvr_mult"]
         return (p["prod_human"] - p["prod_ai"]) / max(V * conv_ai, 1e-9)
 
     base = lift({})
