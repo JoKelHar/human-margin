@@ -44,11 +44,12 @@ def _golden_inputs() -> list[dict]:
     ex = asdict(bc.EXAMPLE)
     base = {"industry": ex["industry"], "goalMode": ex["goal_mode"], "goal": ex["goal"],
             "price": ex["price"], "budget": ex["budget"], "fmt": ex["fmt"],
-            "human": ex["human"], "ai": ex["ai"], "reuse": ex["reuse"], "cpm": ex["cpm"]}
-    cases.append(dict(base))                                             # the example
+            "human": ex["human"], "ai": ex["ai"], "reuse": ex["reuse"], "cpm": ex["cpm"],
+            "margin": None, "marginUnit": "kr", "otherNoun": None}
+    cases.append(dict(base))                                             # the example (target unreachable)
 
-    cases.append({**base, "human": None})                               # blank human quote
-    cases.append({**base, "ai": None})                                  # blank AI cost
+    cases.append({**base, "human": None})                               # blank human quote (typical)
+    cases.append({**base, "ai": None})                                  # blank AI cost (typical)
     cases.append({**base, "human": None, "ai": None})                   # both blank ("only my budget")
     cases.append({**base, "human": 300, "ai": 4200})                    # no-gap (human <= AI)
     cases.append({**base, "goalMode": "max"})                           # as-many-as-possible
@@ -58,8 +59,12 @@ def _golden_inputs() -> list[dict]:
     cases.append({**base, "cpm": 0})                                    # no CPM
     cases.append({**base, "reuse": 1})                                  # single campaign
     cases.append({**base, "reuse": 5})                                  # many campaigns
-    cases.append({**base, "goal": 1, "budget": 500})                    # extra == 1 (singular unit)
-    cases.append({**base, "goal": 1000000, "budget": 5000})            # share < 1 ("under 1%")
+    cases.append({**base, "goal": 5, "budget": 60000, "reuse": 1})     # target reachable (share shown)
+    cases.append({**base, "goal": 5, "budget": 60000, "human": 400, "reuse": 1})  # singular + share
+    cases.append({**base, "margin": 100})                               # margin in kr
+    cases.append({**base, "margin": 40, "marginUnit": "pct"})           # margin in %
+    cases.append({**base, "industry": "other", "otherNoun": "signup"})  # free-text noun
+    cases.append({**base, "industry": "other"})                         # free-text noun default
 
     for fmt in ("static", "video", "ugc", "studio"):
         f = next(x for x in bc.formats() if x["key"] == fmt)
@@ -69,15 +74,18 @@ def _golden_inputs() -> list[dict]:
         cases.append({**base, "fmt": fmt, "human": hi + 1, "ai": 500})  # above band
         cases.append({**base, "fmt": fmt, "human": None, "ai": None})   # band fallback per format
 
-    for ind in bc.INDUSTRIES:                                           # every unit word
+    for ind in bc.INDUSTRIES:                                           # every noun, target + max
         cases.append({**base, "industry": ind["key"]})
+        cases.append({**base, "industry": ind["key"], "goalMode": "max"})
     return cases
 
 
 def _to_inputs(d: dict) -> bc.Inputs:
     return bc.Inputs(industry=d["industry"], goal_mode=d["goalMode"], goal=d["goal"],
                      price=d["price"], budget=d["budget"], fmt=d["fmt"],
-                     human=d["human"], ai=d["ai"], reuse=d["reuse"], cpm=d["cpm"])
+                     human=d["human"], ai=d["ai"], reuse=d["reuse"], cpm=d["cpm"],
+                     margin=d.get("margin"), margin_unit=d.get("marginUnit", "kr"),
+                     other_noun=d.get("otherNoun"))
 
 
 def build_golden() -> list[dict]:

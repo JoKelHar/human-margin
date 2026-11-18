@@ -56,6 +56,9 @@ def main() -> None:
     ap.add_argument("--ai", type=float, default=None, help="AI version cost (unset = usual band)")
     ap.add_argument("--reuse", type=int, default=None)
     ap.add_argument("--cpm", type=float, default=None)
+    ap.add_argument("--margin", type=float, default=None, help="margin per sale (replaces price)")
+    ap.add_argument("--margin-unit", dest="margin_unit", choices=["kr", "pct"], default=None)
+    ap.add_argument("--other-noun", dest="other_noun", default=None, help="noun for --industry other")
     args = ap.parse_args()
 
     if args.all:

@@ -111,17 +111,42 @@
   footer p { margin:0; max-width:720px; }
   footer a { color:var(--ink3); }
   :focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:6px; }
+  /* nav menu: inline on desktop, a "Menu" button on phones */
+  .menu { position:relative; display:flex; gap:20px; align-items:center; }
+  .menu-btn { appearance:none; border:0; background:none; padding:6px 0; font:inherit;
+    font-size:14px; font-weight:500; color:var(--muted); cursor:pointer; display:none; }
+  .links { display:flex; gap:20px; align-items:center; }
+  @media (max-width:640px){
+    .menu-btn { display:inline-block; }
+    .links { display:none; position:absolute; right:0; top:34px; z-index:20;
+      flex-direction:column; align-items:flex-start; gap:14px; background:var(--card);
+      border:1px solid var(--line); border-radius:12px; padding:14px 16px; box-shadow:0 6px 24px rgba(0,0,0,0.12); }
+    .links.open { display:flex; }
+  }
+  .margin-row { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:end; }
+  .margin-row select { height:44px; width:auto; padding:0 8px; }
+  /* mobile sticky answer bar */
+  .stickybar { position:fixed; left:0; right:0; bottom:0; z-index:30; display:none;
+    width:100%; appearance:none; border:0; border-top:1px solid var(--line);
+    background:var(--card); color:var(--ink); font:inherit; font-size:15px; font-weight:600;
+    text-align:left; padding:14px max(16px, env(safe-area-inset-left)) calc(14px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
+    cursor:pointer; box-shadow:0 -2px 16px rgba(0,0,0,0.10); }
+  .stickybar .arrow { float:right; color:var(--muted); font-weight:500; }
+  @media (max-width:819px){ .stickybar.show { display:block; } .answers { padding-bottom:64px; } }
 </style>
 </head>
 <body>
   <div class="wrap">
     <header>
       <div class="brand">Human Margin</div>
-      <nav>
-        <a href="#how">How it works</a>
-        <a href="research.html">Research prototype</a>
-        <a href="https://github.com/JoKelHar/human-margin">GitHub</a>
-        <button type="button" class="theme-btn" id="theme" aria-label="Switch colour theme">Theme</button>
+      <nav class="menu">
+        <button type="button" class="menu-btn" id="menubtn" aria-expanded="false" aria-controls="navlinks">Menu</button>
+        <div class="links" id="navlinks">
+          <a href="#how">How it works</a>
+          <a href="research.html">Research prototype</a>
+          <a href="https://github.com/JoKelHar/human-margin">GitHub</a>
+        </div>
+        <button type="button" class="theme-btn" id="theme" aria-label="Switch colour theme">Dark</button>
       </nav>
     </header>
 
@@ -174,6 +199,8 @@
     </main>
   </div>
 
+  <button type="button" class="stickybar" id="stickybar" aria-label="Jump to your answers"></button>
+
   <footer id="how">
     <div class="wrap">
       <p>Costs count money paid out, not your own time. AI work usually carries more of that uncounted time, so this slightly flatters AI.</p>
@@ -187,20 +214,24 @@
 <script>
 (function () {
   var D = window.HM_DATA, C = window.HMCore;
-  var EXAMPLE = { industry:'uteliv', goalMode:'target', goal:300, price:250, budget:5000, fmt:'ugc', human:4200, ai:300, reuse:2, cpm:115 };
+  var EXAMPLE = { industry:'nightlife', goalMode:'target', goal:300, price:250, budget:5000,
+    fmt:'ugc', human:4200, ai:300, reuse:2, cpm:115, margin:null, marginUnit:'kr', otherNoun:null };
 
-  // --- theme (per-viewer convenience) ---
+  // --- theme (per-viewer convenience); the button names the mode it switches TO ---
+  function isDarkNow(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    return cur ? cur === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+  function setThemeLabel(){ document.getElementById('theme').textContent = isDarkNow() ? 'Light' : 'Dark'; }
   (function initTheme(){
     var saved = null;
     try { saved = localStorage.getItem('hm-theme'); } catch (e) {}
     if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
     document.getElementById('theme').addEventListener('click', function () {
-      var cur = document.documentElement.getAttribute('data-theme');
-      var isDark = cur ? cur === 'dark'
-        : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
-      var next = isDark ? 'light' : 'dark';
+      var next = isDarkNow() ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       try { localStorage.setItem('hm-theme', next); } catch (e) {}
+      setThemeLabel();
     });
   })();
 
@@ -214,6 +245,9 @@
   })();
 
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  var NULLABLE = { human: 1, ai: 1, margin: 1, otherNoun: 1 };
+  function indOf(key){ for (var i=0;i<D.industries.length;i++) if (D.industries[i].key===key) return D.industries[i]; return D.industries[0]; }
 
   // --- build the form once; answers re-render live ---
   function buildForm(){
@@ -230,66 +264,97 @@
     f.innerHTML =
       '<fieldset><legend>What you sell</legend>' +
         '<label class="f">Industry<select id="industry">' + indOpts + '</select></label>' +
-        '<label class="f"><span>Price per <span id="unit-one"></span></span>' + krInput('price', state.price) + '</label>' +
+        '<label class="f" id="other-wrap" style="display:none;">What do you call a sale?' +
+          '<input type="text" id="otherNoun" placeholder="sale" value="' + attr(state.otherNoun) + '"></label>' +
+        '<label class="f"><span id="price-label"></span>' + moneyKr('price', state.price) +
+          '<span class="hint" id="price-hint"></span></label>' +
       '</fieldset>' +
       '<fieldset><legend>Goal and budget</legend>' +
         '<div class="seg" role="group" aria-label="Goal">' + goalBtns + '</div>' +
         '<div class="grid2">' +
           '<label class="f" id="target-wrap"><span>Target <span id="unit-many"></span></span>' +
-            '<input type="number" inputmode="numeric" min="0" id="goal" value="' + attr(state.goal) + '"></label>' +
-          '<label class="f">Media budget' + krInput('budget', state.budget) + '</label>' +
+            moneyPlain('goal', state.goal) + '</label>' +
+          '<label class="f">Media budget' + moneyKr('budget', state.budget) + '</label>' +
         '</div>' +
       '</fieldset>' +
       '<fieldset><legend>Creative</legend>' +
         '<div class="seg four" role="group" aria-label="Format">' + fmtBtns + '</div>' +
         '<div class="grid2">' +
-          '<label class="f">Human quote' + krInput('human', state.human) + '</label>' +
-          '<label class="f">AI version' + krInput('ai', state.ai) + '</label>' +
+          '<label class="f">Human quote' + moneyKr('human', state.human) + '</label>' +
+          '<label class="f">AI version' + moneyKr('ai', state.ai) + '</label>' +
         '</div>' +
         '<label class="f">Campaigns the creative will run in' +
           '<input type="number" inputmode="numeric" min="1" id="reuse" value="' + attr(state.reuse) + '"></label>' +
       '</fieldset>' +
       '<details class="fold"><summary>I know my own numbers</summary>' +
-        '<div style="margin-top:12px; display:flex; flex-direction:column; gap:6px;">' +
-          '<label class="f">CPM (cost per 1 000 views)' + krInput('cpm', state.cpm) + '</label>' +
-          '<p class="hint">Leave as is for a rough estimate (115 kr, US-based). Your own figure replaces it everywhere.</p>' +
+        '<div style="margin-top:12px; display:flex; flex-direction:column; gap:12px;">' +
+          '<label class="f">CPM (cost per 1 000 views)' + moneyKr('cpm', state.cpm) +
+            '<span class="hint">Leave as is for a rough estimate (115 kr, US-based). Your own figure replaces it everywhere.</span></label>' +
+          '<label class="f">Margin per <span id="margin-unit-word"></span> (optional)' +
+            '<span class="margin-row">' +
+              '<span class="inwrap"><input type="text" inputmode="numeric" id="margin" class="money kr" value="' + attr(state.margin) + '"><span class="suffix" aria-hidden="true" id="margin-suffix">kr</span></span>' +
+              '<select id="marginUnit" aria-label="Margin unit"><option value="kr"' + (state.marginUnit==='pct'?'':' selected') + '>kr</option><option value="pct"' + (state.marginUnit==='pct'?' selected':'') + '>%</option></select>' +
+            '</span>' +
+            '<span class="hint">When set, this replaces the price in the human-margin maths.</span></label>' +
         '</div>' +
       '</details>';
 
     // listeners
-    document.getElementById('industry').addEventListener('change', function (e) { setVal('industry', e.target.value); });
-    ['price','goal','budget','human','ai','reuse','cpm'].forEach(function (k) {
-      var el = document.getElementById(k);
-      el.addEventListener('input', function (e) {
-        setVal(k, ((k === 'human' || k === 'ai') && e.target.value.trim() === '') ? null : e.target.value);
-      });
+    document.getElementById('industry').addEventListener('change', function (e) { setVal('industry', e.target.value); updateControls(); });
+    document.getElementById('otherNoun').addEventListener('input', function (e) {
+      var v = e.target.value; setVal('otherNoun', v.trim() === '' ? null : v); });
+    document.getElementById('reuse').addEventListener('input', function (e) { setVal('reuse', e.target.value); });
+    document.getElementById('marginUnit').addEventListener('change', function (e) {
+      state.marginUnit = e.target.value; edited = true;
+      document.getElementById('margin-suffix').textContent = e.target.value === 'pct' ? '%' : 'kr';
+      markEdited(); render(); });
+    Array.prototype.forEach.call(f.querySelectorAll('.money'), function (el) {
+      el.addEventListener('input', function () { onMoney(el); });
     });
     Array.prototype.forEach.call(f.querySelectorAll('.seg button'), function (b) {
       b.addEventListener('click', function () {
-        setVal(b.getAttribute('data-k'), b.getAttribute('data-v'));
+        state[b.getAttribute('data-k')] = b.getAttribute('data-v'); edited = true; copied = false;
         Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function (x) {
           x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
         });
-        updateControls();
+        markEdited(); updateControls();
       });
     });
+    document.getElementById('margin-suffix').textContent = state.marginUnit === 'pct' ? '%' : 'kr';
   }
   function segBtn(k, v, label, on){
     return '<button type="button" data-k="' + k + '" data-v="' + v + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + esc(label) + '</button>';
   }
-  function krInput(id, v){
-    return '<span class="inwrap"><input type="number" inputmode="numeric" min="0" id="' + id +
-      '" class="kr" value="' + attr(v) + '"><span class="suffix" aria-hidden="true">kr</span></span>';
+  function moneyKr(id, v){
+    return '<span class="inwrap"><input type="text" inputmode="numeric" id="' + id +
+      '" class="kr money" value="' + attr(group(v)) + '"><span class="suffix" aria-hidden="true">kr</span></span>';
+  }
+  function moneyPlain(id, v){
+    return '<input type="text" inputmode="numeric" class="money" id="' + id + '" value="' + attr(group(v)) + '">';
   }
   function attr(v){ return v == null ? '' : esc(v); }
+  function group(v){ if (v == null || v === '') return ''; return String(v).replace(/\s/g,'').replace(/[^\d]/g,'').replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
+  function onMoney(el){
+    var start = el.selectionStart, before = el.value.slice(0, start).replace(/[^\d]/g,'').length;
+    var g = group(el.value); el.value = g;
+    var pos = 0, count = 0;
+    while (pos < g.length && count < before) { if (/\d/.test(g[pos])) count++; pos++; }
+    try { el.setSelectionRange(pos, pos); } catch (e) {}
+    var id = el.id, stripped = g.replace(/\s/g,'');
+    setVal(id, (NULLABLE[id] && stripped === '') ? null : g);
+  }
 
   function setVal(k, v){ state[k] = v; edited = true; copied = false; markEdited(); render(); }
 
   function updateControls(){
-    var ind = C.compute(state); // reuse unit words via compute output
-    var one = ind.unit_one, many = ind.unit_many;
-    var uo = document.getElementById('unit-one'); if (uo) uo.textContent = one;
-    var um = document.getElementById('unit-many'); if (um) um.textContent = many;
+    var r = C.compute(state), ind = indOf(state.industry);
+    setText('price-label', ind.price_label);
+    var ph = document.getElementById('price-hint');
+    if (ph) { ph.textContent = ind.hint || ''; ph.style.display = ind.hint ? '' : 'none'; }
+    setText('unit-many', r.unit_many);
+    setText('margin-unit-word', r.unit_one);
+    var ow = document.getElementById('other-wrap');
+    if (ow) ow.style.display = (state.industry === 'other') ? '' : 'none';
     var tw = document.getElementById('target-wrap');
     if (tw) tw.style.display = (state.goalMode === 'target') ? '' : 'none';
     render();
@@ -310,6 +375,13 @@
     // A3
     setText('a3-big', r.a3.big); setText('a3-text', r.a3.text); setText('a3-how', r.a3.how);
     drawBand(r.a3);
+    // mobile sticky bar (hero answer at a glance)
+    var sb = document.getElementById('stickybar');
+    if (sb) {
+      sb.innerHTML = (r.a2.big === '—')
+        ? 'Add your numbers to see your margin<span class="arrow" aria-hidden="true">View ↓</span>'
+        : 'Human margin: ' + esc(r.a2.big) + ' ' + esc(r.unit_many) + '<span class="arrow" aria-hidden="true">View ↓</span>';
+    }
   }
 
   function drawBand(a3){
@@ -355,8 +427,35 @@
     } else { done(); }
   });
 
+  // --- mobile nav menu toggle ---
+  (function navMenu(){
+    var btn = document.getElementById('menubtn'), links = document.getElementById('navlinks');
+    btn.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', function () { links.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); });
+    });
+  })();
+
+  // --- mobile sticky bar: tap to jump to answers; hide when they are in view ---
+  (function stickyBar(){
+    var sbtn = document.getElementById('stickybar');
+    sbtn.addEventListener('click', function () {
+      var a = document.querySelector('.answers');
+      if (a) a.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        sbtn.classList.toggle('show', !entries[0].isIntersecting);
+      }, { threshold: 0 });
+      obs.observe(document.querySelector('.answers'));
+    }
+  })();
+
   // --- go ---
-  buildForm(); updateControls(); renderStatus(); setCopyLabel();
+  buildForm(); updateControls(); renderStatus(); setCopyLabel(); setThemeLabel();
 })();
 </script>
 </body>

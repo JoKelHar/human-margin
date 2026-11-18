@@ -43,83 +43,101 @@
   }
   function isBlank(v) { return v == null || String(v).trim() === '' || num(v) <= 0; }
 
+  function nouns(inp, ind) {
+    if (ind.free_noun) {
+      var base = (inp.otherNoun != null && String(inp.otherNoun).trim() !== '' ? String(inp.otherNoun).trim() : '') || ind.one;
+      return [base, base + 's'];
+    }
+    return [ind.one, ind.many];
+  }
+  function valuePer(price, inp) {
+    var m = num(inp.margin);
+    if (inp.margin != null && String(inp.margin).trim() !== '' && m > 0) {
+      return [(inp.marginUnit === 'kr' ? m : price * m / 100), true];
+    }
+    return [price, false];
+  }
+  function whoTypical(who) { return 'a typical ' + (who.indexOf('The ') === 0 ? who.slice(4) : who.toLowerCase()); }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
   function blankNote(hb, ab, fmt) {
     var h = fmt.human, a = fmt.ai;
     if (hb && ab) {
-      return 'Using the usual ranges — human ' + kr(h.low) + '–' + kr(h.high) + ' kr, AI ' +
+      return 'Typical ranges — human ' + kr(h.low) + '–' + kr(h.high) + ' kr, AI ' +
         kr(a.low) + '–' + kr(a.high) + ' kr. Put in your quotes for a sharper answer.';
     }
     if (hb) {
-      return 'Using the usual range: ' + kr(h.low) + '–' + kr(h.high) +
-        ' kr. Put in your quote for a sharper answer.';
+      return 'Typical range: ' + kr(h.low) + '–' + kr(h.high) + ' kr. Put in your quote for a sharper answer.';
     }
     if (ab) {
-      return 'Using the usual AI cost: ' + kr(a.low) + '–' + kr(a.high) +
-        ' kr. Put in your figure for a sharper answer.';
+      return 'Typical AI cost: ' + kr(a.low) + '–' + kr(a.high) + ' kr. Put in your figure for a sharper answer.';
     }
     return '';
   }
 
-  function answerHumanMargin(human, ai, price, reuse, goal, isTarget, one, many, fmt, note) {
+  function answerHumanMargin(human, ai, valPer, marginUsed, reuse, goal, reachable, one, many, fmt, hb, ab) {
     var diff = human - ai;
-    if (price <= 0) {
-      return { big: '—', unit: '', text: 'Add a price per ' + one + ' to see this.',
+    var note = blankNote(hb, ab, fmt);
+    var subject = cap(hb ? whoTypical(fmt.who) : fmt.who);
+    var aiName = ab ? 'a typical AI version' : 'the AI version';
+    var about = (hb || ab) ? 'about ' : '';
+    if (valPer <= 0) {
+      return { big: '—', unit: '', text: 'Add a value per ' + one + ' to see this.',
         has_context: false, context: '', how: '', note: note };
     }
     if (diff <= 0) {
       return {
         big: '0', unit: 'extra ' + many,
-        text: 'The human option costs no more than the AI version, so it needs no extra ' + many +
-          ' to pay for itself.',
+        text: subject + ' costs no more than ' + aiName + ', so it needs no extra ' + many + ' to pay for itself.',
         has_context: false, context: '',
-        how: 'Human quote ' + kr(human) + ' kr, AI version ' + kr(ai) +
+        how: subject + ' ' + kr(human) + ' kr, ' + aiName + ' ' + kr(ai) +
           ' kr: no cost gap to cover.\nCosts count money paid out, not your own time.',
         note: note
       };
     }
-    var extra = Math.ceil(diff / price);
-    var per = Math.ceil(diff / (price * reuse));
-    var share = (isTarget && goal > 0) ? hround(extra / reuse / goal * 100) : null;
+    var extra = Math.ceil(diff / valPer);
+    var per = Math.ceil(diff / (valPer * reuse));
+    var share = reachable ? hround(extra / reuse / goal * 100) : null;
     var body = reuse > 1
-      ? 'Across ' + reuse + ' campaigns, it needs to sell ' + kr(extra) + ' more ' + many +
-        ' than the AI version to pay for itself, about ' + per + ' per campaign.'
-      : 'It needs to sell ' + kr(extra) + ' more ' + (extra === 1 ? one : many) +
-        ' than the AI version to pay for itself.';
+      ? 'Across ' + reuse + ' campaigns, it needs ' + kr(extra) + ' more ' + many +
+        ' than ' + aiName + ' to pay for itself, about ' + per + ' per campaign.'
+      : 'It needs ' + kr(extra) + ' more ' + (extra === 1 ? one : many) + ' than ' + aiName + ' to pay for itself.';
     var context = '';
     if (share !== null) {
       context = 'That is ' + (share < 1 ? 'under 1' : share) + '% of your ' + kr(goal) + '-' + one +
         ' target per campaign. Whether a human version earns that is your call.';
     }
-    var how = kr(diff) + ' kr extra ÷ ' + kr(price) + ' kr per ' + one + ' = ' + kr(extra) + ' ' +
-      many + ' (rounded up).\n' +
+    var basis = marginUsed ? kr(valPer) + ' kr margin per ' + one : kr(valPer) + ' kr per ' + one;
+    var marginLine = marginUsed ? 'Uses your margin per ' + one + '.\n'
+      : 'Uses the full price. If you know your margin per ' + one + ', use that instead: the number goes up.\n';
+    var how = kr(diff) + ' kr extra ÷ ' + basis + ' = ' + kr(extra) + ' ' + many + ' (rounded up).\n' +
       (reuse > 1 ? 'Spread over ' + reuse + ' campaigns: about ' + per + ' each.\n' : '') +
-      'Uses the full price. If you know your margin per ' + one + ', use that instead: the number goes up.\n' +
+      marginLine +
       'A longer-term brand effect for human work is cited in research but kept out of this number (low confidence).';
     return {
       big: kr(extra), unit: 'more ' + (extra === 1 ? one : many),
-      text: fmt.who + ' costs ' + kr(diff) + ' kr more than the AI version. ' + body,
+      text: subject + ' costs ' + about + kr(diff) + ' kr more than ' + aiName + '. ' + body,
       has_context: share !== null, context: context, how: how, note: note
     };
   }
 
-  function answerBudget(budget, cpm, goal, isTarget, one, many) {
-    var views = cpm > 0 ? budget / cpm * 1000 : 0;
+  function answerBudget(budget, cpm, goal, isTarget, views, oneIn, one, many) {
     if (budget <= 0 || cpm <= 0) {
       return { big: '—', text: 'Add a media budget to see this.', how: '' };
     }
     if (isTarget && goal > 0) {
       var maxCps = budget / goal;
-      var oneIn = hround(views / goal);
       var pos = oneIn < TYP_LO ? 'well above what paid campaigns usually achieve'
         : (oneIn <= TYP_HI ? 'within what paid campaigns usually achieve'
           : 'comfortably inside what paid campaigns usually achieve');
       return {
         big: kr(maxCps) + ' kr per ' + one,
-        text: 'To sell ' + kr(goal) + ' ' + many + ' on ' + kr(budget) + ' kr, each can cost at most ' +
+        text: 'To reach ' + kr(goal) + ' ' + many + ' on ' + kr(budget) + ' kr, each can cost at most ' +
           kr(maxCps) + ' kr. That means about 1 in ' + kr(oneIn) +
-          ' people who see the ad buys: ' + pos + ' (usually 1 in ' + kr(TYP_LO) + '–' + kr(TYP_HI) + ').',
+          ' ad views would need to become a ' + one + ': ' + pos + ' (usually 1 in ' + kr(TYP_LO) + '–' + kr(TYP_HI) + ').',
         how: 'Max cost per ' + one + ': ' + kr(budget) + ' kr ÷ ' + kr(goal) + ' = ' + kr(maxCps) + ' kr.\n' +
-          'Views: ' + kr(budget) + ' kr at a ' + kr(cpm) + ' kr CPM ≈ ' + kr(views) + '.\n' +
+          'Views: ' + kr(budget) + ' kr at a ' + kr(cpm) + ' kr CPM ≈ ' + kr(views) +
+          ' (one person may see the ad more than once).\n' +
           'Needed: ' + kr(goal) + ' ' + many + ' from ' + kr(views) + ' views ≈ 1 in ' + kr(oneIn) + '.\n' +
           'Usual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”.'
       };
@@ -128,9 +146,9 @@
     var cpsLo = hi > 0 ? budget / hi : 0, cpsHi = lo > 0 ? budget / lo : 0;
     return {
       big: 'Usually ' + kr(lo) + '–' + kr(hi) + ' ' + many,
-      text: 'At a typical CPM, ' + kr(budget) + ' kr buys about ' + kr(views) +
-        ' views. Paid campaigns usually convert 1 in ' + kr(TYP_LO) + '–' + kr(TYP_HI) +
-        ', so roughly ' + kr(lo) + '–' + kr(hi) + ' ' + many +
+      text: 'At a typical CPM, ' + kr(budget) + ' kr covers about ' + kr(views) +
+        ' views. Paid campaigns usually turn 1 in ' + kr(TYP_LO) + '–' + kr(TYP_HI) +
+        ' views into a ' + one + ', so roughly ' + kr(lo) + '–' + kr(hi) + ' ' + many +
         (lo > 0 ? ', at ' + kr(cpsLo) + '–' + kr(cpsHi) + ' kr each.' : '.'),
       how: 'Views: ' + kr(budget) + ' kr at a ' + kr(cpm) + ' kr CPM ≈ ' + kr(views) + '.\n' +
         'Usual conversion: 1 in ' + kr(TYP_LO) + '–' + kr(TYP_HI) + ' views (rough US-based estimate).\n' +
@@ -138,15 +156,15 @@
     };
   }
 
-  function answerQuote(humanBlank, human, fmt, one) {
+  function answerQuote(humanBlank, human, fmt) {
     var low = fmt.human.low, high = fmt.human.high, scaleMax = high * 1.3;
     var pct = function (x) { return scaleMax > 0 ? Math.max(0, Math.min(100, x / scaleMax * 100)) : 0; };
     var how = 'Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, ' +
       'including usage rights for paid social.\nYour own quote always replaces the range in the other answers.';
     if (humanBlank) {
       return {
-        big: 'Using the usual range',
-        text: 'No quote entered — for ' + fmt.noun + ' in Oslo the usual range is ' +
+        big: 'Typical range',
+        text: 'No quote entered — ' + fmt.noun + ' in Oslo usually runs ' +
           kr(low) + '–' + kr(high) + ' kr. Put in your quote to place it.',
         blank: true, low: low, high: high, human: human, scale_max: scaleMax,
         pct_low: pct(low), pct_high: pct(high), pct_human: pct(human), how: how
@@ -164,27 +182,34 @@
 
   function compute(inp) {
     var ind = industry(inp.industry), fmt = format(inp.fmt);
-    var one = ind.one, many = ind.many;
+    var nm = nouns(inp, ind), one = nm[0], many = nm[1];
     var price = num(inp.price), goal = num(inp.goal), budget = num(inp.budget);
     var reuse = Math.max(1, hround(num(inp.reuse)) || 1), cpm = num(inp.cpm);
     var isTarget = inp.goalMode === 'target';
+    var vp = valuePer(price, inp), valPer = vp[0], marginUsed = vp[1];
 
     var humanBlank = isBlank(inp.human), aiBlank = isBlank(inp.ai);
     var human = humanBlank ? fmt.human.point : num(inp.human);
     var ai = aiBlank ? fmt.ai.point : num(inp.ai);
-    var note = blankNote(humanBlank, aiBlank, fmt);
+
+    var views = cpm > 0 ? budget / cpm * 1000 : 0;
+    var oneIn = (isTarget && goal > 0 && views > 0) ? hround(views / goal) : null;
+    var reachable = oneIn !== null && oneIn >= TYP_LO;
 
     return {
       unit_one: one, unit_many: many, human_eff: human, ai_eff: ai,
-      human_blank: humanBlank, ai_blank: aiBlank,
-      a1: answerBudget(budget, cpm, goal, isTarget, one, many),
-      a2: answerHumanMargin(human, ai, price, reuse, goal, isTarget, one, many, fmt, note),
-      a3: answerQuote(humanBlank, human, fmt, one)
+      value_per: valPer, margin_used: marginUsed,
+      human_blank: humanBlank, ai_blank: aiBlank, reachable: reachable,
+      a1: answerBudget(budget, cpm, goal, isTarget, views, oneIn, one, many),
+      a2: answerHumanMargin(human, ai, valPer, marginUsed, reuse, goal, reachable, one, many, fmt, humanBlank, aiBlank),
+      a3: answerQuote(humanBlank, human, fmt)
     };
   }
 
   // --- URL round-trip (numbers travel in the link; nothing is stored) ---
-  var FIELDS = ['industry', 'goalMode', 'goal', 'price', 'budget', 'fmt', 'human', 'ai', 'reuse', 'cpm'];
+  var FIELDS = ['industry', 'goalMode', 'goal', 'price', 'budget', 'fmt', 'human', 'ai',
+    'reuse', 'cpm', 'margin', 'marginUnit', 'otherNoun'];
+  var _NULLABLE = { human: 1, ai: 1, margin: 1, otherNoun: 1 };   // empty -> null, not ''
   function toQuery(inp) {
     var q = new URLSearchParams();
     FIELDS.forEach(function (k) { q.set(k, inp[k] == null ? '' : inp[k]); });
@@ -195,7 +220,7 @@
     FIELDS.forEach(function (k) {
       if (q.has(k)) {
         var v = q.get(k);
-        out[k] = ((k === 'human' || k === 'ai') && v === '') ? null : v;
+        out[k] = (_NULLABLE[k] && v === '') ? null : v;
       }
     });
     return out;

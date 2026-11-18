@@ -5,12 +5,20 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
-from mediekjop.planner.budget_check import EXAMPLE, SCENARIOS, Inputs, compute, formats
+from mediekjop.planner.budget_check import (
+    EXAMPLE,
+    INDUSTRIES,
+    SCENARIOS,
+    Inputs,
+    compute,
+    formats,
+)
 from mediekjop.planner.report import PRESCRIPTIVE
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,8 +38,23 @@ def _strings(r: dict) -> list[str]:
 def test_example_human_margin_maths():
     r = compute(EXAMPLE)                       # human 4200, ai 300, price 250, reuse 2, goal 300
     assert r["a2"]["big"] == "16"              # ceil(3900/250)
-    assert "about 8 per campaign" in r["a2"]["text"]   # ceil(3900/(250*2))
-    assert r["a2"]["context"].startswith("That is 3%")  # round(16/2/300*100)
+    assert "it needs 16 more tickets" in r["a2"]["text"] and "about 8 per campaign" in r["a2"]["text"]
+    # 300 tickets is not reachable on this budget, so no share-of-target line (item 3).
+    assert not r["a2"]["has_context"] and not r["reachable"]
+
+
+def test_target_share_only_when_reachable():
+    # Reachable: a big budget on a tiny target shows the share; unreachable drops it.
+    r = compute(replace(EXAMPLE, goal=5, budget=60000, reuse=1))
+    assert r["reachable"] and r["a2"]["has_context"]
+    assert "% of your 5-ticket target" in r["a2"]["context"]
+    assert not compute(EXAMPLE)["a2"]["has_context"]        # example target unreachable
+
+
+def test_views_not_people_wording():
+    r = compute(EXAMPLE)
+    assert "ad views would need to become a ticket" in r["a1"]["text"]
+    assert "people who see the ad" not in r["a1"]["text"]
 
 
 def test_rounding_rounds_up_like_js():
@@ -49,26 +72,41 @@ def test_singular_unit_when_one_extra():
 
 # --- blank-quote fallback ----------------------------------------------------
 
-def test_blank_human_uses_the_band_point_and_is_labelled():
+def test_blank_human_reads_as_typical_not_a_real_quote():
     r = compute(replace(EXAMPLE, human=None))    # ugc human point = 3600
     assert r["human_blank"] and r["human_eff"] == 3600
     assert r["a2"]["big"] == "14"                # ceil((3600-300)/250)
-    assert r["a2"]["note"] == ("Using the usual range: 2 000–8 000 kr. "
-                               "Put in your quote for a sharper answer.")
-    assert r["a3"]["blank"] and "No quote entered" in r["a3"]["text"]
+    assert r["a2"]["text"].startswith("A typical creator costs about 3 300 kr more than the AI version")
+    assert r["a2"]["note"] == ("Typical range: 2 000–8 000 kr. Put in your quote for a sharper answer.")
+    assert r["a3"]["blank"] and "usually runs" in r["a3"]["text"] and "No quote entered" in r["a3"]["text"]
 
 
-def test_blank_ai_uses_the_band_point():
+def test_blank_ai_reads_as_typical():
     r = compute(replace(EXAMPLE, ai=None))       # ugc ai point = 1200
     assert r["ai_blank"] and r["ai_eff"] == 1200
-    assert "usual AI cost" in r["a2"]["note"]
+    assert "a typical AI version" in r["a2"]["text"] and "costs about" in r["a2"]["text"]
+    assert "Typical AI cost" in r["a2"]["note"]
 
 
-def test_only_my_budget_both_blank_still_valid():
+def test_only_my_budget_both_blank_reads_as_typical():
     r = compute(replace(EXAMPLE, human=None, ai=None))
     assert r["human_blank"] and r["ai_blank"]
     assert r["a1"]["big"] != "—"                 # the budget answer does not need the quotes
-    assert "Using the usual ranges" in r["a2"]["note"]
+    assert r["a2"]["text"].startswith("A typical creator costs about")
+    assert "a typical AI version" in r["a2"]["text"]
+    assert "Typical ranges" in r["a2"]["note"]
+
+
+def test_margin_replaces_price_in_the_human_margin():
+    # Margin in % of price, and in kr; both replace price and are named in "how".
+    pct = compute(replace(EXAMPLE, margin=40, margin_unit="pct"))   # 250 * 40% = 100
+    assert pct["value_per"] == 100.0 and pct["margin_used"]
+    assert pct["a2"]["big"] == "39"                                  # ceil(3900/100)
+    assert "margin per ticket" in pct["a2"]["how"]
+    kr_margin = compute(replace(EXAMPLE, margin=200, margin_unit="kr"))
+    assert kr_margin["value_per"] == 200.0 and kr_margin["a2"]["big"] == "20"   # ceil(3900/200)
+    # Unset margin keeps the "use your margin instead" note.
+    assert "use that instead" in compute(EXAMPLE)["a2"]["how"]
 
 
 # --- no-gap case -------------------------------------------------------------
@@ -82,7 +120,7 @@ def test_no_gap_when_human_costs_no_more():
 # --- budget boundaries -------------------------------------------------------
 
 def test_no_price_and_no_budget_prompt_for_the_missing_number():
-    assert compute(replace(EXAMPLE, price=0))["a2"]["text"] == "Add a price per ticket to see this."
+    assert compute(replace(EXAMPLE, price=0))["a2"]["text"] == "Add a value per ticket to see this."
     assert compute(replace(EXAMPLE, budget=0))["a1"]["text"] == "Add a media budget to see this."
     assert compute(replace(EXAMPLE, cpm=0))["a1"]["text"] == "Add a media budget to see this."
 
@@ -125,9 +163,41 @@ def test_golden_matches_current_python_output():
     # The committed golden (what the JS is tested against) still reflects Python.
     golden = json.loads((ROOT / "tests" / "golden" / "budget_check.json").read_text(encoding="utf-8"))
     for case in golden:
-        inp = Inputs(industry=case["input"]["industry"], goal_mode=case["input"]["goalMode"],
-                     goal=case["input"]["goal"], price=case["input"]["price"],
-                     budget=case["input"]["budget"], fmt=case["input"]["fmt"],
-                     human=case["input"]["human"], ai=case["input"]["ai"],
-                     reuse=case["input"]["reuse"], cpm=case["input"]["cpm"])
+        d = case["input"]
+        inp = Inputs(industry=d["industry"], goal_mode=d["goalMode"], goal=d["goal"],
+                     price=d["price"], budget=d["budget"], fmt=d["fmt"], human=d["human"],
+                     ai=d["ai"], reuse=d["reuse"], cpm=d["cpm"], margin=d.get("margin"),
+                     margin_unit=d.get("marginUnit", "kr"), other_noun=d.get("otherNoun"))
         assert compute(inp) == case["output"]
+
+
+# --- industry language: verb-neutral, noun isolated (item 6) -----------------
+
+_BANNED = ("buy", "buys", "buying", "bought", "sell", "sells", "selling", "sold",
+           "book", "books", "booked")
+
+
+@pytest.mark.parametrize("ind", [i["key"] for i in INDUSTRIES])
+@pytest.mark.parametrize("mode", ["target", "max"])
+def test_industry_copy_is_verb_neutral_and_noun_isolated(ind, mode):
+    other = "widget" if ind == "other" else None
+    r = compute(replace(EXAMPLE, industry=ind, goal_mode=mode, other_noun=other))
+    text = " ".join(_strings(r))
+    words = set(re.findall(r"[a-z]+(?:-[a-z]+)?", text.lower()))
+    assert not (words & set(_BANNED)), f"{ind}/{mode}: banned verb in {words & set(_BANNED)}"
+    # No other industry's noun leaks in (compare against this industry's own nouns).
+    my = {r["unit_one"], r["unit_many"]}
+    for other_ind in INDUSTRIES:
+        if other_ind["key"] == ind:
+            continue
+        for noun in (other_ind["one"], other_ind["many"]):
+            if noun in my:
+                continue
+            assert re.search(rf"\b{re.escape(noun)}\b", text) is None, f"{ind}: leaked '{noun}'"
+
+
+def test_other_industry_uses_the_free_text_noun():
+    r = compute(replace(EXAMPLE, industry="other", other_noun="signup", goal=5, budget=60000, reuse=1))
+    assert r["unit_one"] == "signup" and r["unit_many"] == "signups"
+    assert "more signups" in r["a2"]["text"]
+    assert compute(replace(EXAMPLE, industry="other"))["unit_one"] == "sale"   # default

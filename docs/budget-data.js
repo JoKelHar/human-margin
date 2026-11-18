@@ -3,40 +3,93 @@
 var HM_DATA = {
   "industries": [
     {
-      "key": "uteliv",
+      "key": "nightlife",
       "label": "Nightlife",
       "one": "ticket",
-      "many": "tickets"
+      "many": "tickets",
+      "price_label": "Price per ticket",
+      "hint": "Entry price, or average spend per guest"
     },
     {
       "key": "events",
       "label": "Events and concerts",
       "one": "ticket",
-      "many": "tickets"
+      "many": "tickets",
+      "price_label": "Price per ticket",
+      "hint": "Average ticket price"
+    },
+    {
+      "key": "culture",
+      "label": "Culture (theatre, museums, festivals)",
+      "one": "ticket",
+      "many": "tickets",
+      "price_label": "Price per ticket",
+      "hint": "Average ticket price"
     },
     {
       "key": "restaurant",
-      "label": "Restaurant",
+      "label": "Restaurant and café",
       "one": "booking",
-      "many": "bookings"
+      "many": "bookings",
+      "price_label": "Value per booking",
+      "hint": "Covers × average spend"
+    },
+    {
+      "key": "hotel",
+      "label": "Hotel and travel",
+      "one": "booking",
+      "many": "bookings",
+      "price_label": "Value per booking",
+      "hint": "Nights × average room rate"
     },
     {
       "key": "fitness",
-      "label": "Fitness",
+      "label": "Fitness and wellness",
       "one": "membership",
-      "many": "memberships"
+      "many": "memberships",
+      "price_label": "Value per membership",
+      "hint": "Monthly fee × months a member typically stays"
     },
     {
       "key": "beauty",
       "label": "Beauty and skincare",
       "one": "order",
-      "many": "orders"
+      "many": "orders",
+      "price_label": "Average order value",
+      "hint": ""
+    },
+    {
+      "key": "fashion",
+      "label": "Fashion and retail",
+      "one": "order",
+      "many": "orders",
+      "price_label": "Average order value",
+      "hint": ""
+    },
+    {
+      "key": "services",
+      "label": "Services (salon, clinic, trades)",
+      "one": "booking",
+      "many": "bookings",
+      "price_label": "Value per booking",
+      "hint": "Average job or appointment value"
+    },
+    {
+      "key": "courses",
+      "label": "Courses and education",
+      "one": "sign-up",
+      "many": "sign-ups",
+      "price_label": "Value per sign-up",
+      "hint": "Course price"
     },
     {
       "key": "other",
       "label": "Other",
       "one": "sale",
-      "many": "sales"
+      "many": "sales",
+      "price_label": "Value per sale",
+      "hint": "",
+      "free_noun": true
     }
   ],
   "formats": [
