@@ -9,11 +9,11 @@
 // in Node (module.exports) with no DOM.
 (function (root, factory) {
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = factory(require('./budget-data.js'));
+    module.exports = factory(require('./budget-data.js'), require('./budget-ai-data.js'));
   } else {
-    root.HMCore = factory(root.HM_DATA);
+    root.HMCore = factory(root.HM_DATA, root.HM_AI);
   }
-})(typeof self !== 'undefined' ? self : this, function (DATA) {
+})(typeof self !== 'undefined' ? self : this, function (DATA, AI) {
   var INDUSTRIES = DATA.industries, FORMATS = DATA.formats;
   var TYP_LO = DATA.typ_lo, TYP_HI = DATA.typ_hi, DEFAULT_CPM = DATA.default_cpm;
 
@@ -219,6 +219,59 @@
     };
   }
 
+  // --- "If you go AI" tool options (mirrors budget_check.ai_options) ---
+  var RULE_LABEL = { retouch_label: 'retouch label', misleading: 'misleading marketing', ai_act: 'EU AI Act' };
+  var VOICE_FORMATS = { video: 1, ugc: 1 };
+  var BADGE = { confirmed: 'Norwegian: confirmed', likely: 'Norwegian: likely', unverified: 'Norwegian: not confirmed' };
+  var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function checkedDisplay(iso) {
+    var p = String(iso).split('-');
+    return parseInt(p[2], 10) + ' ' + MONTHS[parseInt(p[1], 10) - 1] + ' ' + parseInt(p[0], 10);
+  }
+  function toolView(t, aiCost, rulesById) {
+    return {
+      name: t.name, price_nok: t.price_nok, price_text: 'about ' + kr(t.price_nok) + ' kr/month',
+      includes: t.includes || '', badge: BADGE[t.norwegian] || null, jurisdiction: t.jurisdiction || '',
+      billing_note: t.billing_note || '', pros: (t.pros || []).slice(), cons: (t.cons || []).slice(),
+      rules: (t.rules || []).map(function (r) {
+        return { id: r, label: RULE_LABEL[r] || r, text: (rulesById[r] || {}).text || '',
+          source: (rulesById[r] || {}).source || '' }; }),
+      fits: aiCost > 0 && t.price_nok <= aiCost, source: t.source || ''
+    };
+  }
+  function aiOptions(fmt, aiCost, todayISO) {
+    var data = AI, ucs = {}, i;
+    for (i = 0; i < data.use_cases.length; i++) ucs[data.use_cases[i].key] = data.use_cases[i];
+    var fmtLabel = fmt;
+    for (i = 0; i < FORMATS.length; i++) if (FORMATS[i].key === fmt) fmtLabel = FORMATS[i].label;
+
+    var rulesById = {};
+    (data.norway_rules || []).forEach(function (r) { rulesById[r.id] = r; });
+    var main = null;
+    for (i = 0; i < data.use_cases.length; i++) {
+      var uc = data.use_cases[i];
+      if (uc.key !== 'voice' && (uc.format_keys || []).indexOf(fmt) !== -1) { main = uc; break; }
+    }
+    var tools = (main ? main.tools : []).map(function (t) { return toolView(t, aiCost, rulesById); });
+    var voice = null;
+    if (VOICE_FORMATS[fmt] && ucs.voice) {
+      voice = { label: ucs.voice.label, tools: ucs.voice.tools.map(function (t) { return toolView(t, aiCost, rulesById); }) };
+    }
+    var fb = data.free_baseline || {};
+    var alts = (main && main.alternatives ? main.alternatives : []).map(function (a) {
+      return { name: a.name, price_text: 'about ' + kr(a.price_nok) + ' kr/month', note: a.note || '', source: a.source || '' };
+    });
+    return {
+      format: fmt, format_label: fmtLabel, use_case_label: main ? main.label : '',
+      card_note: (main && main.card_note) || '',
+      free_baseline: { name: fb.name || '', price: fb.price || '', note: fb.note || '', source: fb.source || '' },
+      tools: tools, voice: voice, alternatives: alts,
+      checked_display: data.checked ? checkedDisplay(data.checked) : '',
+      review_by: data.review_by || '',
+      stale: !!data.review_by && String(todayISO) > data.review_by
+    };
+  }
+
   // --- URL round-trip (numbers travel in the link; nothing is stored) ---
   var FIELDS = ['industry', 'goalMode', 'goal', 'price', 'budget', 'fmt', 'human', 'ai',
     'reuse', 'cpm', 'margin', 'marginUnit', 'otherNoun'];
@@ -239,7 +292,7 @@
     return out;
   }
 
-  return { compute: compute, kr: kr, num: num, toQuery: toQuery, fromQuery: fromQuery,
-    FIELDS: FIELDS, INDUSTRIES: INDUSTRIES, FORMATS: FORMATS,
+  return { compute: compute, aiOptions: aiOptions, kr: kr, num: num, toQuery: toQuery,
+    fromQuery: fromQuery, FIELDS: FIELDS, INDUSTRIES: INDUSTRIES, FORMATS: FORMATS,
     TYP_LO: TYP_LO, TYP_HI: TYP_HI, DEFAULT_CPM: DEFAULT_CPM };
 });

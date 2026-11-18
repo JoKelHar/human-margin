@@ -24,9 +24,15 @@ placeholders (see the assumptions register); the page and the copy label them so
 
 from __future__ import annotations
 
+import datetime as dt
 import math
 from dataclasses import dataclass
+from functools import lru_cache
+from pathlib import Path
 
+import yaml
+
+from ..config import repo_root
 from .formats import load_costs
 
 # Rough, non-Norwegian placeholders (flagged as assumptions in the register and on
@@ -377,4 +383,120 @@ def _answer_quote(human_blank, human, fmt):
         "blank": False, "low": low, "high": high, "human": human,
         "scale_max": scale_max, "pct_low": pct(low), "pct_high": pct(high), "pct_human": pct(human),
         "how": how,
+    }
+
+
+# --- "If you go AI" tool options (data/ai_tools.yaml) ------------------------
+# Positions only: tools are listed in price order, with no affiliate links and no
+# paid placement. The YAML is the single source; the JS data is generated from it.
+
+_RULE_LABEL = {"retouch_label": "retouch label", "misleading": "misleading marketing",
+               "ai_act": "EU AI Act"}
+# The voice-over row is shown only for video and UGC (brief), not for every format
+# the YAML lists it under.
+_VOICE_FORMATS = ("video", "ugc")
+_BADGE = {"confirmed": "Norwegian: confirmed", "likely": "Norwegian: likely",
+          "unverified": "Norwegian: not confirmed"}
+
+
+@lru_cache(maxsize=2)
+def load_ai_tools(path: str | None = None) -> dict:
+    p = Path(path) if path else repo_root() / "data" / "ai_tools.yaml"
+    data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
+    # PyYAML parses bare YYYY-MM-DD as date objects; normalise to ISO strings so the
+    # data is JSON-serialisable (for the JS) and comparisons are plain strings.
+    for k in ("checked", "review_by"):
+        if isinstance(data.get(k), (dt.date, dt.datetime)):
+            data[k] = data[k].isoformat()[:10]
+    _validate_ai_tools(data)
+    return data
+
+
+_TOOL_REQUIRED = ("name", "tier", "price_usd", "price_nok", "norwegian", "source")
+
+
+def _validate_ai_tools(data: dict) -> None:
+    """Fail loudly (so the build fails) if the shortlist is malformed: every tool has
+    the required fields and every pros/cons item is a plain string (a stray ': ' makes
+    PyYAML parse a list item as a mapping, which rendered as '[object Object]')."""
+    for uc in data.get("use_cases", []):
+        for t in uc.get("tools", []):
+            missing = [k for k in _TOOL_REQUIRED if k not in t]
+            if missing:
+                raise ValueError(f"ai_tools: tool {t.get('name', '?')!r} missing {missing}")
+            for field in ("pros", "cons"):
+                for item in t.get(field, []):
+                    if not isinstance(item, str):
+                        raise ValueError(
+                            f"ai_tools: {t['name']!r} {field} item is not a string: {item!r} "
+                            f"(quote it or avoid a bare ': ' in the YAML)")
+
+
+_MONTHS = ("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+           "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+
+def _checked_display(iso: str) -> str:
+    d = dt.date.fromisoformat(iso)
+    return f"{d.day} {_MONTHS[d.month - 1]} {d.year}"
+
+
+def _tool_view(t: dict, ai_cost: float, rules_by_id: dict) -> dict:
+    return {
+        "name": t["name"],
+        "price_nok": t["price_nok"],
+        "price_text": f"about {kr(t['price_nok'])} kr/month",
+        "includes": t.get("includes", ""),
+        "badge": _BADGE.get(t.get("norwegian")),         # None for n/a
+        "jurisdiction": t.get("jurisdiction", ""),
+        "billing_note": t.get("billing_note", ""),
+        "pros": list(t.get("pros", [])),
+        "cons": list(t.get("cons", [])),
+        # Each rule carries its one-line label plus the full text, so the per-tool
+        # "Norway: ..." line expands in place (no separate block at the top of the card).
+        "rules": [{"id": r, "label": _RULE_LABEL.get(r, r),
+                   "text": rules_by_id.get(r, {}).get("text", ""),
+                   "source": rules_by_id.get(r, {}).get("source", "")}
+                  for r in t.get("rules", [])],
+        "fits": ai_cost > 0 and t["price_nok"] <= ai_cost,
+        "source": t.get("source", ""),
+    }
+
+
+def ai_options(fmt: str, ai_cost: float = 0.0, today: dt.date | None = None,
+               data: dict | None = None) -> dict:
+    """The "AI options for <format>" card: the tools for one creative format in price
+    order, the Norwegian voice-over options for video/UGC, the free baseline, the
+    Norway rules those tools point to, and the prices-checked footer."""
+    data = data or load_ai_tools()
+    today = today or dt.date.today()
+    ucs = {uc["key"]: uc for uc in data.get("use_cases", [])}
+    fmt_label = next((f["label"] for f in formats() if f["key"] == fmt), fmt)
+
+    rules_by_id = {r["id"]: r for r in data.get("norway_rules", [])}
+    main = next((uc for uc in data.get("use_cases", [])
+                 if uc["key"] != "voice" and fmt in uc.get("format_keys", [])), None)
+    tools = [_tool_view(t, ai_cost, rules_by_id) for t in (main["tools"] if main else [])]
+
+    voice = None
+    if fmt in _VOICE_FORMATS and "voice" in ucs:
+        voice = {"label": ucs["voice"]["label"],
+                 "tools": [_tool_view(t, ai_cost, rules_by_id) for t in ucs["voice"]["tools"]]}
+
+    fb = data.get("free_baseline", {})
+    review_by = data.get("review_by", "")
+    return {
+        "format": fmt, "format_label": fmt_label,
+        "use_case_label": main["label"] if main else "",
+        "card_note": (main or {}).get("card_note", ""),
+        "free_baseline": {"name": fb.get("name", ""), "price": fb.get("price", ""),
+                          "note": fb.get("note", ""), "source": fb.get("source", "")},
+        "tools": tools,
+        "voice": voice,
+        "alternatives": [{"name": a["name"], "price_text": f"about {kr(a['price_nok'])} kr/month",
+                          "note": a.get("note", ""), "source": a.get("source", "")}
+                         for a in (main.get("alternatives", []) if main else [])],
+        "checked_display": _checked_display(data.get("checked", "")) if data.get("checked") else "",
+        "review_by": review_by,
+        "stale": bool(review_by) and today.isoformat() > review_by,
     }

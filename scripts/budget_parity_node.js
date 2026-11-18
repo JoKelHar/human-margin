@@ -12,6 +12,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const core = require(path.join(ROOT, 'web', 'budget-core.js'));
 const golden = require(path.join(ROOT, 'tests', 'golden', 'budget_check.json'));
+const aiGolden = require(path.join(ROOT, 'tests', 'golden', 'ai_options.json'));
 
 function sort(o) {
   if (Array.isArray(o)) return o.map(sort);
@@ -47,9 +48,21 @@ for (const c of golden) {
   }
 }
 
-if (parityFails || roundtripFails) {
+let aiFails = 0;
+for (const c of aiGolden) {
+  const got = core.aiOptions(c.input.fmt, c.input.ai_cost, c.input.today);
+  if (!eq(got, c.output)) {
+    aiFails++;
+    if (show.length < 3) show.push('AI ' + JSON.stringify(c.input) +
+      '\n  JS=' + JSON.stringify(got).slice(0, 200) + '\n  PY=' + JSON.stringify(c.output).slice(0, 200));
+  }
+}
+
+if (parityFails || roundtripFails || aiFails) {
   console.error(show.join('\n'));
-  console.error('FAIL: ' + parityFails + ' parity, ' + roundtripFails + ' round-trip, of ' + golden.length);
+  console.error('FAIL: ' + parityFails + ' parity, ' + roundtripFails + ' round-trip, ' +
+    aiFails + ' ai-options, of ' + golden.length + '/' + aiGolden.length);
   process.exit(1);
 }
-console.log('OK: ' + golden.length + ' cases - JS matches Python golden, URL round-trip stable.');
+console.log('OK: ' + golden.length + ' answer + ' + aiGolden.length +
+  ' ai-options cases - JS matches Python golden, URL round-trip stable.');

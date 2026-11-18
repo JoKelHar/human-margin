@@ -1,0 +1,3158 @@
+[
+  {
+    "input": {
+      "fmt": "static",
+      "ai_cost": 0,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "static",
+      "format_label": "Static image",
+      "use_case_label": "Static images and social graphics",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Adobe Firefly Standard",
+          "price_nok": 110,
+          "price_text": "about 110 kr/month",
+          "includes": "2 000 generative credits/month; Firefly web and mobile; partner models (Google, OpenAI, Flux).",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Adobe's own models are built for commercial use",
+            "Cheapest serious entry point"
+          ],
+          "cons": [
+            "No layout or templates; you still need a design tool",
+            "IP indemnity is enterprise-only; partner-model output is your responsibility"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        },
+        {
+          "name": "Canva Pro",
+          "price_nok": 190,
+          "price_text": "about 190 kr/month",
+          "includes": "Templates, brand kit, 500 Magic Studio AI credits/month (shared across all AI features).",
+          "badge": null,
+          "jurisdiction": "Australia (Canva)",
+          "billing_note": "",
+          "pros": [
+            "Layout, text and AI in one place; easy for non-designers",
+            "Fast to resize for every placement"
+          ],
+          "cons": [
+            "The most common source of generic, template-looking ads",
+            "AI credits are shared and run out; no top-ups on Pro"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://piktochart.com/blog/canva-pricing-2026-costs-raised/"
+        },
+        {
+          "name": "Midjourney Pro",
+          "price_nok": 650,
+          "price_text": "about 650 kr/month",
+          "includes": "30 fast GPU hours, unlimited relaxed; stealth mode (images kept out of the public gallery).",
+          "badge": null,
+          "jurisdiction": "US (Midjourney)",
+          "billing_note": "",
+          "pros": [
+            "Strongest image quality and style control of the three",
+            "Stealth mode keeps campaign work private before launch"
+          ],
+          "cons": [
+            "Images only — no layout, and text handling is weak",
+            "Below Pro, everything you make is publicly visible",
+            "Commercial licence covers companies under USD 1M revenue; larger need Mega"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://fluxnote.io/guides/midjourney-pricing-2026"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "static",
+      "ai_cost": 0,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "static",
+      "format_label": "Static image",
+      "use_case_label": "Static images and social graphics",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Adobe Firefly Standard",
+          "price_nok": 110,
+          "price_text": "about 110 kr/month",
+          "includes": "2 000 generative credits/month; Firefly web and mobile; partner models (Google, OpenAI, Flux).",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Adobe's own models are built for commercial use",
+            "Cheapest serious entry point"
+          ],
+          "cons": [
+            "No layout or templates; you still need a design tool",
+            "IP indemnity is enterprise-only; partner-model output is your responsibility"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        },
+        {
+          "name": "Canva Pro",
+          "price_nok": 190,
+          "price_text": "about 190 kr/month",
+          "includes": "Templates, brand kit, 500 Magic Studio AI credits/month (shared across all AI features).",
+          "badge": null,
+          "jurisdiction": "Australia (Canva)",
+          "billing_note": "",
+          "pros": [
+            "Layout, text and AI in one place; easy for non-designers",
+            "Fast to resize for every placement"
+          ],
+          "cons": [
+            "The most common source of generic, template-looking ads",
+            "AI credits are shared and run out; no top-ups on Pro"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://piktochart.com/blog/canva-pricing-2026-costs-raised/"
+        },
+        {
+          "name": "Midjourney Pro",
+          "price_nok": 650,
+          "price_text": "about 650 kr/month",
+          "includes": "30 fast GPU hours, unlimited relaxed; stealth mode (images kept out of the public gallery).",
+          "badge": null,
+          "jurisdiction": "US (Midjourney)",
+          "billing_note": "",
+          "pros": [
+            "Strongest image quality and style control of the three",
+            "Stealth mode keeps campaign work private before launch"
+          ],
+          "cons": [
+            "Images only — no layout, and text handling is weak",
+            "Below Pro, everything you make is publicly visible",
+            "Commercial licence covers companies under USD 1M revenue; larger need Mega"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://fluxnote.io/guides/midjourney-pricing-2026"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "static",
+      "ai_cost": 300,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "static",
+      "format_label": "Static image",
+      "use_case_label": "Static images and social graphics",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Adobe Firefly Standard",
+          "price_nok": 110,
+          "price_text": "about 110 kr/month",
+          "includes": "2 000 generative credits/month; Firefly web and mobile; partner models (Google, OpenAI, Flux).",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Adobe's own models are built for commercial use",
+            "Cheapest serious entry point"
+          ],
+          "cons": [
+            "No layout or templates; you still need a design tool",
+            "IP indemnity is enterprise-only; partner-model output is your responsibility"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        },
+        {
+          "name": "Canva Pro",
+          "price_nok": 190,
+          "price_text": "about 190 kr/month",
+          "includes": "Templates, brand kit, 500 Magic Studio AI credits/month (shared across all AI features).",
+          "badge": null,
+          "jurisdiction": "Australia (Canva)",
+          "billing_note": "",
+          "pros": [
+            "Layout, text and AI in one place; easy for non-designers",
+            "Fast to resize for every placement"
+          ],
+          "cons": [
+            "The most common source of generic, template-looking ads",
+            "AI credits are shared and run out; no top-ups on Pro"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://piktochart.com/blog/canva-pricing-2026-costs-raised/"
+        },
+        {
+          "name": "Midjourney Pro",
+          "price_nok": 650,
+          "price_text": "about 650 kr/month",
+          "includes": "30 fast GPU hours, unlimited relaxed; stealth mode (images kept out of the public gallery).",
+          "badge": null,
+          "jurisdiction": "US (Midjourney)",
+          "billing_note": "",
+          "pros": [
+            "Strongest image quality and style control of the three",
+            "Stealth mode keeps campaign work private before launch"
+          ],
+          "cons": [
+            "Images only — no layout, and text handling is weak",
+            "Below Pro, everything you make is publicly visible",
+            "Commercial licence covers companies under USD 1M revenue; larger need Mega"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://fluxnote.io/guides/midjourney-pricing-2026"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "static",
+      "ai_cost": 300,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "static",
+      "format_label": "Static image",
+      "use_case_label": "Static images and social graphics",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Adobe Firefly Standard",
+          "price_nok": 110,
+          "price_text": "about 110 kr/month",
+          "includes": "2 000 generative credits/month; Firefly web and mobile; partner models (Google, OpenAI, Flux).",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Adobe's own models are built for commercial use",
+            "Cheapest serious entry point"
+          ],
+          "cons": [
+            "No layout or templates; you still need a design tool",
+            "IP indemnity is enterprise-only; partner-model output is your responsibility"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        },
+        {
+          "name": "Canva Pro",
+          "price_nok": 190,
+          "price_text": "about 190 kr/month",
+          "includes": "Templates, brand kit, 500 Magic Studio AI credits/month (shared across all AI features).",
+          "badge": null,
+          "jurisdiction": "Australia (Canva)",
+          "billing_note": "",
+          "pros": [
+            "Layout, text and AI in one place; easy for non-designers",
+            "Fast to resize for every placement"
+          ],
+          "cons": [
+            "The most common source of generic, template-looking ads",
+            "AI credits are shared and run out; no top-ups on Pro"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://piktochart.com/blog/canva-pricing-2026-costs-raised/"
+        },
+        {
+          "name": "Midjourney Pro",
+          "price_nok": 650,
+          "price_text": "about 650 kr/month",
+          "includes": "30 fast GPU hours, unlimited relaxed; stealth mode (images kept out of the public gallery).",
+          "badge": null,
+          "jurisdiction": "US (Midjourney)",
+          "billing_note": "",
+          "pros": [
+            "Strongest image quality and style control of the three",
+            "Stealth mode keeps campaign work private before launch"
+          ],
+          "cons": [
+            "Images only — no layout, and text handling is weak",
+            "Below Pro, everything you make is publicly visible",
+            "Commercial licence covers companies under USD 1M revenue; larger need Mega"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://fluxnote.io/guides/midjourney-pricing-2026"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "static",
+      "ai_cost": 2000,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "static",
+      "format_label": "Static image",
+      "use_case_label": "Static images and social graphics",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Adobe Firefly Standard",
+          "price_nok": 110,
+          "price_text": "about 110 kr/month",
+          "includes": "2 000 generative credits/month; Firefly web and mobile; partner models (Google, OpenAI, Flux).",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Adobe's own models are built for commercial use",
+            "Cheapest serious entry point"
+          ],
+          "cons": [
+            "No layout or templates; you still need a design tool",
+            "IP indemnity is enterprise-only; partner-model output is your responsibility"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        },
+        {
+          "name": "Canva Pro",
+          "price_nok": 190,
+          "price_text": "about 190 kr/month",
+          "includes": "Templates, brand kit, 500 Magic Studio AI credits/month (shared across all AI features).",
+          "badge": null,
+          "jurisdiction": "Australia (Canva)",
+          "billing_note": "",
+          "pros": [
+            "Layout, text and AI in one place; easy for non-designers",
+            "Fast to resize for every placement"
+          ],
+          "cons": [
+            "The most common source of generic, template-looking ads",
+            "AI credits are shared and run out; no top-ups on Pro"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://piktochart.com/blog/canva-pricing-2026-costs-raised/"
+        },
+        {
+          "name": "Midjourney Pro",
+          "price_nok": 650,
+          "price_text": "about 650 kr/month",
+          "includes": "30 fast GPU hours, unlimited relaxed; stealth mode (images kept out of the public gallery).",
+          "badge": null,
+          "jurisdiction": "US (Midjourney)",
+          "billing_note": "",
+          "pros": [
+            "Strongest image quality and style control of the three",
+            "Stealth mode keeps campaign work private before launch"
+          ],
+          "cons": [
+            "Images only — no layout, and text handling is weak",
+            "Below Pro, everything you make is publicly visible",
+            "Commercial licence covers companies under USD 1M revenue; larger need Mega"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://fluxnote.io/guides/midjourney-pricing-2026"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "static",
+      "ai_cost": 2000,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "static",
+      "format_label": "Static image",
+      "use_case_label": "Static images and social graphics",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Adobe Firefly Standard",
+          "price_nok": 110,
+          "price_text": "about 110 kr/month",
+          "includes": "2 000 generative credits/month; Firefly web and mobile; partner models (Google, OpenAI, Flux).",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Adobe's own models are built for commercial use",
+            "Cheapest serious entry point"
+          ],
+          "cons": [
+            "No layout or templates; you still need a design tool",
+            "IP indemnity is enterprise-only; partner-model output is your responsibility"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        },
+        {
+          "name": "Canva Pro",
+          "price_nok": 190,
+          "price_text": "about 190 kr/month",
+          "includes": "Templates, brand kit, 500 Magic Studio AI credits/month (shared across all AI features).",
+          "badge": null,
+          "jurisdiction": "Australia (Canva)",
+          "billing_note": "",
+          "pros": [
+            "Layout, text and AI in one place; easy for non-designers",
+            "Fast to resize for every placement"
+          ],
+          "cons": [
+            "The most common source of generic, template-looking ads",
+            "AI credits are shared and run out; no top-ups on Pro"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://piktochart.com/blog/canva-pricing-2026-costs-raised/"
+        },
+        {
+          "name": "Midjourney Pro",
+          "price_nok": 650,
+          "price_text": "about 650 kr/month",
+          "includes": "30 fast GPU hours, unlimited relaxed; stealth mode (images kept out of the public gallery).",
+          "badge": null,
+          "jurisdiction": "US (Midjourney)",
+          "billing_note": "",
+          "pros": [
+            "Strongest image quality and style control of the three",
+            "Stealth mode keeps campaign work private before launch"
+          ],
+          "cons": [
+            "Images only — no layout, and text handling is weak",
+            "Below Pro, everything you make is publicly visible",
+            "Commercial licence covers companies under USD 1M revenue; larger need Mega"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://fluxnote.io/guides/midjourney-pricing-2026"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "video",
+      "ai_cost": 0,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "video",
+      "format_label": "Short video",
+      "use_case_label": "Short video (b-roll, product motion, scenes)",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Kling Standard",
+          "price_nok": 100,
+          "price_text": "about 100 kr/month",
+          "includes": "660 credits/month, no watermark, commercial use. About 1-2 usable 10-second 1080p clips with sound.",
+          "badge": null,
+          "jurisdiction": "China (Kuaishou)",
+          "billing_note": "",
+          "pros": [
+            "Cheapest way to get good motion with sound",
+            "Commercial use on all paid plans"
+          ],
+          "cons": [
+            "Default terms let Kling train on your inputs (opt out by email)",
+            "Data held outside the EEA; check before uploading client material"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://voyager.so/blog/kling-ai-pricing"
+        },
+        {
+          "name": "Runway Pro",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "2 250 credits/month, about 3 minutes of Gen-4.5 or 7.5 minutes of Gen-4 Turbo, no watermark.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "28 USD/month billed yearly",
+          "pros": [
+            "Mature editing tools around generation (extend, inpaint, restyle)",
+            "Predictable credit maths"
+          ],
+          "cons": [
+            "Unlimited mode ended September 2026; heavy use now costs more",
+            "No audio generation in the plan figures above"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        },
+        {
+          "name": "Runway Max",
+          "price_nok": 1030,
+          "price_text": "about 1 030 kr/month",
+          "includes": "9 500 credits/month with one month of rollover, about 13 minutes of Gen-4.5.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "76 USD/month billed yearly",
+          "pros": [
+            "Enough volume to test several cuts per campaign",
+            "Credits roll over one month"
+          ],
+          "cons": [
+            "At this price, a real shoot day starts to compete",
+            "No unlimited relaxed mode any more"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "name": "Google Flow (Veo 3.1) via Google AI Pro",
+          "price_text": "about 220 kr/month",
+          "note": "1 000 extra Flow credits/month (about 10 high-quality 8-second clips with audio). Availability of Flow in Norway not confirmed: check before paying.",
+          "source": "https://toyboxai.io/blog/veo-3-pricing/"
+        }
+      ],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "video",
+      "ai_cost": 0,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "video",
+      "format_label": "Short video",
+      "use_case_label": "Short video (b-roll, product motion, scenes)",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Kling Standard",
+          "price_nok": 100,
+          "price_text": "about 100 kr/month",
+          "includes": "660 credits/month, no watermark, commercial use. About 1-2 usable 10-second 1080p clips with sound.",
+          "badge": null,
+          "jurisdiction": "China (Kuaishou)",
+          "billing_note": "",
+          "pros": [
+            "Cheapest way to get good motion with sound",
+            "Commercial use on all paid plans"
+          ],
+          "cons": [
+            "Default terms let Kling train on your inputs (opt out by email)",
+            "Data held outside the EEA; check before uploading client material"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://voyager.so/blog/kling-ai-pricing"
+        },
+        {
+          "name": "Runway Pro",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "2 250 credits/month, about 3 minutes of Gen-4.5 or 7.5 minutes of Gen-4 Turbo, no watermark.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "28 USD/month billed yearly",
+          "pros": [
+            "Mature editing tools around generation (extend, inpaint, restyle)",
+            "Predictable credit maths"
+          ],
+          "cons": [
+            "Unlimited mode ended September 2026; heavy use now costs more",
+            "No audio generation in the plan figures above"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        },
+        {
+          "name": "Runway Max",
+          "price_nok": 1030,
+          "price_text": "about 1 030 kr/month",
+          "includes": "9 500 credits/month with one month of rollover, about 13 minutes of Gen-4.5.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "76 USD/month billed yearly",
+          "pros": [
+            "Enough volume to test several cuts per campaign",
+            "Credits roll over one month"
+          ],
+          "cons": [
+            "At this price, a real shoot day starts to compete",
+            "No unlimited relaxed mode any more"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "name": "Google Flow (Veo 3.1) via Google AI Pro",
+          "price_text": "about 220 kr/month",
+          "note": "1 000 extra Flow credits/month (about 10 high-quality 8-second clips with audio). Availability of Flow in Norway not confirmed: check before paying.",
+          "source": "https://toyboxai.io/blog/veo-3-pricing/"
+        }
+      ],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "video",
+      "ai_cost": 300,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "video",
+      "format_label": "Short video",
+      "use_case_label": "Short video (b-roll, product motion, scenes)",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Kling Standard",
+          "price_nok": 100,
+          "price_text": "about 100 kr/month",
+          "includes": "660 credits/month, no watermark, commercial use. About 1-2 usable 10-second 1080p clips with sound.",
+          "badge": null,
+          "jurisdiction": "China (Kuaishou)",
+          "billing_note": "",
+          "pros": [
+            "Cheapest way to get good motion with sound",
+            "Commercial use on all paid plans"
+          ],
+          "cons": [
+            "Default terms let Kling train on your inputs (opt out by email)",
+            "Data held outside the EEA; check before uploading client material"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://voyager.so/blog/kling-ai-pricing"
+        },
+        {
+          "name": "Runway Pro",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "2 250 credits/month, about 3 minutes of Gen-4.5 or 7.5 minutes of Gen-4 Turbo, no watermark.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "28 USD/month billed yearly",
+          "pros": [
+            "Mature editing tools around generation (extend, inpaint, restyle)",
+            "Predictable credit maths"
+          ],
+          "cons": [
+            "Unlimited mode ended September 2026; heavy use now costs more",
+            "No audio generation in the plan figures above"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        },
+        {
+          "name": "Runway Max",
+          "price_nok": 1030,
+          "price_text": "about 1 030 kr/month",
+          "includes": "9 500 credits/month with one month of rollover, about 13 minutes of Gen-4.5.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "76 USD/month billed yearly",
+          "pros": [
+            "Enough volume to test several cuts per campaign",
+            "Credits roll over one month"
+          ],
+          "cons": [
+            "At this price, a real shoot day starts to compete",
+            "No unlimited relaxed mode any more"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "name": "Google Flow (Veo 3.1) via Google AI Pro",
+          "price_text": "about 220 kr/month",
+          "note": "1 000 extra Flow credits/month (about 10 high-quality 8-second clips with audio). Availability of Flow in Norway not confirmed: check before paying.",
+          "source": "https://toyboxai.io/blog/veo-3-pricing/"
+        }
+      ],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "video",
+      "ai_cost": 300,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "video",
+      "format_label": "Short video",
+      "use_case_label": "Short video (b-roll, product motion, scenes)",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Kling Standard",
+          "price_nok": 100,
+          "price_text": "about 100 kr/month",
+          "includes": "660 credits/month, no watermark, commercial use. About 1-2 usable 10-second 1080p clips with sound.",
+          "badge": null,
+          "jurisdiction": "China (Kuaishou)",
+          "billing_note": "",
+          "pros": [
+            "Cheapest way to get good motion with sound",
+            "Commercial use on all paid plans"
+          ],
+          "cons": [
+            "Default terms let Kling train on your inputs (opt out by email)",
+            "Data held outside the EEA; check before uploading client material"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://voyager.so/blog/kling-ai-pricing"
+        },
+        {
+          "name": "Runway Pro",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "2 250 credits/month, about 3 minutes of Gen-4.5 or 7.5 minutes of Gen-4 Turbo, no watermark.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "28 USD/month billed yearly",
+          "pros": [
+            "Mature editing tools around generation (extend, inpaint, restyle)",
+            "Predictable credit maths"
+          ],
+          "cons": [
+            "Unlimited mode ended September 2026; heavy use now costs more",
+            "No audio generation in the plan figures above"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        },
+        {
+          "name": "Runway Max",
+          "price_nok": 1030,
+          "price_text": "about 1 030 kr/month",
+          "includes": "9 500 credits/month with one month of rollover, about 13 minutes of Gen-4.5.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "76 USD/month billed yearly",
+          "pros": [
+            "Enough volume to test several cuts per campaign",
+            "Credits roll over one month"
+          ],
+          "cons": [
+            "At this price, a real shoot day starts to compete",
+            "No unlimited relaxed mode any more"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "name": "Google Flow (Veo 3.1) via Google AI Pro",
+          "price_text": "about 220 kr/month",
+          "note": "1 000 extra Flow credits/month (about 10 high-quality 8-second clips with audio). Availability of Flow in Norway not confirmed: check before paying.",
+          "source": "https://toyboxai.io/blog/veo-3-pricing/"
+        }
+      ],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "video",
+      "ai_cost": 2000,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "video",
+      "format_label": "Short video",
+      "use_case_label": "Short video (b-roll, product motion, scenes)",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Kling Standard",
+          "price_nok": 100,
+          "price_text": "about 100 kr/month",
+          "includes": "660 credits/month, no watermark, commercial use. About 1-2 usable 10-second 1080p clips with sound.",
+          "badge": null,
+          "jurisdiction": "China (Kuaishou)",
+          "billing_note": "",
+          "pros": [
+            "Cheapest way to get good motion with sound",
+            "Commercial use on all paid plans"
+          ],
+          "cons": [
+            "Default terms let Kling train on your inputs (opt out by email)",
+            "Data held outside the EEA; check before uploading client material"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://voyager.so/blog/kling-ai-pricing"
+        },
+        {
+          "name": "Runway Pro",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "2 250 credits/month, about 3 minutes of Gen-4.5 or 7.5 minutes of Gen-4 Turbo, no watermark.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "28 USD/month billed yearly",
+          "pros": [
+            "Mature editing tools around generation (extend, inpaint, restyle)",
+            "Predictable credit maths"
+          ],
+          "cons": [
+            "Unlimited mode ended September 2026; heavy use now costs more",
+            "No audio generation in the plan figures above"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        },
+        {
+          "name": "Runway Max",
+          "price_nok": 1030,
+          "price_text": "about 1 030 kr/month",
+          "includes": "9 500 credits/month with one month of rollover, about 13 minutes of Gen-4.5.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "76 USD/month billed yearly",
+          "pros": [
+            "Enough volume to test several cuts per campaign",
+            "Credits roll over one month"
+          ],
+          "cons": [
+            "At this price, a real shoot day starts to compete",
+            "No unlimited relaxed mode any more"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "name": "Google Flow (Veo 3.1) via Google AI Pro",
+          "price_text": "about 220 kr/month",
+          "note": "1 000 extra Flow credits/month (about 10 high-quality 8-second clips with audio). Availability of Flow in Norway not confirmed: check before paying.",
+          "source": "https://toyboxai.io/blog/veo-3-pricing/"
+        }
+      ],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "video",
+      "ai_cost": 2000,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "video",
+      "format_label": "Short video",
+      "use_case_label": "Short video (b-roll, product motion, scenes)",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Kling Standard",
+          "price_nok": 100,
+          "price_text": "about 100 kr/month",
+          "includes": "660 credits/month, no watermark, commercial use. About 1-2 usable 10-second 1080p clips with sound.",
+          "badge": null,
+          "jurisdiction": "China (Kuaishou)",
+          "billing_note": "",
+          "pros": [
+            "Cheapest way to get good motion with sound",
+            "Commercial use on all paid plans"
+          ],
+          "cons": [
+            "Default terms let Kling train on your inputs (opt out by email)",
+            "Data held outside the EEA; check before uploading client material"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://voyager.so/blog/kling-ai-pricing"
+        },
+        {
+          "name": "Runway Pro",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "2 250 credits/month, about 3 minutes of Gen-4.5 or 7.5 minutes of Gen-4 Turbo, no watermark.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "28 USD/month billed yearly",
+          "pros": [
+            "Mature editing tools around generation (extend, inpaint, restyle)",
+            "Predictable credit maths"
+          ],
+          "cons": [
+            "Unlimited mode ended September 2026; heavy use now costs more",
+            "No audio generation in the plan figures above"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        },
+        {
+          "name": "Runway Max",
+          "price_nok": 1030,
+          "price_text": "about 1 030 kr/month",
+          "includes": "9 500 credits/month with one month of rollover, about 13 minutes of Gen-4.5.",
+          "badge": null,
+          "jurisdiction": "US (Runway)",
+          "billing_note": "76 USD/month billed yearly",
+          "pros": [
+            "Enough volume to test several cuts per campaign",
+            "Credits roll over one month"
+          ],
+          "cons": [
+            "At this price, a real shoot day starts to compete",
+            "No unlimited relaxed mode any more"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://omidsaffari.com/blog/runway-pricing"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "name": "Google Flow (Veo 3.1) via Google AI Pro",
+          "price_text": "about 220 kr/month",
+          "note": "1 000 extra Flow credits/month (about 10 high-quality 8-second clips with audio). Availability of Flow in Norway not confirmed: check before paying.",
+          "source": "https://toyboxai.io/blog/veo-3-pricing/"
+        }
+      ],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "ai_cost": 0,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "ugc",
+      "format_label": "Creator (UGC)",
+      "use_case_label": "Creator-style talking head (AI presenter or actor)",
+      "card_note": "Presenting an AI actor as a real customer can be misleading marketing in Norway. Use AI presenters as presenters, not as fake testimonials.",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "HeyGen Creator",
+          "price_nok": 310,
+          "price_text": "about 310 kr/month",
+          "includes": "600 credits/month (about 12 minutes of Avatar V), 1080p, no watermark, custom avatar with your own voice.",
+          "badge": "Norwegian: confirmed",
+          "jurisdiction": "US (HeyGen)",
+          "billing_note": "",
+          "pros": [
+            "Norwegian voices listed in vendor docs",
+            "Can clone your own face and voice for founder-led ads"
+          ],
+          "cons": [
+            "Stock avatars read as presenters, not real creators",
+            "Credits go quickly at ad-testing volume"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://help.heygen.com/en/articles/11391932-voice-languages-we-support"
+        },
+        {
+          "name": "Synthesia Creator",
+          "price_nok": 960,
+          "price_text": "about 960 kr/month",
+          "includes": "3 600 credits/month, up to 30 minutes of video, 1-click translation.",
+          "badge": "Norwegian: likely",
+          "jurisdiction": "UK (London), GDPR data processing agreement",
+          "billing_note": "67 USD/month billed yearly",
+          "pros": [
+            "European company with a standard DPA; easiest to clear with a client",
+            "Polished, reliable output"
+          ],
+          "cons": [
+            "Corporate presenter look; weak for native-feeling social ads",
+            "Norwegian voices not confirmed in docs we could read — test first"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://fluxnote.io/guides/synthesia-pricing-2026"
+        },
+        {
+          "name": "Arcads Starter",
+          "price_nok": 1190,
+          "price_text": "about 1 190 kr/month",
+          "includes": "10 videos/month from a library of 1 000+ AI actors (about 120 kr per finished video).",
+          "badge": "Norwegian: not confirmed",
+          "jurisdiction": "not verified",
+          "billing_note": "",
+          "pros": [
+            "Most realistic UGC-style actors of the three",
+            "Built for testing many hooks"
+          ],
+          "cons": [
+            "Norwegian speech not confirmed — test before paying",
+            "No free trial; 10 videos is a hard cap",
+            "Realism raises the fake-testimonial risk in Norway"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/best-ai-ugc-ad-tools-2026"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "ai_cost": 0,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "ugc",
+      "format_label": "Creator (UGC)",
+      "use_case_label": "Creator-style talking head (AI presenter or actor)",
+      "card_note": "Presenting an AI actor as a real customer can be misleading marketing in Norway. Use AI presenters as presenters, not as fake testimonials.",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "HeyGen Creator",
+          "price_nok": 310,
+          "price_text": "about 310 kr/month",
+          "includes": "600 credits/month (about 12 minutes of Avatar V), 1080p, no watermark, custom avatar with your own voice.",
+          "badge": "Norwegian: confirmed",
+          "jurisdiction": "US (HeyGen)",
+          "billing_note": "",
+          "pros": [
+            "Norwegian voices listed in vendor docs",
+            "Can clone your own face and voice for founder-led ads"
+          ],
+          "cons": [
+            "Stock avatars read as presenters, not real creators",
+            "Credits go quickly at ad-testing volume"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://help.heygen.com/en/articles/11391932-voice-languages-we-support"
+        },
+        {
+          "name": "Synthesia Creator",
+          "price_nok": 960,
+          "price_text": "about 960 kr/month",
+          "includes": "3 600 credits/month, up to 30 minutes of video, 1-click translation.",
+          "badge": "Norwegian: likely",
+          "jurisdiction": "UK (London), GDPR data processing agreement",
+          "billing_note": "67 USD/month billed yearly",
+          "pros": [
+            "European company with a standard DPA; easiest to clear with a client",
+            "Polished, reliable output"
+          ],
+          "cons": [
+            "Corporate presenter look; weak for native-feeling social ads",
+            "Norwegian voices not confirmed in docs we could read — test first"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://fluxnote.io/guides/synthesia-pricing-2026"
+        },
+        {
+          "name": "Arcads Starter",
+          "price_nok": 1190,
+          "price_text": "about 1 190 kr/month",
+          "includes": "10 videos/month from a library of 1 000+ AI actors (about 120 kr per finished video).",
+          "badge": "Norwegian: not confirmed",
+          "jurisdiction": "not verified",
+          "billing_note": "",
+          "pros": [
+            "Most realistic UGC-style actors of the three",
+            "Built for testing many hooks"
+          ],
+          "cons": [
+            "Norwegian speech not confirmed — test before paying",
+            "No free trial; 10 videos is a hard cap",
+            "Realism raises the fake-testimonial risk in Norway"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/best-ai-ugc-ad-tools-2026"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "ai_cost": 300,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "ugc",
+      "format_label": "Creator (UGC)",
+      "use_case_label": "Creator-style talking head (AI presenter or actor)",
+      "card_note": "Presenting an AI actor as a real customer can be misleading marketing in Norway. Use AI presenters as presenters, not as fake testimonials.",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "HeyGen Creator",
+          "price_nok": 310,
+          "price_text": "about 310 kr/month",
+          "includes": "600 credits/month (about 12 minutes of Avatar V), 1080p, no watermark, custom avatar with your own voice.",
+          "badge": "Norwegian: confirmed",
+          "jurisdiction": "US (HeyGen)",
+          "billing_note": "",
+          "pros": [
+            "Norwegian voices listed in vendor docs",
+            "Can clone your own face and voice for founder-led ads"
+          ],
+          "cons": [
+            "Stock avatars read as presenters, not real creators",
+            "Credits go quickly at ad-testing volume"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://help.heygen.com/en/articles/11391932-voice-languages-we-support"
+        },
+        {
+          "name": "Synthesia Creator",
+          "price_nok": 960,
+          "price_text": "about 960 kr/month",
+          "includes": "3 600 credits/month, up to 30 minutes of video, 1-click translation.",
+          "badge": "Norwegian: likely",
+          "jurisdiction": "UK (London), GDPR data processing agreement",
+          "billing_note": "67 USD/month billed yearly",
+          "pros": [
+            "European company with a standard DPA; easiest to clear with a client",
+            "Polished, reliable output"
+          ],
+          "cons": [
+            "Corporate presenter look; weak for native-feeling social ads",
+            "Norwegian voices not confirmed in docs we could read — test first"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://fluxnote.io/guides/synthesia-pricing-2026"
+        },
+        {
+          "name": "Arcads Starter",
+          "price_nok": 1190,
+          "price_text": "about 1 190 kr/month",
+          "includes": "10 videos/month from a library of 1 000+ AI actors (about 120 kr per finished video).",
+          "badge": "Norwegian: not confirmed",
+          "jurisdiction": "not verified",
+          "billing_note": "",
+          "pros": [
+            "Most realistic UGC-style actors of the three",
+            "Built for testing many hooks"
+          ],
+          "cons": [
+            "Norwegian speech not confirmed — test before paying",
+            "No free trial; 10 videos is a hard cap",
+            "Realism raises the fake-testimonial risk in Norway"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/best-ai-ugc-ad-tools-2026"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "ai_cost": 300,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "ugc",
+      "format_label": "Creator (UGC)",
+      "use_case_label": "Creator-style talking head (AI presenter or actor)",
+      "card_note": "Presenting an AI actor as a real customer can be misleading marketing in Norway. Use AI presenters as presenters, not as fake testimonials.",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "HeyGen Creator",
+          "price_nok": 310,
+          "price_text": "about 310 kr/month",
+          "includes": "600 credits/month (about 12 minutes of Avatar V), 1080p, no watermark, custom avatar with your own voice.",
+          "badge": "Norwegian: confirmed",
+          "jurisdiction": "US (HeyGen)",
+          "billing_note": "",
+          "pros": [
+            "Norwegian voices listed in vendor docs",
+            "Can clone your own face and voice for founder-led ads"
+          ],
+          "cons": [
+            "Stock avatars read as presenters, not real creators",
+            "Credits go quickly at ad-testing volume"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://help.heygen.com/en/articles/11391932-voice-languages-we-support"
+        },
+        {
+          "name": "Synthesia Creator",
+          "price_nok": 960,
+          "price_text": "about 960 kr/month",
+          "includes": "3 600 credits/month, up to 30 minutes of video, 1-click translation.",
+          "badge": "Norwegian: likely",
+          "jurisdiction": "UK (London), GDPR data processing agreement",
+          "billing_note": "67 USD/month billed yearly",
+          "pros": [
+            "European company with a standard DPA; easiest to clear with a client",
+            "Polished, reliable output"
+          ],
+          "cons": [
+            "Corporate presenter look; weak for native-feeling social ads",
+            "Norwegian voices not confirmed in docs we could read — test first"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://fluxnote.io/guides/synthesia-pricing-2026"
+        },
+        {
+          "name": "Arcads Starter",
+          "price_nok": 1190,
+          "price_text": "about 1 190 kr/month",
+          "includes": "10 videos/month from a library of 1 000+ AI actors (about 120 kr per finished video).",
+          "badge": "Norwegian: not confirmed",
+          "jurisdiction": "not verified",
+          "billing_note": "",
+          "pros": [
+            "Most realistic UGC-style actors of the three",
+            "Built for testing many hooks"
+          ],
+          "cons": [
+            "Norwegian speech not confirmed — test before paying",
+            "No free trial; 10 videos is a hard cap",
+            "Realism raises the fake-testimonial risk in Norway"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": false,
+          "source": "https://omidsaffari.com/blog/best-ai-ugc-ad-tools-2026"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": false,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "ai_cost": 2000,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "ugc",
+      "format_label": "Creator (UGC)",
+      "use_case_label": "Creator-style talking head (AI presenter or actor)",
+      "card_note": "Presenting an AI actor as a real customer can be misleading marketing in Norway. Use AI presenters as presenters, not as fake testimonials.",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "HeyGen Creator",
+          "price_nok": 310,
+          "price_text": "about 310 kr/month",
+          "includes": "600 credits/month (about 12 minutes of Avatar V), 1080p, no watermark, custom avatar with your own voice.",
+          "badge": "Norwegian: confirmed",
+          "jurisdiction": "US (HeyGen)",
+          "billing_note": "",
+          "pros": [
+            "Norwegian voices listed in vendor docs",
+            "Can clone your own face and voice for founder-led ads"
+          ],
+          "cons": [
+            "Stock avatars read as presenters, not real creators",
+            "Credits go quickly at ad-testing volume"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": true,
+          "source": "https://help.heygen.com/en/articles/11391932-voice-languages-we-support"
+        },
+        {
+          "name": "Synthesia Creator",
+          "price_nok": 960,
+          "price_text": "about 960 kr/month",
+          "includes": "3 600 credits/month, up to 30 minutes of video, 1-click translation.",
+          "badge": "Norwegian: likely",
+          "jurisdiction": "UK (London), GDPR data processing agreement",
+          "billing_note": "67 USD/month billed yearly",
+          "pros": [
+            "European company with a standard DPA; easiest to clear with a client",
+            "Polished, reliable output"
+          ],
+          "cons": [
+            "Corporate presenter look; weak for native-feeling social ads",
+            "Norwegian voices not confirmed in docs we could read — test first"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": true,
+          "source": "https://fluxnote.io/guides/synthesia-pricing-2026"
+        },
+        {
+          "name": "Arcads Starter",
+          "price_nok": 1190,
+          "price_text": "about 1 190 kr/month",
+          "includes": "10 videos/month from a library of 1 000+ AI actors (about 120 kr per finished video).",
+          "badge": "Norwegian: not confirmed",
+          "jurisdiction": "not verified",
+          "billing_note": "",
+          "pros": [
+            "Most realistic UGC-style actors of the three",
+            "Built for testing many hooks"
+          ],
+          "cons": [
+            "Norwegian speech not confirmed — test before paying",
+            "No free trial; 10 videos is a hard cap",
+            "Realism raises the fake-testimonial risk in Norway"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": true,
+          "source": "https://omidsaffari.com/blog/best-ai-ugc-ad-tools-2026"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "ai_cost": 2000,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "ugc",
+      "format_label": "Creator (UGC)",
+      "use_case_label": "Creator-style talking head (AI presenter or actor)",
+      "card_note": "Presenting an AI actor as a real customer can be misleading marketing in Norway. Use AI presenters as presenters, not as fake testimonials.",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "HeyGen Creator",
+          "price_nok": 310,
+          "price_text": "about 310 kr/month",
+          "includes": "600 credits/month (about 12 minutes of Avatar V), 1080p, no watermark, custom avatar with your own voice.",
+          "badge": "Norwegian: confirmed",
+          "jurisdiction": "US (HeyGen)",
+          "billing_note": "",
+          "pros": [
+            "Norwegian voices listed in vendor docs",
+            "Can clone your own face and voice for founder-led ads"
+          ],
+          "cons": [
+            "Stock avatars read as presenters, not real creators",
+            "Credits go quickly at ad-testing volume"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": true,
+          "source": "https://help.heygen.com/en/articles/11391932-voice-languages-we-support"
+        },
+        {
+          "name": "Synthesia Creator",
+          "price_nok": 960,
+          "price_text": "about 960 kr/month",
+          "includes": "3 600 credits/month, up to 30 minutes of video, 1-click translation.",
+          "badge": "Norwegian: likely",
+          "jurisdiction": "UK (London), GDPR data processing agreement",
+          "billing_note": "67 USD/month billed yearly",
+          "pros": [
+            "European company with a standard DPA; easiest to clear with a client",
+            "Polished, reliable output"
+          ],
+          "cons": [
+            "Corporate presenter look; weak for native-feeling social ads",
+            "Norwegian voices not confirmed in docs we could read — test first"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": true,
+          "source": "https://fluxnote.io/guides/synthesia-pricing-2026"
+        },
+        {
+          "name": "Arcads Starter",
+          "price_nok": 1190,
+          "price_text": "about 1 190 kr/month",
+          "includes": "10 videos/month from a library of 1 000+ AI actors (about 120 kr per finished video).",
+          "badge": "Norwegian: not confirmed",
+          "jurisdiction": "not verified",
+          "billing_note": "",
+          "pros": [
+            "Most realistic UGC-style actors of the three",
+            "Built for testing many hooks"
+          ],
+          "cons": [
+            "Norwegian speech not confirmed — test before paying",
+            "No free trial; 10 videos is a hard cap",
+            "Realism raises the fake-testimonial risk in Norway"
+          ],
+          "rules": [
+            {
+              "id": "misleading",
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            },
+            {
+              "id": "ai_act",
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
+            }
+          ],
+          "fits": true,
+          "source": "https://omidsaffari.com/blog/best-ai-ugc-ad-tools-2026"
+        }
+      ],
+      "voice": {
+        "label": "Norwegian voice-over",
+        "tools": [
+          {
+            "name": "ElevenLabs Starter",
+            "price_nok": 60,
+            "price_text": "about 60 kr/month",
+            "includes": "Entry text-to-speech allowance with commercial licence.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Norwegian supported on Eleven v3 and Flash v2.5",
+              "Cheapest way to test a Norwegian voice-over"
+            ],
+            "cons": [
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
+              "Small monthly allowance"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Creator",
+            "price_nok": 240,
+            "price_text": "about 240 kr/month",
+            "includes": "Larger allowance, professional voice cloning.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Clone a real Norwegian speaker (with their consent) for a consistent brand voice"
+            ],
+            "cons": [
+              "Cloning a real person's voice needs written consent"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          },
+          {
+            "name": "ElevenLabs Pro",
+            "price_nok": 1070,
+            "price_text": "about 1 070 kr/month",
+            "includes": "High-volume allowance and higher audio quality output.",
+            "badge": "Norwegian: confirmed",
+            "jurisdiction": "not verified",
+            "billing_note": "",
+            "pros": [
+              "Enough volume for multiple campaigns and cut-downs"
+            ],
+            "cons": [
+              "Above this spend, a Norwegian voice actor is often comparable"
+            ],
+            "rules": [],
+            "fits": true,
+            "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"
+          }
+        ]
+      },
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "studio",
+      "ai_cost": 0,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "studio",
+      "format_label": "Studio shoot",
+      "use_case_label": "Studio-style product shots",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Photoroom Pro",
+          "price_nok": 140,
+          "price_text": "about 140 kr/month",
+          "includes": "Background removal, AI backgrounds, AI fashion models, 1 000 exports/month, 2K export.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "7.50 USD/month billed yearly (about 80 kr)",
+          "pros": [
+            "Built for packshots; very fast for a product range",
+            "European company under GDPR"
+          ],
+          "cons": [
+            "2K export cap; no video on this plan",
+            "AI fashion models on real garments may need the retouch label in Norway"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": false,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Photoroom Max",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "Everything in Pro plus the video generator and Shopify sync, 3 000 exports/month.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "20.99 USD/month billed yearly (about 230 kr)",
+          "pros": [
+            "Product stills and short product video from one tool",
+            "Shopify sync for webshops"
+          ],
+          "cons": [
+            "Still capped at 2K",
+            "Video is product motion, not people or scenes"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": false,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Adobe Firefly Pro Plus",
+          "price_nok": 540,
+          "price_text": "about 540 kr/month",
+          "includes": "10 000 credits/month, Photoshop (web and mobile) with generative fill, Adobe Express Premium.",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Full compositing control — place a real product photo in an AI scene",
+            "Photoshop tools for clean, art-directed results"
+          ],
+          "cons": [
+            "Needs some Photoshop skill to beat Photoroom",
+            "IP indemnity is enterprise-only"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "studio",
+      "ai_cost": 0,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "studio",
+      "format_label": "Studio shoot",
+      "use_case_label": "Studio-style product shots",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Photoroom Pro",
+          "price_nok": 140,
+          "price_text": "about 140 kr/month",
+          "includes": "Background removal, AI backgrounds, AI fashion models, 1 000 exports/month, 2K export.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "7.50 USD/month billed yearly (about 80 kr)",
+          "pros": [
+            "Built for packshots; very fast for a product range",
+            "European company under GDPR"
+          ],
+          "cons": [
+            "2K export cap; no video on this plan",
+            "AI fashion models on real garments may need the retouch label in Norway"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": false,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Photoroom Max",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "Everything in Pro plus the video generator and Shopify sync, 3 000 exports/month.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "20.99 USD/month billed yearly (about 230 kr)",
+          "pros": [
+            "Product stills and short product video from one tool",
+            "Shopify sync for webshops"
+          ],
+          "cons": [
+            "Still capped at 2K",
+            "Video is product motion, not people or scenes"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": false,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Adobe Firefly Pro Plus",
+          "price_nok": 540,
+          "price_text": "about 540 kr/month",
+          "includes": "10 000 credits/month, Photoshop (web and mobile) with generative fill, Adobe Express Premium.",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Full compositing control — place a real product photo in an AI scene",
+            "Photoshop tools for clean, art-directed results"
+          ],
+          "cons": [
+            "Needs some Photoshop skill to beat Photoroom",
+            "IP indemnity is enterprise-only"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "studio",
+      "ai_cost": 300,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "studio",
+      "format_label": "Studio shoot",
+      "use_case_label": "Studio-style product shots",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Photoroom Pro",
+          "price_nok": 140,
+          "price_text": "about 140 kr/month",
+          "includes": "Background removal, AI backgrounds, AI fashion models, 1 000 exports/month, 2K export.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "7.50 USD/month billed yearly (about 80 kr)",
+          "pros": [
+            "Built for packshots; very fast for a product range",
+            "European company under GDPR"
+          ],
+          "cons": [
+            "2K export cap; no video on this plan",
+            "AI fashion models on real garments may need the retouch label in Norway"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": true,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Photoroom Max",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "Everything in Pro plus the video generator and Shopify sync, 3 000 exports/month.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "20.99 USD/month billed yearly (about 230 kr)",
+          "pros": [
+            "Product stills and short product video from one tool",
+            "Shopify sync for webshops"
+          ],
+          "cons": [
+            "Still capped at 2K",
+            "Video is product motion, not people or scenes"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": false,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Adobe Firefly Pro Plus",
+          "price_nok": 540,
+          "price_text": "about 540 kr/month",
+          "includes": "10 000 credits/month, Photoshop (web and mobile) with generative fill, Adobe Express Premium.",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Full compositing control — place a real product photo in an AI scene",
+            "Photoshop tools for clean, art-directed results"
+          ],
+          "cons": [
+            "Needs some Photoshop skill to beat Photoroom",
+            "IP indemnity is enterprise-only"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "studio",
+      "ai_cost": 300,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "studio",
+      "format_label": "Studio shoot",
+      "use_case_label": "Studio-style product shots",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Photoroom Pro",
+          "price_nok": 140,
+          "price_text": "about 140 kr/month",
+          "includes": "Background removal, AI backgrounds, AI fashion models, 1 000 exports/month, 2K export.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "7.50 USD/month billed yearly (about 80 kr)",
+          "pros": [
+            "Built for packshots; very fast for a product range",
+            "European company under GDPR"
+          ],
+          "cons": [
+            "2K export cap; no video on this plan",
+            "AI fashion models on real garments may need the retouch label in Norway"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": true,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Photoroom Max",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "Everything in Pro plus the video generator and Shopify sync, 3 000 exports/month.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "20.99 USD/month billed yearly (about 230 kr)",
+          "pros": [
+            "Product stills and short product video from one tool",
+            "Shopify sync for webshops"
+          ],
+          "cons": [
+            "Still capped at 2K",
+            "Video is product motion, not people or scenes"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": false,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Adobe Firefly Pro Plus",
+          "price_nok": 540,
+          "price_text": "about 540 kr/month",
+          "includes": "10 000 credits/month, Photoshop (web and mobile) with generative fill, Adobe Express Premium.",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Full compositing control — place a real product photo in an AI scene",
+            "Photoshop tools for clean, art-directed results"
+          ],
+          "cons": [
+            "Needs some Photoshop skill to beat Photoroom",
+            "IP indemnity is enterprise-only"
+          ],
+          "rules": [],
+          "fits": false,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  },
+  {
+    "input": {
+      "fmt": "studio",
+      "ai_cost": 2000,
+      "today": "2026-11-18"
+    },
+    "output": {
+      "format": "studio",
+      "format_label": "Studio shoot",
+      "use_case_label": "Studio-style product shots",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Photoroom Pro",
+          "price_nok": 140,
+          "price_text": "about 140 kr/month",
+          "includes": "Background removal, AI backgrounds, AI fashion models, 1 000 exports/month, 2K export.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "7.50 USD/month billed yearly (about 80 kr)",
+          "pros": [
+            "Built for packshots; very fast for a product range",
+            "European company under GDPR"
+          ],
+          "cons": [
+            "2K export cap; no video on this plan",
+            "AI fashion models on real garments may need the retouch label in Norway"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": true,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Photoroom Max",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "Everything in Pro plus the video generator and Shopify sync, 3 000 exports/month.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "20.99 USD/month billed yearly (about 230 kr)",
+          "pros": [
+            "Product stills and short product video from one tool",
+            "Shopify sync for webshops"
+          ],
+          "cons": [
+            "Still capped at 2K",
+            "Video is product motion, not people or scenes"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": true,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Adobe Firefly Pro Plus",
+          "price_nok": 540,
+          "price_text": "about 540 kr/month",
+          "includes": "10 000 credits/month, Photoshop (web and mobile) with generative fill, Adobe Express Premium.",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Full compositing control — place a real product photo in an AI scene",
+            "Photoshop tools for clean, art-directed results"
+          ],
+          "cons": [
+            "Needs some Photoshop skill to beat Photoroom",
+            "IP indemnity is enterprise-only"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": false
+    }
+  },
+  {
+    "input": {
+      "fmt": "studio",
+      "ai_cost": 2000,
+      "today": "2027-03-01"
+    },
+    "output": {
+      "format": "studio",
+      "format_label": "Studio shoot",
+      "use_case_label": "Studio-style product shots",
+      "card_note": "",
+      "free_baseline": {
+        "name": "Meta Advantage+ creative (inside Ads Manager)",
+        "price": "Included with ad spend",
+        "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
+        "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
+      },
+      "tools": [
+        {
+          "name": "Photoroom Pro",
+          "price_nok": 140,
+          "price_text": "about 140 kr/month",
+          "includes": "Background removal, AI backgrounds, AI fashion models, 1 000 exports/month, 2K export.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "7.50 USD/month billed yearly (about 80 kr)",
+          "pros": [
+            "Built for packshots; very fast for a product range",
+            "European company under GDPR"
+          ],
+          "cons": [
+            "2K export cap; no video on this plan",
+            "AI fashion models on real garments may need the retouch label in Norway"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": true,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Photoroom Max",
+          "price_nok": 380,
+          "price_text": "about 380 kr/month",
+          "includes": "Everything in Pro plus the video generator and Shopify sync, 3 000 exports/month.",
+          "badge": null,
+          "jurisdiction": "France (Paris), GDPR",
+          "billing_note": "20.99 USD/month billed yearly (about 230 kr)",
+          "pros": [
+            "Product stills and short product video from one tool",
+            "Shopify sync for webshops"
+          ],
+          "cons": [
+            "Still capped at 2K",
+            "Video is product motion, not people or scenes"
+          ],
+          "rules": [
+            {
+              "id": "retouch_label",
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
+            }
+          ],
+          "fits": true,
+          "source": "https://www.ai-media-studio.com/photoroom-pricing"
+        },
+        {
+          "name": "Adobe Firefly Pro Plus",
+          "price_nok": 540,
+          "price_text": "about 540 kr/month",
+          "includes": "10 000 credits/month, Photoshop (web and mobile) with generative fill, Adobe Express Premium.",
+          "badge": null,
+          "jurisdiction": "US (Adobe)",
+          "billing_note": "",
+          "pros": [
+            "Full compositing control — place a real product photo in an AI scene",
+            "Photoshop tools for clean, art-directed results"
+          ],
+          "cons": [
+            "Needs some Photoshop skill to beat Photoroom",
+            "IP indemnity is enterprise-only"
+          ],
+          "rules": [],
+          "fits": true,
+          "source": "https://www.renderahouse.com/blog/adobe-firefly-pricing"
+        }
+      ],
+      "voice": null,
+      "alternatives": [],
+      "checked_display": "18 Nov 2026",
+      "review_by": "2027-02-18",
+      "stale": true
+    }
+  }
+]
