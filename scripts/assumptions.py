@@ -129,6 +129,20 @@ def main() -> None:
               "a larger / API-pulled sample, and pooled linked-account performance for the "
               "approach-vs-outcome question (the snapshot carries no performance data)")
 
+    print("\n## Budget-check placeholders  (src/mediekjop/planner/budget_check.py)")
+    print("  (the calculator behind the “check your creative budget” page; labelled as")
+    print("   rough estimates on the page, never presented as Norwegian data.)")
+    from mediekjop.planner import budget_check as _bc
+    _line("src/mediekjop/planner/budget_check.py",
+          "conversion range (assumption)",
+          f"1 in {_bc.TYP_LO}–{_bc.TYP_HI} views convert",
+          "a sourced Norwegian conversion-rate range (currently a rough US-based estimate)")
+    _line("src/mediekjop/planner/budget_check.py",
+          "default CPM (assumption)",
+          f"{_bc.DEFAULT_CPM} kr per 1 000 views",
+          "a sourced Norwegian CPM by channel (currently a rough US-based placeholder); "
+          "the user can override it on the page")
+
     print("\n## Synthetic demo data  (src/mediekjop/synthetic/, config/config.yaml)")
     _line("src/mediekjop/synthetic/generator.py",
           "planted multipliers: _BASE_CTR / _SAVE_RATE / _LIKE_RATE, _AI_SUBTYPE_*, _conv_mult",

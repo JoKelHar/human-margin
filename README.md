@@ -1,39 +1,45 @@
 # Human Margin
 
-**AI vs human led creative, measured**
+**Check your creative budget — AI vs human-led, on your own numbers**
 
-**Human Margin is a sanity checker for Norwegian B2C media buyers** weighing
-AI-led, hybrid and human-led creative. It gives one advertiser more information
-than they could gather alone, then leaves the decision to them: every output
-compares and describes, [none instructs](docs/principles.md). It never changes
-budgets, bids or ad status. Working today: data ingestion, creative tagging and a
-prototype dashboard. In development: the AI-exhaustion engine and the
-creative-approach planner.
+**Human Margin** answers three plain questions for a B2C media buyer weighing
+AI-led against human-led creative, from numbers they already have. No account, no
+upload; it runs entirely in the browser:
 
-**Live demo** → https://jokelhar.github.io/human-margin/ (runs on synthetic data)
+1. **Your human margin** — how many extra sales a human version must earn to pay
+   for its higher production cost: `ceil((human − AI) / price)`.
+2. **Can this budget do it?** — the most each sale can cost on the budget, and the
+   "1 in N people who see the ad" that implies, placed against a rough range.
+3. **Is this quote normal?** — where a quote sits in the going rate for that format.
 
-[![Human Margin dashboard on synthetic data: English interface with KPI tiles, a glossary, and a provenance section showing a click-through-rate decay chart and a comparison table for human-led, AI-assisted and AI-generated creative.](docs/screenshot.png)](https://jokelhar.github.io/human-margin/)
+It compares and describes; [it never instructs](docs/principles.md), and it never
+changes budgets, bids or ad status. The cost bands are owner-reviewed; the
+conversion range and CPM are rough, clearly-labelled estimates, never presented as
+Norwegian data.
 
-It keeps every platform export at the level of the individual placement, never
-rolled up, and is being built to answer two questions with evidence rather than
-opinion: where human-led creative earns its higher cost, and where the next
-distinctly-human opportunities are. The AI-exhaustion detection behind the
-first, and the planner that weighs AI against hybrid and human-led creative, are
-in development; see the status table below.
+**Try it** → https://jokelhar.github.io/human-margin/ — nothing is stored; your
+numbers travel only in the shareable link.
+
+**Research prototype** (on synthetic data): a dashboard of the human-vs-AI decision
+matrix with AI-exhaustion and forward-pattern alerts, and a creative-approach
+planner that weighs AI against hybrid and human-led creative.
+
+[![Human Margin research-prototype dashboard on synthetic data: English interface with KPI tiles, a glossary, and a provenance section showing a click-through-rate decay chart and a comparison table for human-led, AI-assisted and AI-generated creative.](docs/screenshot.png)](https://jokelhar.github.io/human-margin/research.html)
 
 ![Code licence: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)
 ![Data licence: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey.svg)
 ![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)
-![Tests](https://img.shields.io/badge/tests-126%20passing-brightgreen.svg)
+![Tests](https://img.shields.io/badge/tests-196%20passing-brightgreen.svg)
 
 ## Demo
 
-> **Live demo dashboard** → https://jokelhar.github.io/human-margin/
-> A prototype console rendering the human-vs-AI decision matrix
-> with exhaustion and forward-pattern alerts, on **synthetic** Norwegian data in
-> which the patterns are deliberately planted.
-
-<!-- [[PLACEHOLDER: add a GIF or screenshot of the planner wizard here once Phase 7 lands]] -->
+> **Budget check (home)** → https://jokelhar.github.io/human-margin/
+> Three answers from your own numbers, live in the browser. Nothing is stored.
+>
+> **Research prototype** → https://jokelhar.github.io/human-margin/research.html
+> A console rendering the human-vs-AI decision matrix with exhaustion and
+> forward-pattern alerts, on **synthetic** Norwegian data in which the patterns
+> are deliberately planted — plus the creative-approach planner.
 
 ## Why I built this
 
@@ -43,7 +49,7 @@ The temptation is always the same: let AI iterate the copy, the creative, the UG
 
 Feeds fill up with content that looks the same, and audiences learn to scroll past it. That cost never appears on the production invoice. Neither does the damage to a brand that starts to look like slop.
 
-This tool replaces the guess with evidence. It tracks where AI creative is wearing thin, where human-led work still earns its cost, and what a given campaign should do with the budget it actually has. It's built for marketers, and for business owners who want data to protect their brand before they sign an agency quote.
+This tool replaces the guess with evidence. It tracks where AI creative is wearing thin and where human-led work still earns its cost, and it lets you check a budget and a quote against your own numbers before you sign. It's built for marketers, and for business owners who want data to protect their brand before they sign an agency quote.
 
 I built it with Claude Code, and that's the point. I use Claude daily. AI should make our decisions better informed and our iterations faster. It shouldn't make the creative call. Going into 2027, the edge belongs to teams who know where AI earns its place and where a human idea is still worth paying for.
 

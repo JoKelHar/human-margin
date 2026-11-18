@@ -3,7 +3,7 @@
 """Build the demo pages from the template and the sample weekly brief.
 
 Produces, from web/dashboard.html and samples/weekly_report_sample.md:
-  * docs/index.html         standalone dashboard (served by GitHub Pages)
+  * docs/research.html       research prototype (served by GitHub Pages)
   * docs/sample-brief.html  the sample weekly brief, in the dashboard's styles
   * out/dashboard_page.html  fragment with data inlined (for an Artifact)
 
@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE = ROOT / "web" / "dashboard.html"
 INSIGHTS = ROOT / "out" / "insights.json"
 SAMPLE_MD = ROOT / "samples" / "weekly_report_sample.md"
-STANDALONE = ROOT / "docs" / "index.html"
+STANDALONE = ROOT / "docs" / "research.html"   # research prototype (budget check is the home page)
 SAMPLE_HTML = ROOT / "docs" / "sample-brief.html"
 ARTIFACT = ROOT / "out" / "dashboard_page.html"
 
@@ -205,7 +205,7 @@ def build_sample_brief() -> None:
         '<div class="page-foot">'
         '<span>Recommend-only · evidence over opinion</span>'
         + ATTRIBUTION
-        + '<span><a href="index.html">Back to the dashboard</a></span>'
+        + '<span><a href="research.html">Back to the dashboard</a></span>'
         '</div>\n'
     )
     theme = ('<script>try{var t=localStorage.getItem("mk-theme");'
