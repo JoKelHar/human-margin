@@ -1,0 +1,3082 @@
+[
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": null,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 3600,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": true,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "14",
+        "unit": "more tickets",
+        "text": "A typical creator costs about 3 300 kr more than the AI version. Across 2 campaigns, the human version needs 14 more tickets than the AI version to pay for itself, about 7 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 300 kr extra ÷ 250 kr per ticket = 14 tickets (rounded up).\nSpread over 2 campaigns: about 7 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": "Typical range: 2 000–8 000 kr. Put in your quote for a sharper answer."
+      },
+      "a3": {
+        "big": "Typical range",
+        "text": "No quote entered — a creator video in Oslo usually runs 2 000–8 000 kr. Put in your quote to place it.",
+        "blank": true,
+        "low": 2000,
+        "high": 8000,
+        "human": 3600,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 34.61538461538461,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": null,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 1200,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": true,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "12",
+        "unit": "more tickets",
+        "text": "The creator costs about 3 000 kr more than a typical AI version. Across 2 campaigns, the human version needs 12 more tickets than a typical AI version to pay for itself, about 6 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 000 kr extra ÷ 250 kr per ticket = 12 tickets (rounded up).\nSpread over 2 campaigns: about 6 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": "Typical AI cost: 500–3 000 kr. Put in your figure for a sharper answer."
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": null,
+      "ai": null,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 3600,
+      "ai_eff": 1200,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": true,
+      "ai_blank": true,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "10",
+        "unit": "more tickets",
+        "text": "A typical creator costs about 2 400 kr more than a typical AI version. Across 2 campaigns, the human version needs 10 more tickets than a typical AI version to pay for itself, about 5 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "2 400 kr extra ÷ 250 kr per ticket = 10 tickets (rounded up).\nSpread over 2 campaigns: about 5 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": "Typical ranges — human 2 000–8 000 kr, AI 500–3 000 kr. Put in your quotes for a sharper answer."
+      },
+      "a3": {
+        "big": "Typical range",
+        "text": "No quote entered — a creator video in Oslo usually runs 2 000–8 000 kr. Put in your quote to place it.",
+        "blank": true,
+        "low": 2000,
+        "high": 8000,
+        "human": 3600,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 34.61538461538461,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 300,
+      "ai": 4200,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 300.0,
+      "ai_eff": 4200.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "0",
+        "unit": "extra tickets",
+        "text": "The creator costs no more than the AI version, so it needs no extra tickets to pay for itself.",
+        "has_context": false,
+        "context": "",
+        "how": "The creator 300 kr, the AI version 4 200 kr: no cost gap to cover.\nCosts count money paid out, not your own time.",
+        "note": ""
+      },
+      "a3": {
+        "big": "Below usual",
+        "text": "300 kr for a creator video sits below the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 300.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 2.8846153846153846,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 tickets",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": null,
+      "ai": null,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 3600,
+      "ai_eff": 1200,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": true,
+      "ai_blank": true,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 tickets",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "10",
+        "unit": "more tickets",
+        "text": "A typical creator costs about 2 400 kr more than a typical AI version. Across 2 campaigns, the human version needs 10 more tickets than a typical AI version to pay for itself, about 5 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "2 400 kr extra ÷ 250 kr per ticket = 10 tickets (rounded up).\nSpread over 2 campaigns: about 5 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": "Typical ranges — human 2 000–8 000 kr, AI 500–3 000 kr. Put in your quotes for a sharper answer."
+      },
+      "a3": {
+        "big": "Typical range",
+        "text": "No quote entered — a creator video in Oslo usually runs 2 000–8 000 kr. Put in your quote to place it.",
+        "blank": true,
+        "low": 2000,
+        "high": 8000,
+        "human": 3600,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 34.61538461538461,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 0,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 0.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "—",
+        "unit": "",
+        "text": "Add a value per ticket to see this.",
+        "has_context": false,
+        "context": "",
+        "how": "",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 0,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "—",
+        "text": "Add a media budget to see this.",
+        "how": ""
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 0,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "—",
+        "text": "Add a media budget to see this.",
+        "how": ""
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 1,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. The human version needs 16 more tickets than the AI version to pay for itself.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 5,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 5 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 4 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 5 campaigns: about 4 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 5,
+      "price": 250,
+      "budget": 60000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 1,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": true,
+      "a1": {
+        "big": "12 000 kr per ticket",
+        "text": "To reach 5 tickets on 60 000 kr, each can cost at most 12 000 kr. That means about 1 in 100 000 ad views would need to become a ticket: comfortably inside what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 60 000 kr ÷ 5 = 12 000 kr.\nViews: 60 000 kr at a 115 kr CPM ≈ 520 000 (one person may see the ad more than once).\nNeeded: 5 tickets from 520 000 views ≈ 1 in 100 000.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. The human version needs 16 more tickets than the AI version to pay for itself.",
+        "has_context": true,
+        "context": "That is 320% of your 5-ticket target per campaign. Whether a human version earns that is your call.",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 5,
+      "price": 250,
+      "budget": 60000,
+      "fmt": "ugc",
+      "human": 400,
+      "ai": 300,
+      "reuse": 1,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 400.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": true,
+      "a1": {
+        "big": "12 000 kr per ticket",
+        "text": "To reach 5 tickets on 60 000 kr, each can cost at most 12 000 kr. That means about 1 in 100 000 ad views would need to become a ticket: comfortably inside what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 60 000 kr ÷ 5 = 12 000 kr.\nViews: 60 000 kr at a 115 kr CPM ≈ 520 000 (one person may see the ad more than once).\nNeeded: 5 tickets from 520 000 views ≈ 1 in 100 000.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "1",
+        "unit": "more ticket",
+        "text": "The creator costs 100 kr more than the AI version. The human version needs 1 more ticket than the AI version to pay for itself.",
+        "has_context": true,
+        "context": "That is 20% of your 5-ticket target per campaign. Whether a human version earns that is your call.",
+        "how": "100 kr extra ÷ 250 kr per ticket = 1 tickets (rounded up).\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Below usual",
+        "text": "400 kr for a creator video sits below the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 400.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 3.8461538461538463,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": 100,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 100.0,
+      "margin_used": true,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "39",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 39 more tickets than the AI version to pay for itself, about 20 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 100 kr margin per ticket = 39 tickets (rounded up).\nSpread over 2 campaigns: about 20 each.\nUses your margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": 40,
+      "marginUnit": "pct",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 100.0,
+      "margin_used": true,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "39",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 39 more tickets than the AI version to pay for itself, about 20 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 100 kr margin per ticket = 39 tickets (rounded up).\nSpread over 2 campaigns: about 20 each.\nUses your margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "other",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": "signup"
+    },
+    "output": {
+      "unit_one": "signup",
+      "unit_many": "signups",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per signup",
+        "text": "To reach 300 signups on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a signup: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per signup: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 signups from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more signups",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more signups than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per signup = 16 signups (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per signup, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "other",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "sale",
+      "unit_many": "sales",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per sale",
+        "text": "To reach 300 sales on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a sale: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per sale: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 sales from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more sales",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sales than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per sale = 16 sales (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sale, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "static",
+      "human": 3999,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 3999.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "15",
+        "unit": "more tickets",
+        "text": "The photographer costs 3 699 kr more than the AI version. Across 2 campaigns, the human version needs 15 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 699 kr extra ÷ 250 kr per ticket = 15 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Below usual",
+        "text": "3 999 kr for a static image set sits below the usual range in Oslo (4 000–25 000 kr).",
+        "blank": false,
+        "low": 4000,
+        "high": 25000,
+        "human": 3999.0,
+        "scale_max": 32500.0,
+        "pct_low": 12.307692307692308,
+        "pct_high": 76.92307692307693,
+        "pct_human": 12.304615384615385,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "static",
+      "human": 14500,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 14500.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "57",
+        "unit": "more tickets",
+        "text": "The photographer costs 14 200 kr more than the AI version. Across 2 campaigns, the human version needs 57 more tickets than the AI version to pay for itself, about 29 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "14 200 kr extra ÷ 250 kr per ticket = 57 tickets (rounded up).\nSpread over 2 campaigns: about 29 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "14 500 kr for a static image set sits inside the usual range in Oslo (4 000–25 000 kr).",
+        "blank": false,
+        "low": 4000,
+        "high": 25000,
+        "human": 14500.0,
+        "scale_max": 32500.0,
+        "pct_low": 12.307692307692308,
+        "pct_high": 76.92307692307693,
+        "pct_human": 44.61538461538462,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "static",
+      "human": 25001,
+      "ai": 500,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 25001.0,
+      "ai_eff": 500.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "99",
+        "unit": "more tickets",
+        "text": "The photographer costs 24 501 kr more than the AI version. Across 2 campaigns, the human version needs 99 more tickets than the AI version to pay for itself, about 50 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "24 501 kr extra ÷ 250 kr per ticket = 99 tickets (rounded up).\nSpread over 2 campaigns: about 50 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Above usual",
+        "text": "25 001 kr for a static image set sits above the usual range in Oslo (4 000–25 000 kr).",
+        "blank": false,
+        "low": 4000,
+        "high": 25000,
+        "human": 25001.0,
+        "scale_max": 32500.0,
+        "pct_low": 12.307692307692308,
+        "pct_high": 76.92307692307693,
+        "pct_human": 76.92615384615384,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "static",
+      "human": null,
+      "ai": null,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 12000,
+      "ai_eff": 800,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": true,
+      "ai_blank": true,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "45",
+        "unit": "more tickets",
+        "text": "A typical photographer costs about 11 200 kr more than a typical AI version. Across 2 campaigns, the human version needs 45 more tickets than a typical AI version to pay for itself, about 23 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "11 200 kr extra ÷ 250 kr per ticket = 45 tickets (rounded up).\nSpread over 2 campaigns: about 23 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": "Typical ranges — human 4 000–25 000 kr, AI 300–1 800 kr. Put in your quotes for a sharper answer."
+      },
+      "a3": {
+        "big": "Typical range",
+        "text": "No quote entered — a static image set in Oslo usually runs 4 000–25 000 kr. Put in your quote to place it.",
+        "blank": true,
+        "low": 4000,
+        "high": 25000,
+        "human": 12000,
+        "scale_max": 32500.0,
+        "pct_low": 12.307692307692308,
+        "pct_high": 76.92307692307693,
+        "pct_human": 36.92307692307693,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "video",
+      "human": 9999,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 9999.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "39",
+        "unit": "more tickets",
+        "text": "The video shoot costs 9 699 kr more than the AI version. Across 2 campaigns, the human version needs 39 more tickets than the AI version to pay for itself, about 20 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "9 699 kr extra ÷ 250 kr per ticket = 39 tickets (rounded up).\nSpread over 2 campaigns: about 20 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Below usual",
+        "text": "9 999 kr for a short video sits below the usual range in Oslo (10 000–50 000 kr).",
+        "blank": false,
+        "low": 10000,
+        "high": 50000,
+        "human": 9999.0,
+        "scale_max": 65000.0,
+        "pct_low": 15.384615384615385,
+        "pct_high": 76.92307692307693,
+        "pct_human": 15.383076923076924,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "video",
+      "human": 30000,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 30000.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "119",
+        "unit": "more tickets",
+        "text": "The video shoot costs 29 700 kr more than the AI version. Across 2 campaigns, the human version needs 119 more tickets than the AI version to pay for itself, about 60 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "29 700 kr extra ÷ 250 kr per ticket = 119 tickets (rounded up).\nSpread over 2 campaigns: about 60 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "30 000 kr for a short video sits inside the usual range in Oslo (10 000–50 000 kr).",
+        "blank": false,
+        "low": 10000,
+        "high": 50000,
+        "human": 30000.0,
+        "scale_max": 65000.0,
+        "pct_low": 15.384615384615385,
+        "pct_high": 76.92307692307693,
+        "pct_human": 46.15384615384615,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "video",
+      "human": 50001,
+      "ai": 500,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 50001.0,
+      "ai_eff": 500.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "199",
+        "unit": "more tickets",
+        "text": "The video shoot costs 49 501 kr more than the AI version. Across 2 campaigns, the human version needs 199 more tickets than the AI version to pay for itself, about 100 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "49 501 kr extra ÷ 250 kr per ticket = 199 tickets (rounded up).\nSpread over 2 campaigns: about 100 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Above usual",
+        "text": "50 001 kr for a short video sits above the usual range in Oslo (10 000–50 000 kr).",
+        "blank": false,
+        "low": 10000,
+        "high": 50000,
+        "human": 50001.0,
+        "scale_max": 65000.0,
+        "pct_low": 15.384615384615385,
+        "pct_high": 76.92307692307693,
+        "pct_human": 76.92461538461538,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "video",
+      "human": null,
+      "ai": null,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 25000,
+      "ai_eff": 2000,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": true,
+      "ai_blank": true,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "92",
+        "unit": "more tickets",
+        "text": "A typical video shoot costs about 23 000 kr more than a typical AI version. Across 2 campaigns, the human version needs 92 more tickets than a typical AI version to pay for itself, about 46 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "23 000 kr extra ÷ 250 kr per ticket = 92 tickets (rounded up).\nSpread over 2 campaigns: about 46 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": "Typical ranges — human 10 000–50 000 kr, AI 800–5 000 kr. Put in your quotes for a sharper answer."
+      },
+      "a3": {
+        "big": "Typical range",
+        "text": "No quote entered — a short video in Oslo usually runs 10 000–50 000 kr. Put in your quote to place it.",
+        "blank": true,
+        "low": 10000,
+        "high": 50000,
+        "human": 25000,
+        "scale_max": 65000.0,
+        "pct_low": 15.384615384615385,
+        "pct_high": 76.92307692307693,
+        "pct_human": 38.46153846153847,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 1999,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 1999.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "7",
+        "unit": "more tickets",
+        "text": "The creator costs 1 699 kr more than the AI version. Across 2 campaigns, the human version needs 7 more tickets than the AI version to pay for itself, about 4 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "1 699 kr extra ÷ 250 kr per ticket = 7 tickets (rounded up).\nSpread over 2 campaigns: about 4 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Below usual",
+        "text": "1 999 kr for a creator video sits below the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 1999.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 19.221153846153847,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 5000,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 5000.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "19",
+        "unit": "more tickets",
+        "text": "The creator costs 4 700 kr more than the AI version. Across 2 campaigns, the human version needs 19 more tickets than the AI version to pay for itself, about 10 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "4 700 kr extra ÷ 250 kr per ticket = 19 tickets (rounded up).\nSpread over 2 campaigns: about 10 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "5 000 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 5000.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 48.07692307692308,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 8001,
+      "ai": 500,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 8001.0,
+      "ai_eff": 500.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "31",
+        "unit": "more tickets",
+        "text": "The creator costs 7 501 kr more than the AI version. Across 2 campaigns, the human version needs 31 more tickets than the AI version to pay for itself, about 16 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "7 501 kr extra ÷ 250 kr per ticket = 31 tickets (rounded up).\nSpread over 2 campaigns: about 16 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Above usual",
+        "text": "8 001 kr for a creator video sits above the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 8001.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 76.9326923076923,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": null,
+      "ai": null,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 3600,
+      "ai_eff": 1200,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": true,
+      "ai_blank": true,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "10",
+        "unit": "more tickets",
+        "text": "A typical creator costs about 2 400 kr more than a typical AI version. Across 2 campaigns, the human version needs 10 more tickets than a typical AI version to pay for itself, about 5 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "2 400 kr extra ÷ 250 kr per ticket = 10 tickets (rounded up).\nSpread over 2 campaigns: about 5 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": "Typical ranges — human 2 000–8 000 kr, AI 500–3 000 kr. Put in your quotes for a sharper answer."
+      },
+      "a3": {
+        "big": "Typical range",
+        "text": "No quote entered — a creator video in Oslo usually runs 2 000–8 000 kr. Put in your quote to place it.",
+        "blank": true,
+        "low": 2000,
+        "high": 8000,
+        "human": 3600,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 34.61538461538461,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "studio",
+      "human": 19999,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 19999.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "79",
+        "unit": "more tickets",
+        "text": "The studio shoot costs 19 699 kr more than the AI version. Across 2 campaigns, the human version needs 79 more tickets than the AI version to pay for itself, about 40 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "19 699 kr extra ÷ 250 kr per ticket = 79 tickets (rounded up).\nSpread over 2 campaigns: about 40 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Below usual",
+        "text": "19 999 kr for a studio shoot sits below the usual range in Oslo (20 000–150 000 kr).",
+        "blank": false,
+        "low": 20000,
+        "high": 150000,
+        "human": 19999.0,
+        "scale_max": 195000.0,
+        "pct_low": 10.256410256410255,
+        "pct_high": 76.92307692307693,
+        "pct_human": 10.255897435897436,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "studio",
+      "human": 85000,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 85000.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "339",
+        "unit": "more tickets",
+        "text": "The studio shoot costs 84 700 kr more than the AI version. Across 2 campaigns, the human version needs 339 more tickets than the AI version to pay for itself, about 170 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "84 700 kr extra ÷ 250 kr per ticket = 339 tickets (rounded up).\nSpread over 2 campaigns: about 170 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "85 000 kr for a studio shoot sits inside the usual range in Oslo (20 000–150 000 kr).",
+        "blank": false,
+        "low": 20000,
+        "high": 150000,
+        "human": 85000.0,
+        "scale_max": 195000.0,
+        "pct_low": 10.256410256410255,
+        "pct_high": 76.92307692307693,
+        "pct_human": 43.58974358974359,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "studio",
+      "human": 150001,
+      "ai": 500,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 150001.0,
+      "ai_eff": 500.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "599",
+        "unit": "more tickets",
+        "text": "The studio shoot costs 149 501 kr more than the AI version. Across 2 campaigns, the human version needs 599 more tickets than the AI version to pay for itself, about 300 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "149 501 kr extra ÷ 250 kr per ticket = 599 tickets (rounded up).\nSpread over 2 campaigns: about 300 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Above usual",
+        "text": "150 001 kr for a studio shoot sits above the usual range in Oslo (20 000–150 000 kr).",
+        "blank": false,
+        "low": 20000,
+        "high": 150000,
+        "human": 150001.0,
+        "scale_max": 195000.0,
+        "pct_low": 10.256410256410255,
+        "pct_high": 76.92307692307693,
+        "pct_human": 76.92358974358974,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "studio",
+      "human": null,
+      "ai": null,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 60000,
+      "ai_eff": 800,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": true,
+      "ai_blank": true,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "237",
+        "unit": "more tickets",
+        "text": "A typical studio shoot costs about 59 200 kr more than a typical AI version. Across 2 campaigns, the human version needs 237 more tickets than a typical AI version to pay for itself, about 119 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "59 200 kr extra ÷ 250 kr per ticket = 237 tickets (rounded up).\nSpread over 2 campaigns: about 119 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": "Typical ranges — human 20 000–150 000 kr, AI 300–1 800 kr. Put in your quotes for a sharper answer."
+      },
+      "a3": {
+        "big": "Typical range",
+        "text": "No quote entered — a studio shoot in Oslo usually runs 20 000–150 000 kr. Put in your quote to place it.",
+        "blank": true,
+        "low": 20000,
+        "high": 150000,
+        "human": 60000,
+        "scale_max": 195000.0,
+        "pct_low": 10.256410256410255,
+        "pct_high": 76.92307692307693,
+        "pct_human": 30.76923076923077,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "nightlife",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 tickets",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "events",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "events",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 tickets",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "culture",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per ticket",
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "culture",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 tickets",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more tickets",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "restaurant",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "booking",
+      "unit_many": "bookings",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per booking",
+        "text": "To reach 300 bookings on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a booking: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per booking: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 bookings from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more bookings",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "restaurant",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "booking",
+      "unit_many": "bookings",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 bookings",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a booking, so roughly 4–15 bookings, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more bookings",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "hotel",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "booking",
+      "unit_many": "bookings",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per booking",
+        "text": "To reach 300 bookings on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a booking: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per booking: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 bookings from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more bookings",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "hotel",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "booking",
+      "unit_many": "bookings",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 bookings",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a booking, so roughly 4–15 bookings, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more bookings",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "fitness",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "membership",
+      "unit_many": "memberships",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per membership",
+        "text": "To reach 300 memberships on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a membership: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per membership: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 memberships from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more memberships",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more memberships than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per membership = 16 memberships (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per membership, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "fitness",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "membership",
+      "unit_many": "memberships",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 memberships",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a membership, so roughly 4–15 memberships, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more memberships",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more memberships than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per membership = 16 memberships (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per membership, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "beauty",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "order",
+      "unit_many": "orders",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per order",
+        "text": "To reach 300 orders on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a order: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per order: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 orders from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more orders",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per order = 16 orders (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per order, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "beauty",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "order",
+      "unit_many": "orders",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 orders",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a order, so roughly 4–15 orders, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more orders",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per order = 16 orders (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per order, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "fashion",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "order",
+      "unit_many": "orders",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per order",
+        "text": "To reach 300 orders on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a order: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per order: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 orders from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more orders",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per order = 16 orders (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per order, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "fashion",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "order",
+      "unit_many": "orders",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 orders",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a order, so roughly 4–15 orders, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more orders",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per order = 16 orders (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per order, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "services",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "booking",
+      "unit_many": "bookings",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per booking",
+        "text": "To reach 300 bookings on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a booking: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per booking: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 bookings from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more bookings",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "services",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "booking",
+      "unit_many": "bookings",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 bookings",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a booking, so roughly 4–15 bookings, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more bookings",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "courses",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "sign-up",
+      "unit_many": "sign-ups",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per sign-up",
+        "text": "To reach 300 sign-ups on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a sign-up: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per sign-up: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 sign-ups from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more sign-ups",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sign-ups than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per sign-up = 16 sign-ups (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sign-up, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "courses",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "sign-up",
+      "unit_many": "sign-ups",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 sign-ups",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a sign-up, so roughly 4–15 sign-ups, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more sign-ups",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sign-ups than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per sign-up = 16 sign-ups (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sign-up, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "other",
+      "goalMode": "target",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "sale",
+      "unit_many": "sales",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "17 kr per sale",
+        "text": "To reach 300 sales on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a sale: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per sale: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 sales from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more sales",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sales than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per sale = 16 sales (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sale, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  },
+  {
+    "input": {
+      "industry": "other",
+      "goalMode": "max",
+      "goal": 300,
+      "price": 250,
+      "budget": 5000,
+      "fmt": "ugc",
+      "human": 4200,
+      "ai": 300,
+      "reuse": 2,
+      "cpm": 115,
+      "margin": null,
+      "marginUnit": "kr",
+      "otherNoun": null
+    },
+    "output": {
+      "unit_one": "sale",
+      "unit_many": "sales",
+      "human_eff": 4200.0,
+      "ai_eff": 300.0,
+      "value_per": 250.0,
+      "margin_used": false,
+      "human_blank": false,
+      "ai_blank": false,
+      "reachable": false,
+      "a1": {
+        "big": "Usually 4–15 sales",
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a sale, so roughly 4–15 sales, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+      },
+      "a2": {
+        "big": "16",
+        "unit": "more sales",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sales than the AI version to pay for itself, about 8 per campaign.",
+        "has_context": false,
+        "context": "",
+        "how": "3 900 kr extra ÷ 250 kr per sale = 16 sales (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sale, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "a3": {
+        "big": "Inside usual range",
+        "text": "4 200 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "blank": false,
+        "low": 2000,
+        "high": 8000,
+        "human": 4200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_human": 40.38461538461539,
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.\nYour own quote always replaces the range in the other answers."
+      }
+    }
+  }
+]

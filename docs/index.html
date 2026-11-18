@@ -3,602 +3,460 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Human Margin</title>
-<meta name="description" content="Recommend-only analysis tool for Norwegian B2C media buyers deciding between AI-led, hybrid and human-led creative. Prototype on synthetic data.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Human Margin">
-<meta property="og:description" content="Recommend-only analysis tool for Norwegian B2C media buyers deciding between AI-led, hybrid and human-led creative. Prototype on synthetic data.">
-<meta property="og:url" content="https://jokelhar.github.io/human-margin/">
-<meta property="og:image" content="https://jokelhar.github.io/human-margin/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Human Margin">
-<meta name="twitter:description" content="Recommend-only analysis tool for Norwegian B2C media buyers deciding between AI-led, hybrid and human-led creative. Prototype on synthetic data.">
-<meta name="twitter:image" content="https://jokelhar.github.io/human-margin/og-image.png">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<style>:root{color-scheme:light}body{margin:0;font:14px "Helvetica Neue",Helvetica,Arial,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Check your creative budget — Human Margin</title>
+<meta name="description" content="Three answers from your own numbers: your human margin, whether the budget can hit your target, and whether a quote is normal. Runs in your browser; nothing is stored.">
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#FAFAF9; --card:#FFFFFF; --ink:#111111; --ink2:#2A2A2A; --ink3:#444444;
+    --muted:#5C5C5C; --muted2:#6B6B67; --line:#E6E6E2; --line2:#DCDCD7; --line3:#EDEDEA;
+    --accent:#3346D3; --accent-ink:#FFFFFF; --seg-bg:#F2F2EF; --seg-on:#FFFFFF;
+    --chip-bg:#EFEFEC; --chip-ink:#444444; --chip-dot:#8A8A86; --band:#C9CFF5;
+    --field:#FFFFFF; --shadow:0 1px 2px rgba(0,0,0,0.08), 0 0 0 1px #E2E2DE;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:#141418; --card:#1D1D23; --ink:#F3F3F1; --ink2:#E4E4E1; --ink3:#CBCBC7;
+      --muted:#A6A6A1; --muted2:#9E9E99; --line:#2C2C34; --line2:#3A3A44; --line3:#27272E;
+      --accent:#ABB4FF; --accent-ink:#13131A; --seg-bg:#26262D; --seg-on:#35353F;
+      --chip-bg:#2A2A31; --chip-ink:#CFCFCA; --chip-dot:#7E7E86; --band:#3B4493;
+      --field:#191920; --shadow:0 1px 2px rgba(0,0,0,0.4), 0 0 0 1px #3A3A44;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:#141418; --card:#1D1D23; --ink:#F3F3F1; --ink2:#E4E4E1; --ink3:#CBCBC7;
+    --muted:#A6A6A1; --muted2:#9E9E99; --line:#2C2C34; --line2:#3A3A44; --line3:#27272E;
+    --accent:#ABB4FF; --accent-ink:#13131A; --seg-bg:#26262D; --seg-on:#35353F;
+    --chip-bg:#2A2A31; --chip-ink:#CFCFCA; --chip-dot:#7E7E86; --band:#3B4493;
+    --field:#191920; --shadow:0 1px 2px rgba(0,0,0,0.4), 0 0 0 1px #3A3A44;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-feature-settings:'tnum' 1, 'cv11' 1; -webkit-font-smoothing:antialiased; line-height:1.5; }
+  .wrap { max-width:1120px; margin:0 auto;
+    padding-left:max(24px, env(safe-area-inset-left)); padding-right:max(24px, env(safe-area-inset-right)); }
+  a { color:var(--accent); }
+  header { display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; padding-block:20px; }
+  .brand { font-size:15px; font-weight:600; letter-spacing:-0.01em; }
+  nav { display:flex; gap:20px; align-items:center; font-size:14px; }
+  nav a { color:var(--muted); text-decoration:none; }
+  nav a:hover { color:var(--ink); }
+  .theme-btn { appearance:none; border:1px solid var(--line2); background:var(--card); color:var(--ink);
+    border-radius:999px; padding:6px 12px; font:inherit; font-size:13px; font-weight:500; cursor:pointer; min-height:32px; }
+  h1 { margin:0; font-size:34px; line-height:1.15; font-weight:600; letter-spacing:-0.025em; }
+  .sub { margin:10px 0 0; font-size:16px; line-height:1.5; color:var(--muted); max-width:560px; }
+  .hero { padding-block:12px 24px; }
+  .statusrow { margin-top:20px; min-height:32px; display:flex; align-items:center; }
+  .chip { display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px;
+    background:var(--chip-bg); color:var(--chip-ink); font-size:13px; font-weight:500; }
+  .chip .dot { width:6px; height:6px; border-radius:3px; background:var(--chip-dot); }
+  .linkbtn { appearance:none; border:0; background:none; padding:6px 0; font:inherit; font-size:13px;
+    font-weight:500; color:var(--accent); cursor:pointer; }
+  main { padding-bottom:48px; display:flex; flex-wrap:wrap; gap:24px; align-items:flex-start; }
+  form.card { flex:1 1 340px; min-width:0; background:var(--card); border:1px solid var(--line);
+    border-radius:16px; padding:24px; display:flex; flex-direction:column; gap:28px; }
+  fieldset { border:0; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; }
+  legend { padding:0; margin-bottom:0; font-size:13px; font-weight:600; color:var(--ink); }
+  label.f { display:flex; flex-direction:column; gap:6px; font-size:13px; color:var(--muted); }
+  .inwrap { position:relative; display:block; }
+  .field { width:100%; height:44px; padding:0 12px; border:1px solid var(--line2);
+    border-radius:10px; background:var(--field); font:inherit; font-size:15px; color:var(--ink); }
+  .field.kr { padding-right:40px; }
+  .suffix { position:absolute; right:12px; top:12px; font-size:14px; color:var(--chip-dot); pointer-events:none; }
+  .grid2 { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px; }
+  .seg { display:grid; grid-auto-flow:column; grid-auto-columns:1fr; gap:4px; padding:4px;
+    background:var(--seg-bg); border-radius:12px; }
+  .seg.four { grid-template-columns:repeat(2, minmax(0,1fr)); grid-auto-flow:row; }
+  .seg button { appearance:none; min-height:40px; padding:8px 10px; border:0; border-radius:9px;
+    font:inherit; font-size:14px; font-weight:500; cursor:pointer; background:transparent; color:var(--muted); }
+  .seg button[aria-pressed="true"] { background:var(--seg-on); color:var(--ink); box-shadow:var(--shadow); }
+  details.fold { border-top:1px solid var(--line3); padding-top:16px; }
+  summary { cursor:pointer; font-size:13px; font-weight:500; color:var(--accent); }
+  .hint { margin:0; font-size:12px; line-height:1.5; color:var(--muted2); }
+  .answers { flex:999 1 460px; min-width:0; display:flex; flex-direction:column; gap:16px; }
+  section.card { background:var(--card); border:1px solid var(--line); border-radius:16px; }
+  .hero-card { padding:28px; }
+  .small-card { padding:24px; }
+  .grid-cards { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:16px; }
+  .ahead { margin:0; font-size:13px; font-weight:500; color:var(--muted); }
+  .bignum { margin-top:10px; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .bignum .n { font-size:52px; line-height:1; font-weight:600; letter-spacing:-0.03em; }
+  .bignum .u { font-size:17px; font-weight:500; color:var(--ink3); }
+  .big2 { margin-top:10px; font-size:30px; line-height:1.1; font-weight:600; letter-spacing:-0.02em; }
+  .atext { margin:14px 0 0; font-size:16px; line-height:1.55; color:var(--ink2); max-width:560px; }
+  .atext.sm { margin-top:12px; font-size:15px; }
+  .actx { margin:6px 0 0; font-size:14px; line-height:1.5; color:var(--muted); }
+  .anote { margin:10px 0 0; font-size:13px; line-height:1.5; color:var(--muted2); }
+  .how { margin:10px 0 0; font-size:13px; line-height:1.6; color:var(--muted); white-space:pre-line; }
+  details.how-d { margin-top:16px; }
+  .band { margin-top:20px; position:relative; height:34px; }
+  .band .track { position:absolute; left:0; right:0; top:8px; height:6px; border-radius:3px; background:var(--seg-bg); }
+  .band .fill { position:absolute; top:8px; height:6px; border-radius:3px; background:var(--band); }
+  .band .marker { position:absolute; top:2px; width:3px; height:18px; border-radius:2px; background:var(--accent); transform:translateX(-1px); }
+  .band .lab { position:absolute; top:20px; font-size:12px; color:var(--muted2); transform:translateX(-50%); white-space:nowrap; }
+  .copyrow { display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:4px 4px 0; }
+  .copybtn { appearance:none; height:44px; padding:0 18px; border:1px solid var(--line2); border-radius:10px;
+    background:var(--card); font:inherit; font-size:14px; font-weight:500; color:var(--ink); cursor:pointer; }
+  .copyrow span { font-size:13px; color:var(--muted2); }
+  footer { border-top:1px solid var(--line); }
+  footer .wrap { padding-block:28px 40px; display:flex; flex-direction:column; gap:8px;
+    font-size:13px; line-height:1.6; color:var(--muted2); }
+  footer p { margin:0; max-width:720px; }
+  footer a { color:var(--ink3); }
+  :focus-visible { outline:2px solid var(--accent); outline-offset:2px; border-radius:6px; }
+  /* nav menu: inline on desktop, a "Menu" button on phones */
+  .menu { position:relative; display:flex; gap:20px; align-items:center; }
+  .menu-btn { appearance:none; border:0; background:none; padding:6px 0; font:inherit;
+    font-size:14px; font-weight:500; color:var(--muted); cursor:pointer; display:none; }
+  .links { display:flex; gap:20px; align-items:center; }
+  @media (max-width:640px){
+    .menu-btn { display:inline-block; }
+    .links { display:none; position:absolute; right:0; top:34px; z-index:20;
+      flex-direction:column; align-items:flex-start; gap:14px; background:var(--card);
+      border:1px solid var(--line); border-radius:12px; padding:14px 16px; box-shadow:0 6px 24px rgba(0,0,0,0.12); }
+    .links.open { display:flex; }
+  }
+  .margin-row { display:grid; grid-template-columns:1fr auto; gap:8px; align-items:end; }
+  .margin-row select { height:44px; width:auto; padding:0 8px; }
+  /* mobile sticky answer bar */
+  .stickybar { position:fixed; left:0; right:0; bottom:0; z-index:30; display:none;
+    width:100%; appearance:none; border:0; border-top:1px solid var(--line);
+    background:var(--card); color:var(--ink); font:inherit; font-size:15px; font-weight:600;
+    text-align:left; padding:14px max(16px, env(safe-area-inset-left)) calc(14px + env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-right));
+    cursor:pointer; box-shadow:0 -2px 16px rgba(0,0,0,0.10); }
+  .stickybar .arrow { float:right; color:var(--muted); font-weight:500; }
+  @media (max-width:819px){ .stickybar.show { display:block; } .answers { padding-bottom:64px; } }
+</style>
 </head>
 <body>
-<meta name="claude:viewport-fit-sides" content="cover">
-<title>Human Margin</title>
-<style>
-  /* Layout: fixed left identity rail + scrollable content; a light SaaS
-     analytics console in a Helvetica-forward voice. */
-  :root {
-    --bg: #eef0f4; --surface: #ffffff; --surface-2: #f7f8fb;
-    --ink: #0b1020; --ink-2: #565d70; --ink-3: #8a90a2;
-    --line: #e4e7ee; --rail: #0b1020; --rail-ink: #e9eaf0;
-    --accent: #4f46e5; --accent-2: #ff5c7a; --accent-ink: #ffffff;
-    --pos: #15803d; --pos-bg: #e7f4ec; --warn: #b45309; --warn-bg: #fbf0dd;
-    --crit: #b91c1c; --crit-bg: #fbe6e6; --neutral: #475569; --neutral-bg: #eef1f5;
-    --s-human: #2563eb; --s-assist: #f59e0b; --s-gen: #db2777;
-    --shadow: 0 1px 2px rgba(11,16,32,.06), 0 8px 24px rgba(11,16,32,.05);
-    --font-display: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
-    --font-body: "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
-    --font-mono: ui-monospace, "SF Mono", "Menlo", "Consolas", monospace;
-    --r: 14px;
-  }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
-    --bg: #080a10; --surface: #121724; --surface-2: #0e131e;
-    --ink: #eceef4; --ink-2: #a3abbd; --ink-3: #6e7689;
-    --line: #232a3b; --rail: #05070c; --rail-ink: #eceef4;
-    --accent: #818cf8; --accent-2: #ff7d95; --accent-ink: #0b1020;
-    --pos: #4ade80; --pos-bg: #112a1c; --warn: #fbbf24; --warn-bg: #2b2008;
-    --crit: #f87171; --crit-bg: #2c1414; --neutral: #94a3b8; --neutral-bg: #1a2030;
-    --s-human: #60a5fa; --s-assist: #fbbf24; --s-gen: #f472b6;
-    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
-    color-scheme: dark;
-  } }
-  :root[data-theme="dark"] {
-    --bg: #080a10; --surface: #121724; --surface-2: #0e131e;
-    --ink: #eceef4; --ink-2: #a3abbd; --ink-3: #6e7689;
-    --line: #232a3b; --rail: #05070c; --rail-ink: #eceef4;
-    --accent: #818cf8; --accent-2: #ff7d95; --accent-ink: #0b1020;
-    --pos: #4ade80; --pos-bg: #112a1c; --warn: #fbbf24; --warn-bg: #2b2008;
-    --crit: #f87171; --crit-bg: #2c1414; --neutral: #94a3b8; --neutral-bg: #1a2030;
-    --s-human: #60a5fa; --s-assist: #fbbf24; --s-gen: #f472b6;
-    --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.35);
-    color-scheme: dark;
-  }
-
-  * { box-sizing: border-box; }
-  body { background: var(--bg); color: var(--ink); font-family: var(--font-body);
-    -webkit-font-smoothing: antialiased; line-height: 1.45; }
-  h1,h2,h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
-  .tnum { font-variant-numeric: tabular-nums; }
-
-  .app { display: grid; grid-template-columns: 236px 1fr; min-height: 100%; }
-
-  /* identity rail */
-  .rail { background: var(--rail); color: var(--rail-ink); position: sticky; top: 0;
-    align-self: start; height: 100vh; padding: 22px 18px;
-    padding-left: max(18px, env(safe-area-inset-left, 0px));
-    display: flex; flex-direction: column; gap: 26px; }
-  .brand { display: flex; align-items: center; gap: 10px; }
-  .brand .mark { width: 30px; height: 30px; border-radius: 9px;
-    background: linear-gradient(135deg, var(--accent), var(--accent-2)); flex: none; }
-  .brand b { font-family: var(--font-display); font-weight: 800; font-size: 18px;
-    letter-spacing: -.02em; }
-  .brand small { display: block; color: var(--ink-3); font-size: 11px; letter-spacing: .14em;
-    text-transform: uppercase; margin-top: 1px; }
-  .brandblock { display: flex; flex-direction: column; gap: 7px; }
-  .brand-tag { font-size: 11px; color: var(--ink-3); line-height: 1.4; max-width: 190px; }
-  .nav { display: flex; flex-direction: column; gap: 2px; }
-  .nav a { color: var(--rail-ink); opacity: .72; text-decoration: none; font-size: 13.5px;
-    padding: 8px 10px; border-radius: 9px; display: flex; gap: 9px; align-items: center; }
-  .nav a:hover { opacity: 1; background: rgba(255,255,255,.06); }
-  .nav .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .5; }
-  .rail .foot { margin-top: auto; font-size: 11.5px; color: var(--ink-3); line-height: 1.5; }
-  .rail .foot b { color: var(--rail-ink); font-weight: 700; }
-
-  /* content */
-  .main { min-width: 0; padding: 26px; padding-block: 22px 56px;
-    padding-left: max(26px, env(safe-area-inset-left, 0px));
-    padding-right: max(26px, env(safe-area-inset-right, 0px)); }
-  .topline { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: flex-end;
-    justify-content: space-between; margin-bottom: 22px; }
-  .topline h1 { font-size: 27px; font-weight: 800; letter-spacing: -.025em; }
-  .topline p { margin: 5px 0 0; color: var(--ink-2); font-size: 14px; max-width: 62ch; }
-  .topctl { display: flex; gap: 8px; align-items: center; }
-  .pill { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-    padding: 5px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink-2);
-    background: var(--surface); white-space: nowrap; }
-  .pill.live { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
-  .synthnote { margin: 10px 0 0; font-size: 12px; color: var(--ink-2);
-    border-left: 3px solid var(--accent); padding: 3px 0 3px 10px; max-width: 62ch; }
-  button.toggle { font: inherit; font-size: 12.5px; cursor: pointer; border: 1px solid var(--line);
-    background: var(--surface); color: var(--ink-2); border-radius: 999px; padding: 6px 12px; }
-  button.toggle:hover { color: var(--ink); }
-  .by { font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); }
-  .na { color: var(--ink-3); }
-  a.briefint { font-size: 12.5px; color: var(--ink-2); text-decoration: underline; white-space: nowrap; align-self: center; }
-
-  .grid { display: grid; gap: 16px; }
-  .kpis { grid-template-columns: repeat(4, 1fr); margin-bottom: 18px; }
-  .card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r);
-    box-shadow: var(--shadow); padding: 18px; min-width: 0; }
-  .kpi .k-label { font-size: 12px; color: var(--ink-2); letter-spacing: .02em; }
-  .kpi .k-val { font-family: var(--font-display); font-weight: 800; font-size: 30px;
-    letter-spacing: -.03em; margin-top: 6px; line-height: 1; }
-  .kpi .k-sub { font-size: 12px; color: var(--ink-3); margin-top: 7px; }
-  .kpi .k-sub.warn { color: var(--warn); font-weight: 600; }
-
-  section { margin-top: 26px; }
-  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 13px; flex-wrap: wrap; }
-  .sec-head h2 { font-size: 16px; font-weight: 800; letter-spacing: -.01em; }
-  .sec-head .eyebrow { font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--ink-3); font-weight: 700; }
-  .sec-head .note { font-size: 12.5px; color: var(--ink-2); margin-left: auto; }
-  .caption { margin: -2px 0 14px; font-size: 13px; color: var(--ink-2); max-width: 72ch; }
-  .glossary { margin: 2px 0 20px; font-size: 12.5px; line-height: 1.55; color: var(--ink-2);
-    background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 11px 14px; }
-  .glossary b { color: var(--ink); }
-
-  .two { grid-template-columns: 1.35fr 1fr; align-items: start; }
-
-  /* chart */
-  .chart-wrap { overflow-x: auto; }
-  svg .axis { stroke: var(--line); }
-  svg .grid { stroke: color-mix(in srgb, var(--line) 70%, transparent); }
-  svg text { fill: var(--ink-2); font-family: var(--font-mono); font-size: 11px; }
-  svg .lbl { fill: var(--ink); font-family: var(--font-display); font-weight: 700; font-size: 11.5px; }
-  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 2px 0 12px; }
-  .legend span { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink-2); }
-  .legend i { width: 13px; height: 3px; border-radius: 2px; display: inline-block; }
-
-  /* provenance table */
-  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
-  th, td { text-align: right; padding: 9px 10px; border-bottom: 1px solid var(--line); white-space: nowrap; }
-  th:first-child, td:first-child { text-align: left; }
-  thead th { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3);
-    font-weight: 700; border-bottom: 1px solid var(--line); }
-  tbody tr:last-child td { border-bottom: none; }
-  .prov-chip { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
-  .prov-chip i { width: 10px; height: 10px; border-radius: 3px; }
-
-  /* matrix */
-  .verdict { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 12px;
-    padding: 4px 9px; border-radius: 7px; white-space: nowrap; }
-  .v-human { color: var(--pos); background: var(--pos-bg); }
-  .v-ai { color: var(--warn); background: var(--warn-bg); }
-  .v-none { color: var(--neutral); background: var(--neutral-bg); }
-  .v-insuf { color: var(--ink-3); background: var(--surface-2); border: 1px dashed var(--line); }
-  .conf { font-size: 10.5px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
-    color: var(--ink-3); }
-  .win { font-size: 11.5px; color: var(--ink-2); }
-
-  /* affinity bars */
-  .aff-row { display: grid; grid-template-columns: 130px 1fr; gap: 12px; align-items: center;
-    margin-bottom: 11px; }
-  .aff-row > span { font-size: 13px; color: var(--ink); font-weight: 600; }
-  .bars { display: flex; flex-direction: column; gap: 5px; min-width: 0; }
-  .bar { display: grid; grid-template-columns: 62px 1fr auto; gap: 8px; align-items: center;
-    font-size: 11.5px; color: var(--ink-2); }
-  .bar .track { height: 10px; background: var(--surface-2); border-radius: 999px; overflow: hidden; }
-  .bar .fill { height: 100%; border-radius: 999px; }
-
-  /* alerts */
-  .alerts { display: flex; flex-direction: column; gap: 11px; }
-  .alert { display: grid; grid-template-columns: 4px 1fr; gap: 12px; background: var(--surface);
-    border: 1px solid var(--line); border-radius: 12px; padding: 13px 14px 13px 0; box-shadow: var(--shadow); }
-  .alert .stripe { border-radius: 4px 0 0 4px; }
-  .alert.high .stripe { background: var(--crit); } .alert.medium .stripe { background: var(--warn); }
-  .alert.info .stripe { background: var(--accent); } .alert.ok .stripe { background: var(--pos); }
-  .alert h4 { margin: 0 0 3px; font-size: 13.5px; font-family: var(--font-display); font-weight: 700;
-    display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
-  .alert .tag { font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--ink-3); }
-  .alert p { margin: 2px 0 0; font-size: 12.5px; color: var(--ink-2); }
-  .alert .action { margin-top: 6px; font-size: 12.5px; color: var(--ink); }
-  .alert .action b { color: var(--accent); font-weight: 700; }
-
-  .directional { border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line));
-    background: color-mix(in srgb, var(--accent) 5%, var(--surface)); }
-  .directional .badge { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--accent); border: 1px solid currentColor; border-radius: 6px;
-    padding: 2px 7px; margin-bottom: 8px; }
-  .gauge { display: flex; gap: 6px; align-items: center; margin: 8px 0; }
-  .gauge i { height: 8px; flex: 1; border-radius: 2px; background: var(--surface-2); }
-  .gauge i.on { background: var(--accent); }
-
-  .compliance { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
-  .flag .f-n { font-family: var(--font-display); font-weight: 800; font-size: 24px; letter-spacing: -.02em; }
-  .flag .f-l { font-size: 12.5px; color: var(--ink-2); margin-top: 4px; }
-  .flag .f-law { font-size: 11px; color: var(--ink-3); margin-top: 6px; }
-
-  .page-foot { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--line);
-    font-size: 12px; color: var(--ink-3); display: flex; flex-wrap: wrap; gap: 6px 18px; }
-  .page-foot a { color: var(--ink-2); text-decoration: underline; }
-
-  @media (max-width: 900px) {
-    .app { grid-template-columns: 1fr; }
-    .rail { position: static; height: auto; flex-direction: row; align-items: center; flex-wrap: wrap;
-      gap: 14px; }
-    .rail .nav, .rail .foot { display: none; }
-    .topline { align-items: flex-start; }
-    .topctl { flex-wrap: wrap; }
-    .kpis { grid-template-columns: repeat(2, 1fr); }
-    .two { grid-template-columns: 1fr; }
-    .compliance { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 460px) {
-    .kpis { grid-template-columns: 1fr; }
-    .main { padding: 18px; padding-block: 16px 44px; }
-  }
-  @media (prefers-reduced-motion: no-preference) { .fill, .bar .fill { transition: width .5s ease; } }
-</style>
-
-<div class="app">
-  <aside class="rail">
-    <div class="brandblock">
-      <div class="brand">
-        <span class="mark" aria-hidden="true"></span>
-        <span><b>Human</b><small>Margin</small></span>
-      </div>
-      <div class="brand-tag">AI vs human led creative, measured</div>
-    </div>
-    <nav class="nav">
-      <a href="#overview"><span class="dot"></span>Overview</a>
-      <a href="#matrix"><span class="dot"></span>Decision matrix</a>
-      <a href="#exhaustion"><span class="dot"></span>AI exhaustion</a>
-      <a href="#patterns"><span class="dot"></span>Patterns</a>
-      <a href="#compliance"><span class="dot"></span>Compliance</a>
-      <a href="planner.html"><span class="dot"></span>Planner →</a>
-    </nav>
-    <div class="foot">
-      <b>Recommend-only.</b> This agent never changes budgets, bids or status on any platform.
-      <br><br>Prototype on synthetic data with deliberately planted patterns, not real results.
-    </div>
-  </aside>
-
-  <main class="main">
-    <div class="topline">
-      <div>
-        <h1 id="overview">Human&nbsp;vs&nbsp;AI creative signal</h1>
-        <p id="subtitle">Where human-led content earns its cost, and where AI iterations win on efficiency, for Norwegian B2C audiences, at placement grain.</p>
-        <p class="synthnote">Demonstration on <b>synthetic data with deliberately planted patterns</b>, a prototype, not real campaign results.</p>
-      </div>
-      <div class="topctl">
-        <span class="pill live" id="range-pill">—</span>
-        <span class="pill">Synthetic · prototype</span>
-        <a class="briefint" href="sample-brief.html">Sample weekly brief</a>
-        <button class="toggle" id="theme-toggle" type="button" aria-label="Toggle theme">◐ Theme</button>
-      </div>
-    </div>
-
-    <div class="grid kpis" id="kpis"></div>
-
-    <p class="glossary"><b>Glossary.</b> <b>‰</b> is per thousand impressions. <b>Half-life</b> is the number of exposures at which response falls by half, so shorter means faster fatigue. A <b>placement</b> is one ad slot, such as Instagram Reels or Snapchat Spotlight. <b>Minimum sample</b> means placements below a set impression threshold are marked insufficient data rather than judged.</p>
-
-    <section id="provenance">
-      <div class="sec-head">
-        <span class="eyebrow">Provenance</span>
-        <h2>The core contrast</h2>
-        <span class="note" id="prov-note"></span>
-      </div>
-      <p class="caption">How human-led, AI-assisted and AI-generated creative compare on clicks, saves and return, and how fast each one tires.</p>
-      <div class="grid two">
-        <div class="card">
-          <div class="legend" id="decay-legend"></div>
-          <div class="chart-wrap"><svg id="decay" viewBox="0 0 640 300" width="100%" role="img"
-            aria-label="Click-through rate decay as frequency rises, by provenance"></svg></div>
-          <p style="margin:10px 2px 0;font-size:12.5px;color:var(--ink-2)">
-            CTR against cumulative frequency. Shorter half-life = faster fatigue.</p>
+  <div class="wrap">
+    <header>
+      <div class="brand">Human Margin</div>
+      <nav class="menu">
+        <button type="button" class="menu-btn" id="menubtn" aria-expanded="false" aria-controls="navlinks">Menu</button>
+        <div class="links" id="navlinks">
+          <a href="#how">How it works</a>
+          <a href="research.html">Research prototype</a>
+          <a href="https://github.com/JoKelHar/human-margin">GitHub</a>
         </div>
-        <div class="card" style="overflow-x:auto">
-          <table id="prov-table">
-            <thead><tr><th>Provenance</th><th>CTR&nbsp;‰</th><th>Saves&nbsp;‰</th><th>ROAS</th><th>Half-life</th></tr></thead>
-            <tbody></tbody>
-          </table>
-          <p style="margin:12px 2px 0;font-size:12.5px;color:var(--ink-2)" id="prov-takeaway"></p>
+        <button type="button" class="theme-btn" id="theme" aria-label="Switch colour theme">Dark</button>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <h1>Check your creative budget.</h1>
+      <p class="sub">Three answers from your own numbers. Takes a minute, runs in your browser.</p>
+      <div class="statusrow" id="statusrow"></div>
+    </div>
+
+    <main>
+      <form class="card" id="form" aria-label="Your numbers"></form>
+      <div class="answers">
+        <section class="card hero-card" aria-labelledby="a2h">
+          <h2 class="ahead" id="a2h">Your human margin</h2>
+          <div class="bignum"><span class="n" id="a2-big">—</span><span class="u" id="a2-unit"></span></div>
+          <p class="atext" id="a2-text"></p>
+          <p class="actx" id="a2-ctx" hidden></p>
+          <p class="anote" id="a2-note" hidden></p>
+          <details class="how-d"><summary>How we got this</summary><p class="how" id="a2-how"></p></details>
+        </section>
+
+        <div class="grid-cards">
+          <section class="card small-card" aria-labelledby="a1h">
+            <h2 class="ahead" id="a1h">Can this budget do it?</h2>
+            <div class="big2" id="a1-big">—</div>
+            <p class="atext sm" id="a1-text"></p>
+            <details class="how-d"><summary>How we got this</summary><p class="how" id="a1-how"></p></details>
+          </section>
+
+          <section class="card small-card" aria-labelledby="a3h">
+            <h2 class="ahead" id="a3h">Is this quote normal?</h2>
+            <div class="big2" id="a3-big">—</div>
+            <p class="atext sm" id="a3-text"></p>
+            <div class="band" aria-hidden="true" id="a3-band">
+              <div class="track"></div>
+              <div class="fill" id="a3-fill"></div>
+              <div class="marker" id="a3-marker"></div>
+              <div class="lab" id="a3-low"></div>
+              <div class="lab" id="a3-high"></div>
+            </div>
+            <details class="how-d"><summary>How we got this</summary><p class="how" id="a3-how"></p></details>
+          </section>
+        </div>
+
+        <div class="copyrow">
+          <button type="button" class="copybtn" id="copy">Copy link to these numbers</button>
+          <span>Your numbers travel in the link. Nothing is stored.</span>
         </div>
       </div>
-    </section>
+    </main>
+  </div>
 
-    <section id="matrix">
-      <div class="sec-head">
-        <span class="eyebrow">Decision matrix</span>
-        <h2>Verdict by channel × placement</h2>
-        <span class="note">Let the data decide, min-sample gated, placement-level.</span>
-      </div>
-      <p class="caption">For each ad slot, which approach actually won on the numbers, with low-volume placements marked insufficient rather than judged.</p>
-      <div class="card" style="overflow-x:auto">
-        <table id="matrix-table">
-          <thead><tr>
-            <th>Channel</th><th>Placement</th><th>Verdict</th><th>Decided by</th>
-            <th>Human ROAS</th><th>AI ROAS</th><th>Human saves‰</th><th>AI saves‰</th><th>Conf.</th>
-          </tr></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-      <div class="legend" style="margin-top:12px">
-        <span><i style="background:var(--pos);height:10px;width:10px;border-radius:3px"></i>Human wins</span>
-        <span><i style="background:var(--warn);height:10px;width:10px;border-radius:3px"></i>AI wins</span>
-        <span><i style="background:var(--neutral);height:10px;width:10px;border-radius:3px"></i>No difference</span>
-        <span><i style="background:var(--ink-3);height:10px;width:10px;border-radius:3px"></i>Insufficient data</span>
-      </div>
-    </section>
+  <button type="button" class="stickybar" id="stickybar" aria-label="Jump to your answers"></button>
 
-    <section>
-      <div class="sec-head"><span class="eyebrow">Placement affinity</span>
-        <h2>Lo-fi wins vertical; polished wins feed</h2></div>
-      <p class="caption">Which creative styles do best in vertical, full-screen placements versus in-feed.</p>
-      <div class="card" id="affinity"></div>
-    </section>
-
-    <div class="grid two" style="margin-top:26px;align-items:start">
-      <section id="exhaustion" style="margin:0">
-        <div class="sec-head"><span class="eyebrow">Alerts</span><h2>AI exhaustion</h2></div>
-        <p class="caption">Audience segments where the human versus AI gap is widening over time, a sign that AI creative is tiring.</p>
-        <div class="alerts" id="exhaustion-alerts"></div>
-      </section>
-      <section id="patterns" style="margin:0">
-        <div class="sec-head"><span class="eyebrow">Forward</span><h2>Patterns</h2></div>
-        <p class="caption">Upcoming seasonal moments with what has happened in that window and the evidence behind it. Described, never prescribed.</p>
-        <div class="alerts" id="patterns-alerts"></div>
-      </section>
+  <footer id="how">
+    <div class="wrap">
+      <p>Costs count money paid out, not your own time. AI work usually carries more of that uncounted time, so this slightly flatters AI.</p>
+      <p>These are positions, not advice. The ranges are rough and the call is yours.</p>
+      <p style="margin-top:8px;"><a href="research.html">Research prototype</a> · <a href="https://github.com/JoKelHar/human-margin">GitHub</a> · Built by João Harrison</p>
     </div>
+  </footer>
 
-    <section id="compliance">
-      <div class="sec-head"><span class="eyebrow">Norwegian compliance</span>
-        <h2>Flagged for review</h2>
-        <span class="note">Flagged, never auto-resolved.</span></div>
-      <p class="caption">Creatives and posts that may need a disclosure or labelling check under Norwegian marketing rules.</p>
-      <div class="grid compliance" id="compliance-flags"></div>
-    </section>
-
-    <div class="page-foot">
-      <span id="foot-gen">—</span>
-      <span>Recommend-only · evidence over opinion</span>
-      <span id="foot-note"></span>
-      <span>Built by João Harrison</span>
-      <span><a href="https://github.com/JoKelHar/human-margin">GitHub</a> · <a href="https://www.linkedin.com/in/joaoharrison">LinkedIn</a></span>
-      <span><a href="sample-brief.html">See a sample weekly brief</a></span>
-    </div>
-  </main>
-</div>
-
-<script id="insights" type="application/json">{"meta": {"brand": "Fjord Active (synthetic)", "generated_at": "2026-11-10T10:30:18", "data_range": ["2026-06-05", "2026-10-21"], "today": "2026-11-10", "prototype_note": "Descriptive prototype on synthetic data. Not the Phase-4 statistical engine."}, "kpis": {"spend_nok": 4498406, "impressions": 72477975, "blended_roas": 3.46, "untagged_spend_pct": 7.4, "untagged_warn": false, "currencies": ["GBP", "NOK", "SEK"]}, "provenance": [{"provenance": "human_led", "spend_nok": 1199041, "impressions": 19897201, "ctr_permille": 6.26, "save_permille": 3.19, "share_permille": 2.402, "roas": 3.55, "half_life": 11.5}, {"provenance": "ai_assisted", "spend_nok": 1470597, "impressions": 23547407, "ctr_permille": 5.13, "save_permille": 2.588, "share_permille": 1.695, "roas": 4.03, "half_life": 6.5}, {"provenance": "ai_generated", "spend_nok": 1495529, "impressions": 24060097, "ctr_permille": 3.79, "save_permille": 1.254, "share_permille": 1.099, "roas": 2.92, "half_life": 4.1}], "decay_curve": {"human_led": [{"f": 0, "ctr": 11.71}, {"f": 1, "ctr": 11.01}, {"f": 2, "ctr": 10.69}, {"f": 3, "ctr": 10.3}, {"f": 4, "ctr": 9.83}, {"f": 5, "ctr": 9.31}, {"f": 6, "ctr": 8.96}, {"f": 7, "ctr": 8.47}, {"f": 8, "ctr": 8.21}, {"f": 9, "ctr": 7.82}, {"f": 10, "ctr": 7.51}, {"f": 11, "ctr": 4.71}], "ai_assisted": [{"f": 1, "ctr": 12.08}, {"f": 2, "ctr": 11.14}, {"f": 3, "ctr": 10.57}, {"f": 4, "ctr": 9.64}, {"f": 5, "ctr": 9.03}, {"f": 6, "ctr": 8.3}, {"f": 7, "ctr": 7.77}, {"f": 8, "ctr": 7.07}, {"f": 9, "ctr": 6.57}, {"f": 10, "ctr": 6.05}, {"f": 11, "ctr": 2.97}], "ai_generated": [{"f": 1, "ctr": 13.0}, {"f": 2, "ctr": 11.73}, {"f": 3, "ctr": 10.55}, {"f": 4, "ctr": 9.21}, {"f": 5, "ctr": 8.08}, {"f": 6, "ctr": 7.12}, {"f": 7, "ctr": 6.3}, {"f": 8, "ctr": 5.5}, {"f": 9, "ctr": 4.69}, {"f": 10, "ctr": 4.12}, {"f": 11, "ctr": 1.55}]}, "affinity": {"staff_founder": {"vertical": 34.4, "feed": 32.8}, "documentary": {"vertical": 33.7, "feed": 31.6}, "creator": {"feed": 36.5}, "ugc": {"feed": 26.1, "vertical": 34.5}}, "matrix": [{"channel": "meta", "placement": "feed", "verdict": "AI wins", "decided_by": "ROAS", "sub_type": "product_imagery", "confidence": "high", "human_roas": 2.03, "ai_roas": 2.44, "human_save_permille": 3.18, "ai_save_permille": 2.0, "human_ctr_permille": 5.18, "ai_ctr_permille": 4.46, "impressions": 3210125}, {"channel": "meta", "placement": "feed_video", "verdict": "AI wins", "decided_by": "ROAS", "sub_type": "product_imagery", "confidence": "high", "human_roas": 1.77, "ai_roas": 3.06, "human_save_permille": 3.19, "ai_save_permille": 2.01, "human_ctr_permille": 5.16, "ai_ctr_permille": 4.47, "impressions": 1303315}, {"channel": "meta", "placement": "reels", "verdict": "Human wins", "decided_by": "ROAS", "sub_type": "staff_founder", "confidence": "high", "human_roas": 2.45, "ai_roas": 1.78, "human_save_permille": 3.23, "ai_save_permille": 2.01, "human_ctr_permille": 5.19, "ai_ctr_permille": 4.48, "impressions": 3911352}, {"channel": "meta", "placement": "stories", "verdict": "Human wins", "decided_by": "ROAS", "sub_type": "staff_founder", "confidence": "high", "human_roas": 2.78, "ai_roas": 2.06, "human_save_permille": 3.19, "ai_save_permille": 2.0, "human_ctr_permille": 5.2, "ai_ctr_permille": 4.49, "impressions": 3201541}, {"channel": "snapchat", "placement": "spotlight", "verdict": "Human wins", "decided_by": "ROAS", "sub_type": "documentary", "confidence": "high", "human_roas": 6.49, "ai_roas": 3.89, "human_save_permille": 3.2, "ai_save_permille": 1.77, "human_ctr_permille": 6.74, "ai_ctr_permille": 5.25, "impressions": 6195948}, {"channel": "snapchat", "placement": "stories", "verdict": "Human wins", "decided_by": "ROAS", "sub_type": "documentary", "confidence": "high", "human_roas": 5.34, "ai_roas": 3.23, "human_save_permille": 3.2, "ai_save_permille": 1.79, "human_ctr_permille": 6.73, "ai_ctr_permille": 5.29, "impressions": 4372430}, {"channel": "tiktok", "placement": "feed", "verdict": "AI wins", "decided_by": "ROAS", "sub_type": "product_imagery", "confidence": "high", "human_roas": 3.68, "ai_roas": 4.23, "human_save_permille": 3.18, "ai_save_permille": 1.91, "human_ctr_permille": 6.39, "ai_ctr_permille": 4.17, "impressions": 39150850}, {"channel": "youtube", "placement": "in_stream", "verdict": "No difference", "decided_by": "ROAS", "sub_type": null, "confidence": "high", "human_roas": 2.06, "ai_roas": 1.93, "human_save_permille": 3.15, "ai_save_permille": 1.98, "human_ctr_permille": 7.12, "ai_ctr_permille": 4.96, "impressions": 3300706}, {"channel": "youtube", "placement": "shorts", "verdict": "Human wins", "decided_by": "ROAS", "sub_type": "staff_founder", "confidence": "high", "human_roas": 3.71, "ai_roas": 1.93, "human_save_permille": 3.18, "ai_save_permille": 1.99, "human_ctr_permille": 7.17, "ai_ctr_permille": 4.9, "impressions": 2858438}], "exhaustion_alerts": [{"segment": "age_35_44 · meta", "severity": "high", "widening_permille": 1.85, "detail": "Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in.", "action": "Human-led UGC and creator content held up better than AI in this segment as frequency rose."}, {"segment": "age_25_34 · snapchat", "severity": "medium", "widening_permille": 1.14, "detail": "Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in.", "action": "Human-led UGC and creator content held up better than AI in this segment as frequency rose."}, {"segment": "age_25_34 · meta", "severity": "medium", "widening_permille": 1.1, "detail": "Human vs AI CTR gap is widening over the flight; AI exhaustion is setting in.", "action": "Human-led UGC and creator content held up better than AI in this segment as frequency rose."}], "patterns": [{"category": "Consumer electronics", "moment": "Black Friday", "window": "2026-11-26 to 2026-12-01", "timing": "in 2 weeks", "pattern": "AI product mock-ups (AA-PRD) have performed in line for catalogue variants here; AI-generated UGC (AG-UGC) carries the highest callout risk.", "evidence": "No established history · 0 prior years · no pattern yet", "weeks_out": 2, "status": "untested"}, {"category": "Gifts and retail", "moment": "Advent og jul", "window": "2026-11-30 to 2026-12-20", "timing": "in 2 weeks", "pattern": "Human-led gift storytelling has led here; AI product mock-ups (AA-PRD) sit in line for catalogue scale.", "evidence": "No established history · 0 prior years · no pattern yet", "weeks_out": 2, "status": "untested"}, {"category": "Ski and winter travel", "moment": "Vinterferie", "window": "2027-02-20 to 2027-03-01", "timing": "in 14 weeks", "pattern": "Human-led destination and ski content has led here; AI product mock-ups (AA-PRD) sit in line for gear catalogue variants.", "evidence": "No established history · 0 prior years · no pattern yet", "weeks_out": 14, "status": "untested"}, {"category": "Graduation wear and party", "moment": "Russetid", "window": "2027-04-07 to 2027-05-04", "timing": "in 21 weeks", "pattern": "Human-led creator and UGC has led here; this young audience calls out AI-generated UGC (AG-UGC) fastest.", "evidence": "No established history · 0 prior years · no pattern yet", "weeks_out": 21, "status": "untested"}, {"category": "National-day wear, flags and food", "moment": "17. mai", "window": "2027-05-14 to 2027-05-21", "timing": "in 26 weeks", "pattern": "Human-led cultural content with Norwegian-ness markers has led; AI-generated scenes (AG-SCN) of national symbols draw more callouts here.", "evidence": "No established history · 0 prior years · no pattern yet", "weeks_out": 26, "status": "untested"}], "organic_alerts": [{"post_id": "acc00-post005", "provenance": null, "sub_type": null, "quality_vs_median": 4, "boosted": false, "action": "A post over-indexing on saves and shares, already boosted."}, {"post_id": "acc00-post009", "provenance": "human_led", "sub_type": "staff_founder", "quality_vs_median": 1, "boosted": false, "action": "A human-led organic post over-indexing on saves and shares, not yet boosted."}, {"post_id": "acc00-post004", "provenance": "human_led", "sub_type": "ugc", "quality_vs_median": -1, "boosted": false, "action": "A human-led organic post over-indexing on saves and shares, not yet boosted."}, {"post_id": "acc00-post006", "provenance": "human_led", "sub_type": "documentary", "quality_vs_median": -1, "boosted": false, "action": "A human-led organic post over-indexing on saves and shares, not yet boosted."}], "saturation": {"label": "directional estimate", "category": "Outdoor & activewear (NO)", "trend": "rising", "level": "high", "classifier_accuracy_pct": 78, "classifier_accuracy_margin": 6, "note": "Share of category feed that looks AI-generated appears to be RISING. Directional only, never a competitor league table. A signal to read alongside your own performance data, not a verdict."}, "patterns_note": "Some moments have no reliable history yet, so no pattern is established for them — a blank, not a recommendation.", "compliance": {"kroppspress_review_count": 9, "ai_disclosure_count": 9, "boosted_posts_labelling": 7, "creator_disclosure_count": 1}}</script>
+<script src="budget-data.js"></script>
+<script src="budget-core.js"></script>
 <script>
 (function () {
-  "use strict";
-  var D;
-  try { D = JSON.parse(document.getElementById("insights").textContent); }
-  catch (e) { D = null; }
-  if (!D) { return; }
+  var D = window.HM_DATA, C = window.HMCore;
+  var EXAMPLE = { industry:'nightlife', goalMode:'target', goal:300, price:250, budget:5000,
+    fmt:'ugc', human:4200, ai:300, reuse:2, cpm:115, margin:null, marginUnit:'kr', otherNoun:null };
 
-  var PROV_LABEL = { human_led: "Human-led", ai_assisted: "AI-assisted", ai_generated: "AI-generated" };
-  var PROV_VAR = { human_led: "--s-human", ai_assisted: "--s-assist", ai_generated: "--s-gen" };
-  // Norwegian calendar moments kept as proper nouns, with a short English gloss.
-  var MOMENT_GLOSS = {
-    "Julebordsesong": "Julebordsesong (Christmas party season)",
-    "Første snø": "Første snø (first snow)",
-    "Advent og jul": "Advent og jul (Advent and Christmas)",
-    "Vinterferie": "Vinterferie (winter break)",
-    "Russetid": "Russetid (graduation season)",
-    "17. mai": "17. mai (Constitution Day)",
-    "Påske": "Påske (Easter)",
-    "Fellesferie": "Fellesferie (common summer holiday)",
-    "Skolestart": "Skolestart (back to school)"
-  };
-  var nf = new Intl.NumberFormat("en-US");
-  function fmtNOK(n){ return "kr " + nf.format(Math.round(n)); }
-  function fmtImpr(n){ return n>=1e6 ? (n/1e6).toFixed(1)+"M" : nf.format(n); }
-  function el(tag, cls, html){ var e=document.createElement(tag); if(cls)e.className=cls; if(html!=null)e.innerHTML=html; return e; }
-  // Normalise dashes used as punctuation in data-driven copy (presentation only).
-  function tidy(s){ return String(s).replace(/Human[–-]AI/g, "Human vs AI").replace(/\s[—–]\s/g, ", "); }
+  // --- theme (per-viewer convenience); the button names the mode it switches TO ---
+  function isDarkNow(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    return cur ? cur === 'dark' : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  }
+  function setThemeLabel(){ document.getElementById('theme').textContent = isDarkNow() ? 'Light' : 'Dark'; }
+  (function initTheme(){
+    var saved = null;
+    try { saved = localStorage.getItem('hm-theme'); } catch (e) {}
+    if (saved === 'light' || saved === 'dark') document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('theme').addEventListener('click', function () {
+      var next = isDarkNow() ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('hm-theme', next); } catch (e) {}
+      setThemeLabel();
+    });
+  })();
 
-  // ---- range + footer
-  document.getElementById("range-pill").textContent = D.meta.data_range[0] + " → " + D.meta.data_range[1];
-  document.getElementById("foot-gen").textContent = "Generated " + D.meta.generated_at.replace("T"," ");
-  document.getElementById("foot-note").textContent = D.meta.prototype_note;
-  document.getElementById("subtitle").textContent =
-    "Where human-led content earns its cost, and where AI iterations win on efficiency, "
-    + D.meta.brand + ", at placement grain.";
+  var state = Object.assign({}, EXAMPLE);
+  var edited = false, copied = false;
 
-  // ---- KPIs
-  var k = D.kpis;
-  var kpis = [
-    { label: "Spend (NOK-normalised)", val: fmtNOK(k.spend_nok), sub: "Currencies: " + k.currencies.join(", ") },
-    { label: "Impressions", val: fmtImpr(k.impressions), sub: "Placement-level rows" },
-    { label: "Blended ROAS", val: k.blended_roas.toFixed(2) + "×", sub: "Across all provenance" },
-    { label: "Untagged spend", val: k.untagged_spend_pct + "%", sub: k.untagged_warn ? "Above warn threshold, tag it" : "Within threshold",
-      warn: k.untagged_warn }
-  ];
-  var kw = document.getElementById("kpis");
-  kpis.forEach(function (x) {
-    var c = el("div", "card kpi");
-    c.appendChild(el("div", "k-label", x.label));
-    c.appendChild(el("div", "k-val tnum", x.val));
-    c.appendChild(el("div", "k-sub" + (x.warn ? " warn" : ""), x.sub));
-    kw.appendChild(c);
-  });
+  // --- read inputs from the URL (numbers travel in the link) ---
+  (function fromURL(){
+    var present = C.fromQuery(location.search), keys = Object.keys(present);
+    if (keys.length) { keys.forEach(function (k) { state[k] = present[k]; }); edited = true; }
+  })();
 
-  // ---- provenance table + legend + takeaway
-  var tb = document.querySelector("#prov-table tbody");
-  D.provenance.forEach(function (p) {
-    var tr = el("tr");
-    tr.appendChild(el("td", null, '<span class="prov-chip"><i style="background:var('+PROV_VAR[p.provenance]+')"></i>'+PROV_LABEL[p.provenance]+'</span>'));
-    tr.appendChild(el("td", "tnum", p.ctr_permille.toFixed(2)));
-    tr.appendChild(el("td", "tnum", p.save_permille.toFixed(2)));
-    tr.appendChild(el("td", "tnum", p.roas.toFixed(2) + "×"));
-    tr.appendChild(el("td", "tnum", p.half_life != null ? p.half_life.toFixed(1) : "—"));
-    tb.appendChild(tr);
-  });
-  var leg = document.getElementById("decay-legend");
-  D.provenance.forEach(function (p) {
-    leg.appendChild(el("span", null, '<i style="background:var('+PROV_VAR[p.provenance]+')"></i>'+PROV_LABEL[p.provenance]));
-  });
-  var hH = (D.provenance.find(function(p){return p.provenance==="human_led";})||{}).half_life;
-  var gH = (D.provenance.find(function(p){return p.provenance==="ai_generated";})||{}).half_life;
-  if (hH && gH) {
-    document.getElementById("prov-note").textContent = "AI-generated fatigues ≈" + (hH/gH).toFixed(1) + "× faster";
-    document.getElementById("prov-takeaway").textContent =
-      "AI-generated wins raw clicks when fresh, but its half-life is " + gH.toFixed(1) + " vs "
-      + hH.toFixed(1) + " for human-led, and it trails on saves and ROAS. Human-led earns its premium.";
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+  var NULLABLE = { human: 1, ai: 1, margin: 1, otherNoun: 1 };
+  function indOf(key){ for (var i=0;i<D.industries.length;i++) if (D.industries[i].key===key) return D.industries[i]; return D.industries[0]; }
+
+  // --- build the form once; answers re-render live ---
+  function buildForm(){
+    var f = document.getElementById('form');
+    var indOpts = D.industries.map(function (i) {
+      return '<option value="' + i.key + '"' + (i.key === state.industry ? ' selected' : '') + '>' + esc(i.label) + '</option>';
+    }).join('');
+    var goalBtns = [{key:'target',label:'Hit a target'},{key:'max',label:'As many as possible'}].map(function (g) {
+      return segBtn('goalMode', g.key, g.label, state.goalMode === g.key);
+    }).join('');
+    var fmtBtns = D.formats.map(function (ff) {
+      return segBtn('fmt', ff.key, ff.label, state.fmt === ff.key);
+    }).join('');
+    f.innerHTML =
+      '<fieldset><legend>What you sell</legend>' +
+        '<label class="f">Industry<select class="field" id="industry">' + indOpts + '</select></label>' +
+        '<label class="f" id="other-wrap" style="display:none;">What do you call a sale?' +
+          '<input type="text" class="field" id="otherNoun" placeholder="sale" value="' + attr(state.otherNoun) + '"></label>' +
+        '<label class="f"><span id="price-label"></span>' + moneyKr('price', state.price) +
+          '<span class="hint" id="price-hint"></span></label>' +
+      '</fieldset>' +
+      '<fieldset><legend>Goal and budget</legend>' +
+        '<div class="seg" role="group" aria-label="Goal">' + goalBtns + '</div>' +
+        '<div class="grid2">' +
+          '<label class="f" id="target-wrap"><span>Target <span id="unit-many"></span></span>' +
+            moneyPlain('goal', state.goal) + '</label>' +
+          '<label class="f">Media budget' + moneyKr('budget', state.budget) + '</label>' +
+        '</div>' +
+      '</fieldset>' +
+      '<fieldset><legend>Creative</legend>' +
+        '<div class="seg four" role="group" aria-label="Format">' + fmtBtns + '</div>' +
+        '<div class="grid2">' +
+          '<label class="f">Human quote' + moneyKr('human', state.human) + '</label>' +
+          '<label class="f">AI version' + moneyKr('ai', state.ai) + '</label>' +
+        '</div>' +
+        '<label class="f">Campaigns the creative will run in' +
+          '<input type="number" inputmode="numeric" min="1" class="field" id="reuse" value="' + attr(state.reuse) + '"></label>' +
+      '</fieldset>' +
+      '<details class="fold"><summary>I know my own numbers</summary>' +
+        '<div style="margin-top:12px; display:flex; flex-direction:column; gap:12px;">' +
+          '<label class="f">CPM (cost per 1 000 views)' + moneyKr('cpm', state.cpm) +
+            '<span class="hint">Leave as is for a rough estimate (115 kr, US-based). Your own figure replaces it everywhere.</span></label>' +
+          '<label class="f">Margin per <span id="margin-unit-word"></span> (optional)' +
+            '<span class="margin-row">' +
+              '<span class="inwrap"><input type="text" inputmode="numeric" id="margin" class="field money kr" value="' + attr(group(state.margin)) + '"><span class="suffix" aria-hidden="true" id="margin-suffix">kr</span></span>' +
+              '<select class="field" id="marginUnit" aria-label="Margin unit"><option value="kr"' + (state.marginUnit==='pct'?'':' selected') + '>kr</option><option value="pct"' + (state.marginUnit==='pct'?' selected':'') + '>%</option></select>' +
+            '</span>' +
+            '<span class="hint">When set, this replaces the price in the human-margin maths.</span></label>' +
+        '</div>' +
+      '</details>';
+
+    // listeners
+    document.getElementById('industry').addEventListener('change', function (e) { setVal('industry', e.target.value); updateControls(); });
+    document.getElementById('otherNoun').addEventListener('input', function (e) {
+      var v = e.target.value; setVal('otherNoun', v.trim() === '' ? null : v); });
+    document.getElementById('reuse').addEventListener('input', function (e) { setVal('reuse', e.target.value); });
+    document.getElementById('marginUnit').addEventListener('change', function (e) {
+      state.marginUnit = e.target.value; edited = true;
+      document.getElementById('margin-suffix').textContent = e.target.value === 'pct' ? '%' : 'kr';
+      markEdited(); render(); });
+    Array.prototype.forEach.call(f.querySelectorAll('.money'), function (el) {
+      el.addEventListener('input', function () { onMoney(el); });
+    });
+    Array.prototype.forEach.call(f.querySelectorAll('.seg button'), function (b) {
+      b.addEventListener('click', function () {
+        state[b.getAttribute('data-k')] = b.getAttribute('data-v'); edited = true; copied = false;
+        Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function (x) {
+          x.setAttribute('aria-pressed', x === b ? 'true' : 'false');
+        });
+        markEdited(); updateControls();
+      });
+    });
+    document.getElementById('margin-suffix').textContent = state.marginUnit === 'pct' ? '%' : 'kr';
+  }
+  function segBtn(k, v, label, on){
+    return '<button type="button" data-k="' + k + '" data-v="' + v + '" aria-pressed="' + (on ? 'true' : 'false') + '">' + esc(label) + '</button>';
+  }
+  function moneyKr(id, v){
+    return '<span class="inwrap"><input type="text" inputmode="numeric" id="' + id +
+      '" class="field kr money" value="' + attr(group(v)) + '"><span class="suffix" aria-hidden="true">kr</span></span>';
+  }
+  function moneyPlain(id, v){
+    return '<input type="text" inputmode="numeric" class="field money" id="' + id + '" value="' + attr(group(v)) + '">';
+  }
+  function attr(v){ return v == null ? '' : esc(v); }
+  function group(v){ if (v == null || v === '') return ''; return String(v).replace(/\s/g,'').replace(/[^\d]/g,'').replace(/\B(?=(\d{3})+(?!\d))/g,' '); }
+  function onMoney(el){
+    var start = el.selectionStart, before = el.value.slice(0, start).replace(/[^\d]/g,'').length;
+    var g = group(el.value); el.value = g;
+    var pos = 0, count = 0;
+    while (pos < g.length && count < before) { if (/\d/.test(g[pos])) count++; pos++; }
+    try { el.setSelectionRange(pos, pos); } catch (e) {}
+    var id = el.id, stripped = g.replace(/\s/g,'');
+    setVal(id, (NULLABLE[id] && stripped === '') ? null : g);
   }
 
-  // ---- decay chart (hand-rolled SVG)
-  drawDecay();
-  function drawDecay() {
-    var W=640,H=300, m={l:46,r:92,t:14,b:34};
-    var iw=W-m.l-m.r, ih=H-m.t-m.b;
-    var series = D.provenance.map(function(p){ return { key:p.provenance, pts:(D.decay_curve[p.provenance]||[]) }; })
-      .filter(function(s){ return s.pts.length>1; });
-    var maxF=0, maxY=0;
-    series.forEach(function(s){ s.pts.forEach(function(d){ maxF=Math.max(maxF,d.f); maxY=Math.max(maxY,d.ctr); }); });
-    maxF=Math.max(maxF,1); maxY=Math.ceil(maxY/2)*2 || 2;
-    var x=function(f){ return m.l + (f/maxF)*iw; };
-    var y=function(v){ return m.t + ih - (v/maxY)*ih; };
-    var svg=document.getElementById("decay"); var ns="http://www.w3.org/2000/svg"; var parts="";
-    // gridlines + y labels
-    for (var g=0; g<=4; g++){ var vy=maxY*g/4; var py=y(vy);
-      parts+='<line class="grid" x1="'+m.l+'" y1="'+py+'" x2="'+(W-m.r)+'" y2="'+py+'"/>';
-      parts+='<text x="'+(m.l-8)+'" y="'+(py+4)+'" text-anchor="end">'+vy.toFixed(0)+'</text>'; }
-    // x labels
-    for (var f=0; f<=maxF; f+=Math.ceil(maxF/6)){ parts+='<text x="'+x(f)+'" y="'+(H-m.b+18)+'" text-anchor="middle">'+f+'</text>'; }
-    parts+='<text x="'+(m.l+iw/2)+'" y="'+(H-2)+'" text-anchor="middle">Cumulative frequency</text>';
-    parts+='<text x="'+(m.l-34)+'" y="'+(m.t-2)+'" text-anchor="start">CTR ‰</text>';
-    parts+='<line class="axis" x1="'+m.l+'" y1="'+(m.t+ih)+'" x2="'+(W-m.r)+'" y2="'+(m.t+ih)+'"/>';
-    // de-collide endpoint labels: keep a minimum vertical gap between them
-    var ends = series.map(function(s){ var last=s.pts[s.pts.length-1];
-      return { key:s.key, fx:x(last.f), fy:y(last.ctr), ly:y(last.ctr) }; });
-    ends.sort(function(a,b){ return a.ly-b.ly; });
-    var GAP=15;
-    for (var i=1;i<ends.length;i++){ if (ends[i].ly - ends[i-1].ly < GAP) ends[i].ly = ends[i-1].ly + GAP; }
-    var endByKey={}; ends.forEach(function(e){ endByKey[e.key]=e; });
-    // series paths + first-point markers
-    series.forEach(function(s){
-      var col="var("+PROV_VAR[s.key]+")";
-      var dd=s.pts.map(function(d,i){ return (i?"L":"M")+x(d.f).toFixed(1)+" "+y(d.ctr).toFixed(1); }).join(" ");
-      parts+='<path d="'+dd+'" fill="none" stroke="'+col+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
-      var first=s.pts[0];
-      parts+='<circle cx="'+x(first.f)+'" cy="'+y(first.ctr)+'" r="3" fill="'+col+'" opacity=".55"/>';
-    });
-    // endpoint dots + de-collided labels (with a short leader where nudged)
-    ends.forEach(function(e){
-      var col="var("+PROV_VAR[e.key]+")";
-      parts+='<circle cx="'+e.fx+'" cy="'+e.fy+'" r="3.5" fill="'+col+'"/>';
-      if (Math.abs(e.ly-e.fy)>1) parts+='<line x1="'+(e.fx+4)+'" y1="'+e.fy+'" x2="'+(e.fx+8)+'" y2="'+e.ly+'" stroke="'+col+'" stroke-width="1" opacity=".5"/>';
-      parts+='<text class="lbl" x="'+(e.fx+10)+'" y="'+(e.ly+4)+'" fill="'+col+'">'+PROV_LABEL[e.key].replace("-led","").replace("AI-","AI ")+'</text>';
-    });
-    svg.innerHTML=parts;
+  function setVal(k, v){ state[k] = v; edited = true; copied = false; markEdited(); render(); }
+
+  function updateControls(){
+    var r = C.compute(state), ind = indOf(state.industry);
+    setText('price-label', ind.price_label);
+    var ph = document.getElementById('price-hint');
+    if (ph) { ph.textContent = ind.hint || ''; ph.style.display = ind.hint ? '' : 'none'; }
+    setText('unit-many', r.unit_many);
+    setText('margin-unit-word', r.unit_one);
+    var ow = document.getElementById('other-wrap');
+    if (ow) ow.style.display = (state.industry === 'other') ? '' : 'none';
+    var tw = document.getElementById('target-wrap');
+    if (tw) tw.style.display = (state.goalMode === 'target') ? '' : 'none';
+    render();
   }
 
-  // ---- decision matrix
-  var CH={ meta:"Meta", snapchat:"Snapchat", tiktok:"TikTok", youtube:"YouTube" };
-  var vClass={ "Human wins":"v-human","AI wins":"v-ai","No difference":"v-none","Insufficient data":"v-insuf" };
-  var mt=document.querySelector("#matrix-table tbody");
-  function roas(v){ return v==null ? '<span class="na">n/a</span>' : v.toFixed(2)+"×"; }
-  D.matrix.forEach(function(c){
-    var tr=el("tr");
-    tr.appendChild(el("td", null, "<b>"+(CH[c.channel]||c.channel)+"</b>"));
-    tr.appendChild(el("td", null, c.placement.replace(/_/g," ")));
-    tr.appendChild(el("td", null, '<span class="verdict '+vClass[c.verdict]+'">'+c.verdict+'</span>'
-      + (c.sub_type? ' <span class="win">'+c.sub_type.replace(/_/g," ")+'</span>':'')));
-    tr.appendChild(el("td", null, c.decided_by ? '<span class="by">'+c.decided_by+'</span>' : '<span class="na">n/a</span>'));
-    tr.appendChild(el("td", "tnum", roas(c.human_roas)));
-    tr.appendChild(el("td", "tnum", roas(c.ai_roas)));
-    tr.appendChild(el("td", "tnum", c.human_save_permille.toFixed(2)));
-    tr.appendChild(el("td", "tnum", c.ai_save_permille.toFixed(2)));
-    tr.appendChild(el("td", null, '<span class="conf">'+c.confidence+'</span>'));
-    mt.appendChild(tr);
-  });
+  function setText(id, v){ var el = document.getElementById(id); if (el) el.textContent = v; }
+  function show(id, on){ var el = document.getElementById(id); if (el) el.hidden = !on; }
 
-  // ---- affinity
-  var aff=document.getElementById("affinity");
-  var affMax=0; Object.keys(D.affinity).forEach(function(s){ var o=D.affinity[s];
-    Object.keys(o).forEach(function(f){ affMax=Math.max(affMax,o[f]); }); });
-  affMax=Math.max(affMax,1);
-  var SUBS={ ugc:"UGC", creator:"Creator", staff_founder:"Staff / founder", documentary:"Documentary", studio_polished:"Studio-polished" };
-  Object.keys(D.affinity).forEach(function(sub){
-    var o=D.affinity[sub]; var row=el("div","aff-row");
-    row.appendChild(el("span", null, SUBS[sub]||sub));
-    var bars=el("div","bars");
-    [["vertical","Vertical"],["feed","Feed"]].forEach(function(pair){
-      var fam=pair[0]; if(o[fam]==null) return;
-      var pct=(o[fam]/affMax*100).toFixed(1);
-      var col = fam==="vertical" ? "var(--accent)" : "var(--accent-2)";
-      var b=el("div","bar");
-      b.appendChild(el("span", null, pair[1]));
-      b.appendChild(el("div","track", '<div class="fill" style="width:'+pct+'%;background:'+col+'"></div>'));
-      b.appendChild(el("span","tnum", o[fam].toFixed(1)+"%"));
-      bars.appendChild(b);
-    });
-    row.appendChild(bars); aff.appendChild(row);
-  });
-
-  // ---- exhaustion alerts
-  var ex=document.getElementById("exhaustion-alerts");
-  if (!D.exhaustion_alerts.length) ex.appendChild(makeAlert("ok","No widening gaps","Stable","No segment shows accelerating AI fatigue in this window.",""));
-  D.exhaustion_alerts.forEach(function(a){
-    ex.appendChild(makeAlert(a.severity, a.segment, "Gap +"+a.widening_permille+"‰", a.detail, a.action));
-  });
-
-  // ---- patterns: calendar + organic + saturation (descriptive)
-  var op=document.getElementById("patterns-alerts");
-  D.patterns.slice(0,4).forEach(function(c){
-    var moment = MOMENT_GLOSS[c.moment]||c.moment;
-    // category + moment (title), plain-language timing, the observed pattern, the evidence line
-    op.appendChild(makeAlert(c.status==="history"?"info":"medium",
-      c.category + " · " + moment, c.timing, c.pattern, c.evidence));
-  });
-  if (D.patterns_note) op.appendChild(el("p", "caption", D.patterns_note));
-  D.organic_alerts.filter(function(o){return o.provenance==="human_led";}).slice(0,1).forEach(function(o){
-    op.appendChild(makeAlert("ok","Organic outperformer","+"+o.quality_vs_median+"% vs median",
-      "A human-led organic post is over-indexing on saves + shares.", o.action));
-  });
-  var s=D.saturation;
-  var card=el("div","alert info directional");
-  card.appendChild(el("div","stripe"));
-  var body=el("div");
-  body.appendChild(el("span","badge", s.label));
-  body.appendChild(el("h4", null, "Category saturation · "+s.category));
-  var g=el("div","gauge"); var lvl=s.level==="high"?5:s.level==="medium"?3:2;
-  for(var i=0;i<5;i++){ g.appendChild(el("i", i<lvl?"on":"")); }
-  body.appendChild(g);
-  body.appendChild(el("p", null, "AI presence appears <b>"+s.trend+"</b> · level <b>"+s.level+"</b>. Classifier accuracy ≈ "
-    + s.classifier_accuracy_pct + "% ± " + s.classifier_accuracy_margin + "."));
-  body.appendChild(el("p","action", tidy(s.note)));
-  card.appendChild(body); op.appendChild(card);
-
-  function makeAlert(sev, title, tag, detail, action){
-    var a=el("div","alert "+sev); a.appendChild(el("div","stripe"));
-    var b=el("div");
-    b.appendChild(el("h4", null, title + (tag? ' <span class="tag">'+tag+'</span>':'')));
-    if(detail) b.appendChild(el("p", null, tidy(detail)));
-    if(action) b.appendChild(el("div","action", '<b>→</b> '+tidy(action)));
-    a.appendChild(b); return a;
+  function render(){
+    var r = C.compute(state);
+    // A2 hero
+    setText('a2-big', r.a2.big); setText('a2-unit', r.a2.unit); setText('a2-text', r.a2.text);
+    show('a2-ctx', r.a2.has_context); if (r.a2.has_context) setText('a2-ctx', r.a2.context);
+    show('a2-note', !!r.a2.note); if (r.a2.note) setText('a2-note', r.a2.note);
+    setText('a2-how', r.a2.how);
+    // A1
+    setText('a1-big', r.a1.big); setText('a1-text', r.a1.text); setText('a1-how', r.a1.how);
+    // A3
+    setText('a3-big', r.a3.big); setText('a3-text', r.a3.text); setText('a3-how', r.a3.how);
+    drawBand(r.a3);
+    // mobile sticky bar (hero answer at a glance)
+    var sb = document.getElementById('stickybar');
+    if (sb) {
+      sb.innerHTML = (r.a2.big === '—')
+        ? 'Add your numbers to see your margin<span class="arrow" aria-hidden="true">View ↓</span>'
+        : 'Human margin: ' + esc(r.a2.big) + ' ' + esc(r.unit_many) + '<span class="arrow" aria-hidden="true">View ↓</span>';
+    }
   }
 
-  // ---- compliance
-  var cf=document.getElementById("compliance-flags");
-  var comp=D.compliance;
-  [
-    { n: comp.kroppspress_review_count, l: "AI creatives showing people", law: "Kroppspress-merking (retouched-image labelling)" },
-    { n: comp.ai_disclosure_count, l: "AI-generated creatives", law: "Platform AI disclosure (Meta, TikTok)" },
-    { n: comp.boosted_posts_labelling, l: "Boosted organic posts", law: "Markedsføringsloven (Marketing Control Act): advertising disclosure" },
-    { n: comp.creator_disclosure_count, l: "Creator-led creatives", law: "Influencer labelling check" }
-  ].forEach(function(x){
-    var c=el("div","card flag");
-    c.appendChild(el("div","f-n tnum", x.n));
-    c.appendChild(el("div","f-l", x.l));
-    c.appendChild(el("div","f-law", x.law));
-    cf.appendChild(c);
+  function drawBand(a3){
+    var band = document.getElementById('a3-band');
+    band.style.display = a3.blank ? 'none' : '';
+    if (a3.blank) return;
+    var fill = document.getElementById('a3-fill');
+    fill.style.left = a3.pct_low + '%';
+    fill.style.width = (a3.pct_high - a3.pct_low) + '%';
+    document.getElementById('a3-marker').style.left = a3.pct_human + '%';
+    var lo = document.getElementById('a3-low'), hi = document.getElementById('a3-high');
+    lo.style.left = a3.pct_low + '%'; lo.textContent = C.kr(a3.low);
+    hi.style.left = a3.pct_high + '%'; hi.textContent = C.kr(a3.high);
+  }
+
+  // --- example chip / reset ---
+  function markEdited(){ renderStatus(); }
+  function renderStatus(){
+    var el = document.getElementById('statusrow');
+    if (!edited) {
+      el.innerHTML = '<span class="chip"><span class="dot" aria-hidden="true"></span>Example numbers — put in yours.</span>';
+    } else {
+      el.innerHTML = '<button type="button" class="linkbtn" id="reset">Reset to example</button>';
+      document.getElementById('reset').addEventListener('click', function () {
+        state = Object.assign({}, EXAMPLE); edited = false; copied = false;
+        history.replaceState(null, '', location.pathname);
+        buildForm(); updateControls(); renderStatus(); setCopyLabel();
+      });
+    }
+  }
+
+  // --- copy link (encode inputs in the URL only when clicked; nothing stored) ---
+  function buildLink(){
+    return location.origin + location.pathname + '?' + C.toQuery(state);
+  }
+  function setCopyLabel(){ document.getElementById('copy').textContent = copied ? 'Link copied' : 'Copy link to these numbers'; }
+  document.getElementById('copy').addEventListener('click', function () {
+    var url = buildLink();
+    history.replaceState(null, '', url);
+    var done = function () { copied = true; setCopyLabel(); };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, done);
+    } else { done(); }
   });
 
-  // ---- theme toggle (per-viewer convenience only)
-  var root=document.documentElement, KEY="mk-theme";
-  try { var saved=localStorage.getItem(KEY); if(saved) root.setAttribute("data-theme", saved); } catch(e){}
-  document.getElementById("theme-toggle").addEventListener("click", function(){
-    var cur=root.getAttribute("data-theme");
-    var isDark = cur ? cur==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-    var next= isDark ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    try { localStorage.setItem(KEY, next); } catch(e){}
-    drawDecay();
-  });
+  // --- mobile nav menu toggle ---
+  (function navMenu(){
+    var btn = document.getElementById('menubtn'), links = document.getElementById('navlinks');
+    btn.addEventListener('click', function () {
+      var open = links.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
+      a.addEventListener('click', function () { links.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); });
+    });
+  })();
+
+  // --- mobile sticky bar: tap to jump to answers; hide when they are in view ---
+  (function stickyBar(){
+    var sbtn = document.getElementById('stickybar');
+    sbtn.addEventListener('click', function () {
+      var a = document.querySelector('.answers');
+      if (a) a.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function (entries) {
+        sbtn.classList.toggle('show', !entries[0].isIntersecting);
+      }, { threshold: 0 });
+      obs.observe(document.querySelector('.answers'));
+    }
+  })();
+
+  // --- go ---
+  buildForm(); updateControls(); renderStatus(); setCopyLabel(); setThemeLabel();
 })();
 </script>
-
 </body>
 </html>

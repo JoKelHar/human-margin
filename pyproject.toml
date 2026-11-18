@@ -34,7 +34,8 @@ dashboard = [
 [dependency-groups]
 dev = [
     "pytest>=8.0",
-    "duckdb>=1.1",   # so the full (agent-side) test suite runs in development
+    "duckdb>=1.1",            # so the full (agent-side) test suite runs in development
+    "playwright>=1.44",       # budget-page visual check (field height/border); skipped if no browser
 ]
 
 [build-system]
