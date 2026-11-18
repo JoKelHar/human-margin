@@ -54,6 +54,13 @@
   .sub { margin:10px 0 0; font-size:16px; line-height:1.5; color:var(--muted); max-width:560px; }
   .hero { padding-block:12px 24px; }
   .statusrow { margin-top:20px; min-height:32px; display:flex; align-items:center; }
+  .modebar { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:6px; padding:6px;
+    background:var(--seg-bg); border-radius:14px; margin:16px 0 0; }
+  .modebar button { appearance:none; min-height:52px; border:0; border-radius:10px; font:inherit;
+    font-size:14px; font-weight:500; cursor:pointer; background:transparent; color:var(--muted); padding:10px 12px; }
+  .modebar button[aria-pressed="true"] { background:var(--seg-on); color:var(--ink); box-shadow:var(--shadow); }
+  .feedback { margin:10px 0 0; font-size:13px; color:var(--muted); }
+  .feedback a { color:var(--accent); }
   .chip { display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px;
     background:var(--chip-bg); color:var(--chip-ink); font-size:13px; font-weight:500; }
   .chip .dot { width:6px; height:6px; border-radius:3px; background:var(--chip-dot); }
@@ -185,9 +192,12 @@
       <div class="statusrow" id="statusrow"></div>
     </div>
 
+    <div class="modebar" role="group" aria-label="What you are doing" id="modebar"></div>
+
     <main>
       <form class="card" id="form" aria-label="Your numbers"></form>
       <div class="answers">
+       <div id="buying-view">
         <section class="card hero-card" aria-labelledby="a2h">
           <h2 class="ahead" id="a2h">Your human margin</h2>
           <div class="bignum"><span class="n" id="a2-big">—</span><span class="u" id="a2-unit"></span></div>
@@ -221,6 +231,8 @@
         </div>
 
         <section class="card small-card" id="ai-card" aria-label="AI options"></section>
+       </div>
+       <div id="creator-view" hidden></div>
 
         <div class="copyrow">
           <button type="button" class="copybtn" id="copy">Copy link to these numbers</button>
@@ -246,8 +258,16 @@
 <script>
 (function () {
   var D = window.HM_DATA, C = window.HMCore;
-  var EXAMPLE = { industry:'nightlife', goalMode:'target', goal:300, price:250, budget:5000,
-    fmt:'ugc', human:4200, ai:300, reuse:2, cpm:115, margin:null, marginUnit:'kr', otherNoun:null };
+  var FEEDBACK_EMAIL = 'hello@human-margin.example';   // placeholder address
+  var CREATOR_DEFAULTS = { usageMonths:6, revisions:2, rawFiles:false, exampleIndustry:'nightlife', examplePrice:null };
+  var EXAMPLE_BUYING = { mode:'buying', industry:'nightlife', goalMode:'target', goal:300, price:250,
+    budget:5000, fmt:'ugc', human:4200, ai:300, reuse:2, cpm:115, margin:null, marginUnit:'kr', otherNoun:null };
+  var EXAMPLE_CREATOR = { mode:'creator', fmt:'ugc', price:3500, usageMonths:6, revisions:2,
+    rawFiles:false, exampleIndustry:'nightlife', examplePrice:null, margin:null, marginUnit:'kr' };
+  function exampleFor(mode){ return mode === 'creator'
+    ? Object.assign({}, EXAMPLE_BUYING, EXAMPLE_CREATOR)       // keep buying keys defined too
+    : Object.assign({}, CREATOR_DEFAULTS, EXAMPLE_BUYING); }
+  var EXAMPLE = exampleFor('buying');
 
   // --- theme (per-viewer convenience); the button names the mode it switches TO ---
   function isDarkNow(){
@@ -267,18 +287,20 @@
     });
   })();
 
-  var state = Object.assign({}, EXAMPLE);
-  var edited = false, copied = false;
+  var state, edited = false, copied = false;
 
-  // --- read inputs from the URL (numbers travel in the link) ---
+  // --- read mode + inputs from the URL (numbers travel in the link) ---
   (function fromURL(){
     var present = C.fromQuery(location.search), keys = Object.keys(present);
-    if (keys.length) { keys.forEach(function (k) { state[k] = present[k]; }); edited = true; }
+    var mode = present.mode === 'creator' ? 'creator' : 'buying';
+    state = exampleFor(mode); state.mode = mode;
+    keys.forEach(function (k) { state[k] = present[k]; });
+    if (keys.some(function (k) { return k !== 'mode'; })) edited = true;
   })();
 
   function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
 
-  var NULLABLE = { human: 1, ai: 1, margin: 1, otherNoun: 1 };
+  var NULLABLE = { human: 1, ai: 1, margin: 1, otherNoun: 1, examplePrice: 1 };
   function indOf(key){ for (var i=0;i<D.industries.length;i++) if (D.industries[i].key===key) return D.industries[i]; return D.industries[0]; }
 
   // --- build the form once; answers re-render live ---
@@ -376,7 +398,8 @@
     setVal(id, (NULLABLE[id] && stripped === '') ? null : g);
   }
 
-  function setVal(k, v){ state[k] = v; edited = true; copied = false; markEdited(); render(); }
+  function setVal(k, v){ state[k] = v; edited = true; copied = false; markEdited(); rerender(); }
+  function rerender(){ if (state.mode === 'creator') renderCreator(); else render(); }
 
   function updateControls(){
     var r = C.compute(state), ind = indOf(state.industry);
@@ -414,11 +437,10 @@
         ? 'Add your numbers to see your margin<span class="arrow" aria-hidden="true">View ↓</span>'
         : 'Human margin: ' + esc(r.a2.big) + ' ' + esc(r.unit_many) + '<span class="arrow" aria-hidden="true">View ↓</span>';
     }
-    renderAiCard(state.fmt, r.ai_eff);
+    renderAiCard(document.getElementById('ai-card'), state.fmt, r.ai_eff);
   }
 
   // --- "If you go AI" card (depends only on format + AI cost) ---
-  var lastAiKey = null;
   function srcLink(url){ return url ? '<a class="ai-src" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">source</a>' : ''; }
   function li(items){ return '<ul>' + items.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
   function toolRow(t){
@@ -441,12 +463,11 @@
     h += '<p class="pc-j">' + srcLink(t.source) + '</p></div></details></div>';
     return h;
   }
-  function renderAiCard(fmt, aiCost){
-    var el = document.getElementById('ai-card');
+  function renderAiCard(el, fmt, aiCost){
     if (!el || !C.aiOptions) return;
     var key = fmt + '|' + aiCost;
-    if (key === lastAiKey) return;             // only format + AI cost move this card
-    lastAiKey = key;
+    if (el.getAttribute('data-aikey') === key) return;   // only format + AI cost move this card
+    el.setAttribute('data-aikey', key);
     var d = C.aiOptions(fmt, aiCost, new Date().toISOString().slice(0, 10));
     var h = '<h2 class="ahead">AI options for ' + esc(d.format_label) + '</h2>';
     if (d.card_note) h += '<p class="ai-note">' + esc(d.card_note) + '</p>';
@@ -482,6 +503,125 @@
     hi.style.left = a3.pct_high + '%'; hi.textContent = C.kr(a3.high);
   }
 
+  // --- mode toggle (buying / creator); mode is in the URL ---
+  function buildModebar(){
+    var el = document.getElementById('modebar');
+    var opts = [{ k:'buying', label:'Buying creative? Put your budget to work.' },
+                { k:'creator', label:'Making creative? Check your price.' }];
+    el.innerHTML = opts.map(function (o) {
+      return '<button type="button" data-mode="' + o.k + '" aria-pressed="' + (state.mode === o.k ? 'true' : 'false') + '">' + esc(o.label) + '</button>';
+    }).join('');
+    Array.prototype.forEach.call(el.querySelectorAll('button'), function (b) {
+      b.addEventListener('click', function () { setMode(b.getAttribute('data-mode')); });
+    });
+  }
+  function setMode(m){
+    if (m === state.mode) return;
+    if (!edited) { state = exampleFor(m); state.mode = m; } else { state.mode = m; }
+    copied = false;
+    applyMode(); buildModebar(); renderStatus(); setCopyLabel();
+  }
+  function applyMode(){
+    var creator = state.mode === 'creator';
+    document.getElementById('buying-view').hidden = creator;
+    document.getElementById('creator-view').hidden = !creator;
+    if (creator) { buildCreatorForm(); updateCreatorControls(); }
+    else { buildForm(); updateControls(); }
+  }
+
+  // --- creator form ---
+  function buildCreatorForm(){
+    var f = document.getElementById('form');
+    var fmtBtns = D.formats.map(function (ff) { return segBtn('fmt', ff.key, ff.label, state.fmt === ff.key); }).join('');
+    var rawBtns = [{v:'false',label:'No'},{v:'true',label:'Yes'}].map(function (o) {
+      return '<button type="button" data-k="rawFiles" data-v="' + o.v + '" aria-pressed="' + ((''+state.rawFiles) === o.v ? 'true' : 'false') + '">' + o.label + '</button>'; }).join('');
+    var indOpts = D.industries.map(function (i) {
+      return '<option value="' + i.key + '"' + (i.key === state.exampleIndustry ? ' selected' : '') + '>' + esc(i.label) + '</option>'; }).join('');
+    f.innerHTML =
+      '<fieldset><legend>Your creative</legend>' +
+        '<div class="seg four" role="group" aria-label="Format">' + fmtBtns + '</div>' +
+        '<label class="f">Your price' + moneyKr('price', state.price) + '</label>' +
+      '</fieldset>' +
+      '<fieldset><legend>What is included</legend>' +
+        '<div class="grid2">' +
+          '<label class="f">Usage rights (months)<input type="number" inputmode="numeric" min="0" class="field" id="usageMonths" value="' + attr(state.usageMonths) + '"></label>' +
+          '<label class="f">Revisions<input type="number" inputmode="numeric" min="0" class="field" id="revisions" value="' + attr(state.revisions) + '"></label>' +
+        '</div>' +
+        '<label class="f"><span>Raw files included</span><div class="seg" role="group" aria-label="Raw files">' + rawBtns + '</div></label>' +
+      '</fieldset>' +
+      '<fieldset><legend>Example client (optional)</legend>' +
+        '<label class="f">Industry<select class="field" id="exampleIndustry">' + indOpts + '</select></label>' +
+        '<label class="f"><span id="ex-price-label"></span>' +
+          '<span class="inwrap"><input type="text" inputmode="numeric" id="examplePrice" class="field kr money" value="' + attr(group(state.examplePrice)) + '" placeholder=""><span class="suffix" aria-hidden="true">kr</span></span>' +
+          '<span class="hint">A stand-in client, labelled example. Change it to your own.</span></label>' +
+        '<label class="f">Margin per <span id="cmargin-word"></span> (optional)' +
+          '<span class="margin-row">' +
+            '<span class="inwrap"><input type="text" inputmode="numeric" id="margin" class="field money kr" value="' + attr(group(state.margin)) + '"><span class="suffix" aria-hidden="true" id="margin-suffix">kr</span></span>' +
+            '<select class="field" id="marginUnit" aria-label="Margin unit"><option value="kr"' + (state.marginUnit==='pct'?'':' selected') + '>kr</option><option value="pct"' + (state.marginUnit==='pct'?' selected':'') + '>%</option></select>' +
+          '</span></label>' +
+      '</fieldset>';
+    document.getElementById('exampleIndustry').addEventListener('change', function (e) { setVal('exampleIndustry', e.target.value); updateCreatorControls(); });
+    ['usageMonths','revisions'].forEach(function (k) {
+      document.getElementById(k).addEventListener('input', function (e) { setVal(k, e.target.value); }); });
+    document.getElementById('marginUnit').addEventListener('change', function (e) {
+      state.marginUnit = e.target.value; edited = true;
+      document.getElementById('margin-suffix').textContent = e.target.value === 'pct' ? '%' : 'kr'; markEdited(); renderCreator(); });
+    Array.prototype.forEach.call(f.querySelectorAll('.money'), function (el) { el.addEventListener('input', function () { onMoney(el); }); });
+    Array.prototype.forEach.call(f.querySelectorAll('.seg button'), function (b) {
+      b.addEventListener('click', function () {
+        state[b.getAttribute('data-k')] = b.getAttribute('data-v'); edited = true; copied = false;
+        Array.prototype.forEach.call(b.parentNode.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        markEdited(); updateCreatorControls();
+      });
+    });
+    document.getElementById('margin-suffix').textContent = state.marginUnit === 'pct' ? '%' : 'kr';
+  }
+  function updateCreatorControls(){
+    var ind = indOf(state.exampleIndustry);
+    setText('ex-price-label', ind.price_label + ' (example)');
+    var ep = document.getElementById('examplePrice'); if (ep) ep.placeholder = group(ind.example_price);
+    var r = C.creatorCompute(creatorInput());
+    setText('cmargin-word', r.unit_one);
+    renderCreator();
+  }
+  function creatorInput(){
+    return { fmt: state.fmt, price: state.price, usageMonths: state.usageMonths, revisions: state.revisions,
+      rawFiles: state.rawFiles, exampleIndustry: state.exampleIndustry, examplePrice: state.examplePrice,
+      margin: state.margin, marginUnit: state.marginUnit };
+  }
+  function renderCreator(){
+    var el = document.getElementById('creator-view');
+    var r = C.creatorCompute(creatorInput());
+    var mail = C.creatorMailto(creatorInput(), FEEDBACK_EMAIL);
+    var h = '<section class="card hero-card"><h2 class="ahead">What your price asks of the client</h2>' +
+      '<div class="bignum"><span class="n">' + esc(r.b.big) + '</span><span class="u">' + esc(r.b.unit) + '</span></div>' +
+      '<p class="atext">' + esc(r.b.text) + '</p>' +
+      '<details class="how-d"><summary>How we got this</summary><p class="how">' + esc(r.b.how) + '</p></details></section>';
+    h += '<section class="card small-card" style="margin-top:16px;"><h2 class="ahead">Where your price sits</h2>' +
+      '<div class="big2">' + esc(r.a.big) + '</div><p class="atext sm">' + esc(r.a.text) + '</p>' +
+      '<p class="actx">' + esc(r.a.inclusions) + '</p>';
+    if (!r.a.blank) {
+      h += '<div class="band" aria-hidden="true"><div class="track"></div>' +
+        '<div class="fill" style="left:' + r.a.pct_low + '%; width:' + (r.a.pct_high - r.a.pct_low) + '%;"></div>' +
+        '<div class="marker" style="left:' + r.a.pct_price + '%;"></div>' +
+        '<div class="lab" style="left:' + r.a.pct_low + '%;">' + esc(C.kr(r.a.low)) + '</div>' +
+        '<div class="lab" style="left:' + r.a.pct_high + '%;">' + esc(C.kr(r.a.high)) + '</div></div>';
+    }
+    h += '<details class="how-d"><summary>How we got this</summary><p class="how">' + esc(r.a.how) + '</p></details>' +
+      '<p class="feedback">Think this range is off? <a href="' + esc(mail) + '">Tell us.</a></p></section>';
+    h += '<section class="card small-card" style="margin-top:16px;"><h2 class="ahead">The AI alternative</h2>' +
+      '<p class="atext sm">' + esc(r.c.text) + ' <a href="#creator-ai-card">See the AI options</a></p></section>';
+    h += '<section class="card small-card" id="creator-ai-card" style="margin-top:16px;" aria-label="AI options"></section>';
+    el.innerHTML = h;
+    renderAiCard(document.getElementById('creator-ai-card'), state.fmt, r.typical_ai);
+    var sb = document.getElementById('stickybar');
+    if (sb) {
+      sb.innerHTML = (r.b.big === '—')
+        ? 'Add your numbers to see the answer<span class="arrow" aria-hidden="true">View ↓</span>'
+        : 'Your price asks: ' + esc(r.b.big) + ' ' + esc(r.unit_many) + '<span class="arrow" aria-hidden="true">View ↓</span>';
+    }
+  }
+
   // --- example chip / reset ---
   function markEdited(){ renderStatus(); }
   function renderStatus(){
@@ -491,9 +631,10 @@
     } else {
       el.innerHTML = '<button type="button" class="linkbtn" id="reset">Reset to example</button>';
       document.getElementById('reset').addEventListener('click', function () {
-        state = Object.assign({}, EXAMPLE); edited = false; copied = false;
-        history.replaceState(null, '', location.pathname);
-        buildForm(); updateControls(); renderStatus(); setCopyLabel();
+        var m = state.mode;
+        state = exampleFor(m); state.mode = m; edited = false; copied = false;
+        history.replaceState(null, '', location.pathname + (m === 'creator' ? '?mode=creator' : ''));
+        applyMode(); buildModebar(); renderStatus(); setCopyLabel();
       });
     }
   }
@@ -540,7 +681,7 @@
   })();
 
   // --- go ---
-  buildForm(); updateControls(); renderStatus(); setCopyLabel(); setThemeLabel();
+  buildModebar(); applyMode(); renderStatus(); setCopyLabel(); setThemeLabel();
 })();
 </script>
 </body>

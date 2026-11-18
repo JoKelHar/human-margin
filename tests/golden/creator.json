@@ -1,0 +1,1202 @@
+[
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 3500.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "13",
+        "unit": "more tickets",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 13 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 250 kr per ticket = 13 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 0,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 0.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "—",
+        "text": "Add your price to see this.",
+        "blank": true,
+        "how": "",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 0.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 0.0
+      },
+      "b": {
+        "big": "0",
+        "unit": "extra tickets",
+        "text": "At 0 kr, your creator video costs no more than an AI version, so it needs no extra tickets to pay for itself.",
+        "has_context": false,
+        "how": "Your price 0 kr, typical AI 310 kr: no gap to cover.\nCosts count money paid out, not your own time.",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 1000,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 1000.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Below usual",
+        "blank": false,
+        "text": "1 000 kr for a creator video sits below the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 1000.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 9.615384615384617
+      },
+      "b": {
+        "big": "3",
+        "unit": "more tickets",
+        "text": "At 1 000 kr, a client with 250 kr tickets needs 3 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 1 000 kr − typical AI 310 kr = 690 kr gap.\n690 kr ÷ 250 kr per ticket = 3 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 9000,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 9000.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Above usual",
+        "blank": false,
+        "text": "9 000 kr for a creator video sits above the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 9000.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 86.53846153846155
+      },
+      "b": {
+        "big": "35",
+        "unit": "more tickets",
+        "text": "At 9 000 kr, a client with 250 kr tickets needs 35 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 9 000 kr − typical AI 310 kr = 8 690 kr gap.\n8 690 kr ÷ 250 kr per ticket = 35 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 200,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 200.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Below usual",
+        "blank": false,
+        "text": "200 kr for a creator video sits below the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 200.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 1.9230769230769231
+      },
+      "b": {
+        "big": "0",
+        "unit": "extra tickets",
+        "text": "At 200 kr, your creator video costs no more than an AI version, so it needs no extra tickets to pay for itself.",
+        "has_context": false,
+        "how": "Your price 200 kr, typical AI 310 kr: no gap to cover.\nCosts count money paid out, not your own time.",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": true,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 3500.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, raw files included.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "13",
+        "unit": "more tickets",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 13 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 250 kr per ticket = 13 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": 500,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 3500.0,
+      "example_price": 500.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "7",
+        "unit": "more tickets",
+        "text": "At 3 500 kr, a client with 500 kr tickets needs 7 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 500 kr per ticket = 7 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": 40,
+      "marginUnit": "pct"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 3500.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "32",
+        "unit": "more tickets",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 32 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 100 kr margin per ticket = 32 tickets (rounded up).\nUses the client's margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": 120,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 3500.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "27",
+        "unit": "more tickets",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 27 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 120 kr margin per ticket = 27 tickets (rounded up).\nUses the client's margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "static",
+      "price": 15000,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "static",
+      "format_label": "Static image",
+      "noun": "static image set",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 15000.0,
+      "example_price": 250.0,
+      "typical_ai": 110,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "15 000 kr for a static image set sits inside the usual range in Oslo (4 000–25 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 4000,
+        "high": 25000,
+        "your_price": 15000.0,
+        "scale_max": 32500.0,
+        "pct_low": 12.307692307692308,
+        "pct_high": 76.92307692307693,
+        "pct_price": 46.15384615384615
+      },
+      "b": {
+        "big": "60",
+        "unit": "more tickets",
+        "text": "At 15 000 kr, a client with 250 kr tickets needs 60 more tickets from your static image set than from an AI version.",
+        "has_context": false,
+        "how": "Your price 15 000 kr − typical AI 110 kr = 14 890 kr gap.\n14 890 kr ÷ 250 kr per ticket = 60 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 110 kr a month (Adobe Firefly Standard).",
+        "tool_name": "Adobe Firefly Standard",
+        "tool_price_nok": 110
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "video",
+      "price": 15000,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "video",
+      "format_label": "Short video",
+      "noun": "short video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 15000.0,
+      "example_price": 250.0,
+      "typical_ai": 100,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "15 000 kr for a short video sits inside the usual range in Oslo (10 000–50 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 10000,
+        "high": 50000,
+        "your_price": 15000.0,
+        "scale_max": 65000.0,
+        "pct_low": 15.384615384615385,
+        "pct_high": 76.92307692307693,
+        "pct_price": 23.076923076923077
+      },
+      "b": {
+        "big": "60",
+        "unit": "more tickets",
+        "text": "At 15 000 kr, a client with 250 kr tickets needs 60 more tickets from your short video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 15 000 kr − typical AI 100 kr = 14 900 kr gap.\n14 900 kr ÷ 250 kr per ticket = 60 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 100 kr a month (Kling Standard).",
+        "tool_name": "Kling Standard",
+        "tool_price_nok": 100
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 15000,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 15000.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Above usual",
+        "blank": false,
+        "text": "15 000 kr for a creator video sits above the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 15000.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 100.0
+      },
+      "b": {
+        "big": "59",
+        "unit": "more tickets",
+        "text": "At 15 000 kr, a client with 250 kr tickets needs 59 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 15 000 kr − typical AI 310 kr = 14 690 kr gap.\n14 690 kr ÷ 250 kr per ticket = 59 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "studio",
+      "price": 15000,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "studio",
+      "format_label": "Studio shoot",
+      "noun": "studio shoot",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 15000.0,
+      "example_price": 250.0,
+      "typical_ai": 140,
+      "a": {
+        "big": "Below usual",
+        "blank": false,
+        "text": "15 000 kr for a studio shoot sits below the usual range in Oslo (20 000–150 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 20000,
+        "high": 150000,
+        "your_price": 15000.0,
+        "scale_max": 195000.0,
+        "pct_low": 10.256410256410255,
+        "pct_high": 76.92307692307693,
+        "pct_price": 7.6923076923076925
+      },
+      "b": {
+        "big": "60",
+        "unit": "more tickets",
+        "text": "At 15 000 kr, a client with 250 kr tickets needs 60 more tickets from your studio shoot than from an AI version.",
+        "has_context": false,
+        "how": "Your price 15 000 kr − typical AI 140 kr = 14 860 kr gap.\n14 860 kr ÷ 250 kr per ticket = 60 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 140 kr a month (Photoroom Pro).",
+        "tool_name": "Photoroom Pro",
+        "tool_price_nok": 140
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "nightlife",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 3500.0,
+      "example_price": 250.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "13",
+        "unit": "more tickets",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 13 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 250 kr per ticket = 13 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "events",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 3500.0,
+      "example_price": 600.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "6",
+        "unit": "more tickets",
+        "text": "At 3 500 kr, a client with 600 kr tickets needs 6 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 600 kr per ticket = 6 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "culture",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "ticket",
+      "unit_many": "tickets",
+      "your_price": 3500.0,
+      "example_price": 300.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "11",
+        "unit": "more tickets",
+        "text": "At 3 500 kr, a client with 300 kr tickets needs 11 more tickets from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 300 kr per ticket = 11 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "restaurant",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "booking",
+      "unit_many": "bookings",
+      "your_price": 3500.0,
+      "example_price": 600.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "6",
+        "unit": "more bookings",
+        "text": "At 3 500 kr, a client with 600 kr bookings needs 6 more bookings from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 600 kr per booking = 6 bookings (rounded up).\nUses the full example price. A margin per booking would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "hotel",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "booking",
+      "unit_many": "bookings",
+      "your_price": 3500.0,
+      "example_price": 1500.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "3",
+        "unit": "more bookings",
+        "text": "At 3 500 kr, a client with 1 500 kr bookings needs 3 more bookings from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 1 500 kr per booking = 3 bookings (rounded up).\nUses the full example price. A margin per booking would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "fitness",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "membership",
+      "unit_many": "memberships",
+      "your_price": 3500.0,
+      "example_price": 1800.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "2",
+        "unit": "more memberships",
+        "text": "At 3 500 kr, a client with 1 800 kr memberships needs 2 more memberships from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 1 800 kr per membership = 2 memberships (rounded up).\nUses the full example price. A margin per membership would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "beauty",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "order",
+      "unit_many": "orders",
+      "your_price": 3500.0,
+      "example_price": 900.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "4",
+        "unit": "more orders",
+        "text": "At 3 500 kr, a client with 900 kr orders needs 4 more orders from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 900 kr per order = 4 orders (rounded up).\nUses the full example price. A margin per order would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "fashion",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "order",
+      "unit_many": "orders",
+      "your_price": 3500.0,
+      "example_price": 800.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "4",
+        "unit": "more orders",
+        "text": "At 3 500 kr, a client with 800 kr orders needs 4 more orders from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 800 kr per order = 4 orders (rounded up).\nUses the full example price. A margin per order would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "services",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "booking",
+      "unit_many": "bookings",
+      "your_price": 3500.0,
+      "example_price": 1200.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "3",
+        "unit": "more bookings",
+        "text": "At 3 500 kr, a client with 1 200 kr bookings needs 3 more bookings from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 1 200 kr per booking = 3 bookings (rounded up).\nUses the full example price. A margin per booking would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "courses",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "sign-up",
+      "unit_many": "sign-ups",
+      "your_price": 3500.0,
+      "example_price": 2000.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "2",
+        "unit": "more sign-ups",
+        "text": "At 3 500 kr, a client with 2 000 kr sign-ups needs 2 more sign-ups from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 2 000 kr per sign-up = 2 sign-ups (rounded up).\nUses the full example price. A margin per sign-up would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  },
+  {
+    "input": {
+      "fmt": "ugc",
+      "price": 3500,
+      "usageMonths": 6,
+      "revisions": 2,
+      "rawFiles": false,
+      "exampleIndustry": "other",
+      "examplePrice": null,
+      "margin": null,
+      "marginUnit": "kr"
+    },
+    "output": {
+      "fmt": "ugc",
+      "format_label": "Creator (UGC)",
+      "noun": "creator video",
+      "unit_one": "sale",
+      "unit_many": "sales",
+      "your_price": 3500.0,
+      "example_price": 500.0,
+      "typical_ai": 310,
+      "a": {
+        "big": "Inside usual range",
+        "blank": false,
+        "text": "3 500 kr for a creator video sits inside the usual range in Oslo (2 000–8 000 kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.",
+        "inclusions": "Includes 6 months usage, 2 revisions, no raw files.",
+        "low": 2000,
+        "high": 8000,
+        "your_price": 3500.0,
+        "scale_max": 10400.0,
+        "pct_low": 19.230769230769234,
+        "pct_high": 76.92307692307693,
+        "pct_price": 33.65384615384615
+      },
+      "b": {
+        "big": "7",
+        "unit": "more sales",
+        "text": "At 3 500 kr, a client with 500 kr sales needs 7 more sales from your creator video than from an AI version.",
+        "has_context": false,
+        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 500 kr per sale = 7 sales (rounded up).\nUses the full example price. A margin per sale would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "note": ""
+      },
+      "c": {
+        "text": "The closest AI option costs about 310 kr a month (HeyGen Creator).",
+        "tool_name": "HeyGen Creator",
+        "tool_price_nok": 310
+      }
+    }
+  }
+]

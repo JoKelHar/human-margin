@@ -8,7 +8,8 @@ var HM_DATA = {
       "one": "ticket",
       "many": "tickets",
       "price_label": "Price per ticket",
-      "hint": "Entry price, or average spend per guest"
+      "hint": "Entry price, or average spend per guest",
+      "example_price": 250
     },
     {
       "key": "events",
@@ -16,7 +17,8 @@ var HM_DATA = {
       "one": "ticket",
       "many": "tickets",
       "price_label": "Price per ticket",
-      "hint": "Average ticket price"
+      "hint": "Average ticket price",
+      "example_price": 600
     },
     {
       "key": "culture",
@@ -24,7 +26,8 @@ var HM_DATA = {
       "one": "ticket",
       "many": "tickets",
       "price_label": "Price per ticket",
-      "hint": "Average ticket price"
+      "hint": "Average ticket price",
+      "example_price": 300
     },
     {
       "key": "restaurant",
@@ -32,7 +35,8 @@ var HM_DATA = {
       "one": "booking",
       "many": "bookings",
       "price_label": "Value per booking",
-      "hint": "Covers × average spend"
+      "hint": "Covers × average spend",
+      "example_price": 600
     },
     {
       "key": "hotel",
@@ -40,7 +44,8 @@ var HM_DATA = {
       "one": "booking",
       "many": "bookings",
       "price_label": "Value per booking",
-      "hint": "Nights × average room rate"
+      "hint": "Nights × average room rate",
+      "example_price": 1500
     },
     {
       "key": "fitness",
@@ -48,7 +53,8 @@ var HM_DATA = {
       "one": "membership",
       "many": "memberships",
       "price_label": "Value per membership",
-      "hint": "Monthly fee × months a member typically stays"
+      "hint": "Monthly fee × months a member typically stays",
+      "example_price": 1800
     },
     {
       "key": "beauty",
@@ -56,7 +62,8 @@ var HM_DATA = {
       "one": "order",
       "many": "orders",
       "price_label": "Average order value",
-      "hint": ""
+      "hint": "",
+      "example_price": 900
     },
     {
       "key": "fashion",
@@ -64,7 +71,8 @@ var HM_DATA = {
       "one": "order",
       "many": "orders",
       "price_label": "Average order value",
-      "hint": ""
+      "hint": "",
+      "example_price": 800
     },
     {
       "key": "services",
@@ -72,7 +80,8 @@ var HM_DATA = {
       "one": "booking",
       "many": "bookings",
       "price_label": "Value per booking",
-      "hint": "Average job or appointment value"
+      "hint": "Average job or appointment value",
+      "example_price": 1200
     },
     {
       "key": "courses",
@@ -80,7 +89,8 @@ var HM_DATA = {
       "one": "sign-up",
       "many": "sign-ups",
       "price_label": "Value per sign-up",
-      "hint": "Course price"
+      "hint": "Course price",
+      "example_price": 2000
     },
     {
       "key": "other",
@@ -89,7 +99,8 @@ var HM_DATA = {
       "many": "sales",
       "price_label": "Value per sale",
       "hint": "",
-      "free_noun": true
+      "free_noun": true,
+      "example_price": 500
     }
   ],
   "formats": [
