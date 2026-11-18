@@ -38,9 +38,29 @@ def _strings(r: dict) -> list[str]:
 def test_example_human_margin_maths():
     r = compute(EXAMPLE)                       # human 4200, ai 300, price 250, reuse 2, goal 300
     assert r["a2"]["big"] == "16"              # ceil(3900/250)
-    assert "it needs 16 more tickets" in r["a2"]["text"] and "about 8 per campaign" in r["a2"]["text"]
+    assert "the human version needs 16 more tickets" in r["a2"]["text"]   # pronoun, not "it"
+    assert "about 8 per campaign" in r["a2"]["text"]
+    assert "it needs" not in r["a2"]["text"]
     # 300 tickets is not reachable on this budget, so no share-of-target line (item 3).
     assert not r["a2"]["has_context"] and not r["reachable"]
+
+
+def test_share_uses_the_displayed_per_campaign_figure():
+    # The two numbers in one sentence must agree: 16 per campaign is 40% of a 40 target.
+    r = compute(replace(EXAMPLE, goal=40, budget=600000, reuse=2, human=8000, ai=400))
+    assert "about 16 per campaign" in r["a2"]["text"]
+    assert r["a2"]["context"].startswith("That is 40% of your 40-ticket target")
+
+
+def test_cpm_derived_estimates_round_to_two_sig_figs():
+    r = compute(EXAMPLE)                       # views 43478 -> 43 000; one_in 145 -> 150
+    assert "1 in 150 ad views" in r["a1"]["text"]
+    assert "≈ 43 000" in r["a1"]["how"] and "43 478" not in r["a1"]["how"]
+    # Exact maths stays exact: max cost per sale and extra sales are not rounded.
+    assert "at most 17 kr" in r["a1"]["text"] and r["a2"]["big"] == "16"
+    mx = compute(replace(EXAMPLE, goal_mode="max"))
+    assert "covers about 43 000 views" in mx["a1"]["text"]      # views rounded
+    assert "43 478" not in mx["a1"]["text"]
 
 
 def test_target_share_only_when_reachable():

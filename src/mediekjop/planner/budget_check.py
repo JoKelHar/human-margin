@@ -106,6 +106,21 @@ def _round(x: float) -> int:
     return math.floor(x + 0.5)
 
 
+def _sig2(x: float) -> float:
+    """Round to 2 significant figures - for ROUGH, CPM-derived estimates (views, "1 in
+    N", likely ranges). Exact inputs and exact maths are never passed through this.
+    Uses the integer digit count (not log10) so Python and JS agree bit-for-bit."""
+    x = float(x)
+    if x == 0:
+        return 0.0
+    neg = x < 0
+    ax = abs(x)
+    digits = len(str(int(ax))) if ax >= 1 else 1
+    factor = 10 ** (digits - 2)
+    val = _round(ax / factor) * factor
+    return -val if neg else val
+
+
 def kr(n: float) -> str:
     """Norwegian number: thousands grouped with a space. 4200 -> '4 200'."""
     n = _round(n)
@@ -264,12 +279,14 @@ def _answer_human_margin(human, ai, value_per, margin_used, reuse, goal, reachab
         }
     extra = math.ceil(diff / value_per)
     per = math.ceil(diff / (value_per * reuse))
-    share = _round(extra / reuse / goal * 100) if reachable else None
+    # Share uses the DISPLAYED per-campaign figure, so the two numbers in one sentence agree.
+    share = _round(per / goal * 100) if reachable else None
     if reuse > 1:
-        body = (f"Across {reuse} campaigns, it needs {kr(extra)} more {many} than {ai_name} to "
-                f"pay for itself, about {per} per campaign.")
+        body = (f"Across {reuse} campaigns, the human version needs {kr(extra)} more {many} than "
+                f"{ai_name} to pay for itself, about {per} per campaign.")
     else:
-        body = f"It needs {kr(extra)} more {one if extra == 1 else many} than {ai_name} to pay for itself."
+        body = (f"The human version needs {kr(extra)} more {one if extra == 1 else many} than "
+                f"{ai_name} to pay for itself.")
     context = ""
     if share is not None:
         context = (f"That is {'under 1' if share < 1 else share}% of your {kr(goal)}-{one} "
@@ -293,6 +310,9 @@ def _answer_human_margin(human, ai, value_per, margin_used, reuse, goal, reachab
 def _answer_budget(budget, cpm, goal, is_target, views, one_in, one, many):
     if budget <= 0 or cpm <= 0:
         return {"big": "—", "text": "Add a media budget to see this.", "how": ""}
+    # CPM-derived estimates are rounded to 2 significant figures (rough); the exact
+    # inputs (budget, goal, CPM) and exact maths (max cost per sale) stay exact.
+    vd = kr(_sig2(views))
     if is_target and goal > 0:
         max_cps = budget / goal
         if one_in < TYP_LO:
@@ -301,15 +321,16 @@ def _answer_budget(budget, cpm, goal, is_target, views, one_in, one, many):
             pos = "within what paid campaigns usually achieve"
         else:
             pos = "comfortably inside what paid campaigns usually achieve"
+        oi = kr(_sig2(one_in))
         return {
             "big": f"{kr(max_cps)} kr per {one}",
             "text": f"To reach {kr(goal)} {many} on {kr(budget)} kr, each can cost at most "
-                    f"{kr(max_cps)} kr. That means about 1 in {kr(one_in)} ad views would need to "
+                    f"{kr(max_cps)} kr. That means about 1 in {oi} ad views would need to "
                     f"become a {one}: {pos} (usually 1 in {kr(TYP_LO)}–{kr(TYP_HI)}).",
             "how": f"Max cost per {one}: {kr(budget)} kr ÷ {kr(goal)} = {kr(max_cps)} kr.\n"
-                   f"Views: {kr(budget)} kr at a {kr(cpm)} kr CPM ≈ {kr(views)} (one person may see "
+                   f"Views: {kr(budget)} kr at a {kr(cpm)} kr CPM ≈ {vd} (one person may see "
                    f"the ad more than once).\n"
-                   f"Needed: {kr(goal)} {many} from {kr(views)} views ≈ 1 in {kr(one_in)}.\n"
+                   f"Needed: {kr(goal)} {many} from {vd} views ≈ 1 in {oi}.\n"
                    f"Usual range is a rough US-based estimate. Put in your own CPM under "
                    f"“I know my own numbers”.",
         }
@@ -317,13 +338,14 @@ def _answer_budget(budget, cpm, goal, is_target, views, one_in, one, many):
     hi = math.ceil(views / TYP_LO)
     cps_lo = budget / hi if hi > 0 else 0
     cps_hi = budget / lo if lo > 0 else 0
+    lod, hid = kr(_sig2(lo)), kr(_sig2(hi))
     return {
-        "big": f"Usually {kr(lo)}–{kr(hi)} {many}",
-        "text": f"At a typical CPM, {kr(budget)} kr covers about {kr(views)} views. Paid campaigns "
+        "big": f"Usually {lod}–{hid} {many}",
+        "text": f"At a typical CPM, {kr(budget)} kr covers about {vd} views. Paid campaigns "
                 f"usually turn 1 in {kr(TYP_LO)}–{kr(TYP_HI)} views into a {one}, so roughly "
-                f"{kr(lo)}–{kr(hi)} {many}" + (f", at {kr(cps_lo)}–{kr(cps_hi)} kr each."
-                                               if lo > 0 else "."),
-        "how": f"Views: {kr(budget)} kr at a {kr(cpm)} kr CPM ≈ {kr(views)}.\n"
+                f"{lod}–{hid} {many}" + (f", at {kr(_sig2(cps_lo))}–{kr(_sig2(cps_hi))} kr each."
+                                         if lo > 0 else "."),
+        "how": f"Views: {kr(budget)} kr at a {kr(cpm)} kr CPM ≈ {vd}.\n"
                f"Usual conversion: 1 in {kr(TYP_LO)}–{kr(TYP_HI)} views (rough US-based estimate).\n"
                f"Put in your own CPM under “I know my own numbers”.",
     }

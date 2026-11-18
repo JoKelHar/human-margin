@@ -19,6 +19,14 @@
 
   // --- helpers (must match budget_check.py exactly) ---
   function hround(x) { return Math.floor(x + 0.5); }   // half up, like Python _round
+  function sig2(x) {                                     // 2 significant figures (rough estimates)
+    x = Number(x); if (x === 0) return 0;
+    var neg = x < 0, ax = Math.abs(x);
+    var digits = ax >= 1 ? String(Math.floor(ax)).length : 1;
+    var factor = Math.pow(10, digits - 2);
+    var val = hround(ax / factor) * factor;
+    return neg ? -val : val;
+  }
   function kr(n) {
     n = hround(n);
     var neg = n < 0, s = Math.abs(n).toString(), out = '';
@@ -97,11 +105,12 @@
     }
     var extra = Math.ceil(diff / valPer);
     var per = Math.ceil(diff / (valPer * reuse));
-    var share = reachable ? hround(extra / reuse / goal * 100) : null;
+    var share = reachable ? hround(per / goal * 100) : null;   // uses the displayed per-campaign figure
     var body = reuse > 1
-      ? 'Across ' + reuse + ' campaigns, it needs ' + kr(extra) + ' more ' + many +
+      ? 'Across ' + reuse + ' campaigns, the human version needs ' + kr(extra) + ' more ' + many +
         ' than ' + aiName + ' to pay for itself, about ' + per + ' per campaign.'
-      : 'It needs ' + kr(extra) + ' more ' + (extra === 1 ? one : many) + ' than ' + aiName + ' to pay for itself.';
+      : 'The human version needs ' + kr(extra) + ' more ' + (extra === 1 ? one : many) +
+        ' than ' + aiName + ' to pay for itself.';
     var context = '';
     if (share !== null) {
       context = 'That is ' + (share < 1 ? 'under 1' : share) + '% of your ' + kr(goal) + '-' + one +
@@ -125,32 +134,36 @@
     if (budget <= 0 || cpm <= 0) {
       return { big: '—', text: 'Add a media budget to see this.', how: '' };
     }
+    // CPM-derived estimates round to 2 significant figures; exact inputs and maths stay exact.
+    var vd = kr(sig2(views));
     if (isTarget && goal > 0) {
       var maxCps = budget / goal;
       var pos = oneIn < TYP_LO ? 'well above what paid campaigns usually achieve'
         : (oneIn <= TYP_HI ? 'within what paid campaigns usually achieve'
           : 'comfortably inside what paid campaigns usually achieve');
+      var oi = kr(sig2(oneIn));
       return {
         big: kr(maxCps) + ' kr per ' + one,
         text: 'To reach ' + kr(goal) + ' ' + many + ' on ' + kr(budget) + ' kr, each can cost at most ' +
-          kr(maxCps) + ' kr. That means about 1 in ' + kr(oneIn) +
+          kr(maxCps) + ' kr. That means about 1 in ' + oi +
           ' ad views would need to become a ' + one + ': ' + pos + ' (usually 1 in ' + kr(TYP_LO) + '–' + kr(TYP_HI) + ').',
         how: 'Max cost per ' + one + ': ' + kr(budget) + ' kr ÷ ' + kr(goal) + ' = ' + kr(maxCps) + ' kr.\n' +
-          'Views: ' + kr(budget) + ' kr at a ' + kr(cpm) + ' kr CPM ≈ ' + kr(views) +
+          'Views: ' + kr(budget) + ' kr at a ' + kr(cpm) + ' kr CPM ≈ ' + vd +
           ' (one person may see the ad more than once).\n' +
-          'Needed: ' + kr(goal) + ' ' + many + ' from ' + kr(views) + ' views ≈ 1 in ' + kr(oneIn) + '.\n' +
+          'Needed: ' + kr(goal) + ' ' + many + ' from ' + vd + ' views ≈ 1 in ' + oi + '.\n' +
           'Usual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”.'
       };
     }
     var lo = Math.floor(views / TYP_HI), hi = Math.ceil(views / TYP_LO);
     var cpsLo = hi > 0 ? budget / hi : 0, cpsHi = lo > 0 ? budget / lo : 0;
+    var lod = kr(sig2(lo)), hid = kr(sig2(hi));
     return {
-      big: 'Usually ' + kr(lo) + '–' + kr(hi) + ' ' + many,
-      text: 'At a typical CPM, ' + kr(budget) + ' kr covers about ' + kr(views) +
+      big: 'Usually ' + lod + '–' + hid + ' ' + many,
+      text: 'At a typical CPM, ' + kr(budget) + ' kr covers about ' + vd +
         ' views. Paid campaigns usually turn 1 in ' + kr(TYP_LO) + '–' + kr(TYP_HI) +
-        ' views into a ' + one + ', so roughly ' + kr(lo) + '–' + kr(hi) + ' ' + many +
-        (lo > 0 ? ', at ' + kr(cpsLo) + '–' + kr(cpsHi) + ' kr each.' : '.'),
-      how: 'Views: ' + kr(budget) + ' kr at a ' + kr(cpm) + ' kr CPM ≈ ' + kr(views) + '.\n' +
+        ' views into a ' + one + ', so roughly ' + lod + '–' + hid + ' ' + many +
+        (lo > 0 ? ', at ' + kr(sig2(cpsLo)) + '–' + kr(sig2(cpsHi)) + ' kr each.' : '.'),
+      how: 'Views: ' + kr(budget) + ' kr at a ' + kr(cpm) + ' kr CPM ≈ ' + vd + '.\n' +
         'Usual conversion: 1 in ' + kr(TYP_LO) + '–' + kr(TYP_HI) + ' views (rough US-based estimate).\n' +
         'Put in your own CPM under “I know my own numbers”.'
     };

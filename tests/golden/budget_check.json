@@ -27,13 +27,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -82,13 +82,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "14",
         "unit": "more tickets",
-        "text": "A typical creator costs about 3 300 kr more than the AI version. Across 2 campaigns, it needs 14 more tickets than the AI version to pay for itself, about 7 per campaign.",
+        "text": "A typical creator costs about 3 300 kr more than the AI version. Across 2 campaigns, the human version needs 14 more tickets than the AI version to pay for itself, about 7 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 300 kr extra ÷ 250 kr per ticket = 14 tickets (rounded up).\nSpread over 2 campaigns: about 7 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -137,13 +137,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "12",
         "unit": "more tickets",
-        "text": "The creator costs about 3 000 kr more than a typical AI version. Across 2 campaigns, it needs 12 more tickets than a typical AI version to pay for itself, about 6 per campaign.",
+        "text": "The creator costs about 3 000 kr more than a typical AI version. Across 2 campaigns, the human version needs 12 more tickets than a typical AI version to pay for itself, about 6 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 000 kr extra ÷ 250 kr per ticket = 12 tickets (rounded up).\nSpread over 2 campaigns: about 6 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -192,13 +192,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "10",
         "unit": "more tickets",
-        "text": "A typical creator costs about 2 400 kr more than a typical AI version. Across 2 campaigns, it needs 10 more tickets than a typical AI version to pay for itself, about 5 per campaign.",
+        "text": "A typical creator costs about 2 400 kr more than a typical AI version. Across 2 campaigns, the human version needs 10 more tickets than a typical AI version to pay for itself, about 5 per campaign.",
         "has_context": false,
         "context": "",
         "how": "2 400 kr extra ÷ 250 kr per ticket = 10 tickets (rounded up).\nSpread over 2 campaigns: about 5 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -247,8 +247,8 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "0",
@@ -302,13 +302,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 tickets",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -357,13 +357,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 tickets",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "10",
         "unit": "more tickets",
-        "text": "A typical creator costs about 2 400 kr more than a typical AI version. Across 2 campaigns, it needs 10 more tickets than a typical AI version to pay for itself, about 5 per campaign.",
+        "text": "A typical creator costs about 2 400 kr more than a typical AI version. Across 2 campaigns, the human version needs 10 more tickets than a typical AI version to pay for itself, about 5 per campaign.",
         "has_context": false,
         "context": "",
         "how": "2 400 kr extra ÷ 250 kr per ticket = 10 tickets (rounded up).\nSpread over 2 campaigns: about 5 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -412,8 +412,8 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "—",
@@ -473,7 +473,7 @@
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -528,7 +528,7 @@
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -577,13 +577,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. It needs 16 more tickets than the AI version to pay for itself.",
+        "text": "The creator costs 3 900 kr more than the AI version. The human version needs 16 more tickets than the AI version to pay for itself.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -632,13 +632,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 5 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 4 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 5 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 4 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 5 campaigns: about 4 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -687,13 +687,13 @@
       "reachable": true,
       "a1": {
         "big": "12 000 kr per ticket",
-        "text": "To reach 5 tickets on 60 000 kr, each can cost at most 12 000 kr. That means about 1 in 104 348 ad views would need to become a ticket: comfortably inside what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 60 000 kr ÷ 5 = 12 000 kr.\nViews: 60 000 kr at a 115 kr CPM ≈ 521 739 (one person may see the ad more than once).\nNeeded: 5 tickets from 521 739 views ≈ 1 in 104 348.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 5 tickets on 60 000 kr, each can cost at most 12 000 kr. That means about 1 in 100 000 ad views would need to become a ticket: comfortably inside what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 60 000 kr ÷ 5 = 12 000 kr.\nViews: 60 000 kr at a 115 kr CPM ≈ 520 000 (one person may see the ad more than once).\nNeeded: 5 tickets from 520 000 views ≈ 1 in 100 000.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. It needs 16 more tickets than the AI version to pay for itself.",
+        "text": "The creator costs 3 900 kr more than the AI version. The human version needs 16 more tickets than the AI version to pay for itself.",
         "has_context": true,
         "context": "That is 320% of your 5-ticket target per campaign. Whether a human version earns that is your call.",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -742,13 +742,13 @@
       "reachable": true,
       "a1": {
         "big": "12 000 kr per ticket",
-        "text": "To reach 5 tickets on 60 000 kr, each can cost at most 12 000 kr. That means about 1 in 104 348 ad views would need to become a ticket: comfortably inside what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 60 000 kr ÷ 5 = 12 000 kr.\nViews: 60 000 kr at a 115 kr CPM ≈ 521 739 (one person may see the ad more than once).\nNeeded: 5 tickets from 521 739 views ≈ 1 in 104 348.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 5 tickets on 60 000 kr, each can cost at most 12 000 kr. That means about 1 in 100 000 ad views would need to become a ticket: comfortably inside what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 60 000 kr ÷ 5 = 12 000 kr.\nViews: 60 000 kr at a 115 kr CPM ≈ 520 000 (one person may see the ad more than once).\nNeeded: 5 tickets from 520 000 views ≈ 1 in 100 000.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "1",
         "unit": "more ticket",
-        "text": "The creator costs 100 kr more than the AI version. It needs 1 more ticket than the AI version to pay for itself.",
+        "text": "The creator costs 100 kr more than the AI version. The human version needs 1 more ticket than the AI version to pay for itself.",
         "has_context": true,
         "context": "That is 20% of your 5-ticket target per campaign. Whether a human version earns that is your call.",
         "how": "100 kr extra ÷ 250 kr per ticket = 1 tickets (rounded up).\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -797,13 +797,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "39",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 39 more tickets than the AI version to pay for itself, about 20 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 39 more tickets than the AI version to pay for itself, about 20 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 100 kr margin per ticket = 39 tickets (rounded up).\nSpread over 2 campaigns: about 20 each.\nUses your margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -852,13 +852,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "39",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 39 more tickets than the AI version to pay for itself, about 20 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 39 more tickets than the AI version to pay for itself, about 20 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 100 kr margin per ticket = 39 tickets (rounded up).\nSpread over 2 campaigns: about 20 each.\nUses your margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -907,13 +907,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per signup",
-        "text": "To reach 300 signups on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a signup: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per signup: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 signups from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 signups on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a signup: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per signup: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 signups from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more signups",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more signups than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more signups than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per signup = 16 signups (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per signup, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -962,13 +962,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per sale",
-        "text": "To reach 300 sales on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a sale: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per sale: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 sales from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 sales on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a sale: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per sale: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 sales from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more sales",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more sales than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sales than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per sale = 16 sales (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sale, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1017,13 +1017,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "15",
         "unit": "more tickets",
-        "text": "The photographer costs 3 699 kr more than the AI version. Across 2 campaigns, it needs 15 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The photographer costs 3 699 kr more than the AI version. Across 2 campaigns, the human version needs 15 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 699 kr extra ÷ 250 kr per ticket = 15 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1072,13 +1072,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "57",
         "unit": "more tickets",
-        "text": "The photographer costs 14 200 kr more than the AI version. Across 2 campaigns, it needs 57 more tickets than the AI version to pay for itself, about 29 per campaign.",
+        "text": "The photographer costs 14 200 kr more than the AI version. Across 2 campaigns, the human version needs 57 more tickets than the AI version to pay for itself, about 29 per campaign.",
         "has_context": false,
         "context": "",
         "how": "14 200 kr extra ÷ 250 kr per ticket = 57 tickets (rounded up).\nSpread over 2 campaigns: about 29 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1127,13 +1127,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "99",
         "unit": "more tickets",
-        "text": "The photographer costs 24 501 kr more than the AI version. Across 2 campaigns, it needs 99 more tickets than the AI version to pay for itself, about 50 per campaign.",
+        "text": "The photographer costs 24 501 kr more than the AI version. Across 2 campaigns, the human version needs 99 more tickets than the AI version to pay for itself, about 50 per campaign.",
         "has_context": false,
         "context": "",
         "how": "24 501 kr extra ÷ 250 kr per ticket = 99 tickets (rounded up).\nSpread over 2 campaigns: about 50 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1182,13 +1182,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "45",
         "unit": "more tickets",
-        "text": "A typical photographer costs about 11 200 kr more than a typical AI version. Across 2 campaigns, it needs 45 more tickets than a typical AI version to pay for itself, about 23 per campaign.",
+        "text": "A typical photographer costs about 11 200 kr more than a typical AI version. Across 2 campaigns, the human version needs 45 more tickets than a typical AI version to pay for itself, about 23 per campaign.",
         "has_context": false,
         "context": "",
         "how": "11 200 kr extra ÷ 250 kr per ticket = 45 tickets (rounded up).\nSpread over 2 campaigns: about 23 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1237,13 +1237,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "39",
         "unit": "more tickets",
-        "text": "The video shoot costs 9 699 kr more than the AI version. Across 2 campaigns, it needs 39 more tickets than the AI version to pay for itself, about 20 per campaign.",
+        "text": "The video shoot costs 9 699 kr more than the AI version. Across 2 campaigns, the human version needs 39 more tickets than the AI version to pay for itself, about 20 per campaign.",
         "has_context": false,
         "context": "",
         "how": "9 699 kr extra ÷ 250 kr per ticket = 39 tickets (rounded up).\nSpread over 2 campaigns: about 20 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1292,13 +1292,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "119",
         "unit": "more tickets",
-        "text": "The video shoot costs 29 700 kr more than the AI version. Across 2 campaigns, it needs 119 more tickets than the AI version to pay for itself, about 60 per campaign.",
+        "text": "The video shoot costs 29 700 kr more than the AI version. Across 2 campaigns, the human version needs 119 more tickets than the AI version to pay for itself, about 60 per campaign.",
         "has_context": false,
         "context": "",
         "how": "29 700 kr extra ÷ 250 kr per ticket = 119 tickets (rounded up).\nSpread over 2 campaigns: about 60 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1347,13 +1347,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "199",
         "unit": "more tickets",
-        "text": "The video shoot costs 49 501 kr more than the AI version. Across 2 campaigns, it needs 199 more tickets than the AI version to pay for itself, about 100 per campaign.",
+        "text": "The video shoot costs 49 501 kr more than the AI version. Across 2 campaigns, the human version needs 199 more tickets than the AI version to pay for itself, about 100 per campaign.",
         "has_context": false,
         "context": "",
         "how": "49 501 kr extra ÷ 250 kr per ticket = 199 tickets (rounded up).\nSpread over 2 campaigns: about 100 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1402,13 +1402,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "92",
         "unit": "more tickets",
-        "text": "A typical video shoot costs about 23 000 kr more than a typical AI version. Across 2 campaigns, it needs 92 more tickets than a typical AI version to pay for itself, about 46 per campaign.",
+        "text": "A typical video shoot costs about 23 000 kr more than a typical AI version. Across 2 campaigns, the human version needs 92 more tickets than a typical AI version to pay for itself, about 46 per campaign.",
         "has_context": false,
         "context": "",
         "how": "23 000 kr extra ÷ 250 kr per ticket = 92 tickets (rounded up).\nSpread over 2 campaigns: about 46 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1457,13 +1457,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "7",
         "unit": "more tickets",
-        "text": "The creator costs 1 699 kr more than the AI version. Across 2 campaigns, it needs 7 more tickets than the AI version to pay for itself, about 4 per campaign.",
+        "text": "The creator costs 1 699 kr more than the AI version. Across 2 campaigns, the human version needs 7 more tickets than the AI version to pay for itself, about 4 per campaign.",
         "has_context": false,
         "context": "",
         "how": "1 699 kr extra ÷ 250 kr per ticket = 7 tickets (rounded up).\nSpread over 2 campaigns: about 4 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1512,13 +1512,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "19",
         "unit": "more tickets",
-        "text": "The creator costs 4 700 kr more than the AI version. Across 2 campaigns, it needs 19 more tickets than the AI version to pay for itself, about 10 per campaign.",
+        "text": "The creator costs 4 700 kr more than the AI version. Across 2 campaigns, the human version needs 19 more tickets than the AI version to pay for itself, about 10 per campaign.",
         "has_context": false,
         "context": "",
         "how": "4 700 kr extra ÷ 250 kr per ticket = 19 tickets (rounded up).\nSpread over 2 campaigns: about 10 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1567,13 +1567,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "31",
         "unit": "more tickets",
-        "text": "The creator costs 7 501 kr more than the AI version. Across 2 campaigns, it needs 31 more tickets than the AI version to pay for itself, about 16 per campaign.",
+        "text": "The creator costs 7 501 kr more than the AI version. Across 2 campaigns, the human version needs 31 more tickets than the AI version to pay for itself, about 16 per campaign.",
         "has_context": false,
         "context": "",
         "how": "7 501 kr extra ÷ 250 kr per ticket = 31 tickets (rounded up).\nSpread over 2 campaigns: about 16 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1622,13 +1622,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "10",
         "unit": "more tickets",
-        "text": "A typical creator costs about 2 400 kr more than a typical AI version. Across 2 campaigns, it needs 10 more tickets than a typical AI version to pay for itself, about 5 per campaign.",
+        "text": "A typical creator costs about 2 400 kr more than a typical AI version. Across 2 campaigns, the human version needs 10 more tickets than a typical AI version to pay for itself, about 5 per campaign.",
         "has_context": false,
         "context": "",
         "how": "2 400 kr extra ÷ 250 kr per ticket = 10 tickets (rounded up).\nSpread over 2 campaigns: about 5 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1677,13 +1677,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "79",
         "unit": "more tickets",
-        "text": "The studio shoot costs 19 699 kr more than the AI version. Across 2 campaigns, it needs 79 more tickets than the AI version to pay for itself, about 40 per campaign.",
+        "text": "The studio shoot costs 19 699 kr more than the AI version. Across 2 campaigns, the human version needs 79 more tickets than the AI version to pay for itself, about 40 per campaign.",
         "has_context": false,
         "context": "",
         "how": "19 699 kr extra ÷ 250 kr per ticket = 79 tickets (rounded up).\nSpread over 2 campaigns: about 40 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1732,13 +1732,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "339",
         "unit": "more tickets",
-        "text": "The studio shoot costs 84 700 kr more than the AI version. Across 2 campaigns, it needs 339 more tickets than the AI version to pay for itself, about 170 per campaign.",
+        "text": "The studio shoot costs 84 700 kr more than the AI version. Across 2 campaigns, the human version needs 339 more tickets than the AI version to pay for itself, about 170 per campaign.",
         "has_context": false,
         "context": "",
         "how": "84 700 kr extra ÷ 250 kr per ticket = 339 tickets (rounded up).\nSpread over 2 campaigns: about 170 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1787,13 +1787,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "599",
         "unit": "more tickets",
-        "text": "The studio shoot costs 149 501 kr more than the AI version. Across 2 campaigns, it needs 599 more tickets than the AI version to pay for itself, about 300 per campaign.",
+        "text": "The studio shoot costs 149 501 kr more than the AI version. Across 2 campaigns, the human version needs 599 more tickets than the AI version to pay for itself, about 300 per campaign.",
         "has_context": false,
         "context": "",
         "how": "149 501 kr extra ÷ 250 kr per ticket = 599 tickets (rounded up).\nSpread over 2 campaigns: about 300 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1842,13 +1842,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "237",
         "unit": "more tickets",
-        "text": "A typical studio shoot costs about 59 200 kr more than a typical AI version. Across 2 campaigns, it needs 237 more tickets than a typical AI version to pay for itself, about 119 per campaign.",
+        "text": "A typical studio shoot costs about 59 200 kr more than a typical AI version. Across 2 campaigns, the human version needs 237 more tickets than a typical AI version to pay for itself, about 119 per campaign.",
         "has_context": false,
         "context": "",
         "how": "59 200 kr extra ÷ 250 kr per ticket = 237 tickets (rounded up).\nSpread over 2 campaigns: about 119 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1897,13 +1897,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -1952,13 +1952,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 tickets",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2007,13 +2007,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2062,13 +2062,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 tickets",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2117,13 +2117,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per ticket",
-        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 tickets on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a ticket: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per ticket: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 tickets from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2172,13 +2172,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 tickets",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a ticket, so roughly 4–15 tickets, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more tickets",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more tickets than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per ticket = 16 tickets (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per ticket, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2227,13 +2227,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per booking",
-        "text": "To reach 300 bookings on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a booking: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per booking: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 bookings from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 bookings on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a booking: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per booking: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 bookings from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more bookings",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2282,13 +2282,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 bookings",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a booking, so roughly 4–15 bookings, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a booking, so roughly 4–15 bookings, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more bookings",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2337,13 +2337,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per booking",
-        "text": "To reach 300 bookings on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a booking: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per booking: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 bookings from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 bookings on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a booking: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per booking: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 bookings from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more bookings",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2392,13 +2392,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 bookings",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a booking, so roughly 4–15 bookings, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a booking, so roughly 4–15 bookings, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more bookings",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2447,13 +2447,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per membership",
-        "text": "To reach 300 memberships on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a membership: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per membership: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 memberships from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 memberships on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a membership: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per membership: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 memberships from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more memberships",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more memberships than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more memberships than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per membership = 16 memberships (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per membership, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2502,13 +2502,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 memberships",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a membership, so roughly 4–15 memberships, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a membership, so roughly 4–15 memberships, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more memberships",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more memberships than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more memberships than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per membership = 16 memberships (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per membership, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2557,13 +2557,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per order",
-        "text": "To reach 300 orders on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a order: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per order: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 orders from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 orders on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a order: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per order: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 orders from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more orders",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per order = 16 orders (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per order, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2612,13 +2612,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 orders",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a order, so roughly 4–15 orders, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a order, so roughly 4–15 orders, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more orders",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per order = 16 orders (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per order, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2667,13 +2667,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per order",
-        "text": "To reach 300 orders on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a order: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per order: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 orders from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 orders on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a order: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per order: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 orders from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more orders",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per order = 16 orders (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per order, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2722,13 +2722,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 orders",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a order, so roughly 4–15 orders, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a order, so roughly 4–15 orders, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more orders",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more orders than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per order = 16 orders (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per order, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2777,13 +2777,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per booking",
-        "text": "To reach 300 bookings on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a booking: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per booking: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 bookings from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 bookings on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a booking: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per booking: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 bookings from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more bookings",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2832,13 +2832,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 bookings",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a booking, so roughly 4–15 bookings, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a booking, so roughly 4–15 bookings, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more bookings",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more bookings than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per booking = 16 bookings (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per booking, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2887,13 +2887,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per sign-up",
-        "text": "To reach 300 sign-ups on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a sign-up: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per sign-up: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 sign-ups from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 sign-ups on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a sign-up: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per sign-up: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 sign-ups from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more sign-ups",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more sign-ups than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sign-ups than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per sign-up = 16 sign-ups (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sign-up, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2942,13 +2942,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 sign-ups",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a sign-up, so roughly 4–15 sign-ups, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a sign-up, so roughly 4–15 sign-ups, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more sign-ups",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more sign-ups than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sign-ups than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per sign-up = 16 sign-ups (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sign-up, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -2997,13 +2997,13 @@
       "reachable": false,
       "a1": {
         "big": "17 kr per sale",
-        "text": "To reach 300 sales on 5 000 kr, each can cost at most 17 kr. That means about 1 in 145 ad views would need to become a sale: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
-        "how": "Max cost per sale: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 478 (one person may see the ad more than once).\nNeeded: 300 sales from 43 478 views ≈ 1 in 145.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
+        "text": "To reach 300 sales on 5 000 kr, each can cost at most 17 kr. That means about 1 in 150 ad views would need to become a sale: well above what paid campaigns usually achieve (usually 1 in 3 000–10 000).",
+        "how": "Max cost per sale: 5 000 kr ÷ 300 = 17 kr.\nViews: 5 000 kr at a 115 kr CPM ≈ 43 000 (one person may see the ad more than once).\nNeeded: 300 sales from 43 000 views ≈ 1 in 150.\nUsual range is a rough US-based estimate. Put in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more sales",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more sales than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sales than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per sale = 16 sales (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sale, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
@@ -3052,13 +3052,13 @@
       "reachable": false,
       "a1": {
         "big": "Usually 4–15 sales",
-        "text": "At a typical CPM, 5 000 kr covers about 43 478 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a sale, so roughly 4–15 sales, at 333–1 250 kr each.",
-        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 478.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
+        "text": "At a typical CPM, 5 000 kr covers about 43 000 views. Paid campaigns usually turn 1 in 3 000–10 000 views into a sale, so roughly 4–15 sales, at 330–1 300 kr each.",
+        "how": "Views: 5 000 kr at a 115 kr CPM ≈ 43 000.\nUsual conversion: 1 in 3 000–10 000 views (rough US-based estimate).\nPut in your own CPM under “I know my own numbers”."
       },
       "a2": {
         "big": "16",
         "unit": "more sales",
-        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, it needs 16 more sales than the AI version to pay for itself, about 8 per campaign.",
+        "text": "The creator costs 3 900 kr more than the AI version. Across 2 campaigns, the human version needs 16 more sales than the AI version to pay for itself, about 8 per campaign.",
         "has_context": false,
         "context": "",
         "how": "3 900 kr extra ÷ 250 kr per sale = 16 sales (rounded up).\nSpread over 2 campaigns: about 8 each.\nUses the full price. If you know your margin per sale, use that instead: the number goes up.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
