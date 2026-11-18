@@ -143,6 +143,18 @@ def main() -> None:
           "a sourced Norwegian CPM by channel (currently a rough US-based placeholder); "
           "the user can override it on the page")
 
+    print("\n## AI tools shortlist  (data/ai_tools.yaml)")
+    print("  (the “if you go AI” card; vendor list prices, no affiliate links. Prices and")
+    print("   features change monthly - re-check each quarter.)")
+    _ai = _bc.load_ai_tools()
+    n_tools = sum(len(uc.get("tools", [])) for uc in _ai.get("use_cases", []))
+    _line("data/ai_tools.yaml",
+          "AI creative tools (vendor list prices)",
+          f"{n_tools} tools across {len(_ai.get('use_cases', []))} use cases; "
+          f"checked {_ai.get('checked', '?')}, review_by {_ai.get('review_by', '?')}",
+          "re-check vendor pages each quarter (prices in USD -> NOK at data/fx); the page "
+          "shows “may be out of date” after review_by")
+
     print("\n## Synthetic demo data  (src/mediekjop/synthetic/, config/config.yaml)")
     _line("src/mediekjop/synthetic/generator.py",
           "planted multipliers: _BASE_CTR / _SAVE_RATE / _LIKE_RATE, _AI_SUBTYPE_*, _conv_mult",

@@ -14,6 +14,7 @@ ground_truth.json
 # Ignore everything under data/, but keep the committed, versioned libraries
 # (the CC BY 4.0 benchmark library and the FX rates file ship with the repo).
 /data/*
+!/data/ai_tools.yaml
 !/data/benchmarks/
 !/data/fx/
 # Public ad-volume snapshots are maintainer-built, versioned and bundled to users
