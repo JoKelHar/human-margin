@@ -408,7 +408,28 @@ def load_ai_tools(path: str | None = None) -> dict:
     for k in ("checked", "review_by"):
         if isinstance(data.get(k), (dt.date, dt.datetime)):
             data[k] = data[k].isoformat()[:10]
+    _validate_ai_tools(data)
     return data
+
+
+_TOOL_REQUIRED = ("name", "tier", "price_usd", "price_nok", "norwegian", "source")
+
+
+def _validate_ai_tools(data: dict) -> None:
+    """Fail loudly (so the build fails) if the shortlist is malformed: every tool has
+    the required fields and every pros/cons item is a plain string (a stray ': ' makes
+    PyYAML parse a list item as a mapping, which rendered as '[object Object]')."""
+    for uc in data.get("use_cases", []):
+        for t in uc.get("tools", []):
+            missing = [k for k in _TOOL_REQUIRED if k not in t]
+            if missing:
+                raise ValueError(f"ai_tools: tool {t.get('name', '?')!r} missing {missing}")
+            for field in ("pros", "cons"):
+                for item in t.get(field, []):
+                    if not isinstance(item, str):
+                        raise ValueError(
+                            f"ai_tools: {t['name']!r} {field} item is not a string: {item!r} "
+                            f"(quote it or avoid a bare ': ' in the YAML)")
 
 
 _MONTHS = ("Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -420,7 +441,7 @@ def _checked_display(iso: str) -> str:
     return f"{d.day} {_MONTHS[d.month - 1]} {d.year}"
 
 
-def _tool_view(t: dict, ai_cost: float) -> dict:
+def _tool_view(t: dict, ai_cost: float, rules_by_id: dict) -> dict:
     return {
         "name": t["name"],
         "price_nok": t["price_nok"],
@@ -431,7 +452,12 @@ def _tool_view(t: dict, ai_cost: float) -> dict:
         "billing_note": t.get("billing_note", ""),
         "pros": list(t.get("pros", [])),
         "cons": list(t.get("cons", [])),
-        "rules": [{"id": r, "label": _RULE_LABEL.get(r, r)} for r in t.get("rules", [])],
+        # Each rule carries its one-line label plus the full text, so the per-tool
+        # "Norway: ..." line expands in place (no separate block at the top of the card).
+        "rules": [{"id": r, "label": _RULE_LABEL.get(r, r),
+                   "text": rules_by_id.get(r, {}).get("text", ""),
+                   "source": rules_by_id.get(r, {}).get("source", "")}
+                  for r in t.get("rules", [])],
         "fits": ai_cost > 0 and t["price_nok"] <= ai_cost,
         "source": t.get("source", ""),
     }
@@ -447,25 +473,15 @@ def ai_options(fmt: str, ai_cost: float = 0.0, today: dt.date | None = None,
     ucs = {uc["key"]: uc for uc in data.get("use_cases", [])}
     fmt_label = next((f["label"] for f in formats() if f["key"] == fmt), fmt)
 
+    rules_by_id = {r["id"]: r for r in data.get("norway_rules", [])}
     main = next((uc for uc in data.get("use_cases", [])
                  if uc["key"] != "voice" and fmt in uc.get("format_keys", [])), None)
-    tools = [_tool_view(t, ai_cost) for t in (main["tools"] if main else [])]
+    tools = [_tool_view(t, ai_cost, rules_by_id) for t in (main["tools"] if main else [])]
 
     voice = None
     if fmt in _VOICE_FORMATS and "voice" in ucs:
         voice = {"label": ucs["voice"]["label"],
-                 "tools": [_tool_view(t, ai_cost) for t in ucs["voice"]["tools"]]}
-
-    # The Norway rules any shown tool references, in first-seen order, for the block
-    # the per-tool lines link up to.
-    seen: list[str] = []
-    for t in tools + (voice["tools"] if voice else []):
-        for r in t["rules"]:
-            if r["id"] not in seen:
-                seen.append(r["id"])
-    rules_by_id = {r["id"]: r for r in data.get("norway_rules", [])}
-    rules = [{"id": rid, "label": _RULE_LABEL.get(rid, rid), **rules_by_id[rid]}
-             for rid in seen if rid in rules_by_id]
+                 "tools": [_tool_view(t, ai_cost, rules_by_id) for t in ucs["voice"]["tools"]]}
 
     fb = data.get("free_baseline", {})
     review_by = data.get("review_by", "")
@@ -475,7 +491,6 @@ def ai_options(fmt: str, ai_cost: float = 0.0, today: dt.date | None = None,
         "card_note": (main or {}).get("card_note", ""),
         "free_baseline": {"name": fb.get("name", ""), "price": fb.get("price", ""),
                           "note": fb.get("note", ""), "source": fb.get("source", "")},
-        "rules": rules,
         "tools": tools,
         "voice": voice,
         "alternatives": [{"name": a["name"], "price_text": f"about {kr(a['price_nok'])} kr/month",

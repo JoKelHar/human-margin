@@ -16,7 +16,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Adobe Firefly Standard",
@@ -71,9 +70,7 @@
             "Stealth mode keeps campaign work private before launch"
           ],
           "cons": [
-            {
-              "Images only": "no layout, text handling is weak"
-            },
+            "Images only — no layout, and text handling is weak",
             "Below Pro, everything you make is publicly visible",
             "Commercial licence covers companies under USD 1M revenue; larger need Mega"
           ],
@@ -106,7 +103,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Adobe Firefly Standard",
@@ -161,9 +157,7 @@
             "Stealth mode keeps campaign work private before launch"
           ],
           "cons": [
-            {
-              "Images only": "no layout, text handling is weak"
-            },
+            "Images only — no layout, and text handling is weak",
             "Below Pro, everything you make is publicly visible",
             "Commercial licence covers companies under USD 1M revenue; larger need Mega"
           ],
@@ -196,7 +190,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Adobe Firefly Standard",
@@ -251,9 +244,7 @@
             "Stealth mode keeps campaign work private before launch"
           ],
           "cons": [
-            {
-              "Images only": "no layout, text handling is weak"
-            },
+            "Images only — no layout, and text handling is weak",
             "Below Pro, everything you make is publicly visible",
             "Commercial licence covers companies under USD 1M revenue; larger need Mega"
           ],
@@ -286,7 +277,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Adobe Firefly Standard",
@@ -341,9 +331,7 @@
             "Stealth mode keeps campaign work private before launch"
           ],
           "cons": [
-            {
-              "Images only": "no layout, text handling is weak"
-            },
+            "Images only — no layout, and text handling is weak",
             "Below Pro, everything you make is publicly visible",
             "Commercial licence covers companies under USD 1M revenue; larger need Mega"
           ],
@@ -376,7 +364,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Adobe Firefly Standard",
@@ -431,9 +418,7 @@
             "Stealth mode keeps campaign work private before launch"
           ],
           "cons": [
-            {
-              "Images only": "no layout, text handling is weak"
-            },
+            "Images only — no layout, and text handling is weak",
             "Below Pro, everything you make is publicly visible",
             "Commercial licence covers companies under USD 1M revenue; larger need Mega"
           ],
@@ -466,7 +451,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Adobe Firefly Standard",
@@ -521,9 +505,7 @@
             "Stealth mode keeps campaign work private before launch"
           ],
           "cons": [
-            {
-              "Images only": "no layout, text handling is weak"
-            },
+            "Images only — no layout, and text handling is weak",
             "Below Pro, everything you make is publicly visible",
             "Commercial licence covers companies under USD 1M revenue; larger need Mega"
           ],
@@ -556,7 +538,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Kling Standard",
@@ -635,9 +616,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -712,7 +691,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Kling Standard",
@@ -791,9 +769,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -868,7 +844,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Kling Standard",
@@ -947,9 +922,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -1024,7 +997,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Kling Standard",
@@ -1103,9 +1075,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -1180,7 +1150,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Kling Standard",
@@ -1259,9 +1228,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -1336,7 +1303,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [],
       "tools": [
         {
           "name": "Kling Standard",
@@ -1415,9 +1381,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -1492,20 +1456,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "misleading",
-          "label": "misleading marketing",
-          "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        },
-        {
-          "id": "ai_act",
-          "label": "EU AI Act",
-          "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        }
-      ],
       "tools": [
         {
           "name": "HeyGen Creator",
@@ -1526,11 +1476,15 @@
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -1550,18 +1504,20 @@
           ],
           "cons": [
             "Corporate presenter look; weak for native-feeling social ads",
-            {
-              "Norwegian voices not confirmed in docs we could read": "test first"
-            }
+            "Norwegian voices not confirmed in docs we could read — test first"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -1580,20 +1536,22 @@
             "Built for testing many hooks"
           ],
           "cons": [
-            {
-              "Norwegian speech not confirmed": "test before paying"
-            },
+            "Norwegian speech not confirmed — test before paying",
             "No free trial; 10 videos is a hard cap",
             "Realism raises the fake-testimonial risk in Norway"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -1616,9 +1574,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -1686,20 +1642,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "misleading",
-          "label": "misleading marketing",
-          "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        },
-        {
-          "id": "ai_act",
-          "label": "EU AI Act",
-          "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        }
-      ],
       "tools": [
         {
           "name": "HeyGen Creator",
@@ -1720,11 +1662,15 @@
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -1744,18 +1690,20 @@
           ],
           "cons": [
             "Corporate presenter look; weak for native-feeling social ads",
-            {
-              "Norwegian voices not confirmed in docs we could read": "test first"
-            }
+            "Norwegian voices not confirmed in docs we could read — test first"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -1774,20 +1722,22 @@
             "Built for testing many hooks"
           ],
           "cons": [
-            {
-              "Norwegian speech not confirmed": "test before paying"
-            },
+            "Norwegian speech not confirmed — test before paying",
             "No free trial; 10 videos is a hard cap",
             "Realism raises the fake-testimonial risk in Norway"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -1810,9 +1760,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -1880,20 +1828,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "misleading",
-          "label": "misleading marketing",
-          "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        },
-        {
-          "id": "ai_act",
-          "label": "EU AI Act",
-          "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        }
-      ],
       "tools": [
         {
           "name": "HeyGen Creator",
@@ -1914,11 +1848,15 @@
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -1938,18 +1876,20 @@
           ],
           "cons": [
             "Corporate presenter look; weak for native-feeling social ads",
-            {
-              "Norwegian voices not confirmed in docs we could read": "test first"
-            }
+            "Norwegian voices not confirmed in docs we could read — test first"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -1968,20 +1908,22 @@
             "Built for testing many hooks"
           ],
           "cons": [
-            {
-              "Norwegian speech not confirmed": "test before paying"
-            },
+            "Norwegian speech not confirmed — test before paying",
             "No free trial; 10 videos is a hard cap",
             "Realism raises the fake-testimonial risk in Norway"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -2004,9 +1946,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -2074,20 +2014,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "misleading",
-          "label": "misleading marketing",
-          "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        },
-        {
-          "id": "ai_act",
-          "label": "EU AI Act",
-          "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        }
-      ],
       "tools": [
         {
           "name": "HeyGen Creator",
@@ -2108,11 +2034,15 @@
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -2132,18 +2062,20 @@
           ],
           "cons": [
             "Corporate presenter look; weak for native-feeling social ads",
-            {
-              "Norwegian voices not confirmed in docs we could read": "test first"
-            }
+            "Norwegian voices not confirmed in docs we could read — test first"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -2162,20 +2094,22 @@
             "Built for testing many hooks"
           ],
           "cons": [
-            {
-              "Norwegian speech not confirmed": "test before paying"
-            },
+            "Norwegian speech not confirmed — test before paying",
             "No free trial; 10 videos is a hard cap",
             "Realism raises the fake-testimonial risk in Norway"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": false,
@@ -2198,9 +2132,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -2268,20 +2200,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "misleading",
-          "label": "misleading marketing",
-          "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        },
-        {
-          "id": "ai_act",
-          "label": "EU AI Act",
-          "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        }
-      ],
       "tools": [
         {
           "name": "HeyGen Creator",
@@ -2302,11 +2220,15 @@
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": true,
@@ -2326,18 +2248,20 @@
           ],
           "cons": [
             "Corporate presenter look; weak for native-feeling social ads",
-            {
-              "Norwegian voices not confirmed in docs we could read": "test first"
-            }
+            "Norwegian voices not confirmed in docs we could read — test first"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": true,
@@ -2356,20 +2280,22 @@
             "Built for testing many hooks"
           ],
           "cons": [
-            {
-              "Norwegian speech not confirmed": "test before paying"
-            },
+            "Norwegian speech not confirmed — test before paying",
             "No free trial; 10 videos is a hard cap",
             "Realism raises the fake-testimonial risk in Norway"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": true,
@@ -2392,9 +2318,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -2462,20 +2386,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "misleading",
-          "label": "misleading marketing",
-          "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        },
-        {
-          "id": "ai_act",
-          "label": "EU AI Act",
-          "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
-          "source": "https://legal247.no/en/insights/ai-content-labelling/"
-        }
-      ],
       "tools": [
         {
           "name": "HeyGen Creator",
@@ -2496,11 +2406,15 @@
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": true,
@@ -2520,18 +2434,20 @@
           ],
           "cons": [
             "Corporate presenter look; weak for native-feeling social ads",
-            {
-              "Norwegian voices not confirmed in docs we could read": "test first"
-            }
+            "Norwegian voices not confirmed in docs we could read — test first"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": true,
@@ -2550,20 +2466,22 @@
             "Built for testing many hooks"
           ],
           "cons": [
-            {
-              "Norwegian speech not confirmed": "test before paying"
-            },
+            "Norwegian speech not confirmed — test before paying",
             "No free trial; 10 videos is a hard cap",
             "Realism raises the fake-testimonial risk in Norway"
           ],
           "rules": [
             {
               "id": "misleading",
-              "label": "misleading marketing"
+              "label": "misleading marketing",
+              "text": "An AI image or AI actor that gives a false impression of the product, or presents a synthetic person as a real customer, can be misleading marketing (markedsføringsloven § 7).",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             },
             {
               "id": "ai_act",
-              "label": "EU AI Act"
+              "label": "EU AI Act",
+              "text": "EU AI Act labelling (Article 50) has applied in the EU since 2 August 2026 but is not yet Norwegian law (bill expected spring 2027). Campaigns that also reach EU audiences may already be caught: realistic AI people, places or products must be visibly labelled as AI.",
+              "source": "https://legal247.no/en/insights/ai-content-labelling/"
             }
           ],
           "fits": true,
@@ -2586,9 +2504,7 @@
               "Cheapest way to test a Norwegian voice-over"
             ],
             "cons": [
-              {
-                "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-              },
+              "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
               "Small monthly allowance"
             ],
             "rules": [],
@@ -2656,14 +2572,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "retouch_label",
-          "label": "retouch label",
-          "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
-          "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
-        }
-      ],
       "tools": [
         {
           "name": "Photoroom Pro",
@@ -2684,7 +2592,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": false,
@@ -2709,7 +2619,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": false,
@@ -2724,9 +2636,7 @@
           "jurisdiction": "US (Adobe)",
           "billing_note": "",
           "pros": [
-            {
-              "Full compositing control": "place a real product photo in an AI scene"
-            },
+            "Full compositing control — place a real product photo in an AI scene",
             "Photoshop tools for clean, art-directed results"
           ],
           "cons": [
@@ -2762,14 +2672,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "retouch_label",
-          "label": "retouch label",
-          "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
-          "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
-        }
-      ],
       "tools": [
         {
           "name": "Photoroom Pro",
@@ -2790,7 +2692,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": false,
@@ -2815,7 +2719,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": false,
@@ -2830,9 +2736,7 @@
           "jurisdiction": "US (Adobe)",
           "billing_note": "",
           "pros": [
-            {
-              "Full compositing control": "place a real product photo in an AI scene"
-            },
+            "Full compositing control — place a real product photo in an AI scene",
             "Photoshop tools for clean, art-directed results"
           ],
           "cons": [
@@ -2868,14 +2772,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "retouch_label",
-          "label": "retouch label",
-          "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
-          "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
-        }
-      ],
       "tools": [
         {
           "name": "Photoroom Pro",
@@ -2896,7 +2792,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": true,
@@ -2921,7 +2819,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": false,
@@ -2936,9 +2836,7 @@
           "jurisdiction": "US (Adobe)",
           "billing_note": "",
           "pros": [
-            {
-              "Full compositing control": "place a real product photo in an AI scene"
-            },
+            "Full compositing control — place a real product photo in an AI scene",
             "Photoshop tools for clean, art-directed results"
           ],
           "cons": [
@@ -2974,14 +2872,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "retouch_label",
-          "label": "retouch label",
-          "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
-          "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
-        }
-      ],
       "tools": [
         {
           "name": "Photoroom Pro",
@@ -3002,7 +2892,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": true,
@@ -3027,7 +2919,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": false,
@@ -3042,9 +2936,7 @@
           "jurisdiction": "US (Adobe)",
           "billing_note": "",
           "pros": [
-            {
-              "Full compositing control": "place a real product photo in an AI scene"
-            },
+            "Full compositing control — place a real product photo in an AI scene",
             "Photoshop tools for clean, art-directed results"
           ],
           "cons": [
@@ -3080,14 +2972,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "retouch_label",
-          "label": "retouch label",
-          "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
-          "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
-        }
-      ],
       "tools": [
         {
           "name": "Photoroom Pro",
@@ -3108,7 +2992,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": true,
@@ -3133,7 +3019,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": true,
@@ -3148,9 +3036,7 @@
           "jurisdiction": "US (Adobe)",
           "billing_note": "",
           "pros": [
-            {
-              "Full compositing control": "place a real product photo in an AI scene"
-            },
+            "Full compositing control — place a real product photo in an AI scene",
             "Photoshop tools for clean, art-directed results"
           ],
           "cons": [
@@ -3186,14 +3072,6 @@
         "note": "Text variations, image generation and image-to-video (all advertisers since October 2026) inside Ads Manager. Norwegian-language and EEA availability not confirmed: check your own account.",
         "source": "https://www.trylapis.com/resources/meta-ads-ai-features"
       },
-      "rules": [
-        {
-          "id": "retouch_label",
-          "label": "retouch label",
-          "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
-          "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
-        }
-      ],
       "tools": [
         {
           "name": "Photoroom Pro",
@@ -3214,7 +3092,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": true,
@@ -3239,7 +3119,9 @@
           "rules": [
             {
               "id": "retouch_label",
-              "label": "retouch label"
+              "label": "retouch label",
+              "text": "Norway: ads where a person's body shape, size or skin has been altered must carry the \"retusjert reklame\" label (markedsføringsloven § 2). The Consumer Authority said in 2024 that fully AI-generated people fall outside this duty, but AI-altered images of real people may not.",
+              "source": "https://www.forbrukertilsynet.no/vi-jobber-med/merking-av-retusjert-reklame"
             }
           ],
           "fits": true,
@@ -3254,9 +3136,7 @@
           "jurisdiction": "US (Adobe)",
           "billing_note": "",
           "pros": [
-            {
-              "Full compositing control": "place a real product photo in an AI scene"
-            },
+            "Full compositing control — place a real product photo in an AI scene",
             "Photoshop tools for clean, art-directed results"
           ],
           "cons": [

@@ -85,9 +85,7 @@ var HM_AI = {
             "Stealth mode keeps campaign work private before launch"
           ],
           "cons": [
-            {
-              "Images only": "no layout, text handling is weak"
-            },
+            "Images only — no layout, and text handling is weak",
             "Below Pro, everything you make is publicly visible",
             "Commercial licence covers companies under USD 1M revenue; larger need Mega"
           ],
@@ -155,9 +153,7 @@ var HM_AI = {
           "norwegian": "n/a",
           "jurisdiction": "US (Adobe)",
           "pros": [
-            {
-              "Full compositing control": "place a real product photo in an AI scene"
-            },
+            "Full compositing control — place a real product photo in an AI scene",
             "Photoshop tools for clean, art-directed results"
           ],
           "cons": [
@@ -287,9 +283,7 @@ var HM_AI = {
           ],
           "cons": [
             "Corporate presenter look; weak for native-feeling social ads",
-            {
-              "Norwegian voices not confirmed in docs we could read": "test first"
-            }
+            "Norwegian voices not confirmed in docs we could read — test first"
           ],
           "rules": [
             "misleading",
@@ -310,9 +304,7 @@ var HM_AI = {
             "Built for testing many hooks"
           ],
           "cons": [
-            {
-              "Norwegian speech not confirmed": "test before paying"
-            },
+            "Norwegian speech not confirmed — test before paying",
             "No free trial; 10 videos is a hard cap",
             "Realism raises the fake-testimonial risk in Norway"
           ],
@@ -346,9 +338,7 @@ var HM_AI = {
             "Cheapest way to test a Norwegian voice-over"
           ],
           "cons": [
-            {
-              "Norwegian is not on Multilingual v2": "pick the right model or it may sound Danish"
-            },
+            "Norwegian is not on Multilingual v2 — pick the right model or it may sound Danish",
             "Small monthly allowance"
           ],
           "source": "https://elevenlabs.io/docs/help-center/other/what-languages-do-you-support"

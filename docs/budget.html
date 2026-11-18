@@ -126,7 +126,9 @@
   .chip-n { font-size:12px; color:var(--muted); border:1px solid var(--line2); border-radius:999px; padding:2px 10px; }
   .tool-what { margin:8px 0 0; font-size:13px; line-height:1.5; color:var(--ink2); }
   .tool-rules { margin:6px 0 0; font-size:12px; color:var(--muted2); }
-  .tool-rules a { color:var(--muted); }
+  .tool-rules > summary { cursor:pointer; color:var(--muted2); font-weight:500; }
+  .tool-rules .rule-text { margin-top:6px; }
+  .tool-rules .rule-text p { margin:0 0 6px; line-height:1.5; }
   .tool-details { margin-top:8px; }
   .tool-details summary { font-size:13px; }
   .tool-detail { margin-top:8px; font-size:13px; line-height:1.55; color:var(--muted); }
@@ -417,7 +419,7 @@
 
   // --- "If you go AI" card (depends only on format + AI cost) ---
   var lastAiKey = null;
-  function srcLink(url){ return url ? '<a class="ai-src" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">vendor page</a>' : ''; }
+  function srcLink(url){ return url ? '<a class="ai-src" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">source</a>' : ''; }
   function li(items){ return '<ul>' + items.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
   function toolRow(t){
     var h = '<div class="tool' + (t.fits ? ' fits' : '') + '"><div class="tool-head"><span class="tool-name">' + esc(t.name) + '</span>' +
@@ -426,8 +428,10 @@
     if (t.badge) h += '<span class="chip-n">' + esc(t.badge) + '</span>';
     h += '</div><p class="tool-what">' + esc(t.includes) + '</p>';
     if (t.rules.length) {
-      h += '<p class="tool-rules">Norway: ' + t.rules.map(function (r) {
-        return '<a href="#airule-' + esc(r.id) + '">' + esc(r.label) + '</a>'; }).join(', ') + '</p>';
+      h += '<details class="tool-rules"><summary>Norway: ' +
+        t.rules.map(function (r) { return esc(r.label); }).join(', ') + '</summary><div class="rule-text">' +
+        t.rules.map(function (r) { return '<p>' + esc(r.text) + ' ' + srcLink(r.source) + '</p>'; }).join('') +
+        '</div></details>';
     }
     h += '<details class="tool-details"><summary>Details</summary><div class="tool-detail">';
     if (t.pros.length) h += '<p class="pc-h">Pros</p>' + li(t.pros);
@@ -449,11 +453,6 @@
     var fb = d.free_baseline;
     h += '<p class="ai-baseline"><strong>' + esc(fb.name) + '</strong> — ' + esc(fb.price) + '. ' +
       esc(fb.note) + ' ' + srcLink(fb.source) + '</p>';
-    if (d.rules.length) {
-      h += '<div class="ai-rules">' + d.rules.map(function (r) {
-        return '<p id="airule-' + esc(r.id) + '"><strong>' + esc(r.label) + ':</strong> ' +
-          esc(r.text) + ' ' + srcLink(r.source) + '</p>'; }).join('') + '</div>';
-    }
     h += '<div class="tool-list">' + d.tools.map(toolRow).join('') + '</div>';
     if (d.alternatives.length) {
       h += '<div class="ai-alts">' + d.alternatives.map(function (a) {

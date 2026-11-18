@@ -76,15 +76,19 @@ def test_stale_flag_tracks_review_by():
 
 # --- rule lines --------------------------------------------------------------
 
-def test_rule_lines_reference_the_norway_rules():
+def test_rule_lines_are_per_tool_and_expand_to_the_text():
+    # De-duplicated: no card-level rules block; each tool carries its own line plus the
+    # full rule text (for the inline expand).
     ugc = ai_options("ugc", today=FRESH)
-    assert [r["id"] for r in ugc["tools"][0]["rules"]] == ["misleading", "ai_act"]
-    assert [r["id"] for r in ugc["rules"]] == ["misleading", "ai_act"]
-    for r in ugc["rules"]:                       # the linked text is present
-        assert r["text"] and r["label"]
-    # studio -> retouch_label; static -> no rules.
-    assert [r["id"] for r in ai_options("studio", today=FRESH)["rules"]] == ["retouch_label"]
-    assert ai_options("static", today=FRESH)["rules"] == []
+    assert "rules" not in ugc                     # no block at the top of the card
+    hey = ugc["tools"][0]
+    assert [r["id"] for r in hey["rules"]] == ["misleading", "ai_act"]
+    for r in hey["rules"]:
+        assert r["label"] and r["text"] and r["source"]
+    # studio -> retouch_label on the Photoroom tools; static -> no tool rules.
+    studio = ai_options("studio", today=FRESH)
+    assert [r["id"] for r in studio["tools"][0]["rules"]] == ["retouch_label"]
+    assert all(not t["rules"] for t in ai_options("static", today=FRESH)["tools"])
 
 
 # --- copy guard (our labels; owner data excluded) ----------------------------
@@ -97,7 +101,7 @@ def test_card_labels_are_positions_not_recommendations():
             "No affiliate links or paid placement", card["checked_display"]]
     ours += [t["price_text"] for t in card["tools"]]
     ours += [t["badge"] or "" for t in card["tools"]]
-    ours += [r["label"] for r in card["rules"]]
+    ours += [r["label"] for t in card["tools"] for r in t["rules"]]
     low = " ".join(ours).lower()
     assert not [w for w in PRESCRIPTIVE if w in low]
 
@@ -108,6 +112,30 @@ def test_ai_options_golden_matches_python():
         got = ai_options(case["input"]["fmt"], case["input"]["ai_cost"],
                          today=dt.date.fromisoformat(case["input"]["today"]))
         assert got == case["output"]
+
+
+def test_schema_every_pros_con_is_a_string_and_tools_are_complete():
+    # The bug this guards: a bare ": " makes PyYAML parse a list item as a mapping,
+    # which rendered as "[object Object]". load_ai_tools() must reject that.
+    data = load_ai_tools()
+    required = ("name", "tier", "price_usd", "price_nok", "norwegian", "source")
+    for uc in data["use_cases"]:
+        for t in uc.get("tools", []):
+            assert all(k in t for k in required), f"{t.get('name')} missing a required field"
+            for field in ("pros", "cons"):
+                for item in t.get(field, []):
+                    assert isinstance(item, str), f"{t['name']} {field} not a string: {item!r}"
+
+
+def test_malformed_ai_tools_fails_the_build(tmp_path):
+    import pytest as _pytest
+    from mediekjop.planner.budget_check import _validate_ai_tools
+    with _pytest.raises(ValueError):
+        _validate_ai_tools({"use_cases": [{"tools": [{"name": "X", "tier": "entry",
+            "price_usd": 1, "price_nok": 10, "norwegian": "n/a", "source": "s",
+            "cons": [{"a": "b"}]}]}]})                 # a mapping, not a string
+    with _pytest.raises(ValueError):
+        _validate_ai_tools({"use_cases": [{"tools": [{"name": "X"}]}]})   # missing fields
 
 
 def test_no_tracking_params_in_sources():
