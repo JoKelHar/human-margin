@@ -1,0 +1,75 @@
+{
+  "objective": "launch the new serum line in Oslo",
+  "audience": "Oslo skincare buyers who value a premium look",
+  "insight": "shoppers trust a real studio shot over an obvious render",
+  "proposition": "a premium studio look that earns 90 orders",
+  "maker_recommendation": {
+    "maker": "ai",
+    "position_id": "aurora-pos",
+    "rationale": "the human studio shoot needs 36 more orders to pay off, about 40% of the goal, so AI carries the volume"
+  },
+  "deliverables": [
+    {
+      "format": "studio",
+      "count": 4,
+      "maker": "ai"
+    }
+  ],
+  "mandatories": [
+    {
+      "id": "ai_act",
+      "text": "If realistic AI people appear, label them under Article 50 for EU reach."
+    },
+    {
+      "id": "ai_disclosure",
+      "text": "Disclose AI-made assets."
+    }
+  ],
+  "tone": "clean, premium, understated",
+  "budget": {
+    "value": 40000,
+    "unit": "NOK",
+    "source": "assumption",
+    "confidence": "low",
+    "as_of": "2026-11-19"
+  },
+  "success_measure": {
+    "value": 90,
+    "unit": "orders",
+    "source": "assumption",
+    "confidence": "low",
+    "as_of": "2026-11-19"
+  },
+  "hypothesis": "a studio hero shot lifts orders versus a plain AI mockup",
+  "copy_lines": [
+    {
+      "text": "Ekte studioglans for huden din",
+      "language": "nb-NO",
+      "needs_native_review": true
+    }
+  ],
+  "assumptions": [
+    {
+      "value": 40,
+      "unit": "percent",
+      "source": "assumption",
+      "confidence": "low",
+      "as_of": "2026-11-19",
+      "ref": "break-even as a share of the goal (illustrative)"
+    }
+  ],
+  "open_questions": [
+    "is 90 orders reachable on 40 000 kr at the assumed conversion rate?"
+  ],
+  "envelope": {
+    "id": "aurora-brief",
+    "schema_version": "0.1",
+    "parent_ids": [
+      "aurora-ctx",
+      "aurora-goal",
+      "aurora-pos"
+    ],
+    "made_by": "agent",
+    "status": "proposed"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "mode": "fixture",
+  "decided_by": "fixture",
+  "outcome": "approve",
+  "maker_word": "ai",
+  "reason": null,
+  "acks": {
+    "a7886d7777b5": {
+      "acknowledged": true,
+      "note": "ok"
+    },
+    "303338a60ae5": {
+      "acknowledged": true,
+      "note": ""
+    }
+  }
+}

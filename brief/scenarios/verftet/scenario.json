@@ -1,6 +1,7 @@
 {
   "slug": "verftet",
   "one_liner": "Verftet Kurs -- course provider, promo video",
+  "illustrative": "Illustrative inputs, not market data.",
   "context": {
     "brand": "Verftet Kurs",
     "market": "NO",

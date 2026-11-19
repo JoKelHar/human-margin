@@ -1,0 +1,82 @@
+[
+  {
+    "name": "invented_number",
+    "check": "no_naked_numbers",
+    "patch": {
+      "proposition": "a premium studio look that earns 7 777 orders"
+    }
+  },
+  {
+    "name": "wrong_unit",
+    "check": "no_naked_numbers",
+    "patch": {
+      "hypothesis": "the shoot costs 40 kr versus the AI mockup"
+    }
+  },
+  {
+    "name": "rounding_invented_precision",
+    "check": "no_naked_numbers",
+    "patch": {
+      "maker_recommendation": {
+        "maker": "ai",
+        "position_id": "aurora-pos",
+        "rationale": "the premium is 42.47% of the goal"
+      }
+    }
+  },
+  {
+    "name": "multiplier_unbacked",
+    "check": "no_naked_numbers",
+    "patch": {
+      "insight": "a studio shot can double the orders"
+    }
+  },
+  {
+    "name": "bare_year_checked",
+    "check": "no_naked_numbers",
+    "patch": {
+      "objective": "launch the serum line for 2030 orders"
+    }
+  },
+  {
+    "name": "norwegian_format_unbacked",
+    "check": "no_naked_numbers",
+    "patch": {
+      "hypothesis": "the shoot runs to kr 7.777,- in production"
+    }
+  },
+  {
+    "name": "bare_count_wrong_unit",
+    "check": "no_naked_numbers",
+    "patch": {
+      "proposition": "a premium studio look that earns 36 memberships"
+    }
+  },
+  {
+    "name": "norwegian_line_unflagged",
+    "check": "native_review",
+    "patch": {
+      "copy_lines": [
+        {
+          "text": "Ekte studioglans for huden din",
+          "language": "nb-NO",
+          "needs_native_review": false
+        }
+      ]
+    }
+  },
+  {
+    "name": "maker_mismatch_no_explanation",
+    "check": "maker_match",
+    "patch": {
+      "maker_recommendation": {
+        "maker": "human",
+        "position_id": "aurora-pos",
+        "rationale": "the human studio shoot needs 36 more orders to pay off, about 40% of the goal, so AI carries the volume"
+      },
+      "open_questions": [
+        "is 90 orders reachable on 40 000 kr at the assumed conversion rate?"
+      ]
+    }
+  }
+]
