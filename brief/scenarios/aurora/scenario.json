@@ -1,0 +1,25 @@
+{
+  "slug": "aurora",
+  "one_liner": "Aurora Atelier -- premium skincare, studio product shoot",
+  "context": {
+    "brand": "Aurora Atelier",
+    "market": "NO",
+    "language": "nb-NO",
+    "category": "skincare",
+    "legal_flags": ["retouch_label", "ai_act"],
+    "envelope": {"id": "aurora-ctx", "schema_version": "0.1", "parent_ids": [], "made_by": "agent", "status": "draft"}
+  },
+  "goal": {
+    "objective": "launch the new serum line in the Oslo market",
+    "kpi": "orders",
+    "target": {"value": 90, "unit": "orders", "source": "assumption", "confidence": "low", "as_of": "2026-11-19"},
+    "budget": {"value": 40000, "unit": "NOK", "source": "assumption", "confidence": "low", "as_of": "2026-11-19"},
+    "horizon": "6 weeks",
+    "envelope": {"id": "aurora-goal", "schema_version": "0.1", "parent_ids": [], "made_by": "agent", "status": "draft"}
+  },
+  "decide_inputs": {"industry": "beauty", "goal_mode": "target", "goal": 90, "price": 2500, "budget": 40000, "fmt": "studio", "human": 90000, "ai": 800, "reuse": 1, "cpm": 115},
+  "expected": {"stance": "ai", "reachable": true},
+  "changelog": [
+    {"date": "2026-11-19", "note": "format static->studio: decide/ has no quantity input; AI quote 3 000->800: Decide studio AI band point, required for in-band check; stance unchanged (ai)."}
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "verftet",
+  "one_liner": "Verftet Kurs -- course provider, promo video",
+  "context": {
+    "brand": "Verftet Kurs",
+    "market": "NO",
+    "language": "nb-NO",
+    "category": "courses",
+    "legal_flags": ["misleading", "ai_act"],
+    "envelope": {"id": "verftet-ctx", "schema_version": "0.1", "parent_ids": [], "made_by": "agent", "status": "draft"}
+  },
+  "goal": {
+    "objective": "fill the spring course cohort",
+    "kpi": "sign-ups",
+    "target": {"value": 250, "unit": "sign-ups", "source": "assumption", "confidence": "low", "as_of": "2026-11-19"},
+    "budget": {"value": 40000, "unit": "NOK", "source": "assumption", "confidence": "low", "as_of": "2026-11-19"},
+    "horizon": "10 weeks",
+    "envelope": {"id": "verftet-goal", "schema_version": "0.1", "parent_ids": [], "made_by": "agent", "status": "draft"}
+  },
+  "decide_inputs": {"industry": "courses", "goal_mode": "target", "goal": 250, "price": 1500, "budget": 40000, "fmt": "video", "human": 25000, "ai": 2000, "reuse": 1, "cpm": 115},
+  "expected": {"stance": "human", "reachable": false},
+  "changelog": []
+}

@@ -1,0 +1,23 @@
+{
+  "slug": "fjellbre",
+  "one_liner": "Fjellbre Treningssenter -- gym chain, short promo video",
+  "context": {
+    "brand": "Fjellbre Treningssenter",
+    "market": "NO",
+    "language": "nb-NO",
+    "category": "fitness",
+    "legal_flags": ["misleading", "ai_act"],
+    "envelope": {"id": "fjellbre-ctx", "schema_version": "0.1", "parent_ids": [], "made_by": "agent", "status": "draft"}
+  },
+  "goal": {
+    "objective": "fill off-peak class slots across three branches",
+    "kpi": "memberships",
+    "target": {"value": 150, "unit": "memberships", "source": "assumption", "confidence": "low", "as_of": "2026-11-19"},
+    "budget": {"value": 60000, "unit": "NOK", "source": "assumption", "confidence": "low", "as_of": "2026-11-19"},
+    "horizon": "8 weeks",
+    "envelope": {"id": "fjellbre-goal", "schema_version": "0.1", "parent_ids": [], "made_by": "agent", "status": "draft"}
+  },
+  "decide_inputs": {"industry": "fitness", "goal_mode": "target", "goal": 150, "price": 700, "budget": 60000, "fmt": "video", "human": 25000, "ai": 2000, "reuse": 1, "cpm": 115},
+  "expected": {"stance": "hybrid", "reachable": true},
+  "changelog": []
+}
