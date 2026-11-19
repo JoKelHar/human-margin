@@ -53,21 +53,41 @@ def _items(brief) -> list[tuple[str, str, str]]:
 
 
 _ITEM_LABELS = {"assumption": "assumption", "open_question": "open question"}
+_ACCEPT_PROMPTS = {
+    "assumption": "Do you accept this assumption? (y/n): ",
+    "open_question": "Is this a fair, correctly stated question to leave open? (y/n): ",
+}
+_OUTCOMES = ("approve", "edit", "reject")
+
+
+def _is_calculated(name: str) -> bool:
+    """A figure derived from the assumptions (break-even, its ratio) rather than assumed."""
+    return "break-even" in name
 
 
 def _figure_rows(brief, goal, position) -> list[tuple[str, object]]:
-    """(name, Figure) for every number the reviewer should see, with its provenance."""
+    """(name, Figure) for every number the reviewer should see, with its provenance.
+
+    The goal target is shown once: Decide's 'goal: target sales' figure repeats it, so it
+    is dropped here as a duplicate.
+    """
     rows = [("goal.target", goal.target), ("goal.budget", goal.budget),
             ("brief.budget", brief.budget), ("brief.success_measure", brief.success_measure)]
-    rows += [(f.ref or "position figure", f) for f in position.figures]
+    rows += [(f.ref or "position figure", f) for f in position.figures
+             if not (f.ref or "").startswith("goal:")]
     rows += [(f.ref or "brief assumption", f) for f in brief.assumptions]
     return rows
 
 
 def _figure_table(name_figure_pairs) -> str:
-    """A fixed-width table: name, value, unit, source, confidence."""
+    """A fixed-width table: name, value, unit, source, confidence.
+
+    Figures calculated from the assumptions show source 'calculated', not 'assumption'.
+    """
     headers = ["name", "value", "unit", "source", "confidence"]
-    rows = [(name, f"{f.value:g}", f.unit, f.source.value, f.confidence.value)
+    rows = [(name, f"{f.value:g}", f.unit,
+             "calculated" if _is_calculated(name) else f.source.value,
+             f.confidence.value)
             for name, f in name_figure_pairs]
     cols = list(zip(headers, *rows)) if rows else [(h,) for h in headers]
     widths = [max(len(str(c)) for c in col) for col in cols]
@@ -95,6 +115,24 @@ def _interactive_answers(run, stream_in, stream_out) -> dict:
             raise GateError("input closed before the gate was complete")
         return raw.rstrip("\n")
 
+    def ask_yes_no(prompt: str) -> bool:
+        # Re-ask on anything that is not yes/no rather than guessing or crashing.
+        while True:
+            a = ask(prompt).strip().lower()
+            if a in ("y", "yes"):
+                return True
+            if a in ("n", "no"):
+                return False
+            say(f"  Please answer y or n (you typed {a!r}).")
+
+    def ask_outcome() -> str:
+        while True:
+            a = ask("Decision (type one word: approve, edit or reject): ").strip().lower()
+            if a in _OUTCOMES:
+                return a
+            say(f"  Please type exactly one of: approve, edit, reject "
+                f"(you typed {a!r}).")
+
     say(render_summary(brief, run.context, run.goal, run.position))
 
     # 1. Every Figure the brief may cite, with provenance, then the stance thresholds.
@@ -119,20 +157,20 @@ def _interactive_answers(run, stream_in, stream_out) -> dict:
         say("")
         say(f"Item {i} of {n}: [{_ITEM_LABELS.get(kind, kind)}]")
         say(f"  {text}")
-        ans = ask("Accept? (y/n): ").strip().lower()
+        accepted = ask_yes_no(_ACCEPT_PROMPTS.get(kind, "Accept? (y/n): "))
         note = ask("Note (optional, press Enter to skip): ").strip()
-        acks[ref] = {"acknowledged": ans.startswith("y"), "note": note or ""}
+        acks[ref] = {"acknowledged": accepted, "note": note or ""}
 
-    # 3. The decision, with the options spelled out.
+    # 3. Decision, then reason, as separate steps with the options spelled out.
     say("")
-    outcome = ask("Decision: type approve, edit or reject: ").strip().lower()
+    outcome = ask_outcome()
     maker_word = ""
     if outcome == "approve":
         rec = brief.maker_recommendation.maker.value
         maker_word = ask(f"To approve, retype the recommended maker word ({rec}): ") \
             .strip().lower()
-    reason = ask("Reason (required for edit/reject or to approve against Decide's stance; "
-                 "Enter to skip): ").strip() or None
+    reason = ask("Reason for this decision (required for edit/reject or to approve "
+                 "against Decide's stance; press Enter to skip): ").strip() or None
     return {"mode": "interactive", "decided_by": "", "outcome": outcome,
             "maker_word": maker_word, "reason": reason, "acks": acks}
 

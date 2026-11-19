@@ -9,6 +9,10 @@ The same rules apply whichever maker the brief commits to:
   - maker_match: the maker recommendation equals Decide's stance, or the brief explains
     the divergence in open_questions; a near-boundary stance requires an open question.
   - native_review: Norwegian copy lines must be flagged needs_native_review.
+  - ai_labelling: a brief with any AI or hybrid maker must carry an AI-content labelling
+    mandatory (ai_disclosure or ai_act). Where the risk is lopsided, the safe option is
+    the default: labelling is a default mandatory, never an open question. Dropping it is
+    an explicit human opt-out recorded at the gate, not something the brief omits.
 """
 
 from __future__ import annotations
@@ -21,6 +25,11 @@ from schema import Brief, Context, Figure, Goal, Maker, Position
 
 # Text fields checked for naked numbers. Legal mandatories are excluded by design.
 _TEXT_FIELDS = ("objective", "audience", "insight", "proposition", "hypothesis", "tone")
+
+# Mandatory ids that satisfy the AI-content labelling duty.
+_LABELLING_IDS = frozenset({"ai_disclosure", "ai_act"})
+# Makers whose output can pass as real and so triggers the labelling duty.
+_AI_MAKERS = frozenset({Maker.ai, Maker.hybrid})
 
 
 @dataclass(frozen=True)
@@ -114,11 +123,29 @@ def _check_native_review(brief: Brief) -> Finding:
                    "Norwegian copy not flagged needs_native_review: " + ", ".join(offenders))
 
 
+def _uses_ai(brief: Brief) -> bool:
+    makers = {brief.maker_recommendation.maker} | {d.maker for d in brief.deliverables}
+    return bool(makers & _AI_MAKERS)
+
+
+def _check_labelling(brief: Brief) -> Finding:
+    if not _uses_ai(brief):
+        return Finding("ai_labelling", True,
+                       "no AI or hybrid maker; AI-content labelling not required")
+    has = any(m.id in _LABELLING_IDS for m in brief.mandatories)
+    return Finding("ai_labelling", has,
+                   "AI-content labelling mandatory present" if has else
+                   "brief uses AI/hybrid makers but carries no AI-content labelling "
+                   "mandatory (ai_disclosure or ai_act); labelling is a default mandatory, "
+                   "not an open question")
+
+
 def check_brief(brief: Brief, context: Context, goal: Goal, position: Position) -> CheckReport:
     findings = [Finding("schema", True, "Brief validates against schema v0.2")]
     findings.append(_check_numbers(brief, figure_pool(brief, goal, position)))
     findings.append(_check_maker(brief, position))
     findings.append(_check_native_review(brief))
+    findings.append(_check_labelling(brief))
     return CheckReport(findings)
 
 

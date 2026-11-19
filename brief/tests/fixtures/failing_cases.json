@@ -92,5 +92,17 @@
     "patch": {
       "hypothesis": "the usual band runs 20 000-999 999 kr for this format"
     }
+  },
+  {
+    "name": "ai_maker_no_labelling",
+    "check": "ai_labelling",
+    "patch": {
+      "mandatories": [
+        {
+          "id": "retouch_label",
+          "text": "Norway: altered-body ads carry the retusjert reklame label."
+        }
+      ]
+    }
   }
 ]

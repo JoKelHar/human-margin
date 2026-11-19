@@ -95,23 +95,79 @@ def test_interactive_shows_each_item_before_its_question(tmp_path):
     _interactive_answers(run, io.StringIO(feed), out)
     text = out.getvalue()
 
-    # Figures table and stance thresholds are shown before any question.
+    # Figures table and stance thresholds are shown before any item.
     assert "Figures the brief may cite:" in text
     assert "Decide stance thresholds" in text
-    assert text.index("Figures the brief may cite:") < text.index("Accept? (y/n):")
+    assert text.index("Figures the brief may cite:") < text.index("Item 1 of")
 
-    # Every item's full text appears before the Accept prompt that follows it.
+    # Every item's full text appears before the acknowledgement prompt that follows it.
     cursor = 0
-    for i, (_kind, _ref, item_text) in enumerate(items, 1):
+    for i, (kind, _ref, item_text) in enumerate(items, 1):
+        prompt = ("Do you accept this assumption? (y/n):" if kind == "assumption"
+                  else "Is this a fair, correctly stated question to leave open? (y/n):")
         pos_item = text.find(item_text, cursor)
         assert pos_item != -1, f"item {i} text not shown: {item_text!r}"
-        pos_q = text.find("Accept? (y/n):", pos_item)
+        pos_q = text.find(prompt, pos_item)
         assert pos_q > pos_item, f"item {i} question not shown after its text"
         assert f"Item {i} of {len(items)}:" in text
         cursor = pos_q + 1
 
     # The decision options are spelled out.
-    assert "Decision: type approve, edit or reject:" in text
+    assert "Decision (type one word: approve, edit or reject):" in text
+
+
+def test_interactive_reprompts_on_bad_input_without_crashing(tmp_path):
+    """Bad y/n and a bad decision word re-ask instead of crashing or guessing."""
+    run = load_run(make_run(tmp_path))
+    items = _items(run.brief)
+    assert items
+    lines = ["maybe", "y", ""]                 # first item: junk, then yes, empty note
+    for _ in items[1:]:
+        lines += ["y", ""]                     # remaining items: yes, empty note
+    lines += ["banana", "reject", "scope too broad"]   # junk decision, then reject + reason
+    out = io.StringIO()
+    answers = _interactive_answers(run, io.StringIO("".join(s + "\n" for s in lines)), out)
+    text = out.getvalue()
+    assert "Please answer y or n" in text
+    assert "Please type exactly one of: approve, edit, reject" in text
+    assert answers["outcome"] == "reject"
+    assert all(v["acknowledged"] for v in answers["acks"].values())
+
+
+def test_item_prompts_are_worded_by_type(tmp_path):
+    """Assumptions and open questions get their own acknowledgement wording."""
+    run = load_run(make_run(tmp_path))
+    items = _items(run.brief)
+    kinds = {kind for kind, _ref, _text in items}
+    feed = "".join("y\n\n" for _ in items) + "reject\nx\n"
+    out = io.StringIO()
+    _interactive_answers(run, io.StringIO(feed), out)
+    text = out.getvalue()
+    if "assumption" in kinds:
+        assert "Do you accept this assumption? (y/n):" in text
+    if "open_question" in kinds:
+        assert "Is this a fair, correctly stated question to leave open? (y/n):" in text
+
+
+def test_figures_table_marks_calculated_and_drops_duplicate_goal(tmp_path):
+    """Break-even and its ratio show source 'calculated'; the duplicate goal figure is gone."""
+    run = load_run(make_run(tmp_path))
+    items = _items(run.brief)
+    feed = "".join("y\n\n" for _ in items) + "reject\nx\n"
+    out = io.StringIO()
+    _interactive_answers(run, io.StringIO(feed), out)
+    text = out.getvalue()
+    lines = text.splitlines()
+    # The two figures derived from assumptions are labelled 'calculated'.
+    for name in ("human-margin break-even", "break-even as a share of the goal"):
+        row = next((ln for ln in lines if name in ln), None)
+        assert row is not None, f"figure row not shown: {name!r}"
+        assert "calculated" in row, f"derived figure not labelled calculated: {row!r}"
+    # A plain assumption still reads 'assumption'.
+    quote = next((ln for ln in lines if "human production quote" in ln), None)
+    assert quote and "assumption" in quote
+    # The duplicate goal figure is dropped (goal.target already shown once).
+    assert "goal: target sales" not in text, "duplicate goal figure should be dropped"
 
 
 def test_reject_requires_a_reason(tmp_path, monkeypatch):
