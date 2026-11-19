@@ -1,0 +1,78 @@
+{
+  "assumptions": [],
+  "audience": "Oslo skincare buyers who follow ingredient-led routines and buy premium serums online.",
+  "budget": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": "goal: budget",
+    "source": "assumption",
+    "unit": "NOK",
+    "value": 40000.0
+  },
+  "copy_lines": [
+    {
+      "language": "nb-NO",
+      "needs_native_review": true,
+      "text": "Ny serum. Ekte hud, ekte resultater."
+    }
+  ],
+  "deliverables": [
+    {
+      "count": 4,
+      "format": "static social image",
+      "maker": "ai"
+    },
+    {
+      "count": 2,
+      "format": "short product video",
+      "maker": "ai"
+    }
+  ],
+  "envelope": {
+    "id": "aurora-brief",
+    "made_by": "agent",
+    "parent_ids": [
+      "aurora-ctx",
+      "aurora-goal",
+      "aurora-pos"
+    ],
+    "schema_version": "0.1",
+    "status": "proposed"
+  },
+  "hypothesis": "An AI-made creative set can reach the 90-order goal inside budget, because the human route needs 36 extra orders to break even, 40 percent of the goal, which premium serum launches rarely add.",
+  "insight": "Shoppers judge a new serum on proof and provenance, not polish; a believable result beats a glossy studio image.",
+  "maker_recommendation": {
+    "maker": "ai",
+    "position_id": "aurora-pos",
+    "rationale": "Decide puts break-even at 36 of the 90 goal orders, 40 percent of the goal, so the studio shoot only pays back if it lifts orders beyond that; at 2500 kr per order the AI route carries far less downside."
+  },
+  "mandatories": [
+    {
+      "id": "retouch_label",
+      "text": "Ads where a person's body shape, size or skin has been altered must carry the 'retusjert reklame' label (markedsforingsloven par. 2). AI-altered images of real people are in scope."
+    },
+    {
+      "id": "ai_act",
+      "text": "If the campaign also reaches EU audiences, realistic AI-made people, places or products that could pass as real must be visibly labelled as AI (EU AI Act Article 50)."
+    },
+    {
+      "id": "ai_disclosure",
+      "text": "AI-generated creative is disclosed to the client and labelled to the audience where a reasonable viewer could take it for an unedited photograph of a real person."
+    }
+  ],
+  "objective": "Launch Aurora Atelier's new serum line in Oslo and win 90 first orders within the campaign window.",
+  "open_questions": [
+    "What is the account's real conversion rate and CPM, which would replace the assumed 2500 kr value per order?",
+    "Does the Oslo launch also reach EU audiences, which would trigger AI Act labelling?"
+  ],
+  "proposition": "Clinically-minded skincare, shown honestly.",
+  "success_measure": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": "goal: target",
+    "source": "assumption",
+    "unit": "orders",
+    "value": 90.0
+  },
+  "tone": "Honest, clinical, warm."
+}

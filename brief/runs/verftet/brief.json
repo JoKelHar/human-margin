@@ -1,0 +1,78 @@
+{
+  "assumptions": [],
+  "audience": "Adults in Norway weighing an evening or weekend course to build a practical skill, who judge a provider on the instructor's credibility.",
+  "budget": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": "goal: budget",
+    "source": "assumption",
+    "unit": "NOK",
+    "value": 40000.0
+  },
+  "copy_lines": [
+    {
+      "language": "nb-NO",
+      "needs_native_review": true,
+      "text": "Laer av dem som faktisk underviser. Ekte instruktorer, ekte kurs."
+    }
+  ],
+  "deliverables": [
+    {
+      "count": 1,
+      "format": "course promo video",
+      "maker": "human"
+    },
+    {
+      "count": 3,
+      "format": "instructor social clip",
+      "maker": "human"
+    }
+  ],
+  "envelope": {
+    "id": "verftet-brief",
+    "made_by": "agent",
+    "parent_ids": [
+      "verftet-ctx",
+      "verftet-goal",
+      "verftet-pos"
+    ],
+    "schema_version": "0.1",
+    "status": "proposed"
+  },
+  "hypothesis": "A human-made creative set can fill the 250-sign-up spring cohort within budget, because its break-even over the AI route is only 16 extra sign-ups, 6.4 percent of the goal, which a credibility-led course brand should clear.",
+  "insight": "Course sign-ups turn on trust in the teacher; a real instructor on camera carries proof an AI presenter cannot.",
+  "maker_recommendation": {
+    "maker": "human",
+    "position_id": "verftet-pos",
+    "rationale": "Decide puts break-even at 16 of the 250 goal sign-ups, 6.4 percent of the goal, a bar a credibility-led course brand clears easily; at 1500 kr per sign-up the human shoot's trust is worth more than the saving."
+  },
+  "mandatories": [
+    {
+      "id": "misleading",
+      "text": "An AI image or AI actor that presents a synthetic person as a real instructor or student can be misleading marketing (markedsforingsloven par. 7); AI presenters must not pose as real teachers or testimonials."
+    },
+    {
+      "id": "ai_act",
+      "text": "If the campaign also reaches EU audiences, realistic AI-made people, places or products that could pass as real must be visibly labelled as AI (EU AI Act Article 50)."
+    },
+    {
+      "id": "ai_disclosure",
+      "text": "Any AI-generated supporting creative is disclosed to the client and labelled to the audience where a reasonable viewer could take an AI presenter for a real instructor."
+    }
+  ],
+  "objective": "Fill Verftet's spring course cohort with 250 sign-ups in the campaign window.",
+  "open_questions": [
+    "What is the account's real sign-up conversion rate and CPM, which would replace the assumed 1500 kr value per sign-up?",
+    "If AI is used for supporting cuts, could a synthetic instructor read as a real teacher and raise a misleading-marketing risk?"
+  ],
+  "proposition": "Learn from people who actually teach.",
+  "success_measure": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": "goal: target",
+    "source": "assumption",
+    "unit": "sign-ups",
+    "value": 250.0
+  },
+  "tone": "Credible, warm, practical."
+}

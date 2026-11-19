@@ -1,0 +1,83 @@
+{
+  "assumptions": [],
+  "audience": "Local adults near each branch who want to train at quieter hours and compare gyms on price and convenience.",
+  "budget": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": "goal: budget",
+    "source": "assumption",
+    "unit": "NOK",
+    "value": 60000.0
+  },
+  "copy_lines": [
+    {
+      "language": "nb-NO",
+      "needs_native_review": true,
+      "text": "Tren nar det passer deg. Ekte medlemmer, ekte timer."
+    }
+  ],
+  "deliverables": [
+    {
+      "count": 1,
+      "format": "hero class video",
+      "maker": "human"
+    },
+    {
+      "count": 6,
+      "format": "social variant",
+      "maker": "ai"
+    },
+    {
+      "count": 3,
+      "format": "static branch ad",
+      "maker": "hybrid"
+    }
+  ],
+  "envelope": {
+    "id": "fjellbre-brief",
+    "made_by": "agent",
+    "parent_ids": [
+      "fjellbre-ctx",
+      "fjellbre-goal",
+      "fjellbre-pos"
+    ],
+    "schema_version": "0.1",
+    "status": "proposed"
+  },
+  "hypothesis": "A hybrid creative set can hit the 150-membership goal within budget, because the all-human route needs 33 extra memberships to break even, 22 percent of the goal, that off-peak sign-ups are unlikely to add.",
+  "insight": "Off-peak slots sell on belonging and routine, not hype; seeing real members at real classes converts better than a polished promo.",
+  "maker_recommendation": {
+    "maker": "hybrid",
+    "position_id": "fjellbre-pos",
+    "rationale": "Decide puts break-even at 33 of the 150 goal memberships, 22 percent of the goal, a low bar; a hybrid cut uses AI for volume and variants and a real shoot for the hero, balancing the 700 kr value per membership against production cost."
+  },
+  "mandatories": [
+    {
+      "id": "misleading",
+      "text": "An AI image or AI actor that presents a synthetic person as a real member can be misleading marketing (markedsforingsloven par. 7); AI presenters must not pose as real testimonials."
+    },
+    {
+      "id": "ai_act",
+      "text": "If the campaign also reaches EU audiences, realistic AI-made people, places or products that could pass as real must be visibly labelled as AI (EU AI Act Article 50)."
+    },
+    {
+      "id": "ai_disclosure",
+      "text": "AI-generated creative is disclosed to the client and labelled to the audience where a reasonable viewer could take an AI presenter for a real member."
+    }
+  ],
+  "objective": "Fill Fjellbre's off-peak class slots across every branch and convert 150 new memberships in the campaign window.",
+  "open_questions": [
+    "What is each branch's real off-peak conversion rate and CPM, which would replace the assumed 700 kr value per membership?",
+    "Could an AI presenter read as a real member and raise a misleading-marketing risk?"
+  ],
+  "proposition": "Your gym, your hours.",
+  "success_measure": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": "goal: target",
+    "source": "assumption",
+    "unit": "memberships",
+    "value": 150.0
+  },
+  "tone": "Grounded, local, encouraging."
+}
