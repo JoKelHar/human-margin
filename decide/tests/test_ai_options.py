@@ -74,6 +74,35 @@ def test_stale_flag_tracks_review_by():
     assert ai_options("ugc", today=FRESH)["checked_display"] == "18 Nov 2026"
 
 
+def _ai_act_rule() -> dict:
+    rules = {r["id"]: r for r in load_ai_tools()["norway_rules"]}
+    return rules["ai_act"]
+
+
+def test_ai_act_rule_cites_primary_sources_and_current_wording():
+    rule = _ai_act_rule()
+    # Primary government sources replace the earlier secondary explainer.
+    assert rule["sources"] == [
+        "https://www.regjeringen.no/no/aktuelt/regjeringen-sender-forenklinger-i-ki-forordningen-pa-horing/id3187283/",
+        "https://www.regjeringen.no/no/aktuelt/id3169693/",
+    ]
+    assert "legal247" not in (rule["source"] + " ".join(rule["sources"]))
+    assert "could pass as real must be visibly labelled as AI" in rule["text"]
+    assert "closes 11 December 2026" in rule["text"]
+
+
+def test_ai_act_rule_fails_once_review_by_has_passed():
+    # A real-time staleness tripwire: once review_by is in the past, this test fails,
+    # forcing a re-check of the AI Act's Norwegian status rather than silent staleness.
+    rule = _ai_act_rule()
+    assert rule["as_of"] == "2026-11-19"
+    review_by = dt.date.fromisoformat(rule["review_by"])
+    assert review_by == dt.date(2027, 3, 1)
+    assert dt.date.today() <= review_by, (
+        f"ai_act rule is past review_by {review_by}: re-verify the AI Act's Norwegian "
+        "status and the consultation outcome, then bump as_of/review_by")
+
+
 # --- rule lines --------------------------------------------------------------
 
 def test_rule_lines_are_per_tool_and_expand_to_the_text():
