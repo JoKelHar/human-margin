@@ -58,6 +58,10 @@ Write the draft to a temp JSON file and record it:
 uv run python -m brief.record <slug> <draft-brief.json>
 ```
 
+**Run the checks with the command only. Don't open or read `brief/checks.py`,
+`brief/numbers.py`, or the fixtures; treat the checks as a black box. Fix drafts using the
+failure messages alone.**
+
 `brief.record.write_run` runs `brief/checks.py` and **sets the status itself**:
 
 - checks pass → the run is written **`status=proposed`**.
