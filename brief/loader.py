@@ -10,6 +10,7 @@ brief after approval all make the loader refuse.
 
 from __future__ import annotations
 
+from brief.checks import check_brief
 from brief.review import shown_hash
 from brief.run import Run, load_decision, load_run
 from schema import Brief, DecisionMode, MadeBy, Outcome
@@ -35,6 +36,12 @@ def load_approved_brief(run_id) -> Brief:
     if decision.shown_hash != recomputed:
         raise NotApproved("shown_hash does not match the current brief: it changed after "
                           "approval, so the approval no longer applies")
+    # Re-run the checks regardless of any recorded checks.json: a brief that fails never
+    # loads, even with an approval attached.
+    rep = check_brief(run.brief, run.context, run.goal, run.position)
+    if not rep.ok:
+        raise NotApproved("brief no longer passes checks: "
+                          + "; ".join(f.detail for f in rep.findings if not f.ok))
     return run.brief
 
 

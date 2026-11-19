@@ -24,6 +24,7 @@ import os
 import sys
 from pathlib import Path
 
+from brief.checks import check_brief
 from brief.review import item_ref, render_summary, shown_hash
 from brief.run import load_run, write_decision
 from schema import (
@@ -117,6 +118,12 @@ def decide(run, answers: dict, decided_by: str) -> Decision:
 def run_gate(run_id, from_file: Path | None, decided_by: str,
              stdin=sys.stdin, stdout=sys.stdout) -> Decision:
     run = load_run(run_id)
+    # The gate re-runs the checks itself; a brief that fails cannot be gated, whatever a
+    # recorded checks.json claims.
+    rep = check_brief(run.brief, run.context, run.goal, run.position)
+    if not rep.ok:
+        raise GateError("brief fails checks, cannot be gated: "
+                        + "; ".join(f.detail for f in rep.findings if not f.ok))
     if from_file is not None:
         if os.environ.get("BRIEF_ALLOW_NONINTERACTIVE") != "1":
             raise GateError("fixture mode (--from-file) needs BRIEF_ALLOW_NONINTERACTIVE=1")

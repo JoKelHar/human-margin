@@ -78,5 +78,19 @@
         "is 90 orders reachable on 40 000 kr at the assumed conversion rate?"
       ]
     }
+  },
+  {
+    "name": "number_word_unbacked",
+    "check": "no_naked_numbers",
+    "patch": {
+      "proposition": "a premium studio look that earns ten orders"
+    }
+  },
+  {
+    "name": "range_one_endpoint_unbacked",
+    "check": "no_naked_numbers",
+    "patch": {
+      "hypothesis": "the usual band runs 20 000-999 999 kr for this format"
+    }
   }
 ]

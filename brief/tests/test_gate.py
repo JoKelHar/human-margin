@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 
 import pytest
-from _fixtures import FIX, make_run
+from _fixtures import FIX, make_run, valid_brief_dict
 
 from brief.approve import GateError, run_gate
 from brief.run import load_decision
@@ -70,6 +70,16 @@ def test_approval_requires_the_maker_word(tmp_path, monkeypatch):
     d = make_run(tmp_path)
     with pytest.raises(GateError):
         run_gate(d, from_file=_answers(tmp_path, maker_word="human"), decided_by="x")
+
+
+def test_gate_refuses_a_failing_brief_even_if_checksjson_claims_pass(tmp_path, monkeypatch):
+    monkeypatch.setenv("BRIEF_ALLOW_NONINTERACTIVE", "1")
+    bad = valid_brief_dict()
+    bad["proposition"] = "a premium studio look that earns 7 777 orders"   # naked number
+    d = make_run(tmp_path, bad)
+    (d / "checks.json").write_text(json.dumps({"ok": True, "findings": []}), encoding="utf-8")
+    with pytest.raises(GateError):
+        run_gate(d, from_file=FIX / "approve_answers.json", decided_by="x")
 
 
 def test_reject_requires_a_reason(tmp_path, monkeypatch):

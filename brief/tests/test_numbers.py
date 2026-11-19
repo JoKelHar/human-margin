@@ -19,11 +19,25 @@ FIGS = [(90000.0, "NOK"), (800.0, "NOK"), (2500.0, "NOK"), (36.0, "orders"),
     "a 2.500 kr value per order",               # Norwegian "." thousands
     "a 40 % share of the goal",                 # percent
     "needs 36 more orders",                     # bare count, right unit
+    "about 36 orders",                          # "about" + bare count
     "the band runs 20 000-150 000 kr",          # range, both endpoints present
     "closes in 2026",                           # year in date context
+    "on 2 August 2026 the rule applies",        # day and year beside a month
+    "under § 2 of the Act",                     # legal citation
+    "see Article 50 for EU reach",              # legal citation
 ])
 def test_clean_numbers_pass(text):
     assert unmatched(text, FIGS) == []
+
+
+@pytest.mark.parametrize("text,figs", [
+    ("a 43% share", [(42.5, "percent")]),           # rounds to the token's precision
+    ("a 1,5 % uplift", [(1.5, "percent")]),         # Norwegian decimal, backed
+    ("costs kr 3 900,- total", [(3900.0, "NOK")]),  # Norwegian "kr …,-", backed
+    ("band 20 000-150 000 kr", [(20000.0, "NOK"), (150000.0, "NOK")]),  # range backed
+])
+def test_backed_numbers_pass(text, figs):
+    assert unmatched(text, figs) == []
 
 
 @pytest.mark.parametrize("text,figs", [
@@ -43,6 +57,8 @@ def test_rounding_to_token_precision_passes(text, figs):
     ("reach 2030 orders", FIGS),                   # bare 4-digit, not a date
     ("the band 20 000-999 999 kr", FIGS),          # one range endpoint missing
     ("runs to kr 7.777,-", FIGS),                  # Norwegian format, no match
+    ("earns ten orders", FIGS),                    # number word, no backing figure
+    ("tolv bestillinger kommer", FIGS),            # Norwegian number word + unit alias
 ])
 def test_naked_numbers_are_flagged(text, figs):
     assert unmatched(text, figs), f"expected a naked number in {text!r}"

@@ -130,15 +130,19 @@ def _canonical_unit(word: str) -> str | None:
     return UNIT_ALIASES.get(_fold(word).rstrip("."))
 
 
-def _year_in_date_context(text: str, start: int, token: str) -> bool:
-    """A bare 4-digit year is whitelisted only next to a month or 'in/i'."""
-    if not re.fullmatch(r"\d{4}", token):
-        return False
-    before = _fold(text[max(0, start - 14):start])
-    after = _fold(text[start + len(token):start + len(token) + 12])
-    if re.search(r"\b(in|i)\s*$", before) or re.search(r"^\s*(in|i)\b", after):
+def _whitelisted(text: str, start: int, token: str) -> bool:
+    """A number is not a quantitative claim when it is a legal citation (§ 2, Article 50)
+    or a date component (a day or year beside a month name, or a year after in/i)."""
+    before = _fold(text[max(0, start - 16):start])
+    after = _fold(text[start + len(token):start + len(token) + 14])
+    if re.search(r"(§|article|artikkel|art\.?)\s*$", before):          # legal citation
         return True
-    return any(mo in before or mo in after for mo in _MONTHS)
+    if any(mo in before or mo in after for mo in _MONTHS):             # a date (day or year)
+        return True
+    if re.fullmatch(r"\d{4}", token) and (re.search(r"\b(in|i)\s*$", before)
+                                          or re.search(r"^\s*(in|i)\b", after)):
+        return True
+    return False
 
 
 def extract(text: str) -> list[Num]:
@@ -152,11 +156,14 @@ def extract(text: str) -> list[Num]:
         if w in MULTIPLIERS:
             nums.append(Num(MULTIPLIERS[w], "x", w, 0, 0))
         elif w in _UNITS_WORDS and w not in ("en", "to", "i"):   # skip words that are also NO prepositions/articles
-            val = _UNITS_WORDS[w]
-            scale_after = folded[m.end():m.end() + 8].strip().split(" ")[0] if folded[m.end():].strip() else ""
-            if scale_after in _SCALE_WORDS:
-                val *= _SCALE_WORDS[scale_after]
-            nums.append(Num(float(val), None, w, 0, 0))
+            val = float(_UNITS_WORDS[w])
+            rest = re.findall(r"[a-zæøå]+", folded[m.end():])     # following words, punctuation stripped
+            j = 0
+            if rest and rest[j] in _SCALE_WORDS:
+                val *= _SCALE_WORDS[rest[j]]
+                j += 1
+            unit = _canonical_unit(rest[j]) if j < len(rest) else None
+            nums.append(Num(val, unit, w, 0, 0))
 
     # Digit tokens: ranges, then currency/percent/counts, then bare.
     for m in re.finditer(rf"({_NUM})\s*[–—-]\s*({_NUM})\s*(kr|nok|%|prosent)?", text, re.I):
@@ -179,7 +186,7 @@ def extract(text: str) -> list[Num]:
             continue
         pre, suf, word = m.group(1), (m.group(3) or ""), (m.group(4) or "")
         dp, tz = _precision(m.group(2))
-        if _year_in_date_context(consumed, m.start(2), m.group(2).strip()):
+        if _whitelisted(consumed, m.start(2), m.group(2).strip()):
             continue
         if pre or suf.lower() in ("kr", "nok", ",-"):
             unit = "NOK"
