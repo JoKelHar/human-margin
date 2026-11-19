@@ -24,7 +24,8 @@ import os
 import sys
 from pathlib import Path
 
-from brief.checks import check_brief
+from brief.checks import check_brief, stance_of
+from brief.config import THRESHOLDS
 from brief.review import item_ref, render_summary, shown_hash
 from brief.run import load_run, write_decision
 from schema import (
@@ -51,23 +52,87 @@ def _items(brief) -> list[tuple[str, str, str]]:
     return out
 
 
-def _interactive_answers(run, stream_in, stream_out) -> dict:
-    def say(s=""):
-        print(s, file=stream_out)
+_ITEM_LABELS = {"assumption": "assumption", "open_question": "open question"}
 
-    say(render_summary(run.brief, run.context, run.goal, run.position))
-    say("\nAcknowledge each item (y/n), with an optional note:")
-    acks = {}
-    for kind, ref, text in _items(run.brief):
+
+def _figure_rows(brief, goal, position) -> list[tuple[str, object]]:
+    """(name, Figure) for every number the reviewer should see, with its provenance."""
+    rows = [("goal.target", goal.target), ("goal.budget", goal.budget),
+            ("brief.budget", brief.budget), ("brief.success_measure", brief.success_measure)]
+    rows += [(f.ref or "position figure", f) for f in position.figures]
+    rows += [(f.ref or "brief assumption", f) for f in brief.assumptions]
+    return rows
+
+
+def _figure_table(name_figure_pairs) -> str:
+    """A fixed-width table: name, value, unit, source, confidence."""
+    headers = ["name", "value", "unit", "source", "confidence"]
+    rows = [(name, f"{f.value:g}", f.unit, f.source.value, f.confidence.value)
+            for name, f in name_figure_pairs]
+    cols = list(zip(headers, *rows)) if rows else [(h,) for h in headers]
+    widths = [max(len(str(c)) for c in col) for col in cols]
+
+    def line(cells):
+        return "  " + "  ".join(str(c).ljust(w) for c, w in zip(cells, widths))
+
+    return "\n".join([line(headers), line(["-" * w for w in widths])]
+                     + [line(r) for r in rows])
+
+
+def _interactive_answers(run, stream_in, stream_out) -> dict:
+    brief = run.brief
+
+    def say(s=""):
+        stream_out.write(s + "\n")
+        stream_out.flush()
+
+    def ask(prompt: str) -> str:
+        # Flush the prompt to the screen before blocking on input (requirement 4).
+        stream_out.write(prompt)
+        stream_out.flush()
         raw = stream_in.readline()
         if raw == "":
-            raise GateError("input closed before all items were acknowledged")
-        ans = raw.strip().lower()
-        acks[ref] = {"acknowledged": ans.startswith("y"), "note": ""}
-        say(f"  [{kind}] {text} -> {'ack' if acks[ref]['acknowledged'] else 'NOT ack'}")
-    outcome = stream_in.readline().strip().lower()
-    maker_word = stream_in.readline().strip().lower() if outcome == "approve" else ""
-    reason = stream_in.readline().strip() or None
+            raise GateError("input closed before the gate was complete")
+        return raw.rstrip("\n")
+
+    say(render_summary(brief, run.context, run.goal, run.position))
+
+    # 1. Every Figure the brief may cite, with provenance, then the stance thresholds.
+    say("")
+    say("Figures the brief may cite:")
+    say(_figure_table(_figure_rows(brief, run.goal, run.position)))
+
+    st = stance_of(run.position)
+    say("")
+    say("Decide stance thresholds (break-even as % of goal):")
+    say(_figure_table(THRESHOLDS))
+    say(f"  this brief: stance={st.maker.value}, ratio={st.ratio:.1f}%"
+        f"{', NEAR BOUNDARY' if st.near_boundary else ''}")
+
+    # 2. One item at a time: its type and full text FIRST, then the two questions.
+    items = _items(brief)
+    n = len(items)
+    say("")
+    say(f"Acknowledge each item ({n} total). Accept only what you have read and agree with.")
+    acks = {}
+    for i, (kind, ref, text) in enumerate(items, 1):
+        say("")
+        say(f"Item {i} of {n}: [{_ITEM_LABELS.get(kind, kind)}]")
+        say(f"  {text}")
+        ans = ask("Accept? (y/n): ").strip().lower()
+        note = ask("Note (optional, press Enter to skip): ").strip()
+        acks[ref] = {"acknowledged": ans.startswith("y"), "note": note or ""}
+
+    # 3. The decision, with the options spelled out.
+    say("")
+    outcome = ask("Decision: type approve, edit or reject: ").strip().lower()
+    maker_word = ""
+    if outcome == "approve":
+        rec = brief.maker_recommendation.maker.value
+        maker_word = ask(f"To approve, retype the recommended maker word ({rec}): ") \
+            .strip().lower()
+    reason = ask("Reason (required for edit/reject or to approve against Decide's stance; "
+                 "Enter to skip): ").strip() or None
     return {"mode": "interactive", "decided_by": "", "outcome": outcome,
             "maker_word": maker_word, "reason": reason, "acks": acks}
 
