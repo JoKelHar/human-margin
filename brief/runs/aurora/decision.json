@@ -1,0 +1,31 @@
+{
+  "acknowledgements": [
+    {
+      "acknowledged": false,
+      "item_ref": "57807ab178b3",
+      "item_type": "open_question",
+      "note": "Wrong logic: conversion rate and CPM don't set value per order; they decide whether 40 000 kr can reach 90 orders. Reword: \"What are the account's real conversion rate and CPM? They decide whether the budget can reach the 90-order goal.\""
+    },
+    {
+      "acknowledged": false,
+      "item_ref": "b428bfc54436",
+      "item_type": "open_question",
+      "note": "Wrong default for a legal item. Labelling should be mandatory by default, not an open question. Only drop it if the user explicitly confirms the campaign can't reach EU audiences, and log that confirmation. A needless label costs nothing; a missing one is the expensive mistake."
+    }
+  ],
+  "decided_by": "joaoharrison",
+  "edits": null,
+  "envelope": {
+    "id": "1f9fd20b3eec483a9ddf6b9b222fef5a",
+    "made_by": "human",
+    "parent_ids": [],
+    "schema_version": "0.1",
+    "status": "draft"
+  },
+  "mode": "interactive",
+  "outcome": "edit",
+  "reason": "1) Hypothesis makes an unsourced market claim (\"premium serum launches rarely add\"); cut it or make it an open question. 2) Open question 1 has the wrong logic; reword as noted. 3) AI labelling must be a default mandatory, not an open question; opt-out only by explicit, logged confirmation.",
+  "shown_hash": "8589807e43e88e1b208277936b8d9e2c55603d5b5f7a0039d670827876dc069a",
+  "target_id": "aurora-brief",
+  "timestamp": "2026-11-19T22:52:09.324128Z"
+}
