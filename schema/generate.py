@@ -15,7 +15,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from schema.models import MODELS
+from schema.briefs import BRIEF_MODELS
+from schema.models import MODELS as _CORE_MODELS
+
+# v0.1 value objects + artefacts, then the v0.2 Brief/Decision artefacts.
+MODELS = _CORE_MODELS + BRIEF_MODELS
 
 JSON_DIR = Path(__file__).resolve().parent / "json"
 

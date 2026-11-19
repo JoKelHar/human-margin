@@ -1,0 +1,182 @@
+{
+  "$defs": {
+    "Acknowledgement": {
+      "additionalProperties": false,
+      "description": "One reviewer sign-off at the gate, tied to the item's content hash.",
+      "properties": {
+        "acknowledged": {
+          "title": "Acknowledged",
+          "type": "boolean"
+        },
+        "item_ref": {
+          "title": "Item Ref",
+          "type": "string"
+        },
+        "item_type": {
+          "title": "Item Type",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Note"
+        }
+      },
+      "required": [
+        "item_type",
+        "item_ref",
+        "acknowledged"
+      ],
+      "title": "Acknowledgement",
+      "type": "object"
+    },
+    "DecisionMode": {
+      "enum": [
+        "interactive",
+        "fixture"
+      ],
+      "title": "DecisionMode",
+      "type": "string"
+    },
+    "Envelope": {
+      "additionalProperties": false,
+      "description": "Version, lineage and review status carried by every artefact.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "made_by": {
+          "$ref": "#/$defs/MadeBy"
+        },
+        "parent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "default": "0.1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/Status",
+          "default": "draft"
+        }
+      },
+      "required": [
+        "made_by"
+      ],
+      "title": "Envelope",
+      "type": "object"
+    },
+    "MadeBy": {
+      "enum": [
+        "agent",
+        "human"
+      ],
+      "title": "MadeBy",
+      "type": "string"
+    },
+    "Outcome": {
+      "enum": [
+        "approve",
+        "edit",
+        "reject"
+      ],
+      "title": "Outcome",
+      "type": "string"
+    },
+    "Status": {
+      "enum": [
+        "draft",
+        "proposed",
+        "approved",
+        "rejected"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "acknowledgements": {
+      "items": {
+        "$ref": "#/$defs/Acknowledgement"
+      },
+      "title": "Acknowledgements",
+      "type": "array"
+    },
+    "decided_by": {
+      "title": "Decided By",
+      "type": "string"
+    },
+    "edits": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Edits"
+    },
+    "envelope": {
+      "$ref": "#/$defs/Envelope"
+    },
+    "mode": {
+      "$ref": "#/$defs/DecisionMode"
+    },
+    "outcome": {
+      "$ref": "#/$defs/Outcome"
+    },
+    "reason": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Reason"
+    },
+    "shown_hash": {
+      "title": "Shown Hash",
+      "type": "string"
+    },
+    "target_id": {
+      "title": "Target Id",
+      "type": "string"
+    },
+    "timestamp": {
+      "format": "date-time",
+      "title": "Timestamp",
+      "type": "string"
+    }
+  },
+  "required": [
+    "target_id",
+    "outcome",
+    "decided_by",
+    "timestamp",
+    "mode",
+    "shown_hash",
+    "acknowledgements",
+    "envelope"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

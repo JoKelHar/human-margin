@@ -8,6 +8,18 @@ See :mod:`schema.models`. JSON Schema for each model is generated into
 
 from __future__ import annotations
 
+from .briefs import (
+    Acknowledgement,
+    Brief,
+    CopyLine,
+    Decision,
+    DecisionMode,
+    Deliverable,
+    Maker,
+    Mandatory,
+    MakerRecommendation,
+    Outcome,
+)
 from .models import (
     MODELS,
     SCHEMA_VERSION,
@@ -23,6 +35,10 @@ from .models import (
 )
 
 __all__ = [
+    # v0.1
     "SCHEMA_VERSION", "Source", "Confidence", "MadeBy", "Status",
     "Figure", "Envelope", "Context", "Goal", "Position", "MODELS",
+    # v0.2
+    "Maker", "Outcome", "DecisionMode", "MakerRecommendation", "Deliverable",
+    "Mandatory", "CopyLine", "Acknowledgement", "Brief", "Decision",
 ]

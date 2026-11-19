@@ -1,0 +1,315 @@
+{
+  "$defs": {
+    "Confidence": {
+      "enum": [
+        "low",
+        "med",
+        "high"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "CopyLine": {
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "title": "Language",
+          "type": "string"
+        },
+        "needs_native_review": {
+          "title": "Needs Native Review",
+          "type": "boolean"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "language",
+        "needs_native_review"
+      ],
+      "title": "CopyLine",
+      "type": "object"
+    },
+    "Deliverable": {
+      "additionalProperties": false,
+      "properties": {
+        "count": {
+          "title": "Count",
+          "type": "integer"
+        },
+        "format": {
+          "title": "Format",
+          "type": "string"
+        },
+        "maker": {
+          "$ref": "#/$defs/Maker"
+        }
+      },
+      "required": [
+        "format",
+        "count",
+        "maker"
+      ],
+      "title": "Deliverable",
+      "type": "object"
+    },
+    "Envelope": {
+      "additionalProperties": false,
+      "description": "Version, lineage and review status carried by every artefact.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "made_by": {
+          "$ref": "#/$defs/MadeBy"
+        },
+        "parent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "default": "0.1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/Status",
+          "default": "draft"
+        }
+      },
+      "required": [
+        "made_by"
+      ],
+      "title": "Envelope",
+      "type": "object"
+    },
+    "Figure": {
+      "additionalProperties": false,
+      "description": "A single number with its provenance. The one place a raw number may live.",
+      "properties": {
+        "as_of": {
+          "format": "date",
+          "title": "As Of",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        },
+        "ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ref"
+        },
+        "source": {
+          "$ref": "#/$defs/Source"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "value",
+        "unit",
+        "source",
+        "confidence",
+        "as_of"
+      ],
+      "title": "Figure",
+      "type": "object"
+    },
+    "MadeBy": {
+      "enum": [
+        "agent",
+        "human"
+      ],
+      "title": "MadeBy",
+      "type": "string"
+    },
+    "Maker": {
+      "enum": [
+        "human",
+        "ai",
+        "hybrid"
+      ],
+      "title": "Maker",
+      "type": "string"
+    },
+    "MakerRecommendation": {
+      "additionalProperties": false,
+      "description": "Which maker the brief commits to, citing the Decide Position it rests on.",
+      "properties": {
+        "maker": {
+          "$ref": "#/$defs/Maker"
+        },
+        "position_id": {
+          "title": "Position Id",
+          "type": "string"
+        },
+        "rationale": {
+          "title": "Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "maker",
+        "position_id",
+        "rationale"
+      ],
+      "title": "MakerRecommendation",
+      "type": "object"
+    },
+    "Mandatory": {
+      "additionalProperties": false,
+      "description": "A must-carry item; ``id`` cites a decide/ norway_rules id or 'ai_disclosure'.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "title": "Mandatory",
+      "type": "object"
+    },
+    "Source": {
+      "description": "Where a figure came from, best (own) to weakest (assumption).",
+      "enum": [
+        "own",
+        "pooled",
+        "public",
+        "assumption"
+      ],
+      "title": "Source",
+      "type": "string"
+    },
+    "Status": {
+      "enum": [
+        "draft",
+        "proposed",
+        "approved",
+        "rejected"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assumptions": {
+      "items": {
+        "$ref": "#/$defs/Figure"
+      },
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "audience": {
+      "title": "Audience",
+      "type": "string"
+    },
+    "budget": {
+      "$ref": "#/$defs/Figure"
+    },
+    "copy_lines": {
+      "items": {
+        "$ref": "#/$defs/CopyLine"
+      },
+      "title": "Copy Lines",
+      "type": "array"
+    },
+    "deliverables": {
+      "items": {
+        "$ref": "#/$defs/Deliverable"
+      },
+      "title": "Deliverables",
+      "type": "array"
+    },
+    "envelope": {
+      "$ref": "#/$defs/Envelope"
+    },
+    "hypothesis": {
+      "title": "Hypothesis",
+      "type": "string"
+    },
+    "insight": {
+      "title": "Insight",
+      "type": "string"
+    },
+    "maker_recommendation": {
+      "$ref": "#/$defs/MakerRecommendation"
+    },
+    "mandatories": {
+      "items": {
+        "$ref": "#/$defs/Mandatory"
+      },
+      "title": "Mandatories",
+      "type": "array"
+    },
+    "objective": {
+      "title": "Objective",
+      "type": "string"
+    },
+    "open_questions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Open Questions",
+      "type": "array"
+    },
+    "proposition": {
+      "title": "Proposition",
+      "type": "string"
+    },
+    "success_measure": {
+      "$ref": "#/$defs/Figure"
+    },
+    "tone": {
+      "title": "Tone",
+      "type": "string"
+    }
+  },
+  "required": [
+    "objective",
+    "audience",
+    "insight",
+    "proposition",
+    "maker_recommendation",
+    "deliverables",
+    "mandatories",
+    "tone",
+    "budget",
+    "success_measure",
+    "hypothesis",
+    "copy_lines",
+    "assumptions",
+    "open_questions",
+    "envelope"
+  ],
+  "title": "Brief",
+  "type": "object"
+}
