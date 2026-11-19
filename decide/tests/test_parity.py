@@ -13,7 +13,8 @@ import pytest
 
 from mediekjop.planner.report import PRESCRIPTIVE
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[1]          # the decide/ app root
+REPO = Path(__file__).resolve().parents[2]           # repo root (GitHub Pages serves /docs from here)
 
 
 def _prescriptive_hits(text: str) -> list[str]:
@@ -23,9 +24,9 @@ def _prescriptive_hits(text: str) -> list[str]:
 
 @pytest.mark.skipif(shutil.which("node") is None, reason="node not installed")
 def test_js_matches_python_golden_and_url_round_trips():
-    # Runs scripts/budget_parity_node.js: asserts budget-core.js reproduces every
+    # Runs decide/build/parity_node.js: asserts budget-core.js reproduces every
     # golden case from Python and that URL encode/decode is stable.
-    proc = subprocess.run(["node", str(ROOT / "scripts" / "budget_parity_node.js")],
+    proc = subprocess.run(["node", str(ROOT / "build" / "parity_node.js")],
                           capture_output=True, text=True, cwd=ROOT)
     assert proc.returncode == 0, proc.stderr + proc.stdout
     assert "OK:" in proc.stdout
@@ -33,8 +34,10 @@ def test_js_matches_python_golden_and_url_round_trips():
 
 def test_budget_page_and_core_are_non_prescriptive_when_built():
     checked = 0
-    for rel in ("web/budget.html", "web/budget-core.js", "docs/budget.html", "docs/budget-core.js"):
-        p = ROOT / rel
+    targets = [(ROOT, "web/budget.html"), (ROOT, "web/budget-core.js"),
+               (REPO, "docs/budget.html"), (REPO, "docs/budget-core.js")]
+    for base, rel in targets:
+        p = base / rel
         if p.exists():
             checked += 1
             hits = _prescriptive_hits(p.read_text(encoding="utf-8"))

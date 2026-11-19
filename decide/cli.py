@@ -16,7 +16,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import replace
 
-from mediekjop.planner.budget_check import EXAMPLE, SCENARIOS, Inputs, compute
+from decide.compute import EXAMPLE, SCENARIOS, Inputs, compute
 
 
 def _render(name: str, inp: Inputs) -> str:

@@ -129,30 +129,30 @@ def main() -> None:
               "a larger / API-pulled sample, and pooled linked-account performance for the "
               "approach-vs-outcome question (the snapshot carries no performance data)")
 
-    print("\n## Budget-check placeholders  (src/mediekjop/planner/budget_check.py)")
+    print("\n## Budget-check placeholders  (decide/compute.py)")
     print("  (the calculator behind the “check your creative budget” page; labelled as")
     print("   rough estimates on the page, never presented as Norwegian data.)")
-    from mediekjop.planner import budget_check as _bc
-    _line("src/mediekjop/planner/budget_check.py",
+    from decide import compute as _bc
+    _line("decide/compute.py",
           "conversion range (assumption)",
           f"1 in {_bc.TYP_LO}–{_bc.TYP_HI} views convert",
           "a sourced Norwegian conversion-rate range (currently a rough US-based estimate)")
-    _line("src/mediekjop/planner/budget_check.py",
+    _line("decide/compute.py",
           "default CPM (assumption)",
           f"{_bc.DEFAULT_CPM} kr per 1 000 views",
           "a sourced Norwegian CPM by channel (currently a rough US-based placeholder); "
           "the user can override it on the page")
-    _line("src/mediekjop/planner/budget_check.py",
+    _line("decide/compute.py",
           "creator-mode example client prices (assumption)",
           "rough per-industry per-sale values (_EXAMPLE_PRICE)",
           "the user's own client price; shown labelled “example”, never as measured data")
 
-    print("\n## AI tools shortlist  (data/ai_tools.yaml)")
+    print("\n## AI tools shortlist  (decide/data/ai_tools.yaml)")
     print("  (the “if you go AI” card; vendor list prices, no affiliate links. Prices and")
     print("   features change monthly - re-check each quarter.)")
     _ai = _bc.load_ai_tools()
     n_tools = sum(len(uc.get("tools", [])) for uc in _ai.get("use_cases", []))
-    _line("data/ai_tools.yaml",
+    _line("decide/data/ai_tools.yaml",
           "AI creative tools (vendor list prices)",
           f"{n_tools} tools across {len(_ai.get('use_cases', []))} use cases; "
           f"checked {_ai.get('checked', '?')}, review_by {_ai.get('review_by', '?')}",

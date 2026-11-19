@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from mediekjop.planner.budget_check import ai_options, load_ai_tools
+from decide.compute import ai_options, load_ai_tools
 from mediekjop.planner.report import PRESCRIPTIVE
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -129,7 +129,7 @@ def test_schema_every_pros_con_is_a_string_and_tools_are_complete():
 
 def test_malformed_ai_tools_fails_the_build(tmp_path):
     import pytest as _pytest
-    from mediekjop.planner.budget_check import _validate_ai_tools
+    from decide.compute import _validate_ai_tools
     with _pytest.raises(ValueError):
         _validate_ai_tools({"use_cases": [{"tools": [{"name": "X", "tier": "entry",
             "price_usd": 1, "price_nok": 10, "norwegian": "n/a", "source": "s",

@@ -11,7 +11,7 @@ from pathlib import Path
 
 import pytest
 
-from mediekjop.planner.budget_check import (
+from decide.compute import (
     CREATOR_EXAMPLE,
     CreatorInputs,
     Inputs,

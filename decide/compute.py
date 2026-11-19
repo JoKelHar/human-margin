@@ -32,8 +32,8 @@ from pathlib import Path
 
 import yaml
 
-from ..config import repo_root
-from .formats import load_costs
+from mediekjop.config import repo_root
+from mediekjop.planner.formats import load_costs
 
 # Rough, non-Norwegian placeholders (flagged as assumptions in the register and on
 # the page). Replace with sourced Norwegian figures when available.
@@ -409,7 +409,7 @@ _BADGE = {"confirmed": "Norwegian: confirmed", "likely": "Norwegian: likely",
 
 @lru_cache(maxsize=2)
 def load_ai_tools(path: str | None = None) -> dict:
-    p = Path(path) if path else repo_root() / "data" / "ai_tools.yaml"
+    p = Path(path) if path else Path(__file__).resolve().parent / "data" / "ai_tools.yaml"
     data = yaml.safe_load(p.read_text(encoding="utf-8")) or {}
     # PyYAML parses bare YYYY-MM-DD as date objects; normalise to ISO strings so the
     # data is JSON-serialisable (for the JS) and comparisons are plain strings.
