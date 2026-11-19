@@ -1,0 +1,54 @@
+{
+  "$defs": {
+    "MadeBy": {
+      "enum": [
+        "agent",
+        "human"
+      ],
+      "title": "MadeBy",
+      "type": "string"
+    },
+    "Status": {
+      "enum": [
+        "draft",
+        "proposed",
+        "approved",
+        "rejected"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Version, lineage and review status carried by every artefact.",
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "made_by": {
+      "$ref": "#/$defs/MadeBy"
+    },
+    "parent_ids": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Parent Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "default": "0.1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "$ref": "#/$defs/Status",
+      "default": "draft"
+    }
+  },
+  "required": [
+    "made_by"
+  ],
+  "title": "Envelope",
+  "type": "object"
+}

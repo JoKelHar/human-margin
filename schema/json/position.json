@@ -1,0 +1,155 @@
+{
+  "$defs": {
+    "Confidence": {
+      "enum": [
+        "low",
+        "med",
+        "high"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "Envelope": {
+      "additionalProperties": false,
+      "description": "Version, lineage and review status carried by every artefact.",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "made_by": {
+          "$ref": "#/$defs/MadeBy"
+        },
+        "parent_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Parent Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "default": "0.1",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/$defs/Status",
+          "default": "draft"
+        }
+      },
+      "required": [
+        "made_by"
+      ],
+      "title": "Envelope",
+      "type": "object"
+    },
+    "Figure": {
+      "additionalProperties": false,
+      "description": "A single number with its provenance. The one place a raw number may live.",
+      "properties": {
+        "as_of": {
+          "format": "date",
+          "title": "As Of",
+          "type": "string"
+        },
+        "confidence": {
+          "$ref": "#/$defs/Confidence"
+        },
+        "ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ref"
+        },
+        "source": {
+          "$ref": "#/$defs/Source"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "value",
+        "unit",
+        "source",
+        "confidence",
+        "as_of"
+      ],
+      "title": "Figure",
+      "type": "object"
+    },
+    "MadeBy": {
+      "enum": [
+        "agent",
+        "human"
+      ],
+      "title": "MadeBy",
+      "type": "string"
+    },
+    "Source": {
+      "description": "Where a figure came from, best (own) to weakest (assumption).",
+      "enum": [
+        "own",
+        "pooled",
+        "public",
+        "assumption"
+      ],
+      "title": "Source",
+      "type": "string"
+    },
+    "Status": {
+      "enum": [
+        "draft",
+        "proposed",
+        "approved",
+        "rejected"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A claim backed by figures, with the one thing that would change it.",
+  "properties": {
+    "claim": {
+      "title": "Claim",
+      "type": "string"
+    },
+    "confidence": {
+      "$ref": "#/$defs/Confidence"
+    },
+    "envelope": {
+      "$ref": "#/$defs/Envelope"
+    },
+    "figures": {
+      "items": {
+        "$ref": "#/$defs/Figure"
+      },
+      "title": "Figures",
+      "type": "array"
+    },
+    "what_would_change_it": {
+      "title": "What Would Change It",
+      "type": "string"
+    }
+  },
+  "required": [
+    "claim",
+    "confidence",
+    "what_would_change_it",
+    "envelope"
+  ],
+  "title": "Position",
+  "type": "object"
+}

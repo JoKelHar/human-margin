@@ -1,0 +1,68 @@
+{
+  "$defs": {
+    "Confidence": {
+      "enum": [
+        "low",
+        "med",
+        "high"
+      ],
+      "title": "Confidence",
+      "type": "string"
+    },
+    "Source": {
+      "description": "Where a figure came from, best (own) to weakest (assumption).",
+      "enum": [
+        "own",
+        "pooled",
+        "public",
+        "assumption"
+      ],
+      "title": "Source",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A single number with its provenance. The one place a raw number may live.",
+  "properties": {
+    "as_of": {
+      "format": "date",
+      "title": "As Of",
+      "type": "string"
+    },
+    "confidence": {
+      "$ref": "#/$defs/Confidence"
+    },
+    "ref": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Ref"
+    },
+    "source": {
+      "$ref": "#/$defs/Source"
+    },
+    "unit": {
+      "title": "Unit",
+      "type": "string"
+    },
+    "value": {
+      "title": "Value",
+      "type": "number"
+    }
+  },
+  "required": [
+    "value",
+    "unit",
+    "source",
+    "confidence",
+    "as_of"
+  ],
+  "title": "Figure",
+  "type": "object"
+}
