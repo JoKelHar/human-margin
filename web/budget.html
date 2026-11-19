@@ -55,12 +55,15 @@
   .hero { padding-block:12px 24px; }
   .statusrow { margin-top:20px; min-height:32px; display:flex; align-items:center; }
   .modebar { display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:6px; padding:6px;
-    background:var(--seg-bg); border-radius:14px; margin:16px 0 0; }
+    background:var(--seg-bg); border-radius:14px; margin:4px 0 24px; }
   .modebar button { appearance:none; min-height:52px; border:0; border-radius:10px; font:inherit;
     font-size:14px; font-weight:500; cursor:pointer; background:transparent; color:var(--muted); padding:10px 12px; }
   .modebar button[aria-pressed="true"] { background:var(--seg-on); color:var(--ink); box-shadow:var(--shadow); }
   .feedback { margin:10px 0 0; font-size:13px; color:var(--muted); }
   .feedback a { color:var(--accent); }
+  .ai-fold > summary.ai-fold-sum { cursor:pointer; font-size:14px; font-weight:500; color:var(--accent);
+    background:var(--card); border:1px solid var(--line); border-radius:12px; padding:14px 16px; list-style:none; }
+  .ai-fold > summary.ai-fold-sum::-webkit-details-marker { display:none; }
   .chip { display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border-radius:999px;
     background:var(--chip-bg); color:var(--chip-ink); font-size:13px; font-weight:500; }
   .chip .dot { width:6px; height:6px; border-radius:3px; background:var(--chip-dot); }
@@ -186,13 +189,13 @@
       </nav>
     </header>
 
+    <div class="modebar" role="group" aria-label="What you are doing" id="modebar"></div>
+
     <div class="hero">
-      <h1>Check your creative budget.</h1>
-      <p class="sub">Three answers from your own numbers. Takes a minute, runs in your browser.</p>
+      <h1 id="hero-h1">Check your creative budget.</h1>
+      <p class="sub" id="hero-sub">Three answers from your own numbers. Takes a minute, runs in your browser.</p>
       <div class="statusrow" id="statusrow"></div>
     </div>
-
-    <div class="modebar" role="group" aria-label="What you are doing" id="modebar"></div>
 
     <main>
       <form class="card" id="form" aria-label="Your numbers"></form>
@@ -258,7 +261,7 @@
 <script>
 (function () {
   var D = window.HM_DATA, C = window.HMCore;
-  var FEEDBACK_EMAIL = 'hello@human-margin.example';   // placeholder address
+  var FEEDBACK_EMAIL = '';   // set to a real address to show the "Tell us" link; empty hides it
   var CREATOR_DEFAULTS = { usageMonths:6, revisions:2, rawFiles:false, exampleIndustry:'nightlife', examplePrice:null };
   var EXAMPLE_BUYING = { mode:'buying', industry:'nightlife', goalMode:'target', goal:300, price:250,
     budget:5000, fmt:'ugc', human:4200, ai:300, reuse:2, cpm:115, margin:null, marginUnit:'kr', otherNoun:null };
@@ -523,6 +526,10 @@
   }
   function applyMode(){
     var creator = state.mode === 'creator';
+    document.getElementById('hero-h1').textContent = creator ? 'Check your price.' : 'Check your creative budget.';
+    document.getElementById('hero-sub').textContent = creator
+      ? 'See where your rate sits, and what it asks of a client. Runs in your browser.'
+      : 'Three answers from your own numbers. Takes a minute, runs in your browser.';
     document.getElementById('buying-view').hidden = creator;
     document.getElementById('creator-view').hidden = !creator;
     if (creator) { buildCreatorForm(); updateCreatorControls(); }
@@ -554,7 +561,7 @@
         '<label class="f"><span id="ex-price-label"></span>' +
           '<span class="inwrap"><input type="text" inputmode="numeric" id="examplePrice" class="field kr money" value="' + attr(group(state.examplePrice)) + '" placeholder=""><span class="suffix" aria-hidden="true">kr</span></span>' +
           '<span class="hint">A stand-in client, labelled example. Change it to your own.</span></label>' +
-        '<label class="f">Margin per <span id="cmargin-word"></span> (optional)' +
+        '<label class="f"><span>Margin per <span id="cmargin-word"></span> (optional)</span>' +
           '<span class="margin-row">' +
             '<span class="inwrap"><input type="text" inputmode="numeric" id="margin" class="field money kr" value="' + attr(group(state.margin)) + '"><span class="suffix" aria-hidden="true" id="margin-suffix">kr</span></span>' +
             '<select class="field" id="marginUnit" aria-label="Margin unit"><option value="kr"' + (state.marginUnit==='pct'?'':' selected') + '>kr</option><option value="pct"' + (state.marginUnit==='pct'?' selected':'') + '>%</option></select>' +
@@ -592,7 +599,6 @@
   function renderCreator(){
     var el = document.getElementById('creator-view');
     var r = C.creatorCompute(creatorInput());
-    var mail = C.creatorMailto(creatorInput(), FEEDBACK_EMAIL);
     var h = '<section class="card hero-card"><h2 class="ahead">What your price asks of the client</h2>' +
       '<div class="bignum"><span class="n">' + esc(r.b.big) + '</span><span class="u">' + esc(r.b.unit) + '</span></div>' +
       '<p class="atext">' + esc(r.b.text) + '</p>' +
@@ -607,13 +613,21 @@
         '<div class="lab" style="left:' + r.a.pct_low + '%;">' + esc(C.kr(r.a.low)) + '</div>' +
         '<div class="lab" style="left:' + r.a.pct_high + '%;">' + esc(C.kr(r.a.high)) + '</div></div>';
     }
-    h += '<details class="how-d"><summary>How we got this</summary><p class="how">' + esc(r.a.how) + '</p></details>' +
-      '<p class="feedback">Think this range is off? <a href="' + esc(mail) + '">Tell us.</a></p></section>';
+    h += '<details class="how-d"><summary>How we got this</summary><p class="how">' + esc(r.a.how) + '</p></details>';
+    if (FEEDBACK_EMAIL) {
+      h += '<p class="feedback">Think this range is off? <a href="' +
+        esc(C.creatorMailto(creatorInput(), FEEDBACK_EMAIL)) + '">Tell us.</a></p>';
+    }
+    h += '</section>';
     h += '<section class="card small-card" style="margin-top:16px;"><h2 class="ahead">The AI alternative</h2>' +
-      '<p class="atext sm">' + esc(r.c.text) + ' <a href="#creator-ai-card">See the AI options</a></p></section>';
-    h += '<section class="card small-card" id="creator-ai-card" style="margin-top:16px;" aria-label="AI options"></section>';
+      '<p class="atext sm">' + esc(r.c.text) + ' <a href="#creator-ai-card">See the AI options below.</a></p></section>';
+    // AI options collapsed by default in creator mode; no "fits your AI budget" badges (aiCost 0).
+    h += '<details class="ai-fold" style="margin-top:16px;"><summary class="ai-fold-sum">Show AI options for ' +
+      esc(r.format_label) + '</summary><section class="card small-card" id="creator-ai-card" aria-label="AI options" style="margin-top:12px;"></section></details>';
     el.innerHTML = h;
-    renderAiCard(document.getElementById('creator-ai-card'), state.fmt, r.typical_ai);
+    renderAiCard(document.getElementById('creator-ai-card'), state.fmt, 0);
+    var seeLink = el.querySelector('a[href="#creator-ai-card"]'), fold = el.querySelector('.ai-fold');
+    if (seeLink && fold) seeLink.addEventListener('click', function () { fold.open = true; });
     var sb = document.getElementById('stickybar');
     if (sb) {
       sb.innerHTML = (r.b.big === '—')

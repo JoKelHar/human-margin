@@ -19,7 +19,7 @@
       "unit_many": "tickets",
       "your_price": 3500.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -35,11 +35,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "13",
+        "big": "10",
         "unit": "more tickets",
-        "text": "At 3 500 kr, a client with 250 kr tickets needs 13 more tickets from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 10 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 250 kr per ticket = 13 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 250 kr per ticket = 10 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -69,7 +69,7 @@
       "unit_many": "tickets",
       "your_price": 0.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "—",
         "text": "Add your price to see this.",
@@ -87,9 +87,9 @@
       "b": {
         "big": "0",
         "unit": "extra tickets",
-        "text": "At 0 kr, your creator video costs no more than an AI version, so it needs no extra tickets to pay for itself.",
+        "text": "At 0 kr, your creator video costs no more than a typical AI version, so it needs no extra tickets to pay for itself.",
         "has_context": false,
-        "how": "Your price 0 kr, typical AI 310 kr: no gap to cover.\nCosts count money paid out, not your own time.",
+        "how": "Your price 0 kr, typical AI 1 200 kr: no gap to cover.\nCosts count money paid out, not your own time.",
         "note": ""
       },
       "c": {
@@ -119,7 +119,7 @@
       "unit_many": "tickets",
       "your_price": 1000.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Below usual",
         "blank": false,
@@ -135,11 +135,11 @@
         "pct_price": 9.615384615384617
       },
       "b": {
-        "big": "3",
-        "unit": "more tickets",
-        "text": "At 1 000 kr, a client with 250 kr tickets needs 3 more tickets from your creator video than from an AI version.",
+        "big": "0",
+        "unit": "extra tickets",
+        "text": "At 1 000 kr, your creator video costs no more than a typical AI version, so it needs no extra tickets to pay for itself.",
         "has_context": false,
-        "how": "Your price 1 000 kr − typical AI 310 kr = 690 kr gap.\n690 kr ÷ 250 kr per ticket = 3 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 1 000 kr, typical AI 1 200 kr: no gap to cover.\nCosts count money paid out, not your own time.",
         "note": ""
       },
       "c": {
@@ -169,7 +169,7 @@
       "unit_many": "tickets",
       "your_price": 9000.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Above usual",
         "blank": false,
@@ -185,11 +185,11 @@
         "pct_price": 86.53846153846155
       },
       "b": {
-        "big": "35",
+        "big": "32",
         "unit": "more tickets",
-        "text": "At 9 000 kr, a client with 250 kr tickets needs 35 more tickets from your creator video than from an AI version.",
+        "text": "At 9 000 kr, a client with 250 kr tickets needs 32 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 9 000 kr − typical AI 310 kr = 8 690 kr gap.\n8 690 kr ÷ 250 kr per ticket = 35 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 9 000 kr − typical AI 1 200 kr = 7 800 kr gap.\n7 800 kr ÷ 250 kr per ticket = 32 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -219,7 +219,7 @@
       "unit_many": "tickets",
       "your_price": 200.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Below usual",
         "blank": false,
@@ -237,9 +237,9 @@
       "b": {
         "big": "0",
         "unit": "extra tickets",
-        "text": "At 200 kr, your creator video costs no more than an AI version, so it needs no extra tickets to pay for itself.",
+        "text": "At 200 kr, your creator video costs no more than a typical AI version, so it needs no extra tickets to pay for itself.",
         "has_context": false,
-        "how": "Your price 200 kr, typical AI 310 kr: no gap to cover.\nCosts count money paid out, not your own time.",
+        "how": "Your price 200 kr, typical AI 1 200 kr: no gap to cover.\nCosts count money paid out, not your own time.",
         "note": ""
       },
       "c": {
@@ -269,7 +269,7 @@
       "unit_many": "tickets",
       "your_price": 3500.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -285,11 +285,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "13",
+        "big": "10",
         "unit": "more tickets",
-        "text": "At 3 500 kr, a client with 250 kr tickets needs 13 more tickets from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 10 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 250 kr per ticket = 13 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 250 kr per ticket = 10 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -319,7 +319,7 @@
       "unit_many": "tickets",
       "your_price": 3500.0,
       "example_price": 500.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -335,11 +335,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "7",
+        "big": "5",
         "unit": "more tickets",
-        "text": "At 3 500 kr, a client with 500 kr tickets needs 7 more tickets from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 500 kr tickets needs 5 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 500 kr per ticket = 7 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 500 kr per ticket = 5 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -369,7 +369,7 @@
       "unit_many": "tickets",
       "your_price": 3500.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -385,11 +385,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "32",
+        "big": "23",
         "unit": "more tickets",
-        "text": "At 3 500 kr, a client with 250 kr tickets needs 32 more tickets from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 23 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 100 kr margin per ticket = 32 tickets (rounded up).\nUses the client's margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 100 kr margin per ticket = 23 tickets (rounded up).\nUses the client's margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -419,7 +419,7 @@
       "unit_many": "tickets",
       "your_price": 3500.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -435,11 +435,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "27",
+        "big": "20",
         "unit": "more tickets",
-        "text": "At 3 500 kr, a client with 250 kr tickets needs 27 more tickets from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 20 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 120 kr margin per ticket = 27 tickets (rounded up).\nUses the client's margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 120 kr margin per ticket = 20 tickets (rounded up).\nUses the client's margin per ticket.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -469,7 +469,7 @@
       "unit_many": "tickets",
       "your_price": 15000.0,
       "example_price": 250.0,
-      "typical_ai": 110,
+      "typical_ai": 800,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -485,11 +485,11 @@
         "pct_price": 46.15384615384615
       },
       "b": {
-        "big": "60",
+        "big": "57",
         "unit": "more tickets",
-        "text": "At 15 000 kr, a client with 250 kr tickets needs 60 more tickets from your static image set than from an AI version.",
+        "text": "At 15 000 kr, a client with 250 kr tickets needs 57 more tickets from your static image set than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 15 000 kr − typical AI 110 kr = 14 890 kr gap.\n14 890 kr ÷ 250 kr per ticket = 60 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 15 000 kr − typical AI 800 kr = 14 200 kr gap.\n14 200 kr ÷ 250 kr per ticket = 57 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -519,7 +519,7 @@
       "unit_many": "tickets",
       "your_price": 15000.0,
       "example_price": 250.0,
-      "typical_ai": 100,
+      "typical_ai": 2000,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -535,11 +535,11 @@
         "pct_price": 23.076923076923077
       },
       "b": {
-        "big": "60",
+        "big": "52",
         "unit": "more tickets",
-        "text": "At 15 000 kr, a client with 250 kr tickets needs 60 more tickets from your short video than from an AI version.",
+        "text": "At 15 000 kr, a client with 250 kr tickets needs 52 more tickets from your short video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 15 000 kr − typical AI 100 kr = 14 900 kr gap.\n14 900 kr ÷ 250 kr per ticket = 60 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 15 000 kr − typical AI 2 000 kr = 13 000 kr gap.\n13 000 kr ÷ 250 kr per ticket = 52 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -569,7 +569,7 @@
       "unit_many": "tickets",
       "your_price": 15000.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Above usual",
         "blank": false,
@@ -585,11 +585,11 @@
         "pct_price": 100.0
       },
       "b": {
-        "big": "59",
+        "big": "56",
         "unit": "more tickets",
-        "text": "At 15 000 kr, a client with 250 kr tickets needs 59 more tickets from your creator video than from an AI version.",
+        "text": "At 15 000 kr, a client with 250 kr tickets needs 56 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 15 000 kr − typical AI 310 kr = 14 690 kr gap.\n14 690 kr ÷ 250 kr per ticket = 59 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 15 000 kr − typical AI 1 200 kr = 13 800 kr gap.\n13 800 kr ÷ 250 kr per ticket = 56 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -619,7 +619,7 @@
       "unit_many": "tickets",
       "your_price": 15000.0,
       "example_price": 250.0,
-      "typical_ai": 140,
+      "typical_ai": 800,
       "a": {
         "big": "Below usual",
         "blank": false,
@@ -635,11 +635,11 @@
         "pct_price": 7.6923076923076925
       },
       "b": {
-        "big": "60",
+        "big": "57",
         "unit": "more tickets",
-        "text": "At 15 000 kr, a client with 250 kr tickets needs 60 more tickets from your studio shoot than from an AI version.",
+        "text": "At 15 000 kr, a client with 250 kr tickets needs 57 more tickets from your studio shoot than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 15 000 kr − typical AI 140 kr = 14 860 kr gap.\n14 860 kr ÷ 250 kr per ticket = 60 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 15 000 kr − typical AI 800 kr = 14 200 kr gap.\n14 200 kr ÷ 250 kr per ticket = 57 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -669,7 +669,7 @@
       "unit_many": "tickets",
       "your_price": 3500.0,
       "example_price": 250.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -685,11 +685,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "13",
+        "big": "10",
         "unit": "more tickets",
-        "text": "At 3 500 kr, a client with 250 kr tickets needs 13 more tickets from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 250 kr tickets needs 10 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 250 kr per ticket = 13 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 250 kr per ticket = 10 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -719,7 +719,7 @@
       "unit_many": "tickets",
       "your_price": 3500.0,
       "example_price": 600.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -735,11 +735,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "6",
+        "big": "4",
         "unit": "more tickets",
-        "text": "At 3 500 kr, a client with 600 kr tickets needs 6 more tickets from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 600 kr tickets needs 4 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 600 kr per ticket = 6 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 600 kr per ticket = 4 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -769,7 +769,7 @@
       "unit_many": "tickets",
       "your_price": 3500.0,
       "example_price": 300.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -785,11 +785,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "11",
+        "big": "8",
         "unit": "more tickets",
-        "text": "At 3 500 kr, a client with 300 kr tickets needs 11 more tickets from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 300 kr tickets needs 8 more tickets from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 300 kr per ticket = 11 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 300 kr per ticket = 8 tickets (rounded up).\nUses the full example price. A margin per ticket would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -819,7 +819,7 @@
       "unit_many": "bookings",
       "your_price": 3500.0,
       "example_price": 600.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -835,11 +835,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "6",
+        "big": "4",
         "unit": "more bookings",
-        "text": "At 3 500 kr, a client with 600 kr bookings needs 6 more bookings from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 600 kr bookings needs 4 more bookings from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 600 kr per booking = 6 bookings (rounded up).\nUses the full example price. A margin per booking would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 600 kr per booking = 4 bookings (rounded up).\nUses the full example price. A margin per booking would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -869,7 +869,7 @@
       "unit_many": "bookings",
       "your_price": 3500.0,
       "example_price": 1500.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -885,11 +885,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "3",
+        "big": "2",
         "unit": "more bookings",
-        "text": "At 3 500 kr, a client with 1 500 kr bookings needs 3 more bookings from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 1 500 kr bookings needs 2 more bookings from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 1 500 kr per booking = 3 bookings (rounded up).\nUses the full example price. A margin per booking would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 1 500 kr per booking = 2 bookings (rounded up).\nUses the full example price. A margin per booking would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -919,7 +919,7 @@
       "unit_many": "memberships",
       "your_price": 3500.0,
       "example_price": 1800.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -937,9 +937,9 @@
       "b": {
         "big": "2",
         "unit": "more memberships",
-        "text": "At 3 500 kr, a client with 1 800 kr memberships needs 2 more memberships from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 1 800 kr memberships needs 2 more memberships from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 1 800 kr per membership = 2 memberships (rounded up).\nUses the full example price. A margin per membership would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 1 800 kr per membership = 2 memberships (rounded up).\nUses the full example price. A margin per membership would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -969,7 +969,7 @@
       "unit_many": "orders",
       "your_price": 3500.0,
       "example_price": 900.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -985,11 +985,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "4",
+        "big": "3",
         "unit": "more orders",
-        "text": "At 3 500 kr, a client with 900 kr orders needs 4 more orders from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 900 kr orders needs 3 more orders from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 900 kr per order = 4 orders (rounded up).\nUses the full example price. A margin per order would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 900 kr per order = 3 orders (rounded up).\nUses the full example price. A margin per order would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -1019,7 +1019,7 @@
       "unit_many": "orders",
       "your_price": 3500.0,
       "example_price": 800.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -1035,11 +1035,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "4",
+        "big": "3",
         "unit": "more orders",
-        "text": "At 3 500 kr, a client with 800 kr orders needs 4 more orders from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 800 kr orders needs 3 more orders from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 800 kr per order = 4 orders (rounded up).\nUses the full example price. A margin per order would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 800 kr per order = 3 orders (rounded up).\nUses the full example price. A margin per order would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -1069,7 +1069,7 @@
       "unit_many": "bookings",
       "your_price": 3500.0,
       "example_price": 1200.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -1085,11 +1085,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "3",
+        "big": "2",
         "unit": "more bookings",
-        "text": "At 3 500 kr, a client with 1 200 kr bookings needs 3 more bookings from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 1 200 kr bookings needs 2 more bookings from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 1 200 kr per booking = 3 bookings (rounded up).\nUses the full example price. A margin per booking would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 1 200 kr per booking = 2 bookings (rounded up).\nUses the full example price. A margin per booking would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -1119,7 +1119,7 @@
       "unit_many": "sign-ups",
       "your_price": 3500.0,
       "example_price": 2000.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -1137,9 +1137,9 @@
       "b": {
         "big": "2",
         "unit": "more sign-ups",
-        "text": "At 3 500 kr, a client with 2 000 kr sign-ups needs 2 more sign-ups from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 2 000 kr sign-ups needs 2 more sign-ups from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 2 000 kr per sign-up = 2 sign-ups (rounded up).\nUses the full example price. A margin per sign-up would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 2 000 kr per sign-up = 2 sign-ups (rounded up).\nUses the full example price. A margin per sign-up would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {
@@ -1169,7 +1169,7 @@
       "unit_many": "sales",
       "your_price": 3500.0,
       "example_price": 500.0,
-      "typical_ai": 310,
+      "typical_ai": 1200,
       "a": {
         "big": "Inside usual range",
         "blank": false,
@@ -1185,11 +1185,11 @@
         "pct_price": 33.65384615384615
       },
       "b": {
-        "big": "7",
+        "big": "5",
         "unit": "more sales",
-        "text": "At 3 500 kr, a client with 500 kr sales needs 7 more sales from your creator video than from an AI version.",
+        "text": "At 3 500 kr, a client with 500 kr sales needs 5 more sales from your creator video than from a typical AI version.",
         "has_context": false,
-        "how": "Your price 3 500 kr − typical AI 310 kr = 3 190 kr gap.\n3 190 kr ÷ 500 kr per sale = 7 sales (rounded up).\nUses the full example price. A margin per sale would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
+        "how": "Your price 3 500 kr − typical AI 1 200 kr = 2 300 kr gap.\n2 300 kr ÷ 500 kr per sale = 5 sales (rounded up).\nUses the full example price. A margin per sale would raise the number.\nA longer-term brand effect for human work is cited in research but kept out of this number (low confidence).",
         "note": ""
       },
       "c": {

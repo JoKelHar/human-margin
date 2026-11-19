@@ -14,6 +14,8 @@ import pytest
 from mediekjop.planner.budget_check import (
     CREATOR_EXAMPLE,
     CreatorInputs,
+    Inputs,
+    compute,
     creator_compute,
 )
 from mediekjop.planner.report import PRESCRIPTIVE
@@ -33,13 +35,25 @@ def _strings(r: dict) -> str:
 
 
 def test_example_matches_the_brief():
-    r = creator_compute(CREATOR_EXAMPLE)   # ugc, your price 3500, nightlife 250, typical AI 310
+    r = creator_compute(CREATOR_EXAMPLE)   # ugc, your price 3500, nightlife 250
     assert r["a"]["big"] == "Inside usual range"
     assert r["a"]["text"].startswith("3 500 kr for a creator video sits inside the usual range")
     assert r["a"]["inclusions"] == "Includes 6 months usage, 2 revisions, no raw files."
-    assert r["b"]["big"] == "13"                 # ceil((3500 - 310) / 250)
-    assert "needs 13 more tickets from your creator video than from an AI version" in r["b"]["text"]
+    # AI cost = formats.yaml UGC band point (1 200), same as buying mode (not the tool sub).
+    assert r["typical_ai"] == 1200
+    assert r["b"]["big"] == "10"                 # ceil((3500 - 1200) / 250)
+    assert "needs 10 more tickets from your creator video than from a typical AI version" in r["b"]["text"]
     assert r["c"]["text"] == "The closest AI option costs about 310 kr a month (HeyGen Creator)."
+
+
+def test_both_modes_return_the_same_extra_sales_for_identical_inputs():
+    # Creator mode and buying mode use the SAME AI cost (the band point), so a 3 500 kr
+    # UGC video against a 250 kr ticket gives the same extra-sales number either way.
+    creator = creator_compute(replace(CREATOR_EXAMPLE, fmt="ugc", price=3500,
+                                      example_industry="nightlife", example_price=250))
+    buying = compute(Inputs(industry="nightlife", goal_mode="max", price=250, human=3500,
+                            ai=None, fmt="ugc", reuse=1, budget=5000))
+    assert creator["b"]["big"] == buying["a2"]["big"] == "10"
 
 
 def test_where_price_sits_tracks_the_band():
@@ -57,13 +71,18 @@ def test_inclusions_line_reflects_the_inputs():
 
 
 def test_no_gap_when_price_under_the_typical_ai_cost():
-    r = creator_compute(replace(CREATOR_EXAMPLE, price=200))   # < typical AI 310
-    assert r["b"]["big"] == "0" and "costs no more than an AI version" in r["b"]["text"]
+    r = creator_compute(replace(CREATOR_EXAMPLE, price=1000))   # < typical AI band point 1200
+    assert r["b"]["big"] == "0" and "costs no more than a typical AI version" in r["b"]["text"]
+
+
+def test_singular_plural_for_months_and_revisions():
+    r = creator_compute(replace(CREATOR_EXAMPLE, usage_months=1, revisions=1))
+    assert r["a"]["inclusions"] == "Includes 1 month usage, 1 revision, no raw files."
 
 
 def test_margin_replaces_the_example_price():
     pct = creator_compute(replace(CREATOR_EXAMPLE, margin=40, margin_unit="pct"))   # 250 * 40% = 100
-    assert pct["b"]["big"] == "32"                 # ceil((3500 - 310) / 100)
+    assert pct["b"]["big"] == "23"                 # ceil((3500 - 1200) / 100)
     assert "margin per ticket" in pct["b"]["how"]
 
 

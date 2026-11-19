@@ -290,8 +290,11 @@
     return n.indexOf('a ') === 0 ? n.slice(2) : (n.indexOf('an ') === 0 ? n.slice(3) : n);
   }
   function inclusionsLine(inp) {
-    return 'Includes ' + hround(num(inp.usageMonths)) + ' months usage, ' + hround(num(inp.revisions)) +
-      ' revisions, ' + (truthy(inp.rawFiles) ? 'raw files included' : 'no raw files') + '.';
+    var usage = hround(num(inp.usageMonths)), rev = hround(num(inp.revisions));
+    var months = usage + ' month' + (usage === 1 ? '' : 's');
+    var revs = rev + ' revision' + (rev === 1 ? '' : 's');
+    return 'Includes ' + months + ' usage, ' + revs + ', ' +
+      (truthy(inp.rawFiles) ? 'raw files included' : 'no raw files') + '.';
   }
   function creatorWhere(price, fmt, inp) {
     var low = fmt.human.low, high = fmt.human.high, scaleMax = high * 1.3;
@@ -310,7 +313,7 @@
     var diff = price - typicalAi;
     if (diff <= 0) {
       return { big: '0', unit: 'extra ' + many,
-        text: 'At ' + kr(price) + ' kr, your ' + makerN + ' costs no more than an AI version, so it needs no extra ' + many + ' to pay for itself.',
+        text: 'At ' + kr(price) + ' kr, your ' + makerN + ' costs no more than a typical AI version, so it needs no extra ' + many + ' to pay for itself.',
         has_context: false,
         how: 'Your price ' + kr(price) + ' kr, typical AI ' + kr(typicalAi) + ' kr: no gap to cover.\nCosts count money paid out, not your own time.',
         note: '' };
@@ -321,7 +324,7 @@
       : 'Uses the full example price. A margin per ' + one + ' would raise the number.\n';
     return { big: kr(extra), unit: 'more ' + (extra === 1 ? one : many),
       text: 'At ' + kr(price) + ' kr, a client with ' + kr(examplePrice) + ' kr ' + many + ' needs ' + kr(extra) +
-        ' more ' + (extra === 1 ? one : many) + ' from your ' + makerN + ' than from an AI version.',
+        ' more ' + (extra === 1 ? one : many) + ' from your ' + makerN + ' than from a typical AI version.',
       has_context: false,
       how: 'Your price ' + kr(price) + ' kr − typical AI ' + kr(typicalAi) + ' kr = ' + kr(diff) + ' kr gap.\n' +
         kr(diff) + ' kr ÷ ' + basis + ' = ' + kr(extra) + ' ' + many + ' (rounded up).\n' + marginLine +
@@ -334,7 +337,7 @@
     var hasEx = inp.examplePrice != null && String(inp.examplePrice).trim() !== '';
     var examplePrice = hasEx ? num(inp.examplePrice) : Number(ind.example_price);
     var vp = valuePer(examplePrice, inp), valPer = vp[0], marginUsed = vp[1];
-    var entry = entryTool(inp.fmt), typicalAi = entry ? entry.price_nok : 0, makerN = makerNoun(fmt);
+    var entry = entryTool(inp.fmt), typicalAi = fmt.ai.point, makerN = makerNoun(fmt);
     var c = entry ? { text: 'The closest AI option costs about ' + kr(entry.price_nok) + ' kr a month (' + entry.name + ').',
         tool_name: entry.name, tool_price_nok: entry.price_nok } : { text: '', tool_name: '', tool_price_nok: 0 };
     return { fmt: inp.fmt, format_label: fmt.label, noun: makerN, unit_one: one, unit_many: many,

@@ -555,7 +555,9 @@ def _inclusions_line(inp: CreatorInputs) -> str:
     usage = _round(_num(inp.usage_months))
     rev = _round(_num(inp.revisions))
     raw = "raw files included" if _truthy(inp.raw_files) else "no raw files"
-    return f"Includes {usage} months usage, {rev} revisions, {raw}."
+    months = f"{usage} month" + ("" if usage == 1 else "s")
+    revs = f"{rev} revision" + ("" if rev == 1 else "s")
+    return f"Includes {months} usage, {revs}, {raw}."
 
 
 def _creator_where(price: float, fmt: dict, inp: CreatorInputs) -> dict:
@@ -588,8 +590,8 @@ def _creator_asks(price, typical_ai, value_per, margin_used, one, many, maker_no
     if diff <= 0:
         return {
             "big": "0", "unit": f"extra {many}",
-            "text": f"At {kr(price)} kr, your {maker_noun} costs no more than an AI version, so it "
-                    f"needs no extra {many} to pay for itself.",
+            "text": f"At {kr(price)} kr, your {maker_noun} costs no more than a typical AI version, "
+                    f"so it needs no extra {many} to pay for itself.",
             "has_context": False,
             "how": f"Your price {kr(price)} kr, typical AI {kr(typical_ai)} kr: no gap to cover.\n"
                    f"Costs count money paid out, not your own time.",
@@ -603,7 +605,8 @@ def _creator_asks(price, typical_ai, value_per, margin_used, one, many, maker_no
     return {
         "big": kr(extra), "unit": f"more {one if extra == 1 else many}",
         "text": f"At {kr(price)} kr, a client with {kr(example_price)} kr {many} needs {kr(extra)} "
-                f"more {one if extra == 1 else many} from your {maker_noun} than from an AI version.",
+                f"more {one if extra == 1 else many} from your {maker_noun} than from a typical "
+                f"AI version.",
         "has_context": False,
         "how": f"Your price {kr(price)} kr − typical AI {kr(typical_ai)} kr = {kr(diff)} kr gap.\n"
                f"{kr(diff)} kr ÷ {basis} = {kr(extra)} {many} (rounded up).\n" + margin_line
@@ -624,7 +627,10 @@ def creator_compute(inp: CreatorInputs) -> dict:
     example_price = _num(inp.example_price) if has_example else float(ind["example_price"])
     value_per, margin_used = _value_per(example_price, inp)
     entry = _entry_tool(inp.fmt)
-    typical_ai = entry["price_nok"] if entry else 0
+    # The AI cost in the maths is the SAME as buying mode: the formats.yaml AI band
+    # point (a one-off production cost), so identical inputs give the same number. The
+    # tool's monthly subscription appears only in "The AI alternative" card.
+    typical_ai = fmt["ai"]["point"]
     maker_noun = _maker_noun(fmt)
 
     a = _creator_where(price, fmt, inp)
