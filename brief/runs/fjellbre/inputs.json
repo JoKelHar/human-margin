@@ -1,0 +1,128 @@
+{
+  "context": {
+    "brand": "Fjellbre Treningssenter",
+    "category": "fitness",
+    "envelope": {
+      "id": "fjellbre-ctx",
+      "made_by": "agent",
+      "parent_ids": [],
+      "schema_version": "0.1",
+      "status": "draft"
+    },
+    "language": "nb-NO",
+    "legal_flags": [
+      "misleading",
+      "ai_act"
+    ],
+    "market": "NO"
+  },
+  "goal": {
+    "budget": {
+      "as_of": "2026-11-19",
+      "confidence": "low",
+      "ref": null,
+      "source": "assumption",
+      "unit": "NOK",
+      "value": 60000.0
+    },
+    "envelope": {
+      "id": "fjellbre-goal",
+      "made_by": "agent",
+      "parent_ids": [],
+      "schema_version": "0.1",
+      "status": "draft"
+    },
+    "horizon": "8 weeks",
+    "kpi": "memberships",
+    "objective": "fill off-peak class slots across three branches",
+    "target": {
+      "as_of": "2026-11-19",
+      "confidence": "low",
+      "ref": null,
+      "source": "assumption",
+      "unit": "memberships",
+      "value": 150.0
+    }
+  },
+  "position": {
+    "claim": "The video shoot costs 23 000 kr more than the AI version. The human version needs 33 more memberships than the AI version to pay for itself.",
+    "confidence": "low",
+    "envelope": {
+      "id": "fjellbre-pos",
+      "made_by": "agent",
+      "parent_ids": [
+        "fjellbre-ctx",
+        "fjellbre-goal"
+      ],
+      "schema_version": "0.1",
+      "status": "draft"
+    },
+    "figures": [
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: human production quote",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 25000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: ai version cost",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 2000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: value per membership",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 700.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: human-margin break-even (a2)",
+        "source": "assumption",
+        "unit": "memberships",
+        "value": 33.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "goal: target sales",
+        "source": "assumption",
+        "unit": "memberships",
+        "value": 150.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: usual band low (a3)",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 10000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: usual band high (a3)",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 50000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "break-even as a share of the goal",
+        "source": "assumption",
+        "unit": "percent",
+        "value": 22.0
+      }
+    ],
+    "what_would_change_it": "real campaign data for this brand -- the account's own conversion rate, CPM and client prices -- replacing the assumed ranges"
+  }
+}

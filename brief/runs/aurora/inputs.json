@@ -1,0 +1,128 @@
+{
+  "context": {
+    "brand": "Aurora Atelier",
+    "category": "skincare",
+    "envelope": {
+      "id": "aurora-ctx",
+      "made_by": "agent",
+      "parent_ids": [],
+      "schema_version": "0.1",
+      "status": "draft"
+    },
+    "language": "nb-NO",
+    "legal_flags": [
+      "retouch_label",
+      "ai_act"
+    ],
+    "market": "NO"
+  },
+  "goal": {
+    "budget": {
+      "as_of": "2026-11-19",
+      "confidence": "low",
+      "ref": null,
+      "source": "assumption",
+      "unit": "NOK",
+      "value": 40000.0
+    },
+    "envelope": {
+      "id": "aurora-goal",
+      "made_by": "agent",
+      "parent_ids": [],
+      "schema_version": "0.1",
+      "status": "draft"
+    },
+    "horizon": "6 weeks",
+    "kpi": "orders",
+    "objective": "launch the new serum line in the Oslo market",
+    "target": {
+      "as_of": "2026-11-19",
+      "confidence": "low",
+      "ref": null,
+      "source": "assumption",
+      "unit": "orders",
+      "value": 90.0
+    }
+  },
+  "position": {
+    "claim": "The studio shoot costs 89 200 kr more than the AI version. The human version needs 36 more orders than the AI version to pay for itself.",
+    "confidence": "low",
+    "envelope": {
+      "id": "aurora-pos",
+      "made_by": "agent",
+      "parent_ids": [
+        "aurora-ctx",
+        "aurora-goal"
+      ],
+      "schema_version": "0.1",
+      "status": "draft"
+    },
+    "figures": [
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: human production quote",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 90000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: ai version cost",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 800.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: value per order",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 2500.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: human-margin break-even (a2)",
+        "source": "assumption",
+        "unit": "orders",
+        "value": 36.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "goal: target sales",
+        "source": "assumption",
+        "unit": "orders",
+        "value": 90.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: usual band low (a3)",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 20000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: usual band high (a3)",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 150000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "break-even as a share of the goal",
+        "source": "assumption",
+        "unit": "percent",
+        "value": 40.0
+      }
+    ],
+    "what_would_change_it": "real campaign data for this brand -- the account's own conversion rate, CPM and client prices -- replacing the assumed ranges"
+  }
+}

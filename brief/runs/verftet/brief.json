@@ -1,0 +1,77 @@
+{
+  "assumptions": [],
+  "audience": "adults considering an evening course this spring",
+  "budget": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": null,
+    "source": "assumption",
+    "unit": "NOK",
+    "value": 40000.0
+  },
+  "copy_lines": [
+    {
+      "language": "nb-NO",
+      "needs_native_review": true,
+      "text": "Lær det sammen med andre"
+    },
+    {
+      "language": "nb-NO",
+      "needs_native_review": true,
+      "text": "Kurs som passer en travel hverdag"
+    }
+  ],
+  "deliverables": [
+    {
+      "count": 2,
+      "format": "video",
+      "maker": "human"
+    }
+  ],
+  "envelope": {
+    "id": "verftet-run-brief",
+    "made_by": "agent",
+    "parent_ids": [
+      "verftet-ctx",
+      "verftet-goal",
+      "verftet-pos"
+    ],
+    "schema_version": "0.1",
+    "status": "proposed"
+  },
+  "hypothesis": "a real instructor on camera lifts sign-ups versus a generic promo",
+  "insight": "a real instructor on camera builds the trust a sign-up needs",
+  "maker_recommendation": {
+    "maker": "human",
+    "position_id": "verftet-pos",
+    "rationale": "a human video needs only 16 more sign-ups to pay off, about 6% of the goal, so the human version is easily justified"
+  },
+  "mandatories": [
+    {
+      "id": "ai_disclosure",
+      "text": "Disclose any AI-made assets."
+    },
+    {
+      "id": "misleading",
+      "text": "Do not present an AI actor as a real instructor."
+    },
+    {
+      "id": "ai_act",
+      "text": "For EU reach, label realistic AI-made people under Article 50."
+    }
+  ],
+  "objective": "fill Verftet's spring course cohort",
+  "open_questions": [
+    "Decide flags 250 sign-ups on 40 000 kr as a stretch at the assumed conversion rate; is the target or budget firm?"
+  ],
+  "proposition": "an honest look at the course that earns 250 sign-ups",
+  "success_measure": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": null,
+    "source": "assumption",
+    "unit": "sign-ups",
+    "value": 250.0
+  },
+  "tone": "sincere, practical, encouraging"
+}

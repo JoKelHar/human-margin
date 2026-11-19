@@ -1,0 +1,25 @@
+{
+  "findings": [
+    {
+      "check": "schema",
+      "detail": "Brief validates against schema v0.2",
+      "ok": true
+    },
+    {
+      "check": "no_naked_numbers",
+      "detail": "every number is backed by a Figure",
+      "ok": true
+    },
+    {
+      "check": "maker_match",
+      "detail": "maker hybrid matches Decide's stance",
+      "ok": true
+    },
+    {
+      "check": "native_review",
+      "detail": "Norwegian copy flagged for native review",
+      "ok": true
+    }
+  ],
+  "ok": true
+}

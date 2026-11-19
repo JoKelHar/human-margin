@@ -1,0 +1,82 @@
+{
+  "assumptions": [],
+  "audience": "busy adults near a Fjellbre branch who want a flexible membership",
+  "budget": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": null,
+    "source": "assumption",
+    "unit": "NOK",
+    "value": 60000.0
+  },
+  "copy_lines": [
+    {
+      "language": "nb-NO",
+      "needs_native_review": true,
+      "text": "Bli med når det passer deg"
+    },
+    {
+      "language": "nb-NO",
+      "needs_native_review": true,
+      "text": "Ekte folk, ekte treningsglede"
+    }
+  ],
+  "deliverables": [
+    {
+      "count": 1,
+      "format": "video",
+      "maker": "human"
+    },
+    {
+      "count": 6,
+      "format": "video",
+      "maker": "ai"
+    }
+  ],
+  "envelope": {
+    "id": "fjellbre-run-brief",
+    "made_by": "agent",
+    "parent_ids": [
+      "fjellbre-ctx",
+      "fjellbre-goal",
+      "fjellbre-pos"
+    ],
+    "schema_version": "0.1",
+    "status": "proposed"
+  },
+  "hypothesis": "a human hero clip plus AI cutdowns lifts memberships more than AI alone",
+  "insight": "people join when a short clip shows the room is welcoming, not intimidating",
+  "maker_recommendation": {
+    "maker": "hybrid",
+    "position_id": "fjellbre-pos",
+    "rationale": "a full human video needs 33 more memberships to pay off, about 22% of the goal, so pair a human hero clip with AI-made cutdowns"
+  },
+  "mandatories": [
+    {
+      "id": "ai_disclosure",
+      "text": "Disclose AI-made clips."
+    },
+    {
+      "id": "misleading",
+      "text": "Do not present an AI actor as a real member."
+    },
+    {
+      "id": "ai_act",
+      "text": "For EU reach, label realistic AI-made people under Article 50."
+    }
+  ],
+  "objective": "fill Fjellbre's off-peak class slots across its branches",
+  "open_questions": [
+    "is the value per membership of 700 kr steady across the branches?"
+  ],
+  "proposition": "a warm, real look at off-peak classes that earns 150 memberships",
+  "success_measure": {
+    "as_of": "2026-11-19",
+    "confidence": "low",
+    "ref": null,
+    "source": "assumption",
+    "unit": "memberships",
+    "value": 150.0
+  },
+  "tone": "warm, down-to-earth, local"
+}

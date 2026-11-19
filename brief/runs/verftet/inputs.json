@@ -1,0 +1,128 @@
+{
+  "context": {
+    "brand": "Verftet Kurs",
+    "category": "courses",
+    "envelope": {
+      "id": "verftet-ctx",
+      "made_by": "agent",
+      "parent_ids": [],
+      "schema_version": "0.1",
+      "status": "draft"
+    },
+    "language": "nb-NO",
+    "legal_flags": [
+      "misleading",
+      "ai_act"
+    ],
+    "market": "NO"
+  },
+  "goal": {
+    "budget": {
+      "as_of": "2026-11-19",
+      "confidence": "low",
+      "ref": null,
+      "source": "assumption",
+      "unit": "NOK",
+      "value": 40000.0
+    },
+    "envelope": {
+      "id": "verftet-goal",
+      "made_by": "agent",
+      "parent_ids": [],
+      "schema_version": "0.1",
+      "status": "draft"
+    },
+    "horizon": "10 weeks",
+    "kpi": "sign-ups",
+    "objective": "fill the spring course cohort",
+    "target": {
+      "as_of": "2026-11-19",
+      "confidence": "low",
+      "ref": null,
+      "source": "assumption",
+      "unit": "sign-ups",
+      "value": 250.0
+    }
+  },
+  "position": {
+    "claim": "The video shoot costs 23 000 kr more than the AI version. The human version needs 16 more sign-ups than the AI version to pay for itself.",
+    "confidence": "low",
+    "envelope": {
+      "id": "verftet-pos",
+      "made_by": "agent",
+      "parent_ids": [
+        "verftet-ctx",
+        "verftet-goal"
+      ],
+      "schema_version": "0.1",
+      "status": "draft"
+    },
+    "figures": [
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: human production quote",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 25000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: ai version cost",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 2000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: value per sign-up",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 1500.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: human-margin break-even (a2)",
+        "source": "assumption",
+        "unit": "sign-ups",
+        "value": 16.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "goal: target sales",
+        "source": "assumption",
+        "unit": "sign-ups",
+        "value": 250.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: usual band low (a3)",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 10000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "decide: usual band high (a3)",
+        "source": "assumption",
+        "unit": "NOK",
+        "value": 50000.0
+      },
+      {
+        "as_of": "2026-11-19",
+        "confidence": "low",
+        "ref": "break-even as a share of the goal",
+        "source": "assumption",
+        "unit": "percent",
+        "value": 6.4
+      }
+    ],
+    "what_would_change_it": "real campaign data for this brand -- the account's own conversion rate, CPM and client prices -- replacing the assumed ranges"
+  }
+}
