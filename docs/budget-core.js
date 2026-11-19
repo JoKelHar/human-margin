@@ -272,10 +272,93 @@
     };
   }
 
+  // --- Creator mode (mirrors budget_check.creator_compute) ---
+  function truthy(v) { return ['true', '1', 'yes', 'y', 'on'].indexOf(String(v).trim().toLowerCase()) !== -1; }
+  function entryTool(fmt) {
+    var uc = null;
+    for (var i = 0; i < AI.use_cases.length; i++) {
+      var u = AI.use_cases[i];
+      if (u.key !== 'voice' && (u.format_keys || []).indexOf(fmt) !== -1) { uc = u; break; }
+    }
+    if (!uc || !uc.tools || !uc.tools.length) return null;
+    var t = uc.tools[0];
+    for (i = 1; i < uc.tools.length; i++) if (uc.tools[i].price_nok < t.price_nok) t = uc.tools[i];
+    return { name: t.name, price_nok: t.price_nok };
+  }
+  function makerNoun(fmt) {
+    var n = fmt.noun;
+    return n.indexOf('a ') === 0 ? n.slice(2) : (n.indexOf('an ') === 0 ? n.slice(3) : n);
+  }
+  function inclusionsLine(inp) {
+    var usage = hround(num(inp.usageMonths)), rev = hround(num(inp.revisions));
+    var months = usage + ' month' + (usage === 1 ? '' : 's');
+    var revs = rev + ' revision' + (rev === 1 ? '' : 's');
+    return 'Includes ' + months + ' usage, ' + revs + ', ' +
+      (truthy(inp.rawFiles) ? 'raw files included' : 'no raw files') + '.';
+  }
+  function creatorWhere(price, fmt, inp) {
+    var low = fmt.human.low, high = fmt.human.high, scaleMax = high * 1.3;
+    var pct = function (x) { return scaleMax > 0 ? Math.max(0, Math.min(100, x / scaleMax * 100)) : 0; };
+    var base = { inclusions: inclusionsLine(inp), low: low, high: high, your_price: price,
+      scale_max: scaleMax, pct_low: pct(low), pct_high: pct(high), pct_price: pct(price) };
+    if (price <= 0) return Object.assign({ big: '—', text: 'Add your price to see this.', blank: true, how: '' }, base);
+    var where = price < low ? 'below the usual range' : (price > high ? 'above the usual range' : 'inside the usual range');
+    var big = price < low ? 'Below usual' : (price > high ? 'Above usual' : 'Inside usual range');
+    return Object.assign({ big: big, blank: false,
+      text: kr(price) + ' kr for ' + fmt.noun + ' sits ' + where + ' in Oslo (' + kr(low) + '–' + kr(high) + ' kr).',
+      how: 'Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, including usage rights for paid social.' }, base);
+  }
+  function creatorAsks(price, typicalAi, valPer, marginUsed, one, many, makerN, examplePrice) {
+    if (valPer <= 0) return { big: '—', unit: '', text: 'Add an example client price to see this.', has_context: false, how: '', note: '' };
+    var diff = price - typicalAi;
+    if (diff <= 0) {
+      return { big: '0', unit: 'extra ' + many,
+        text: 'At ' + kr(price) + ' kr, your ' + makerN + ' costs no more than a typical AI version, so it needs no extra ' + many + ' to pay for itself.',
+        has_context: false,
+        how: 'Your price ' + kr(price) + ' kr, typical AI ' + kr(typicalAi) + ' kr: no gap to cover.\nCosts count money paid out, not your own time.',
+        note: '' };
+    }
+    var extra = Math.ceil(diff / valPer);
+    var basis = marginUsed ? kr(valPer) + ' kr margin per ' + one : kr(valPer) + ' kr per ' + one;
+    var marginLine = marginUsed ? "Uses the client's margin per " + one + '.\n'
+      : 'Uses the full example price. A margin per ' + one + ' would raise the number.\n';
+    return { big: kr(extra), unit: 'more ' + (extra === 1 ? one : many),
+      text: 'At ' + kr(price) + ' kr, a client with ' + kr(examplePrice) + ' kr ' + many + ' needs ' + kr(extra) +
+        ' more ' + (extra === 1 ? one : many) + ' from your ' + makerN + ' than from a typical AI version.',
+      has_context: false,
+      how: 'Your price ' + kr(price) + ' kr − typical AI ' + kr(typicalAi) + ' kr = ' + kr(diff) + ' kr gap.\n' +
+        kr(diff) + ' kr ÷ ' + basis + ' = ' + kr(extra) + ' ' + many + ' (rounded up).\n' + marginLine +
+        'A longer-term brand effect for human work is cited in research but kept out of this number (low confidence).',
+      note: '' };
+  }
+  function creatorCompute(inp) {
+    var fmt = format(inp.fmt), ind = industry(inp.exampleIndustry);
+    var one = ind.one, many = ind.many, price = num(inp.price);
+    var hasEx = inp.examplePrice != null && String(inp.examplePrice).trim() !== '';
+    var examplePrice = hasEx ? num(inp.examplePrice) : Number(ind.example_price);
+    var vp = valuePer(examplePrice, inp), valPer = vp[0], marginUsed = vp[1];
+    var entry = entryTool(inp.fmt), typicalAi = fmt.ai.point, makerN = makerNoun(fmt);
+    var c = entry ? { text: 'The closest AI option costs about ' + kr(entry.price_nok) + ' kr a month (' + entry.name + ').',
+        tool_name: entry.name, tool_price_nok: entry.price_nok } : { text: '', tool_name: '', tool_price_nok: 0 };
+    return { fmt: inp.fmt, format_label: fmt.label, noun: makerN, unit_one: one, unit_many: many,
+      your_price: price, example_price: examplePrice, typical_ai: typicalAi,
+      a: creatorWhere(price, fmt, inp),
+      b: creatorAsks(price, typicalAi, valPer, marginUsed, one, many, makerN, examplePrice), c: c };
+  }
+  function creatorMailto(inp, address) {
+    var fmt = format(inp.fmt);
+    var subject = 'Range feedback: ' + fmt.label;
+    var body = 'Format: ' + fmt.label + '\nMy price: ' + kr(num(inp.price)) + ' kr\nUsage: ' +
+      hround(num(inp.usageMonths)) + ' months\nRevisions: ' + hround(num(inp.revisions)) +
+      '\nRaw files: ' + (truthy(inp.rawFiles) ? 'yes' : 'no') + '\n\nWhy I think the range is off: ';
+    return 'mailto:' + address + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+  }
+
   // --- URL round-trip (numbers travel in the link; nothing is stored) ---
-  var FIELDS = ['industry', 'goalMode', 'goal', 'price', 'budget', 'fmt', 'human', 'ai',
-    'reuse', 'cpm', 'margin', 'marginUnit', 'otherNoun'];
-  var _NULLABLE = { human: 1, ai: 1, margin: 1, otherNoun: 1 };   // empty -> null, not ''
+  var FIELDS = ['mode', 'industry', 'goalMode', 'goal', 'price', 'budget', 'fmt', 'human', 'ai',
+    'reuse', 'cpm', 'margin', 'marginUnit', 'otherNoun',
+    'usageMonths', 'revisions', 'rawFiles', 'exampleIndustry', 'examplePrice'];
+  var _NULLABLE = { human: 1, ai: 1, margin: 1, otherNoun: 1, examplePrice: 1 };   // empty -> null
   function toQuery(inp) {
     var q = new URLSearchParams();
     FIELDS.forEach(function (k) { q.set(k, inp[k] == null ? '' : inp[k]); });
@@ -292,7 +375,8 @@
     return out;
   }
 
-  return { compute: compute, aiOptions: aiOptions, kr: kr, num: num, toQuery: toQuery,
-    fromQuery: fromQuery, FIELDS: FIELDS, INDUSTRIES: INDUSTRIES, FORMATS: FORMATS,
+  return { compute: compute, aiOptions: aiOptions, creatorCompute: creatorCompute,
+    creatorMailto: creatorMailto, kr: kr, num: num, toQuery: toQuery, fromQuery: fromQuery,
+    FIELDS: FIELDS, INDUSTRIES: INDUSTRIES, FORMATS: FORMATS,
     TYP_LO: TYP_LO, TYP_HI: TYP_HI, DEFAULT_CPM: DEFAULT_CPM };
 });

@@ -21,14 +21,7 @@ FIELD_BORDER_LIGHT = "rgb(220, 220, 215)"      # --line2 in light mode (#DCDCD7)
 WIDTHS = {"desktop": 1280, "phone": 390}
 
 
-def _check_at(page, name: str, width: int) -> None:
-    page.set_viewport_size({"width": width, "height": 900 if width > 800 else 844})
-    page.goto(PAGE)
-    page.wait_for_selector("#form .field")
-    page.evaluate("document.querySelectorAll('details').forEach(function(d){ d.open = true; });")
-    ARTIFACTS.mkdir(parents=True, exist_ok=True)
-    page.screenshot(path=str(ARTIFACTS / f"budget-{name}-{width}.png"), full_page=True)
-
+def _assert_fields(page, name: str) -> None:
     boxes = page.eval_on_selector_all(
         "#form .field",
         """els => els
@@ -41,10 +34,26 @@ def _check_at(page, name: str, width: int) -> None:
             })""")
     assert boxes, f"{name}: no visible form fields found"
     for b in boxes:
-        assert b["h"] == 44, f"{name} {width}px: field '{b['id']}' is {b['h']}px tall, want 44"
+        assert b["h"] == 44, f"{name}: field '{b['id']}' is {b['h']}px tall, want 44"
         assert b["border"] == FIELD_BORDER_LIGHT, \
-            f"{name} {width}px: field '{b['id']}' border {b['border']}, want {FIELD_BORDER_LIGHT}"
-        assert b["radius"] == "10px", f"{name} {width}px: field '{b['id']}' radius {b['radius']}"
+            f"{name}: field '{b['id']}' border {b['border']}, want {FIELD_BORDER_LIGHT}"
+        assert b["radius"] == "10px", f"{name}: field '{b['id']}' radius {b['radius']}"
+
+
+def _check_at(page, name: str, width: int) -> None:
+    page.set_viewport_size({"width": width, "height": 900 if width > 800 else 844})
+    page.goto(PAGE)
+    page.wait_for_selector("#form .field")
+    ARTIFACTS.mkdir(parents=True, exist_ok=True)
+    # Buying mode (default).
+    page.evaluate("document.querySelectorAll('details').forEach(function(d){ d.open = true; });")
+    page.screenshot(path=str(ARTIFACTS / f"budget-buying-{name}-{width}.png"), full_page=True)
+    _assert_fields(page, f"buying/{name} {width}px")
+    # Creator mode: the fields must stay styled too.
+    page.click("#modebar button[data-mode='creator']")
+    page.wait_for_selector("#form #price")
+    page.screenshot(path=str(ARTIFACTS / f"budget-creator-{name}-{width}.png"), full_page=True)
+    _assert_fields(page, f"creator/{name} {width}px")
 
 
 def test_budget_page_fields_are_styled_at_desktop_and_phone():

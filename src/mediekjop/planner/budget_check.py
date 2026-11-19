@@ -70,6 +70,14 @@ INDUSTRIES = [
      "price_label": "Value per sale", "hint": "", "free_noun": True},
 ]
 
+# A rough default per-sale value per industry, for the creator-mode "example client"
+# (labelled "example" on the page; the user replaces it). Not measured data.
+_EXAMPLE_PRICE = {"nightlife": 250, "events": 600, "culture": 300, "restaurant": 600,
+                  "hotel": 1500, "fitness": 1800, "beauty": 900, "fashion": 800,
+                  "services": 1200, "courses": 2000, "other": 500}
+for _ind in INDUSTRIES:
+    _ind["example_price"] = _EXAMPLE_PRICE[_ind["key"]]
+
 # Page format key -> (formats.yaml format key, human label bits). The AI "version"
 # band is the format's ai_generated band; studio_shoot has no AI cell, so it borrows
 # the generic AI-scene band (ai_mockup / ai_generated).
@@ -499,4 +507,139 @@ def ai_options(fmt: str, ai_cost: float = 0.0, today: dt.date | None = None,
         "checked_display": _checked_display(data.get("checked", "")) if data.get("checked") else "",
         "review_by": review_by,
         "stale": bool(review_by) and today.isoformat() > review_by,
+    }
+
+
+# --- Creator mode: "Making creative? Check your price." ----------------------
+# Shared maths with the page (budget-core.js). Reuses the formats.yaml band and the
+# ai_tools entry-tier tool. Positions only: never "charge more"/"underpriced".
+
+@dataclass
+class CreatorInputs:
+    fmt: str = "ugc"
+    price: float = 0.0                 # your price, kr
+    usage_months: float = 6
+    revisions: float = 2
+    raw_files: bool = False
+    example_industry: str = "nightlife"
+    example_price: float | None = None  # None/empty -> the industry default
+    margin: float | None = None
+    margin_unit: str = "kr"
+
+
+CREATOR_EXAMPLE = CreatorInputs(fmt="ugc", price=3500, usage_months=6, revisions=2,
+                                raw_files=False, example_industry="nightlife", example_price=None)
+
+
+def _truthy(v) -> bool:
+    return str(v).strip().lower() in ("true", "1", "yes", "y", "on")
+
+
+def _entry_tool(fmt: str, data: dict | None = None) -> dict | None:
+    """The cheapest (entry-tier) AI tool for a creative format, from the shortlist."""
+    data = data or load_ai_tools()
+    uc = next((u for u in data.get("use_cases", [])
+               if u["key"] != "voice" and fmt in u.get("format_keys", [])), None)
+    if not uc or not uc.get("tools"):
+        return None
+    t = min(uc["tools"], key=lambda x: x["price_nok"])
+    return {"name": t["name"], "price_nok": t["price_nok"]}
+
+
+def _maker_noun(fmt: dict) -> str:
+    n = fmt["noun"]
+    return n[2:] if n.startswith("a ") else (n[3:] if n.startswith("an ") else n)
+
+
+def _inclusions_line(inp: CreatorInputs) -> str:
+    usage = _round(_num(inp.usage_months))
+    rev = _round(_num(inp.revisions))
+    raw = "raw files included" if _truthy(inp.raw_files) else "no raw files"
+    months = f"{usage} month" + ("" if usage == 1 else "s")
+    revs = f"{rev} revision" + ("" if rev == 1 else "s")
+    return f"Includes {months} usage, {revs}, {raw}."
+
+
+def _creator_where(price: float, fmt: dict, inp: CreatorInputs) -> dict:
+    low, high = fmt["human"]["low"], fmt["human"]["high"]
+    scale_max = high * 1.3
+    def pct(x):
+        return max(0.0, min(100.0, x / scale_max * 100)) if scale_max > 0 else 0.0
+    incl = _inclusions_line(inp)
+    base = {"inclusions": incl, "low": low, "high": high, "your_price": price,
+            "scale_max": scale_max, "pct_low": pct(low), "pct_high": pct(high), "pct_price": pct(price)}
+    if price <= 0:
+        return {"big": "—", "text": "Add your price to see this.", "blank": True,
+                "how": "", **base}
+    where = ("below the usual range" if price < low else
+             "above the usual range" if price > high else "inside the usual range")
+    big = "Below usual" if price < low else ("Above usual" if price > high else "Inside usual range")
+    return {
+        "big": big, "blank": False,
+        "text": f"{kr(price)} kr for {fmt['noun']} sits {where} in Oslo ({kr(low)}–{kr(high)} kr).",
+        "how": "Usual range: owner-reviewed estimate for Oslo, November 2026. Money paid out, "
+               "including usage rights for paid social.", **base,
+    }
+
+
+def _creator_asks(price, typical_ai, value_per, margin_used, one, many, maker_noun, example_price):
+    if value_per <= 0:
+        return {"big": "—", "unit": "", "text": "Add an example client price to see this.",
+                "has_context": False, "how": "", "note": ""}
+    diff = price - typical_ai
+    if diff <= 0:
+        return {
+            "big": "0", "unit": f"extra {many}",
+            "text": f"At {kr(price)} kr, your {maker_noun} costs no more than a typical AI version, "
+                    f"so it needs no extra {many} to pay for itself.",
+            "has_context": False,
+            "how": f"Your price {kr(price)} kr, typical AI {kr(typical_ai)} kr: no gap to cover.\n"
+                   f"Costs count money paid out, not your own time.",
+            "note": "",
+        }
+    extra = math.ceil(diff / value_per)
+    basis = f"{kr(value_per)} kr margin per {one}" if margin_used else f"{kr(value_per)} kr per {one}"
+    margin_line = ("Uses the client's margin per " + one + ".\n" if margin_used
+                   else "Uses the full example price. A margin per " + one
+                        + " would raise the number.\n")
+    return {
+        "big": kr(extra), "unit": f"more {one if extra == 1 else many}",
+        "text": f"At {kr(price)} kr, a client with {kr(example_price)} kr {many} needs {kr(extra)} "
+                f"more {one if extra == 1 else many} from your {maker_noun} than from a typical "
+                f"AI version.",
+        "has_context": False,
+        "how": f"Your price {kr(price)} kr − typical AI {kr(typical_ai)} kr = {kr(diff)} kr gap.\n"
+               f"{kr(diff)} kr ÷ {basis} = {kr(extra)} {many} (rounded up).\n" + margin_line
+               + "A longer-term brand effect for human work is cited in research but kept out of "
+                 "this number (low confidence).",
+        "note": "",
+    }
+
+
+def creator_compute(inp: CreatorInputs) -> dict:
+    """The three creator answers: where your price sits, what it asks of the client,
+    and the closest AI alternative."""
+    fmt = _format(inp.fmt)
+    ind = _industry(inp.example_industry)
+    one, many = ind["one"], ind["many"]
+    price = _num(inp.price)
+    has_example = inp.example_price is not None and str(inp.example_price).strip() != ""
+    example_price = _num(inp.example_price) if has_example else float(ind["example_price"])
+    value_per, margin_used = _value_per(example_price, inp)
+    entry = _entry_tool(inp.fmt)
+    # The AI cost in the maths is the SAME as buying mode: the formats.yaml AI band
+    # point (a one-off production cost), so identical inputs give the same number. The
+    # tool's monthly subscription appears only in "The AI alternative" card.
+    typical_ai = fmt["ai"]["point"]
+    maker_noun = _maker_noun(fmt)
+
+    a = _creator_where(price, fmt, inp)
+    b = _creator_asks(price, typical_ai, value_per, margin_used, one, many, maker_noun, example_price)
+    c = ({"text": f"The closest AI option costs about {kr(entry['price_nok'])} kr a month "
+                  f"({entry['name']}).", "tool_name": entry["name"], "tool_price_nok": entry["price_nok"]}
+         if entry else {"text": "", "tool_name": "", "tool_price_nok": 0})
+    return {
+        "fmt": inp.fmt, "format_label": fmt["label"], "noun": maker_noun,
+        "unit_one": one, "unit_many": many, "your_price": price, "example_price": example_price,
+        "typical_ai": typical_ai, "a": a, "b": b, "c": c,
     }

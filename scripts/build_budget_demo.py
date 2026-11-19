@@ -92,6 +92,39 @@ def build_golden() -> list[dict]:
     return [{"input": d, "output": bc.compute(_to_inputs(d))} for d in _golden_inputs()]
 
 
+def _creator_inputs() -> list[dict]:
+    ex = asdict(bc.CREATOR_EXAMPLE)
+    base = {"fmt": ex["fmt"], "price": ex["price"], "usageMonths": ex["usage_months"],
+            "revisions": ex["revisions"], "rawFiles": ex["raw_files"],
+            "exampleIndustry": ex["example_industry"], "examplePrice": None,
+            "margin": None, "marginUnit": "kr"}
+    cases = [dict(base)]
+    cases.append({**base, "price": 0})                               # no price
+    cases.append({**base, "price": 1000})                            # below band (ugc 2000)
+    cases.append({**base, "price": 9000})                            # above band
+    cases.append({**base, "price": 200})                             # no-gap (< typical AI 310)
+    cases.append({**base, "rawFiles": True})                         # inclusions line
+    cases.append({**base, "examplePrice": 500})                      # custom example price
+    cases.append({**base, "margin": 40, "marginUnit": "pct"})        # margin option
+    cases.append({**base, "margin": 120, "marginUnit": "kr"})
+    for fmt in ("static", "video", "ugc", "studio"):
+        cases.append({**base, "fmt": fmt, "price": 15000})
+    for ind in bc.INDUSTRIES:
+        cases.append({**base, "exampleIndustry": ind["key"]})
+    return cases
+
+
+def _to_creator(d: dict) -> bc.CreatorInputs:
+    return bc.CreatorInputs(fmt=d["fmt"], price=d["price"], usage_months=d["usageMonths"],
+                            revisions=d["revisions"], raw_files=d["rawFiles"],
+                            example_industry=d["exampleIndustry"], example_price=d["examplePrice"],
+                            margin=d.get("margin"), margin_unit=d.get("marginUnit", "kr"))
+
+
+def build_creator_golden() -> list[dict]:
+    return [{"input": d, "output": bc.creator_compute(_to_creator(d))} for d in _creator_inputs()]
+
+
 def build_ai_golden() -> list[dict]:
     """AI-options card cases (format x AI cost x date) for JS/Python parity."""
     out = []
@@ -128,6 +161,8 @@ def main() -> None:
         json.dumps(build_golden(), ensure_ascii=False, indent=2), encoding="utf-8")
     (ROOT / "tests" / "golden" / "ai_options.json").write_text(
         json.dumps(build_ai_golden(), ensure_ascii=False, indent=2), encoding="utf-8")
+    (ROOT / "tests" / "golden" / "creator.json").write_text(
+        json.dumps(build_creator_golden(), ensure_ascii=False, indent=2), encoding="utf-8")
     golden = build_golden()
 
     # Copy the page + scripts to docs/ for GitHub Pages. The budget check is the home

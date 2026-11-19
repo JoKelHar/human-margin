@@ -142,6 +142,10 @@ def main() -> None:
           f"{_bc.DEFAULT_CPM} kr per 1 000 views",
           "a sourced Norwegian CPM by channel (currently a rough US-based placeholder); "
           "the user can override it on the page")
+    _line("src/mediekjop/planner/budget_check.py",
+          "creator-mode example client prices (assumption)",
+          "rough per-industry per-sale values (_EXAMPLE_PRICE)",
+          "the user's own client price; shown labelled “example”, never as measured data")
 
     print("\n## AI tools shortlist  (data/ai_tools.yaml)")
     print("  (the “if you go AI” card; vendor list prices, no affiliate links. Prices and")
